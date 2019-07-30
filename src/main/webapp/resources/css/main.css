@@ -19,15 +19,49 @@ header nav .headerContent .gnb li a:hover {color: #e83023;}
 
 
 #container {margin-top: 65px;}
-#contaienr .slider {width: 100%; }
-#contaienr .slider {}
-#contaienr .slider .item {}
-#contaienr .slider .item img {height: 500px;}
-#contaienr .slider .item h1 {}
-#contaienr .slider .item p {}
-#contaienr .slider .item1 {}
-#contaienr .slider .item2 {}
-#contaienr .slider .item3 {}
+#container .slider {width: 100%; }
+#container .slider .item {background-color: #eee;}
+#container .slider .item img {}
+#container .slider .item h1 {}
+#container .slider .item p {}
+#container .slider .item {position: relative;}
+#container .slider .item .slidercontent {position: absolute; top: 300px; left: 300px; }
+#container .slider .item .slidercontent h1 {margin: 24px 88px 36px 0; font-size: 37px; font-weight: 300; line-height: 1.43em;}
+#container .slider .item .slidercontent p {margin: 24px 88px 36px 0; font-size: 25px; font-weight: 300; line-height: 1.43em;}
+#container .slider .item .slidercontent input[type="button"]  {display: inline-block; margin-top: 10px; padding: 0 3pc; height: 3pc; line-height: 3pc; border-radius: 24px; background: #fff; font-size: 18px; font-weight: 700; color: #ef6c00;}
+#container .slider .item2 {}
+#container .slider .item3 {}
+
+#container .studyListWrap {height: 800px; padding: 30px 0 30px 20px;}
+#container .studyListWrap h1 {font-size: 38px;}
+#container .studyListWrap h1:last-child {border-bottom: 3px solid #eee; padding-bottom: 30px;}
+
+#container .studyListContent {margin-top: 40px; overflow: hidden; margin-left: 40px;}
+#container .studyListContent .studyList {float: left; width: 300px; height: 480px; background-color: #eee;}
+
+#container .studyListContent .studyList:nth-child(2) {margin-left: 50px; }
+#container .studyListContent .studyList:nth-child(3) {margin-left: 50px; }
+
+#container .howLike {background-color: #eee; padding-top: 30px;	padding-bottom: 30px;	}
+#container .howLike .howLikeTitle {margin-bottom: 40px;}
+#container .howLike .howLikeTitle h1 {font-size: 38px;}
+#container .howLike ul {overflow: hidden;	}
+#container .howLike ul li {float: left;}
+#container .howLike ul li:nth-child(1) {width: 37.5%;}
+#container .howLike ul li:nth-child(2) {width: 35%;}
+#container .howLike ul li:nth-child(2) {width: 27.5%;}
+#container .howLike ul li .icon {width: 72px; height: 72px; background: url(https://cdn.studysearch.co.kr/static/images/icon-pc-renewal-assets-2.6d4447f11752.png); background-position-y: -86px; margin-bottom: 20px;	}
+#container .howLike ul li .icon1 {}
+#container .howLike ul li .icon2 {background-position-x: -81pt;}
+#container .howLike ul li .icon3 {background-position-x: -216px;}
+#container .howLike ul li h2 {margin: 36px 0 24px; color: #3c3c3c; font-size: 18pt; font-weight: 600;}
+#container .howLike ul li h3 {color: #777b7e; font-size: 18px; line-height: 1.6em;}
+
+#container .levelTestGo {margin-top: 50px; padding: 30px 0;}
+#container .levelTestGo .levelTestContent {}
+#container .levelTestGo .levelTestContent h1 {}
+#container .levelTestGo .levelTestContent h2 {}
+#container .levelTestGo .levelTestContent a {}
 
 footer {position: relative; background: #383e48 repeat-x top; height: 220px; margin-top: 50px;}
 footer .footArea {position: relative; max-width: 1200px; margin: 0 auto; overflow: hidden; padding-top: 20px;}

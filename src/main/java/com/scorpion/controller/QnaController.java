@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.study.domain.Criteria;
-import org.study.domain.QnaVO;
+
+import com.scorpion.domain.Criteria;
+import com.scorpion.domain.QnaVO;
+import com.scorpion.service.QnaService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -20,22 +22,26 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class QnaController {
 	
+	private QnaService service;
+	
 	@GetMapping("/myQna")
-	public void myQna(@RequestParam("id") Long id) {
-		
+	public void myQna(Model model, Criteria cri, @RequestParam("id") String id) {
+		service.getMyList(cri, id);
 	}
 	
 	@GetMapping("/get")
 	public void get(@RequestParam("qnano") Long qnano,
 			@ModelAttribute("cri") Criteria cri,
 	        Model model) {
-		
+		service.get(qnano);
 	}
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("qnano") Long qnano,
             @ModelAttribute("cri") Criteria cri,
 	 		     RedirectAttributes rttr) {
+		
+		service.remove(qnano);
 		
 		return "/qna/list";
 	}
@@ -51,13 +57,13 @@ public class QnaController {
 	public String modify(QnaVO qna, 
 			@ModelAttribute("cri") Criteria cri, 
 			RedirectAttributes rttr) {
-		
+		service.modify(qna);
 		return "/qna/get";
 	}
 	
 	@GetMapping("/list")
-	public void list() {
-		
+	public void list(Model model, Criteria cri) {
+		service.getList(cri);
 	}
 	
 	@GetMapping("/register")
@@ -68,7 +74,7 @@ public class QnaController {
 	@PostMapping("/register")
 	public String register(QnaVO qna,
 			   RedirectAttributes rttr) {
-		
+		service.register(qna);
 		return "/qna/list";
 	}
 	
@@ -81,10 +87,8 @@ public class QnaController {
 	
 	@PostMapping("/answer")
 	public String answer(@RequestParam("qnano") Long qnano,
-			@RequestParam("answer") String answer,
-			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		
+			@RequestParam("answer") String answer) {
+		service.replymodify(qnano, answer);
 		return "/qna/get";
 	}
 }

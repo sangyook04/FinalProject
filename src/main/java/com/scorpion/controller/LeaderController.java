@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.study.domain.Criteria;
-import org.study.domain.LeaderVO;
+import com.scorpion.domain.Criteria;
+import com.scorpion.domain.LeaderVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;

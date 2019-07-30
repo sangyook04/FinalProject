@@ -14,7 +14,7 @@ img {display: block;}
 
 /* GLOBAL */
 [type=checkbox], [type=radio] {display: none;}
-.inner {display: block; position: relative; margin: auto; width: 80%; height: 100%;}
+.inner {display: block; position: relative; margin: auto; width: 1080px; height: 100%;}
 .inner:after {content: ""; display: block; clear: both;}
 
 .price {font-family: tahoma; font-weight: 700;}

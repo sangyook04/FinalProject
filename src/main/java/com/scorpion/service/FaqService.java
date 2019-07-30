@@ -9,7 +9,7 @@ public interface FaqService {
 
 	public boolean remove(Long fno);
 	public boolean modify(FaqVO faq);
-	public FaqVO register(Long fno);
+	public FaqVO register(FaqVO faq);
 	public FaqVO get(Long fno);
 	public int getTotal(Criteria cri);
 	public List<FaqVO> getList(Criteria cri);
