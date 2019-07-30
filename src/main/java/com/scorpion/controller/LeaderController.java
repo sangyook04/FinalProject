@@ -1,14 +1,18 @@
 package com.scorpion.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.study.domain.Criteria;
-import org.study.domain.LeaderVO;
+
+import com.scorpion.domain.Criteria;
+import com.scorpion.domain.LeaderVO;
+import com.scorpion.service.LeaderReviewService;
+import com.scorpion.service.LeaderService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -18,41 +22,46 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class LeaderController {
-
+	
+	private LeaderService service;
+	private LeaderReviewService reviewService;
+	
 	@GetMapping("/join")
-	public void join() {
+	public void join(@RequestParam("leaScore") int leascore) {
 		
 	}
 	
 	@PostMapping("/join")
-	public String join(LeaderVO leader) {
+	public String join(LeaderVO leadervo) {
+		
 		return "/common/main";
 	}
 	
 	@GetMapping("/info")
-	public void info(@RequestParam("id") String id) {
+	public void info(@RequestParam("leaId") String leaid, Model model) {
 		
 	}
 	
 	@GetMapping("/modify")
-	public void modify() {
+	public void modify(@RequestParam("leaId") String leaid, Model model) {
 		
 	}
 	
 	@PostMapping("/modify")
-	public String modify(LeaderVO leader, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(LeaderVO leadervo /*@ModelAttribute("cri") Criteria cri 확인필요 */) {
 		
 		return "/leader/info";
 	}
 	
 	@GetMapping("/review")
-	public void review() {
+	public void review(@RequestParam("leaId") String leaid) {
 		
 	}
 	
 	@PostMapping("/review")
-	public void review(@RequestParam("studentid") String studentid, @RequestParam("leaderid") String leaderid) {
+	public String review(@RequestParam("stuId") String stuId, @RequestParam("leaId") String leaId) {
 		
+		return "/study/endStudyList";
 	}
 	
 	@GetMapping("/list")
