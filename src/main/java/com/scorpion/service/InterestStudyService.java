@@ -1,5 +1,10 @@
 package com.scorpion.service;
 
-public interface InterestStudyService {
+import java.util.List;
 
+import com.scorpion.domain.InterestStudyVO;
+
+public interface InterestStudyService {
+	public List<InterestStudyVO> getListPage(Long intIndex);
+	public int remove(Long intIndex);
 }
