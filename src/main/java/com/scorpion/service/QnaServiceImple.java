@@ -3,17 +3,10 @@ package com.scorpion.service;
 import java.util.List;
 
 import com.scorpion.domain.Criteria;
-import com.scorpion.domain.QnaPageDTO;
 import com.scorpion.domain.QnaReplyVO;
 import com.scorpion.domain.QnaVO;
 
 public class QnaServiceImple implements QnaService {
-
-	@Override
-	public QnaPageDTO getListPage(Criteria cri, Long qno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<QnaVO> getList(Criteria cri, Long qno) {
