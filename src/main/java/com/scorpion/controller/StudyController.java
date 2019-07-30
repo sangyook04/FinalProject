@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.study.domain.Criteria;
-import org.study.domain.StudyVO;
+
+import com.scorpion.domain.Criteria;
+import com.scorpion.domain.StudyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 public class StudyController {
 	
 	@GetMapping("/recommend")
-	public void recommend(@RequestParam("grade") String grade) {
+	public void recommend(@RequestParam("level") String level) {
 		
 	}
 	
