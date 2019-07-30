@@ -3,7 +3,6 @@ package com.scorpion.mapper;
 import java.util.List;
 
 import com.scorpion.domain.Criteria;
-import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.RefundVO;
 
 public interface RefundMapper {
