@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.study.domain.Criteria;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -15,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/pay")
 @AllArgsConstructor
-public class payController {
+public class PayController {
    
    @GetMapping("/incomeList")
    public void get(Model model, Criteria cri) {

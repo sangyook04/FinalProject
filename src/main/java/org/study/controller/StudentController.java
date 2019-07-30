@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.study.domain.Criteria;
+import org.study.domain.StudentVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +19,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class StudentController {
 
+	
+	
 		@GetMapping("/join")
 		public void join() {
 			

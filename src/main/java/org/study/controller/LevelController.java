@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.Criteria;
+import org.study.domain.Criteria;
+import org.study.domain.LevelTestVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -24,8 +25,10 @@ public class LevelController {
 	}
 	
 	@PostMapping("/leaderTest")
-	public String leaderTest(???) {
+	public String leaderTest(@RequestParam("testno") Long testno,
+			@RequestParam("dap") String dap) {
 		
+		return
 	}
 	
 	@GetMapping("/commonTest")
@@ -34,8 +37,10 @@ public class LevelController {
 	}
 	
 	@PostMapping("/commonTest")
-	public String commonTest(???) {
+	public String commonTest(@RequestParam("testno") Long testno,
+			@RequestParam("dap") String dap) {
 		
+		return
 	}
 	
 	@GetMapping("/list")

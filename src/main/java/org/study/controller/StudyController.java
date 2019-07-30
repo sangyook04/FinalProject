@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.study.domain.Criteria;
+import org.study.domain.StudyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,7 +33,7 @@ public class StudyController {
 	}
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("studyindex") Long studyindex,
+	public void get(@RequestParam("studyno") Long studyno,
 			@ModelAttribute("cri") Criteria cri,
 	        Model model) {
 		
@@ -44,13 +45,13 @@ public class StudyController {
 	}
 	
 	@PostMapping("/scheduleRemove")
-	public String scheduleRemove(@RequestParam("studyindex") Long studyindex) {
+	public String scheduleRemove(@RequestParam("studyno") Long studyno) {
 		
 		return "/study/scheduleList";
 	}
 	
 	@GetMapping("/scheduleModify")
-	public void scheduleModify(@RequestParam("studyindex") Long studyindex) {
+	public void scheduleModify(@RequestParam("studyno") Long studyno) {
 		
 	}
 	
@@ -66,7 +67,7 @@ public class StudyController {
 	}
 	
 	@GetMapping("/studyingStudentList")
-	public void studyingStudentList(@RequestParam("studyindex") String studyindex) {
+	public void studyingStudentList(@RequestParam("studyno") String studyno) {
 		
 	}
 	
@@ -76,7 +77,7 @@ public class StudyController {
 	}
 	
 	@GetMapping("/endStudyStudentList")
-	public void endStudyStudentList(@RequestParam("studyindex") String studyindex) {
+	public void endStudyStudentList(@RequestParam("studyno") String studyno) {
 		
 	}
 	
