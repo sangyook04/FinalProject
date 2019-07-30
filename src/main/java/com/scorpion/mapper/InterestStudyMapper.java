@@ -1,5 +1,7 @@
 package com.scorpion.mapper;
 
-public interface InterestStudyMapper {
+import com.scorpion.domain.InterestStudyVO;
 
+public interface InterestStudyMapper {
+	public InterestStudyVO read(Long intIndex);
 }

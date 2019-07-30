@@ -7,6 +7,7 @@ import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.StudentVO;
 
 public interface StudentMapper {
+
 	public int update(StudentVO student);
 	public int delete(String stuid);
 	public StudentVO read(String stuid);
@@ -15,4 +16,5 @@ public interface StudentMapper {
 	public List<StudentVO> getListWithPaging(Criteria cri);
 	 
 }
+
 

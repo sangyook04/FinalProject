@@ -1,5 +1,15 @@
 package com.scorpion.mapper;
 
-public interface PictureMapper {
+import java.util.List;
 
+import com.scorpion.domain.PictureVO;
+
+public interface PictureMapper {
+   public List<PictureVO> getOldFiles();
+   public void deleteAllStudy(Long studyIndex);
+   public void deleteAllLeader(String leaId);
+   public void insert(PictureVO vo);
+   public void delete(String uuid);
+   public List<PictureVO> findByLeaId(String leaId);
+   public List<PictureVO> findByStudyIndex(Long StudyIndex);
 }
