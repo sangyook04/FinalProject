@@ -1,5 +1,8 @@
 package com.scorpion.mapper;
 
-public interface PaymentMapper {
+import com.scorpion.domain.PaymentVO;
 
+public interface PaymentMapper {
+	public PaymentVO read(Long payIndex);
+	public PaymentVO read(String payDate);
 }
