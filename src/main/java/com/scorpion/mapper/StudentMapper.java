@@ -12,5 +12,5 @@ public interface StudentMapper {
    public Integer insertSelectKey(StudentVO student);
    public int getTotalCount(Criteria cri);
    public List<StudentVO> getListWithPaging(Criteria cri);
-   public String getLevel(String stuid);
+    
 }
