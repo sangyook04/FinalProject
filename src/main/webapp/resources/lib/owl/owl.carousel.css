@@ -49,8 +49,9 @@
   .owl-carousel .owl-item img {
     display: block;
     position: relative;
-    max-width: 80%;
-    height: 680px;
+    max-width: 100%;
+    width: 100%;
+    height: 640px;
     margin: 0 auto;}
   .owl-carousel .owl-nav.disabled,
   .owl-carousel .owl-dots.disabled {
