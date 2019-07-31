@@ -2,9 +2,8 @@
 header {position: fixed; border-top: 5px solid #4285f4; background: #fff; width: 100%; height: 65px; z-index: 999; top: 0;}
 header nav {height: 65px; background-color: #fff; border: 1px solid #eee;}
 header nav .headerContent {padding: 13px 0 8px 0; }
-header nav .headerContent .mainlogo {float: left; width: 80px;
-    height: 42px; text-indent: -9999em; background: url(../img/GumonMain/logo.jpg); background-size: cover; margin-right: 40px;}
-/*header nav .headerContent .mainlogo {display: block; width: 200px;}*/
+header nav .headerContent .mainlogo {float: left; width: 80px; height: 42px; text-indent: -9999em; background: url(../img/GumonMain/logo.jpg); background-size: cover; margin-right: 40px;}
+header nav .headerContent .mainlogo a {display: block; width: 80px; height: 42px;}
 header nav .headerContent .mainmenu {float: left; overflow: hidden;}
 header nav .headerContent .mainmenu>li {float: left; display: inline-block; margin: 4px 36px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
 header nav .headerContent .mainmenu li a {}

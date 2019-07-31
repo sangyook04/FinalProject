@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,7 +10,6 @@
 	<script src="../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
    <link rel="stylesheet" type="text/css" href="../../resources/css/common.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/main.css">
-   <link rel="stylesheet" type="text/css" href="../../resources/css/faq.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
    <script>
@@ -30,8 +27,6 @@
 
 		});//ready
    </script>
-   
-
 </head>
 <body>
 	<div id="wrap">
@@ -42,9 +37,7 @@
 						<div class="mainlogo"></div>
 						<ul class="mainmenu">
 							<li><a href="#">스터디 찾기</a></li>
-
 							<li><a href="#">레벨 테스트</a></li>
-
 							<li><a href="#">공지사항</a></li>
 							<li class="one"><a href="#">고객센터</a>
 								<ul class="callsenterSub">
@@ -64,40 +57,12 @@
 			</nav>
 		</header>
 		<div id="container">
-		<!-- 내용 칸 -->
-		<h1 class="viewh1"> FAQ  </h1>
-		
-		<table class="table">
-		<thead>
-  			<tr onclick="doDisplay()">
-  				<th class="th1">Q.</th><th class="th2">카테고리</th><th class="th3">제목</th>
-  			</tr>
-  		</thead>
-  		<tbody>
-  			<tr>
-  				<td id="inoutputtd">내용 입력</td>
-  			</tr>
-  		</tbody>	
-		</table>
-		
-	
-	
-<script>
-var doDisplay = none;
-function doDisplay(){
-	var con = document.getElementById("inoutputtd");
-	if(con.style.display == 'none'){
-		con.style.display = 'block';
-	}else {
-		con.style.display = 'none';
-	}
-}
 
-
-
-
-
-</script>	
+			<table>
+				<tr>
+					<td>리더명</td><td>신청날짜</td><td>점수</td>
+				</tr>
+			</table>
 
 		</div><!-- container -->
 		<footer>

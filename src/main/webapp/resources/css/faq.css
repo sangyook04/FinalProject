@@ -1,0 +1,8 @@
+#container .viewh1{font-variant: bold; font-size: 70px; text-align: center; width: 1980px;}
+#container .table{text-align: center; margin-left: 400px;}
+#container .table thead th{background-color: #4285f4;}
+#container .table thead .th1{width: 100px; height: 50px;}
+#container .table thead .th2{width: 200px;}
+#container .table thead .th3{width: 800px;}
+#container .table tbody #inoutputtd{display:none;}
+

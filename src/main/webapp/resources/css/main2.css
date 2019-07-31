@@ -1,0 +1,73 @@
+#wrap {font-family: 'Noto Sans KR', sans-serif;}
+header {position: fixed; border-top: 5px solid #f15b6d; background: #fff; width: 100%; height: 65px; z-index: 999; top: 0;}
+header nav {height: 65px; background-color: #F2F2F2; }
+header nav .headerContent {padding: 13px 0 8px 0; }
+header nav .headerContent .mainlogo {float: left; width: 80px;
+    height: 42px; text-indent: -9999em; background: url(../img/GumonMain/logo.jpg); background-size: cover; margin-right: 40px;}
+/*header nav .headerContent .mainlogo {display: block; width: 200px;}*/
+header nav .headerContent .mainmenu {float: left; overflow: hidden;}
+header nav .headerContent .mainmenu>li {float: left; display: inline-block; margin: 4px 36px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
+header nav .headerContent .mainmenu li a {}
+header nav .headerContent .mainmenu>li a:hover {color: #e83023;}
+header nav .headerContent .mainmenu li .callsenterSub {display: none; position: relative; right: 35px; width: 130px; height: 105px; background-color: #F2F2F2; margin-top: 24px; padding: 20px; text-align: center; border-radius: 3px; }
+header nav .headerContent .mainmenu li .callsenterSub li { margin-bottom: 15px; }
+header nav .headerContent .gnb {float: right; overflow: hidden;}
+header nav .headerContent .gnb li {float: left; display: inline-block; margin: 4px 36px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
+header nav .headerContent .gnb li a {}
+header nav .headerContent .gnb li a:hover {color: #e83023;}
+
+
+[type=radio] {display: block;}
+
+#container {margin-top: 65px;}
+#container .loginform {}
+#container .loginform h1 {margin-left: 500px; margin-top: 120px;}
+#container .loginform h1 b {font-size: 2em; }
+#container .loginform form {margin-left: 400px; margin-top: 30px;}
+#container .loginform form .joinInput {}
+#container .loginform form .joinInput .joinInputText {border: 1px solid black;  height:40px; margin-top: 20px;}
+#container .loginform form .joinInput .Btn {background:gray; width: 100px; height:35px; color: white; font:bold; margin-left: 7px; border-radius: 5px;}
+#container .loginform form .radiogender {}
+#container .loginform form .radiogender label {}
+#container .loginform form .radiogender label .radiogenderRadio {display:inline-block; margin-top: 20px;}
+
+#container .loginform form .joinInput2 {}
+#container .loginform form .joinInput2 .joinInputText2 {border: 1px solid black;  height:40px; margin-top: 10px;}
+#container .loginform form .joinInput2 .Btn2 {background:gray; width: 100px; height:35px; color: white; font:bold; margin-left: 7px; border-radius: 5px;}
+#container .loginform form .joinBtn {background:#4285f4; color:white; margin-left: 50px; margin-top: 40px; height:40px; width:300px; font-size:1.2em;}
+
+
+#container .inner h1{ margin-left: 460px; margin-top: 120px;}
+#container .inner h1 b {font-size: 2em; }
+#container .content {padding: 50px;text-align: center;}
+#container .content .info { font-size: xx-small; margin-bottom: 5px;}
+#container .content .userInfo{ border-bottom: 1px solid gray; padding: 5px;margin: 5px;}
+#container .content #modBtn {background-color: #4285f4; padding: 10px;color: white;border-radius: 5px; margin: 10px;}
+
+aside{background: gray;}
+
+footer {position: relative; background: #383e48 repeat-x top; height: 220px; margin-top: 50px;}
+footer .footArea {position: relative; max-width: 1200px; margin: 0 auto; overflow: hidden; padding-top: 20px;}
+footer .footArea .footerLeft {float: left; width: 70%;}
+footer .footArea .footerLeft .callNumber {line-height: 55px; font-size: 16px; color: #afadad; letter-spacing: -0.5px;}
+footer .footArea .footerLeft .callNumber b {font-size: 18px; color: #fff;}
+footer .footArea .footerLeft .callNumber strong {margin-right:  10px;
+    font-size: 24px; font-weight: bold; color: #fff;}
+footer .footArea .footerLeft .footerinfo {margin-top: 30px; font-size: 14px; color: #fff; letter-spacing: 0; line-height: 1.5;}
+footer .footArea .footerLeft .footerinfo ul {overflow: hidden;}
+footer .footArea .footerLeft .footerinfo ul li {float: left; margin-right: 15px;}
+footer .footArea .footerLeft address {margin-top: 10px; font-size: 14px; color: #939393;}
+footer .footArea .footerRight {float: left; width: 30%; height: 138px;}
+footer .footArea .footerRight .sns {height: 57px; line-height: 57px; margin-left: 30%;}
+footer .footArea .footerRight .sns a {float: left; margin: 20px 10px 10px 10px;}
+footer .copyright {clear: both; padding-top: 30px; font-size: 14px; color: #828893; text-align: center; letter-spacing: 0;}
+
+
+
+
+
+
+
+
+
+
