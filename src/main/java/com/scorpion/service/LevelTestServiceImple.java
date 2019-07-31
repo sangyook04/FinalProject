@@ -2,10 +2,17 @@ package com.scorpion.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LevelTestVO;
 import com.scorpion.mapper.LevelTestMapper;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+@Log4j
+@Service
+@AllArgsConstructor
 public class LevelTestServiceImple implements LevelTestService {
    private LevelTestMapper mapper;
 

@@ -2,11 +2,18 @@ package com.scorpion.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.PictureVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.domain.StudyVO;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+@Log4j
+@Service
+@AllArgsConstructor
 public class StudyServiceImple implements StudyService {
 
 	@Override
