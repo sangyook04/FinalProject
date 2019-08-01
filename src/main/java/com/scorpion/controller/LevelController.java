@@ -54,10 +54,10 @@ public class LevelController {
 	}
 	
 	@GetMapping("/get")
-	public void get(/*@RequestParam("testno") Long testno,
+	public void get(@RequestParam("testIndex") Long testindex,
 			@ModelAttribute("cri") Criteria cri,
-	        Model model*/) {
-//		service.get(testno);
+	        Model model) {
+		model.addAttribute("test", service.get(testindex));
 	}
 	
 	@GetMapping("/register")
@@ -70,7 +70,9 @@ public class LevelController {
 			RedirectAttributes rttr) {
 		
 		service.register(levelTest);
-		return "/level/list";
+		
+		rttr.addFlashAttribute("result", levelTest.getTestIndex());
+		return "redirect:/level/list";
 	}
 	
 	@PostMapping("/remove")
