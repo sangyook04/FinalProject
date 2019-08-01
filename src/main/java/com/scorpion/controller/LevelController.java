@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LevelTestVO;
+import com.scorpion.domain.PageDTO;
 import com.scorpion.service.LevelTestService;
 
 import lombok.AllArgsConstructor;
@@ -50,10 +51,11 @@ public class LevelController {
 	
 	@GetMapping("/list")
 	public void list(Model model, Criteria cri) {
-		service.getList(cri);
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri,service.getTotal(cri)));
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("testIndex") Long testindex,
 			@ModelAttribute("cri") Criteria cri,
 	        Model model) {
@@ -76,21 +78,21 @@ public class LevelController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("testno") Long testno,
+	public String remove(@RequestParam("testIndex") Long testindex,
 			@ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {
-		service.remove(testno);
-		return "/level/list";
-	}
-	
-	@GetMapping("/modify")
-	public void modify() {
-		
+		if(service.remove(testindex)) {
+			rttr.addAttribute("result","success");
+		}
+		return "redirect:/level/list";
 	}
 	
 	@PostMapping("/modify")
 	public String modify(LevelTestVO levelTest, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		service.modify(levelTest);
-		return "/level/get";
+		if(service.modify(levelTest)) {
+			rttr.addAttribute("result","success");
+		}
+		return "redirect:/level/get?testIndex="+levelTest.getTestIndex();
+		
 	}
 }

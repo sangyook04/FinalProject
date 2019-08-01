@@ -130,7 +130,7 @@
 				<form role="form" method="post" action="/level/register">
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
-					<textarea class="form-control questionInput" rows="20" cols="100" name="testContent">dsada</textarea>
+					<textarea class="form-control questionInput" rows="20" cols="100" name="testContent"></textarea>
 					<h2>보기</h2><br>
 					1 : <input type="text" class="form-control" name="testExam1">
 					2 : <input type="text" class="form-control" name="testExam2">

@@ -21,6 +21,7 @@ public class LevelTestServiceImple implements LevelTestService {
    public List<LevelTestVO> getList(Criteria cri) {
       
       return mapper.getListWithPaging(cri);
+//	   return mapper.getList();
    }
 
    @Override
