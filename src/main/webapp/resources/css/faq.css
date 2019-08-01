@@ -1,8 +1,17 @@
 #container .viewh1{font-variant: bold; font-size: 70px; text-align: center; width: 1980px;}
 #container .table{text-align: center; margin-left: 400px;}
-#container .table thead th{background-color: #4285f4;}
+#container .table thead th{background-color: #4285f4; font-size:20px; text-align: center;}
 #container .table thead .th1{width: 100px; height: 50px;}
 #container .table thead .th2{width: 200px;}
 #container .table thead .th3{width: 800px;}
 #container .table tbody #inoutputtd{display:none;}
 
+
+#container .containerContent .inner #faqh2 {margin:30px; font-size:50px; margin-left:200px;}
+#container .containerContent .inner #registerbtn {margin-left:1075px; font-size: 20px; margin-bottom: 10px;}
+#container .containerContent .inner #faqtable {margin-left:100px;}
+#container .containerContent .inner .form-control { resize: none; margin-left:200px;}
+#container .containerContent .inner form label {padding-left:200px; font-size:20px; margin: 15px;}
+#container .containerContent .inner form #regibtn {margin-left:600px; font-size:30px; margin-top:20px;}
+#container .containerContent .inner form #listbtn {margin-left:10px;font-size:30px; margin-top:20px;}
+#container .containerContent .inner form #delbtn {margin-left:10px;font-size:30px; margin-top:20px;}
