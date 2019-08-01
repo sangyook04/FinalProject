@@ -32,67 +32,7 @@
 
 		});//ready
    </script>
-   
-   <!-- ex07 -->
-   <!-- Bootstrap Core CSS -->
-    <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    
-   <style>
-   #container .inner{
-   text-align: center;
-   }
-   
-   #container .inner h1{
-   background: yellow;
-   font-size: 40px;
-   font-weight: bold;
-   margin: 100px 0px;
-   }
-   .question {
-   background: aqua;
-   height: 400px;
-   }
-   .select {
-   background: pink;
-   height: 100px;
-   }
-   .answer {
-   text-align: center;
-   height: 150px;
-   }
-   
-   .select ol{
-   list-style: lower-roman;
-   }
-   
-   .select ol li {
-   display: inline-block;
-   font-size: 20px; 
-   font-weight: bold;
-   margin: 0px 50px;
-   }
-   
-   .answer input{
-   margin: 0px 50px 0px 50px;
-   }
-   
-   </style>
+   <link rel="stylesheet" type="text/css" href="../../resources/css/test.css">
 </head>
 <body>
 	<div id="wrap">
@@ -178,19 +118,5 @@
 		</footer>
 	</div><!-- wrap -->
 	
-	<!-- ex07 -->
-	<!-- Bootstrap Core JavaScript -->
-    <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/resources/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- DataTables JavaScript -->
-    <script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/resources/vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/resources/dist/js/sb-admin-2.js"></script>
 </body>
 </html>
