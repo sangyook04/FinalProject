@@ -20,12 +20,15 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/pay")
+@RequestMapping("/pay/*")
 @AllArgsConstructor
 public class PayController {
    
 	private PaymentService service;
 	private StudyService studyservice;
+	
+	@GetMapping("/test")
+	public void test() {}
 	
    @GetMapping("/incomeList")
    public void get(Model model, Criteria cri,
@@ -51,8 +54,8 @@ public class PayController {
    }
    
    @GetMapping("/payInfo")
-   public void payInfo(@ModelAttribute("studyNum") Long studyNum, Criteria cri, Model model ) {
-	   studyservice.get(studyNum);
+   public void payInfo(/*@ModelAttribute("studyNum") Long studyNum, Model model */) {
+//	   studyservice.get(studyNum);
    }
    
    @GetMapping("/paymentList")

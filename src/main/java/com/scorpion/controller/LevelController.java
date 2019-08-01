@@ -54,10 +54,10 @@ public class LevelController {
 	}
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("testno") Long testno,
+	public void get(/*@RequestParam("testno") Long testno,
 			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		service.get(testno);
+	        Model model*/) {
+//		service.get(testno);
 	}
 	
 	@GetMapping("/register")
