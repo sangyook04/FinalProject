@@ -18,16 +18,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class LeaderController {
-
-	@GetMapping("/join")
-	public void join() {
-		
-	}
-	
-	@PostMapping("/join")
-	public String join(LeaderVO leader) {
-		return "/common/main";
-	}
 	
 	@GetMapping("/info")
 	public void info(@RequestParam("id") String id) {
