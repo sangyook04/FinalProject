@@ -13,20 +13,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/common.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/main.css">
+   <link rel="stylesheet" type="text/css" href="../../resources/css/study.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
-<style>
-#container #studyingside {float:left;}  
-#container #studyingarticle {background-color: blue; width: 1903px; height: 650px; margin-bottom: 0px;}   
-#container #studyingside {background-color: pink; width: 300px;  height: 650px; margin-bottom: 0px;}
-#container #studyingarticle h1{font-size:50px;}
-#container #studyingarticle .th1{width:150px;}
-#container #studyingarticle .th2{width:200px;}
-#container #studyingarticle .th3{width:80px;}
-#container #studyingarticle .th4{width:80px;}
-#container #studyingarticle .th5{width:80px;}
-#container #studyingarticle .th6{width:100px;}
-</style>
 
 
    <script>
@@ -80,32 +69,28 @@
 		<!-- 내용 입력 칸 -->
 		
 		<div class="inner">
-		<h1>진행 중 스터디 </h1>	
+		<h1 class="studyingh1">진행 중 스터디 </h1>	
 		<table class="table table-striped">
-			<thead>
+			<thead class="studyingthead">
 				<tr>
 					<th class="th1">이름</th><th class="th2">기간</th>
 					<th class="th3">레벨</th><th class="th4">장소</th>
 					<th class="th5">가격</th><th class="th6">사진</th>
 				</tr>
 			</thead>
-		
+			<tbody class="studyingtbody">
+				<tr>
+					<td class="td1"><a href="get.jsp">용원</a></td><td class="td2">2019-04-05~2019-07-31</td>
+					<td class="td3">초급</td><td class="td4">쌍용교육</td>
+					<td class="td5">1800000</td><td class="td6"><img class="humanimg" src="../../resources/img/KisJamMain/인체아틀라스_배너.jpg"></td>
+					<td class="td7"><button class="btn btn-primary" id="studentbtn">학생명단</button></td>		
+				</tr>
+			</tbody>
 		</table>
-	
-		
 		</div>
 		
+		 
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 		</div><!-- container -->
 		<footer>
 			<div class="inner">
