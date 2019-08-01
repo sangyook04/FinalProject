@@ -61,6 +61,8 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 #container .inner .content .infoContent form #refBtn { background-color: #5D5D5D; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
 #container .inner .content .infoContent form #listBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px; float:right;}
 
+#container aside a {color: #fff; text-decoration: none;}
+
 /* 지현 */
 
 footer {position: relative; background: #383e48 repeat-x top; height: 220px;}
