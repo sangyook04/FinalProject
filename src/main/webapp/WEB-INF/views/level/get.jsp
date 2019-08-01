@@ -131,13 +131,13 @@
 				<form>
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
-					<textarea class="form-control questionInput" rows="20" cols="100" readonly="readonly">dsada</textarea>
+					<textarea class="form-control questionInput" rows="20" cols="100" readonly="readonly">${test.testContent}</textarea>
 					<h2>보기</h2><br>
-					1 : <input type="text" class="form-control" readonly="readonly">
-					2 : <input type="text" class="form-control" readonly="readonly">
-					3 : <input type="text" class="form-control" readonly="readonly">
-					4 : <input type="text" class="form-control" readonly="readonly"><br>
-					<p id="answerInput">정답 : <input type="text" class="form-control" readonly="readonly"></p>
+					1 : <input type="text" class="form-control" readonly="readonly" value="${test.testExam1}">
+					2 : <input type="text" class="form-control" readonly="readonly" value="${test.testExam2}">
+					3 : <input type="text" class="form-control" readonly="readonly" value="${test.testExam3}">
+					4 : <input type="text" class="form-control" readonly="readonly" value="${test.testExam4}"><br>
+					<p id="answerInput">정답 : <input type="text" class="form-control" readonly="readonly" value="${test.testAnswer}"></p>
 					<button class="btn btn-success pull-right"> 목록 </button>
 					<button class="btn btn-primary pull-right"> 변경 </button>
 					<button class="btn btn-danger pull-right"> 삭제 </button>
