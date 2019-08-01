@@ -1,10 +1,13 @@
 package com.scorpion.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.scorpion.domain.LeaderVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,8 +24,10 @@ public class CommonController {
 	}
 	
 	@GetMapping("/login")
-	public void login() {
-		
+	public void login(String error, String logout, Model model) {
+		if(error != null) {
+			model.addAttribute("msg", "아이디 또는 비밀번호를 다시 확인해주세요.");
+		}
 	}
 	
 	@PostMapping("/login")
@@ -66,6 +71,26 @@ public class CommonController {
 	@PostMapping("/disable")
 	public String disable(@RequestParam("id") String id) {
 		
+		return "/common/main";
+	}
+	
+	@GetMapping("/leaderJoin")
+	public void leaderJoin() {
+		
+	}
+	
+	@PostMapping("/leaderJoin")
+	public String leaderJoin(LeaderVO leader) {
+		return "/common/main";
+	}
+	
+	@GetMapping("/studentrJoin")
+	public void studentJoin() {
+		
+	}
+	
+	@PostMapping("/studentJoin")
+	public String studentJoin(LeaderVO leader) {
 		return "/common/main";
 	}
 }

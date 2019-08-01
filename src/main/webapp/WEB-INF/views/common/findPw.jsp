@@ -7,7 +7,7 @@
 <meta name="viewport"
 	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Final Project_leaderJoin</title>
+<title>Final Project_findPw</title>
 <!-- CSS -->
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
@@ -19,21 +19,20 @@
 	href="../../../resources/css/main2.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
 	rel="stylesheet">
-
 <script>
-   		$(document).ready(function(){
+         $(document).ready(function(){
 
-			$('nav .one').hover(function () {
-			    if($(".callsenterSub").css("display") == "none"){
-			       $('.callsenterSub').slideDown();
-			       $("headerA").css("color","#f15b6d");
-			       event.preventDefault();
-			    } else {
-			       $('.callsenterSub').css("display", "none");
-			    }
-			});
+         $('nav .one').hover(function () {
+             if($(".callsenterSub").css("display") == "none"){
+                $('.callsenterSub').slideDown();
+                $("headerA").css("color","#f15b6d");
+                event.preventDefault();
+             } else {
+                $('.callsenterSub').css("display", "none");
+             }
+         });
 
-		});//ready
+      });//ready
    </script>
 </head>
 <body>
@@ -49,7 +48,6 @@
 							<li><a href="#">공지사항</a></li>
 							<li class="one"><a href="#">고객센터</a>
 								<ul class="callsenterSub">
-
 									<li><a href="#">FAQ</a></li>
 									<li><a href="#">QnA</a></li>
 								</ul></li>
@@ -64,33 +62,25 @@
 			</nav>
 		</header>
 		<div id="container">
-
 			<div class="inner">
 				<div class="content">
-					<h1>리더 회원가입</h1>
-					<div class="leaderJoin">
+					<h1>비밀번호 찾기</h1>
+					<div class="chkPw">
 						<form>
-							<div class="textInput"><input type="text" placeholder="아이디" class="joinInput"><button class="btn">중복확인</button></div>
-							<div class="textInput"><input type="password" placeholder="비밀번호" class="joinInput"></div>
-							<div class="textInput"><input type="password" placeholder="비밀번호 확인" class="joinInput"><button class="btn">비밀번호 확인</button></div>
-							<div class="textInput"><input type="text" placeholder="이름" class="joinInput"></div>
-							<div class="textInput"><label><input class="radiogenderRadio" type="radio" name="gender" value="m">남</label><span class="joinText"></span>
-													 <label><input class="radiogenderRadio" type="radio" name="gender" value="f">여</label></div>
-							<div class="textInput"><input type="text" placeholder="주소" class="joinInput1"><input type="text" placeholder="주소" class="joinInput1"><button class="btn">주소찾기</button></div>
-							<div class="textInput"><input type="tel" placeholder="연락처" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" class="joinInput2"></div>
-							<div class="textInput"><input type="text" placeholder="이메일" class="joinInput2"><span class="joinText">@</span><input type="text" placeholder="이메일" class="joinInput2">
-							<select class="joinInput2">
-													<option>직접입력</option><option>naver.com</option><option>daum.net</option><option>gmail.com</option></select></div>
-							<div class="textInput"><select class="joinInput2">
-													<option>국민은행</option><option>신한은행</option><option>우리은행</option><option>기업은행</option></select>
-													<input type="text" placeholder="계좌번호" class="joinInput1"></div>
-							<div class="textInput"><textarea class="joinInput3" placeholder="자기소개"></textarea></div>
-							<div class="textBtn"><input type="button" value="가입신청" class="joinBtn"></div>
+							<div class="textInput"><input type="text" placeholder="이름을 입력해주세요"></div>
+							<div class="textInput"><input type="tel" placeholder="아이디를 입력해주세요"></div>
+							<div class="textInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
+							<div class="textInput"><input type="button" value="확인" class="loginBtn"></div>
 						</form>
+					</div>
+						
+					<div class="chgPw">
+						<div class="textInput"><input type="tel" placeholder="새로운 비밀번호를 입력해주세요."></div>
+						<div class="textInput"><input type="text" placeholder="새로운 비밀번호를 다시 입력해주세요"></div>
+						<div class="textInput"><input type="button" value="비밀번호 변경" class="loginBtn"></div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<!-- container -->
 		<footer>
