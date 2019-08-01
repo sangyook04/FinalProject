@@ -8,13 +8,14 @@
   	
   </select>
 
+<!-- 인덱스명 주의!!! 컴퓨터마다 이름이 다름. 테이블 만들때 정해서 통일시켜야함 -->
   <select id="getListWithPaging"
   	      resultType="com.scorpion.domain.LevelTestVO">
    	<![CDATA[
-  		SELECT	test_index, test_content, test_exam1, test_exam2, test_exam3, test_exam4, test_answer
+  		SELECT	testindex, testcontent, testexam1, testexam2, testexam3, testexam4, testanswer
   		FROM	( SELECT 	/*+INDEX_DESC(levelTest SYS_C007432)*/
-  							rownum rn, test_index, test_content, test_exam1,
-  							test_exam2, test_exam3, test_exam4, test_answer
+  							rownum rn, testindex, testcontent, testexam1, 
+  							testexam2, testexam3, testexam4, testanswer
   				  FROM 		levelTest
   				  WHERE		rownum <= #{pageNum} * #{amount} )
   		WHERE rn > (#{pageNum} - 1) * #{amount}
@@ -23,14 +24,14 @@
 
   <update id="update">
   	UPDATE	levelTest
-  	SET		test_content = #{test_content}, test_exam1 = #{test_exam1},
-  			test_exam2= #{test_exam2}, test_exam3 = #{test_exam3},
-  			test_exam4= #{test_exam4}, test_answer = #{test_answer}
-  	WHERE  	test_index = #{test_index}
+  	SET		testcontent = #{testContent}, testexam1 = #{testExam1},
+  			testexam2= #{testExam2}, testexam3 = #{testExam3},
+  			testexam4= #{testExam4}, testanswer = #{testAnswer}
+  	WHERE  	testindex = #{testIndex}
   </update>
   
   <delete id="delete">
-  	DELETE FROM levelTest WHERE test_index = #{test_index}
+  	DELETE FROM levelTest WHERE testindex = #{testIndex}
   </delete>
 
   <select id="read" resultType="com.scorpion.domain.LevelTestVO">

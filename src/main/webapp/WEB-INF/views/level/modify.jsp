@@ -127,18 +127,19 @@
 			<div class="inner">
 			<h2>레벨 테스트 문항 변경</h2>
 			<div class="problem">
-				<form>
+				<form role="form" action="/level/modify" method="post">
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
-					<textarea class="form-control questionInput" rows="20" cols="100">dsada</textarea>
+					<input type="hidden" class="form-control" name="testIndex" value="${test.testIndex}">
+					<textarea class="form-control questionInput" rows="20" cols="100" name="testContent">${test.testContent}</textarea>
 					<h2>보기</h2><br>
-					1 : <input type="text" class="form-control">
-					2 : <input type="text" class="form-control">
-					3 : <input type="text" class="form-control">
-					4 : <input type="text" class="form-control"><br>
-					<p id="answerInput">정답 : <input type="text" class="form-control"></p>
-					<button class="btn btn-danger pull-right"> 취소 </button>
-					<button class="btn btn-primary pull-right"> 확인 </button>
+					1 : <input type="text" class="form-control" name="testExam1" value="${test.testExam1}">
+					2 : <input type="text" class="form-control" name="testExam2" value="${test.testExam2}">
+					3 : <input type="text" class="form-control" name="testExam3" value="${test.testExam3}">
+					4 : <input type="text" class="form-control" name="testExam4" value="${test.testExam4}"><br>
+					<p id="answerInput">정답 : <input type="text" class="form-control" name="testAnswer" value="${test.testAnswer}"></p>
+					<button type="submit" data-oper="list" class="btn btn-danger pull-right"> 취소 </button>
+					<button type="submit" data-oper="modify" class="btn btn-primary pull-right"> 확인 </button>
 					</div>
 				</form>
 			</div>
@@ -175,5 +176,37 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+<script>
+$(function() {
+	
+var formObj = $("form");
+	
+	//modify
+	$('button').on("click", function(e){
+		e.preventDefault();
+		var operation = $(this).data("oper");
+		
+		if(operation === "list"){
+			formObj.attr("action", "/level/list").attr("method", "get");
+			/* var pageNumTag = $("input[name='pageNum']").clone();
+			var amountTag = $("input[name='amount']").clone();
+			var typeTag = $("input[name='type']").clone();
+			var keywordTag = $("input[name='keyword']").clone();
+			
+			formObj.empty();
+			
+			formObj.append(pageNumTag);
+			formObj.append(amountTag);
+			formObj.append(typeTag);
+			formObj.append(keywordTag); */
+		}else if(operation === 'modify'){
+
+		}
+		
+		formObj.submit();
+	});
+	
+});
+</script>
 </body>
 </html>
