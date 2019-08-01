@@ -70,7 +70,9 @@ public class LevelController {
 			RedirectAttributes rttr) {
 		
 		service.register(levelTest);
-		return "/level/list";
+		
+		rttr.addFlashAttribute("result", levelTest.getTestIndex());
+		return "redirect:/level/list";
 	}
 	
 	@PostMapping("/remove")
