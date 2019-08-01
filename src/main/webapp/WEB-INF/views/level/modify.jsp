@@ -67,7 +67,7 @@
 
 		});//ready
    </script>
-<link rel="stylesheet" type="text/css" href="../../../resources/css/test.css">
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/test.css">
 </head>
 <body>
 	<div id="wrap">
@@ -123,10 +123,9 @@
 			</aside>
 			
 			<!-- End Sidebar Start 내용물-->
-			
+			<div class="containerContent">
 			<div class="inner">
-			<h1>레벨 테스트 문항 변경</h1>
-			<!-- <div class="containerContent"> -->
+			<h2>레벨 테스트 문항 변경</h2>
 			<div class="problem">
 				<form>
 					<div class="form-group form-inline">
@@ -143,7 +142,7 @@
 					</div>
 				</form>
 			</div>
-			<!-- </div> -->
+			</div>
 			</div>
 			<!-- End 내용물 -->
 			

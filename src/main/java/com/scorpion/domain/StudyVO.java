@@ -1,5 +1,8 @@
 package com.scorpion.domain;
 
+import lombok.Data;
+
+@Data
 public class StudyVO {
       private long studyIndex;
       private String studyName;

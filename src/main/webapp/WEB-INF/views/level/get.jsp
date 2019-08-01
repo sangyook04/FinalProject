@@ -67,30 +67,7 @@
 
 		});//ready
    </script>
-<style>
-	.getProblem {
-	text-align: center;
-	}
-
-	.questionInput {
-	border: 1px solid gray;
-	margin-bottom: 35px;
-	}
-	
-	#answerInput {
-	font-size: 20px;
-	margin: 20px 0px;
-	}
-	
-	.getProblem .form-control {
-	margin-right: 30px;
-	}
-	
-	.getProblem button{
-	width: 100px;
-	margin-right: 10px;
-	}
-</style>
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/test.css">
 </head>
 <body>
 	<div id="wrap">
@@ -146,11 +123,11 @@
 			</aside>
 			
 			<!-- End Sidebar Start 내용물-->
-			
+			<div class="containerContent">
 			<div class="inner">
-			<h1>레벨 테스트 상세 정보</h1>
+			<h2>레벨 테스트 상세 정보</h2>
 			<!-- <div class="containerContent"> -->
-			<div class="getProblem">
+			<div class="Problem">
 				<form>
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
@@ -168,6 +145,7 @@
 				</form>
 			</div>
 			<!-- </div> -->
+			</div>
 			</div>
 			<!-- End 내용물 -->
 			

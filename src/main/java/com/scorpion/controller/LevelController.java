@@ -50,7 +50,7 @@ public class LevelController {
 	
 	@GetMapping("/list")
 	public void list(Model model, Criteria cri) {
-		service.getList(cri);
+		model.addAttribute("list", service.getList(cri));
 	}
 	
 	@GetMapping("/get")
