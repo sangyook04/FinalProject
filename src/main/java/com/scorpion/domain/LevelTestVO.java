@@ -1,5 +1,8 @@
 package com.scorpion.domain;
 
+import lombok.Data;
+
+@Data
 public class LevelTestVO {
 	private long testIndex;
 	private String testContent;

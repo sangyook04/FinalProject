@@ -1,7 +1,8 @@
 package com.scorpion.domain;
 
+import lombok.Data;
 
-
+@Data
 public class StudentVO {
 	
 	private String stuId;

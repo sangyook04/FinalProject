@@ -1,5 +1,8 @@
 package com.scorpion.domain;
 
+import lombok.Data;
+
+@Data
 public class RefundVO {
 	
 	private Long refIndex;

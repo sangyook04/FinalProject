@@ -3,7 +3,6 @@ text-align: center;
 }
    
 #container .inner h1{
-background: yellow;
 font-size: 40px;
 font-weight: bold;
    margin: 100px 0px;
@@ -58,4 +57,18 @@ font-weight: bold;
 	.problem button{
 	width: 100px;
 	margin-right: 10px;
+	}
+	
+	#container .containerContent{
+	margin-left: 200px;
+	}
+	
+	#container .containerContent h2{
+	font-size: 40px;
+	font-weight: bold;
+	margin-bottom: 50px;
+	}
+	
+	#container .containerContent textarea{
+	resize: none;
 	}
