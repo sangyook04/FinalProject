@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,6 +69,7 @@
 		});//ready
    </script>
 <link rel="stylesheet" type="text/css" href="../../../resources/css/tableEllipsis.css">
+<link rel="stylesheet" type="text/css" href="../../../resources/css/test.css">
 </head>
 <body>
 	<div id="wrap">
@@ -123,32 +125,29 @@
 			</aside>
 			
 			<!-- End Sidebar Start 내용물-->
-			
-			<div class="inner">
-			<h1>레벨 테스트 관리</h1>
-			<!-- <div class="containerContent"> -->
-			<div class="beforeDepositList">
-				<table class="table table-striped table-hover">
-					<thead>
-		            	<tr>
-		                  <th>문제<!-- Rendering engine --></th>
-		                  <th>정답<!-- Engine version --></th>
-		            	</tr>
-		            </thead>
-		            <tbody>
-		            	<tr>
-		            		<td><a class="move" href="#">강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른강푸른</a></td>
-					        <td>우리1002-033-899856</td>
-		            	</tr>
-		            	<tr>
-		            		<td>강푸른</td>
-					        <td>우리1002-033-899856</td>
-		            	</tr>
-		           </tbody>
-				</table>
-				<button class="btn btn-primary pull-right">문제 추가</button>
-			</div>
-			<!-- </div> -->
+			<div class="containerContent">
+				<div class="inner">
+				<h2>레벨 테스트 관리</h2>
+				<div class="beforeDepositList">
+					<table class="table table-striped table-hover">
+						<thead>
+			            	<tr>
+			                  <th>문제<!-- Rendering engine --></th>
+			                  <th>정답<!-- Engine version --></th>
+			            	</tr>
+			            </thead>
+			            <tbody>
+	                   		<c:forEach items="${list }" var="test">
+			            	<tr>
+			            		<td><a class="move" href="#">${test.testContent}</a></td>
+						        <td>${test.testAnswer}</td>
+			            	</tr>
+			            	</c:forEach>
+			           </tbody>
+					</table>
+					<button id="regBtn" class="btn btn-primary pull-right">문제 추가</button>
+				</div>
+				</div>
 			</div>
 			<!-- End 내용물 -->
 			
@@ -181,5 +180,11 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+	
+<script>
+$("#regBtn").on("click", function(){
+	self.location = "/level/register";
+});
+</script>	
 </body>
 </html>

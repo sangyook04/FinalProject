@@ -123,27 +123,26 @@
 			</aside>
 			
 			<!-- End Sidebar Start 내용물-->
-			
+			<div class="containerContent">
 			<div class="inner">
-			<h1>레벨 테스트 문항 추가</h1>
-			<!-- <div class="containerContent"> -->
+			<h2>레벨 테스트 문항 추가</h2>
 			<div class="problem">
-				<form>
+				<form role="form" method="post" action="/level/register">
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
-					<textarea class="form-control questionInput" rows="20" cols="100">dsada</textarea>
+					<textarea class="form-control questionInput" rows="20" cols="100" name="testContent">dsada</textarea>
 					<h2>보기</h2><br>
-					1 : <input type="text" class="form-control">
-					2 : <input type="text" class="form-control">
-					3 : <input type="text" class="form-control">
-					4 : <input type="text" class="form-control"><br>
-					<p id="answerInput">정답 : <input type="text" class="form-control"></p>
+					1 : <input type="text" class="form-control" name="testExam1">
+					2 : <input type="text" class="form-control" name="testExam2">
+					3 : <input type="text" class="form-control" name="testExam3">
+					4 : <input type="text" class="form-control" name="testExam4"><br>
+					<p id="answerInput">정답 : <input type="text" class="form-control" name="testAnswer"></p>
 					<button class="btn btn-danger pull-right"> 취소 </button>
-					<button class="btn btn-primary pull-right"> 확인 </button>
+					<button class="btn btn-primary pull-right" type="submit"> 확인 </button>
 					</div>
 				</form>
 			</div>
-			<!-- </div> -->
+			</div>
 			</div>
 			<!-- End 내용물 -->
 			
