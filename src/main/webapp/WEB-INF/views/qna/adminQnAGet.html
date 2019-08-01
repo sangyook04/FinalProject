@@ -117,36 +117,30 @@
 				</ul>
 			</aside>
 			<div class="containerContent">
-				<h1>QnA 관리</h1>
+				<h1>QnA 상세정보</h1>
 				<div class="QnAWrap">
-					<table class="table table-hover">
-					  <thead>
-					    <tr>
-					      <th scope="col">번호</th>
-					      <th scope="col">제목</th>
-					      <th scope="col">작성자</th>
-					      <th scope="col">날짜</th>
-					      <th scope="col">답변상태</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr>
-					      <th scope="row">1</th>
-					      <td>제목이에용</td>
-					      <td>김상욱</td>
-					      <td>2019-07-31</td>
-					      <td>미답변</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">2</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					      <td>@fat</td>
-					      <td>@fat</td>
-					    </tr>
-					  </tbody>
-					</table>
-				</div>
+					<form>
+					  <div class="form-group">
+					    <label for="QnAGetTitle">제목</label>
+					    <input type="text" class="form-control" id="QnAGetTitle" placeholder="제목" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAGetWriter">작성자</label>
+					    <input type="text" class="form-control" id="QnAGetWriter" placeholder="작성자" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAGetDate">날짜</label>
+					    <input type="text" class="form-control" id="QnAGetDate" placeholder="날짜" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAGetContent">내용</label>
+					    <textarea class="form-control" id="QnAGetContent" placeholder="내용" style="resize: none" readonly="readonly"></textarea>
+					  </div>
+					  <button type="button" class="btn btn-default">답변</button>
+					  <button type="button" class="btn btn-default">삭제</button>
+					  <button type="button" class="btn btn-default">목록</button>
+					</form>
+				</div><!-- QnAWrap -->
 			</div>
 		</div><!-- container -->
 		<footer>

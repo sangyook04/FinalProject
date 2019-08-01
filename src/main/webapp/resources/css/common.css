@@ -3,7 +3,7 @@
 ul, ol, li {list-style: none;}
 table {table-layout: fixed;}
 h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: inherit;}
-label, button, [type=button], [type=submit], [type=reset], a {cursor: pointer;}
+label, button, [type=button], [type=submit], [type=reset], a {cursor: pointer; color: black;}
 img {display: block;}
 
 /* CLASS */
