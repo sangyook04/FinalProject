@@ -12,7 +12,7 @@
   				<trim prefix="OR">
   					<choose>
   						<when test="type == 'T'.toString()">
-  							title   LIKE '%'||#{keyword}||'%'
+  							title   LIKE '%'||#{keywords}||'%'
   						</when>
   						<when test="type == 'C'.toString()">
   							content LIKE '%'||#{keyword}||'%'
