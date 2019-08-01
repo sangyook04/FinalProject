@@ -24,7 +24,7 @@ public class StudentController {
 
 		private StudentService service;
 	
-		@GetMapping("/join")
+		@GetMapping("/studentJoin")
 		public void join() {
 			
 		}
@@ -33,6 +33,7 @@ public class StudentController {
 		public String join(StudentVO student) {
 			service.join(student);
 			return "/common/login";
+			
 		}
 		
 		@GetMapping("/info")

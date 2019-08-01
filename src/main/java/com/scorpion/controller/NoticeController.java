@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.NoticeVO;
+import com.scorpion.domain.PageDTO;
 import com.scorpion.service.NoticeService;
 
 import lombok.AllArgsConstructor;
@@ -24,12 +25,33 @@ public class NoticeController {
 
 	private NoticeService service;
 	
-	@GetMapping("/list")
+//	@GetMapping("/list")
+//	public void list(Model model, Criteria cri) {
+//		service.getList(cri);
+//	}
+	
+	@GetMapping("/noticeList")
 	public void list(Model model, Criteria cri) {
 		service.getList(cri);
+		
+		model.addAttribute("noticeList", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, 123));
+	
+
+		
 	}
 	
-	@GetMapping("/get")
+	
+	
+//	@GetMapping("/get")
+//	public void get(@RequestParam("noticeno") Long noticeno,
+//			@ModelAttribute("cri") Criteria cri,
+//	        Model model) {
+//		service.get(noticeno);
+//	}
+	
+	
+	@GetMapping("/noticeView")
 	public void get(@RequestParam("noticeno") Long noticeno,
 			@ModelAttribute("cri") Criteria cri,
 	        Model model) {
