@@ -5,16 +5,16 @@
 <meta name="viewport"
 	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Final Project</title>
+<title>Final Project_leaderInfoModify</title>
 <!-- CSS -->
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
-<script src="../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
+<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../resources/css/common.css">
+	href="../../../resources/css/common.css">
 <link rel="stylesheet" type="text/css"
-	href="../../resources/css/main.css">
+	href="../../../resources/css/main2.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
 	rel="stylesheet">
 
@@ -34,60 +34,6 @@
 		});//ready
    </script>
 
-<style>
-.content {
-	padding: 50px;
-	text-align: center;
-}
-
-.info {
-	font-size: xx-small;
-	margin-bottom: 5px;
-}
-
-.userInfo {
-	border-bottom: 1px solid gray;
-	padding: 5px;
-	margin: 5px;
-}
-
-#modBtn {
-	background-color: #4285f4;
-	padding: 10px;
-	color: white;
-	border-radius: 5px;
-	margin: 10px;
-}
-
-#closeBtn {
-	background-color: red;
-	padding: 10px;
-	color: white;
-	border-radius: 5px;
-	margin: 10px;
-}
-
-.joinInput {
-	border: 1px solid black;
-	padding: 4px;
-	width : 300px;
-	height : 40px;
-}
-
-.joinInput1 {
-	border: 1px solid black;
-	padding: 4px;
-	width : 150px;
-	height : 40px;
-}
-
-.joinInput2 {
-	border: 1px solid black;
-	padding: 4px;
-	width : 100px;
-	height : 40px;
-}
-</style>
 </head>
 <body>
 	<div id="wrap">
@@ -119,33 +65,35 @@
 		<div id="container">
 			<div class="inner">
 				<div class="content">
-					<form>
-						<img src="../../resources/img/GumonMain/mozip.png">
-						<div class="info">아이디</div>
-						<div class="userInfo">dkdlel</div>
-						<div class="info">비밀번호 수정</div>
-						<div class="userInfo"><input type="password" placeholder="비밀번호" class="joinInput"><input type="password" placeholder="비밀번호 확인" class="joinInput"></div>
-						<div class="info">이름</div>
-						<div class="userInfo">이름</div>
-						<div class="info">성별</div>
-						<div class="userInfo">여자</div>
-						<div class="info">국적</div>
-						<div class="userInfo">한국</div>
-						<div class="info">주소</div>
-						<div class="userInfo"><input type="text" placeholder="주소" class="joinInput1"><input type="text" placeholder="주소" class="joinInput1"><button class="btn">주소찾기</button></div>
-						<div class="info">연락처</div>
-						<div class="userInfo"><input type="tel" placeholder="연락처" class="joinInput2">-<input type="tel" placeholder="연락처" class="joinInput2">-<input type="tel" placeholder="연락처" class="joinInput2"></div>
-						<div class="info">이메일</div>
-						<div class="userInfo"><input type="text" placeholder="이메일" class="joinInput1">@<input type="text" placeholder="이메일" class="joinInput1"></div>
-						<div class="info">계좌번호</div>
-						<div class="userInfo"><select class="joinInput2">
-												<option>국민은행</option><option>신한은행</option><option>우리은행</option><option>기업은행</option></select>
-												<input type="text" placeholder="계좌번호" class="joinInput"></div>
-						<div class="info">자기소개</div>
-						<div class="userInfo"><textarea>자자자기기ㅣ기기소소소ㅗㅅ개ㅐ개개개</textarea></div>
-	
-						<button id="modBtn">확인</button><button id="closeBtn">취소</button>
-					</form>
+					<div class="infoContent">
+						<form>
+							<div class="img"><img src="../../../resources/img/GumonMain/user123.jpg"></div>
+							<div class="info">아이디</div>
+							<div class="userInfo">dkdlel</div>
+							<div class="info">비밀번호 수정</div>
+							<div class="userInfo"><input type="password" placeholder="비밀번호" class="joinInput"><input type="password" placeholder="비밀번호 확인" class="joinInput"></div>
+							<div class="info">이름</div>
+							<div class="userInfo">이름</div>
+							<div class="info">성별</div>
+							<div class="userInfo">여자</div>
+							<div class="info">국적</div>
+							<div class="userInfo">한국</div>
+							<div class="info">주소</div>
+							<div class="userInfo"><input type="text" placeholder="주소" class="joinInput1"><input type="text" placeholder="주소" class="joinInput"><button id="btn">주소찾기</button></div>
+							<div class="info">연락처</div>
+							<div class="userInfo"><input type="tel" placeholder="연락처" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" class="joinInput2"></div>
+							<div class="info">이메일</div>
+							<div class="userInfo"><input type="text" placeholder="이메일" class="joinInput1"><span class="joinText">@</span><input type="text" placeholder="이메일" class="joinInput1"></div>
+							<div class="info">계좌번호</div>
+							<div class="userInfo"><select class="joinInput2">
+													<option>국민은행</option><option>신한은행</option><option>우리은행</option><option>기업은행</option></select>
+													<input type="text" placeholder="계좌번호" class="joinInput"></div>
+							<div class="info">자기소개</div>
+							<div class="userInfo"><textarea class="joinInput3">자자자기기ㅣ기기소소소ㅗㅅ개ㅐ개개개</textarea></div>
+		
+							<button id="modBtn">확인</button><button id="closeBtn">취소</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -168,13 +116,13 @@
 					<div class="footerRight">
 						<div class="sns">
 							<a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
+								src="../../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
 							<a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
+								src="../../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
 							<a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_facebook.png"
+								src="../../../resources/img/GumonMain/img_sns_facebook.png"
 								alt="페이스북"></a> <a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_kakaostory.png"
+								src="../../../resources/img/GumonMain/img_sns_kakaostory.png"
 								alt="카카오스토리"></a>
 						</div>
 					</div>

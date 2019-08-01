@@ -3,11 +3,19 @@ package com.scorpion.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.PaymentVO;
 import com.scorpion.mapper.LeaderMapper;
 import com.scorpion.mapper.PaymentMapper;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@Service
+@AllArgsConstructor
 public class PaymentServiceImple implements PaymentService {
 
 	private PaymentMapper mapper;

@@ -3,8 +3,9 @@
 ul, ol, li {list-style: none;}
 table {table-layout: fixed;}
 h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: inherit;}
-label, button, [type=button], [type=submit], [type=reset], a {cursor: pointer;}
+label, button, [type=button], [type=submit], [type=reset] {cursor: pointer; color: black;}
 img {display: block;}
+a {text-decoration: none;}
 
 /* CLASS */
 .clearfix:after {content: ""; display: block; clear: both;}
@@ -40,3 +41,11 @@ img {display: block;}
 
 .thumb {position: relative;}
 .thumb.productlow:after {content: "\cd5c\c800\ac00"; position: absolute; top: -260px; left: 210px; color: #fff; background-color: red; width: 50px; height: 50px; text-align: center; line-height: 45px; font-weight: bold; font-size: 13px;}
+
+header nav .headerContent .mainmenu li a {color: black; text-decoration: none;}
+header nav .headerContent .gnb li a {color: black; text-decoration: none;}
+#wrap footer {height: 250px;}
+#container aside {border-radius: 0px 5px 5px 0px; z-index: 10;}
+#container aside .asdieMainMenu .Mainli .asideSubmenu {z-index: 10;}
+#container aside .asdieMainMenu .Mainli .asideSubmenu .asideSubmenu2 {z-index: 10;}
+#container aside a {color: #fff; text-decoration: none;}
