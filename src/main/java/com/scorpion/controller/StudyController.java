@@ -26,28 +26,28 @@ public class StudyController {
 	private StudyService service;
 	private InterestStudyService interservice;
 	@GetMapping("/recommend")
-	public void recommend(@RequestParam("level") String level, @ModelAttribute("cri") Criteria cri) {
-		service.getRecommendList(level, cri);
+	public void recommend(/*@RequestParam("level") String level, @ModelAttribute("cri") Criteria cri*/) {
+		//service.getRecommendList(level, cri);
 	}
 	
 	@GetMapping("/search")
-	public void search(@RequestParam("location") String location,
+	public void search(/*@RequestParam("location") String location,
 			@RequestParam("level") String level,
-			@RequestParam("time") String time) {
+			@RequestParam("time") String time*/) {
 		
 	}
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("studyno") Long studyno,
+	public void get(/*@RequestParam("studyno") Long studyno,
 			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		service.get(studyno);
+	        Model model*/) {
+		//service.get(studyno);
 	}
 	
 	@GetMapping("/scheduleList")
-	public void scheduleList(@RequestParam("id") String id, @RequestParam("state") String state,
-			 @ModelAttribute("cri") Criteria cri) {
-		service.getScheduleList(id, state, cri);
+	public void scheduleList(/*@RequestParam("id") String id, @RequestParam("state") String state,
+			 @ModelAttribute("cri") Criteria cri*/) {
+		//service.getScheduleList(id, state, cri);
 	}
 	
 	@PostMapping("/scheduleRemove")
@@ -57,38 +57,39 @@ public class StudyController {
 	}
 	
 	@GetMapping("/scheduleModify")
-	public void scheduleModify(@RequestParam("studyno") Long studyno) {
+	public void scheduleModify(/*@RequestParam("studyno") Long studyno*/) {
 		
 	}
 	
-	@PostMapping("/scheduleModify")
+	/*@PostMapping("/scheduleModify")
 	public String scheduleModify(StudyVO study, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		service.modify(study);
-		return "/study/scheduleList";
-	}
+		//service.modify(study);
+		return "/study/scheduleModify";
+	}*/
 	
 	@GetMapping("/studyingList")
-	public void studyingList(@RequestParam("id") String id, @RequestParam("state") String state,
-			 @ModelAttribute("cri") Criteria cri) {
-		service.getStudyingList(id, state, cri);
+	public void studyingList(/*@RequestParam("id") String id, @RequestParam("state") String state, @ModelAttribute("cri") Criteria cri*/
+			Model model, Criteria cri) {
+		model.addAttribute("list", cri);
+		//service.getStudyingList(id, state, cri);
 	}
 	
 	@GetMapping("/studyingStudentList")
-	public void studyingStudentList(@RequestParam("id") String id, @RequestParam("studyno") Long studyno,
-			@ModelAttribute("cri") Criteria cri) {
-		service.getStudentList(id, studyno, cri);
+	public void studyingStudentList(/*@RequestParam("id") String id, @RequestParam("studyno") Long studyno,
+			@ModelAttribute("cri") Criteria cri*/) {
+	//	service.getStudentList(id, studyno, cri);
 	}
 	
 	@GetMapping("/endStudyList")
-	public void endStudyList(@RequestParam("id") String id, @RequestParam("state") String state,
-			 @ModelAttribute("cri") Criteria cri) {
-		service.getEndList(id, state, cri);
+	public void endStudyList(/*@RequestParam("id") String id, @RequestParam("state") String state,
+			 @ModelAttribute("cri") Criteria cri*/) {
+		//service.getEndList(id, state, cri);
 	}
 	
 	@GetMapping("/endStudyStudentList")
-	public void endStudyStudentList(@RequestParam("id") String id, @RequestParam("studyno") Long studyno,
-			@ModelAttribute("cri") Criteria cri) {
-		service.getStudentList(id, studyno, cri);
+	public void endStudyStudentList(/*@RequestParam("id") String id, @RequestParam("studyno") Long studyno,
+			@ModelAttribute("cri") Criteria cri*/) {
+		//service.getStudentList(id, studyno, cri);
 	}
 	
 	@GetMapping("/create")
@@ -104,9 +105,9 @@ public class StudyController {
 	}
 	
 	@GetMapping("/zzimStudy")
-	public void zzimStudy(@ModelAttribute("cri") Criteria cri, 
-			@RequestParam("id") String id) {
-		interservice.getListPage(cri, id);
+	public void zzimStudy(/*@ModelAttribute("cri") Criteria cri, 
+			@RequestParam("id") String id*/) {
+		//interservice.getListPage(cri, id);
 	}
 	
 	@PostMapping("/zzimStudyRemove")
