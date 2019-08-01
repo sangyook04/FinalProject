@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.BoardVO;
+import com.scorpion.domain.QnaDTO;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.QnaVO;
@@ -25,6 +25,29 @@ import lombok.extern.log4j.Log4j;
 public class QnaController {
 	
 	private QnaService service;
+	
+	//처음 QnA페이지 뿌려주는 곳
+	//전체 목록 가져오기
+	@GetMapping("/list")
+	public void list(Model model, Criteria cri) {
+		log.info("list");
+//			model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new QnaDTO(cri, 123));
+									   //전체 데이터 수는 임의로 123으로 지정
+		//전체 데이터 개수를 가지고 와서 total에 저장
+		int total = service.getTotal(cri);
+		log.info("total count : " + total);	//전체 데이터 개수 로그로 기록
+		//모델 객체 pageMaker의 값을 실제 총 데이터 개수로 지정해서 저장
+		model.addAttribute("pageMaker", new QnaDTO(cri, total));
+		
+	}	
+
+//	@GetMapping("/list")
+//	public void list(Model model, Criteria cri) {
+//		service.getList(cri);
+//	}
+	
 	
 	@GetMapping("/myQna")
 	public void myQna(Model model, Criteria cri, @RequestParam("id") String id) {
@@ -61,11 +84,6 @@ public class QnaController {
 			RedirectAttributes rttr) {
 		service.modify(qna);
 		return "/qna/get";
-	}
-	
-	@GetMapping("/list")
-	public void list(Model model, Criteria cri) {
-		service.getList(cri);
 	}
 	
 	//register 등록기능

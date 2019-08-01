@@ -1,35 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>Final Project</title>
-   <!-- CSS -->
-   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/mainQnA.css">
-   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Final Project</title>
+<!-- CSS -->
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/css/common.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../resources/css/mainQnA.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
+	rel="stylesheet">
 
-   <script>
-   		$(document).ready(function(){
+<script>
+	$(document).ready(function() {
 
-			$('nav .one').hover(function () {
-			    if($(".callsenterSub").css("display") == "none"){
-			       $('.callsenterSub').slideDown();
-			       $("headerA").css("color","#f15b6d");
-			       event.preventDefault();
-			    } else {
-			       $('.callsenterSub').css("display", "none");
-			    }
-			});
+		$('nav .one').hover(function() {
+			if ($(".callsenterSub").css("display") == "none") {
+				$('.callsenterSub').slideDown();
+				$("headerA").css("color", "#f15b6d");
+				event.preventDefault();
+			} else {
+				$('.callsenterSub').css("display", "none");
+			}
+		});
 
-		});//ready
-   </script>
+	});//ready
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -37,7 +46,9 @@
 			<nav>
 				<div class="inner">
 					<div class="headerContent">
-						<div class="mainlogo"><a href="#"></a></div>
+						<div class="mainlogo">
+							<a href="#"></a>
+						</div>
 						<ul class="mainmenu">
 							<li><a href="#">스터디 찾기</a></li>
 							<li><a href="#">레벨 테스트</a></li>
@@ -46,8 +57,7 @@
 								<ul class="callsenterSub">
 									<li><a href="#">FAQ</a></li>
 									<li><a href="#">QnA</a></li>
-								</ul>
-							</li>
+								</ul></li>
 						</ul>
 						<ul class="gnb">
 							<li><a href="#">로그인</a></li>
@@ -63,40 +73,49 @@
 				<h1>QnA</h1>
 				<div class="QnAWrap">
 					<form>
-						<button type="button" class="btn btn-default btnNew">새글 등록</button>
+						<button type="button" class="btn btn-default btnNew">새글
+							등록</button>
 						<table class="table table-hover">
-						  <thead>
-						    <tr>
-						      <th scope="col">번호</th>
-						      <th scope="col">제목</th>
-						      <th scope="col">날짜</th>
-						      <th scope="col">작성자</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr>
-						      <th scope="row">1</th>
-						      <td>제목이에용</td>
-						      <td>2019-07-31</td>
-						      <td>김상욱</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">2</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>Thornton</td>
-						    </tr>
-						  </tbody>
+							<thead>
+								<tr>
+									<th scope="col">번호</th>
+									<th scope="col">제목</th>
+									<th scope="col">날짜</th>
+									<th scope="col">작성자</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Model 데이터 출력 -->
+								<c:forEach items="${list }" var="qna">
+									<tr>
+										<td>${qna.qnaindex }</td>
+										<%-- <td>
+											게시물 조회 페이지 이동 <a class="move" href="${board.bno}">
+												${board.title } <!-- 댓글 갯수 표시 --> [${board.replyCnt }]
+										</a>
+										</td>
+										<td>${board.writer}</td>
+										<td><fmt:formatDate value="${board.regdate}"
+												pattern="yyyy-MM-dd" /></td>
+										<td><fmt:formatDate value="${board.updateDate}"
+												pattern="yyyy-MM-dd" /></td> --%>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 					</form>
 				</div>
-			</div><!-- inner -->
-		</div><!-- container -->
+			</div>
+			<!-- inner -->
+		</div>
+		<!-- container -->
 		<footer>
 			<div class="inner">
 				<div class="footArea">
 					<div class="footerLeft">
-						<div class="callNumber"><b>고객센터</b><strong> 1588-0000</strong> 평일 09:00~18:00(공휴일 제외)</div>
+						<div class="callNumber">
+							<b>고객센터</b><strong> 1588-0000</strong> 평일 09:00~18:00(공휴일 제외)
+						</div>
 						<div class="footerinfo">
 							<ul>
 								<li><a href="#">개인정보 처리방침</a></li>
@@ -107,16 +126,23 @@
 					</div>
 					<div class="footerRight">
 						<div class="sns">
-		                    <a href="#" target="_blank"><img src="../../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
-		                    <a href="#" target="_blank"><img src="../../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
-		                    <a href="#" target="_blank"><img src="../../../resources/img/GumonMain/img_sns_facebook.png" alt="페이스북"></a>
-		                    <a href="#" target="_blank"><img src="../../../resources/img/GumonMain/img_sns_kakaostory.png" alt="카카오스토리"></a>
-		                </div>
+							<a href="#" target="_blank"><img
+								src="../../../resources/img/GumonMain/img_sns_instar.png"
+								alt="인스타"></a> <a href="#" target="_blank"><img
+								src="../../../resources/img/GumonMain/img_sns_blog.png"
+								alt="블로그"></a> <a href="#" target="_blank"><img
+								src="../../../resources/img/GumonMain/img_sns_facebook.png"
+								alt="페이스북"></a> <a href="#" target="_blank"><img
+								src="../../../resources/img/GumonMain/img_sns_kakaostory.png"
+								alt="카카오스토리"></a>
+						</div>
 					</div>
 				</div>
 				<div class="copyright">Copyrightⓒ AGUMON. All Right Reserved</div>
-			</div><!-- inner -->
+			</div>
+			<!-- inner -->
 		</footer>
-	</div><!-- wrap -->
+	</div>
+	<!-- wrap -->
 </body>
 </html>
