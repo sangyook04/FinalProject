@@ -5,19 +5,18 @@
 <meta name="viewport"
 	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Final Project</title>
+<title>Final Project_findPw</title>
 <!-- CSS -->
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
-<script src="../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
+<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../resources/css/common.css">
+	href="../../../resources/css/common.css">
 <link rel="stylesheet" type="text/css"
-	href="../../resources/css/main.css">
+	href="../../../resources/css/main2.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
 	rel="stylesheet">
-
 <script>
          $(document).ready(function(){
 
@@ -33,50 +32,6 @@
 
       });//ready
    </script>
-<style>
-.content {
-	padding : 50px;
-	text-align : center;
-}
-
-input {
-	border: 1px solid black;
-	padding: 4px;
-	width : 300px;
-	height : 40px;
-}
-
-h1{
-	font-size : 3em;
-	margin-top : 50px;
-	margin-bottom : 50px;
-	font-weight: bold;
-}
-
-.textInput {
-	margin-bottom : 10px;
-}
-
-.find {
-	margin-bottom : 50px;
-}
-
-.loginBtn {
-	background-color : #4285f4;
-	color : white;
-	border : none;
-	height : 50px;
-	font-weight: bold;
-	margin-bottom : 60px;
-}
-
-.msg {
-	color : red;
-	text-align : center;
-	margin : 20px;
-	height : 50px;
-}
-</style>
 </head>
 <body>
 	<div id="wrap">
@@ -108,17 +63,20 @@ h1{
 			<div class="inner">
 				<div class="content">
 					<h1>비밀번호 찾기</h1>
-					<form>
-						<div class="textInput"><input type="text" placeholder="이름을 입력해주세요"></div>
-						<div class="textInput"><input type="tel" placeholder="아이디를 입력해주세요"></div>
-						<div class="textInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
-						<div class="textInput"><input type="button" value="확인" class="loginBtn"></div>
+					<div class="chkPw">
+						<form>
+							<div class="textInput"><input type="text" placeholder="이름을 입력해주세요"></div>
+							<div class="textInput"><input type="tel" placeholder="아이디를 입력해주세요"></div>
+							<div class="textInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
+							<div class="textInput"><input type="button" value="확인" class="loginBtn"></div>
+						</form>
+					</div>
 						
-						
+					<div class="chgPw">
 						<div class="textInput"><input type="tel" placeholder="새로운 비밀번호를 입력해주세요."></div>
 						<div class="textInput"><input type="text" placeholder="새로운 비밀번호를 다시 입력해주세요"></div>
 						<div class="textInput"><input type="button" value="비밀번호 변경" class="loginBtn"></div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -141,13 +99,13 @@ h1{
 					<div class="footerRight">
 						<div class="sns">
 							<a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
+								src="../../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
 							<a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
+								src="../../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
 							<a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_facebook.png"
+								src="../../../resources/img/GumonMain/img_sns_facebook.png"
 								alt="페이스북"></a> <a href="#" target="_blank"><img
-								src="../../resources/img/GumonMain/img_sns_kakaostory.png"
+								src="../../../resources/img/GumonMain/img_sns_kakaostory.png"
 								alt="카카오스토리"></a>
 						</div>
 					</div>
