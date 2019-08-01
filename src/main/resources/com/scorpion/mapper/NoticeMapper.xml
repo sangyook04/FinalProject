@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.NoticeSMapper">
+  
+    <!-- 쿼리 보관 -->
+  <sql id="criteria">
+  	<trim prefix="(" suffix=") AND " 
+  			  prefixOverrides="OR">
+  			<foreach item="type" collection="typeArr">
+  				<trim prefix="OR">
+  					<choose>
+  						<when test="type == 'T'.toString()">
+  							title   LIKE '%'||#{keywords}||'%'
+  						</when>
+  						<when test="type == 'C'.toString()">
+  							content LIKE '%'||#{keyword}||'%'
+  						</when>
+  						<when test="type == 'W'.toString()">
+  							writer  LIKE '%'||#{keyword}||'%'
+  						</when>
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
+
+  
+
+  <select id="read" resultType="com.scorpion.domain.NoticeVO">
+  	SELECT * FROM notice WHERE notIndex = #{notIndex}
+  </select>
+
+  <insert id="insertSelectKey">
+    <selectKey keyProperty="bno" resultType="long"    
+    			order="BEFORE">
+    	SELECT seq_board.nextval FROM dual
+    </selectKey>
+  	INSERT INTO tbl_board(bno, title, content, writer)
+  	VALUES(#{bno}, #{title}, #{content}, #{writer})
+  </insert>
+  
+ 
+  <select id="getList" 
+  		  resultType="com.scorpion.domain.NoticeVO">
+  	<![CDATA[
+  		SELECT * FROM notice WHERE notIndex > 0
+  	]]>
+  </select>
+  
+  
+  
+</mapper>
+
+
