@@ -34,16 +34,16 @@
   </delete>
 
   <select id="read" resultType="com.scorpion.domain.LevelTestVO">
-  	SELECT * FROM levelTest WHERE test_index = #{test_index}
+  	SELECT * FROM levelTest WHERE testindex = #{testIndex}
   </select>
 
   <insert id="insertSelectKey">
-    <selectKey keyProperty="test_index" resultType="long"    
+    <selectKey keyProperty="testIndex" resultType="long"    
     			order="BEFORE">
     	SELECT leveltest_no.nextval FROM dual
     </selectKey>
   	INSERT INTO levelTest
-  	VALUES(#{test_index}, #{test_content}, #{test_exam1}, #{test_exam2}, #{test_exam3}, #{test_exam4}, #{test_answer})
+  	VALUES(#{testIndex}, #{testContent}, #{testExam1}, #{testExam2}, #{testExam3}, #{testExam4}, #{testAnswer})
   </insert>
   
   <select id="getList" 

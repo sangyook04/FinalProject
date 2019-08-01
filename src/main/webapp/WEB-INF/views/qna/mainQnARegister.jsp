@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +12,7 @@
 	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/leastuQnA.css">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/mainQnA.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
    <script>
@@ -25,6 +27,16 @@
 			       $('.callsenterSub').css("display", "none");
 			    }
 			});
+
+			$('input[id="pwdCheck"]').change(function() {
+				    var value = $(this).val();
+				    var checked = $(this).prop('checked');
+
+				    if(checked)
+				    	$('#mainQnARegisterPwd').attr("readonly", false);
+				    else
+				        $('#mainQnARegisterPwd').attr("readonly", true);
+				});
 
 		});//ready
    </script>
@@ -58,33 +70,28 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>내 문의 상세 내역</h1>
+				<h1>QnA 등록</h1>
 				<div class="QnAWrap">
-					<form class="leaderMyQnAGetForm">
+					<form role="form" method="post" action="/qna/register">
 					  <div class="form-group">
-					    <label for="QnALeaderGetNo">번호</label>
-					    <input type="text" class="form-control" id="QnALeaderGetNo" placeholder="번호" readonly="readonly">
+					    <label for="mainQnARegisterTitle">제목</label>
+					    <input type="text" class="form-control" id="mainQnARegisterTitle" placeholder="제목">
+					  </div>
+					  <div class="form-group registerpwd">
+					    <label for="mainQnARegisterPwd">비밀번호</label>
+					    <input type="password" class="form-control" id="mainQnARegisterPwd" placeholder="비밀번호" readonly="readonly">
+					  </div>
+					  <div class="pwdOKWrap">
+					  	<label for="pwdCheck">비밀번호 여부</label>
+					  	<input id="pwdCheck" type="checkbox" name="pwdOK" value="pwdOK">
 					  </div>
 					  <div class="form-group">
-					    <label for="QnALeaderGetTitle">제목</label>
-					    <input type="text" class="form-control" id="QnALeaderGetTitle" placeholder="제목" readonly="readonly">
+					    <label for="mainQnARegisterContent">내용</label>
+					    <textarea class="form-control" id="mainQnARegisterContent" placeholder="내용" style="resize: none"></textarea>
 					  </div>
-					  <div class="form-group">
-					    <label for="QnALeaderGetDate">날짜</label>
-					    <input type="text" class="form-control" id="QnALeaderGetDate" placeholder="날짜" readonly="readonly">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnALeaderGetContent">내용</label>
-					    <textarea class="form-control" id="QnALeaderGetContent" placeholder="내용" style="resize: none" readonly="readonly"></textarea>
-					  </div>
-					  <button type="button" class="btn btn-default">수정</button>
-					  <button type="button" class="btn btn-default">삭제</button>
-					  <button type="button" class="btn btn-default">목록</button>
+					  <button type="submit" class="btn btn-default">확인</button>
+					  <button type="button" class="btn btn-default">취소</button>
 					</form>
-					<div class="leaderMyQnAGetAnswer">
-						<h2>답변내용</h2>
-						<input type="textarea" class="form-control" id="QnALeaderGetContent" placeholder="내용" readonly="readonly">
-					</div>
 				</div>
 			</div><!-- inner -->
 		</div><!-- container -->

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +12,7 @@
 	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/mainQnA.css">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/leastuQnA.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
    <script>
@@ -25,16 +27,6 @@
 			       $('.callsenterSub').css("display", "none");
 			    }
 			});
-
-			$('input[id="pwdCheck"]').change(function() {
-				    var value = $(this).val();
-				    var checked = $(this).prop('checked');
-
-				    if(checked)
-				    	$('#mainQnARegisterPwd').attr("readonly", false);
-				    else
-				        $('#mainQnARegisterPwd').attr("readonly", true);
-				});
 
 		});//ready
    </script>
@@ -68,28 +60,29 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>QnA 등록</h1>
+				<h1>내 문의 내역</h1>
 				<div class="QnAWrap">
-					<form>
-					  <div class="form-group">
-					    <label for="mainQnARegisterTitle">제목</label>
-					    <input type="text" class="form-control" id="mainQnARegisterTitle" placeholder="제목">
-					  </div>
-					  <div class="form-group registerpwd">
-					    <label for="mainQnARegisterPwd">비밀번호</label>
-					    <input type="password" class="form-control" id="mainQnARegisterPwd" placeholder="비밀번호" readonly="readonly">
-					  </div>
-					  <div class="pwdOKWrap">
-					  	<label for="pwdCheck">비밀번호 여부</label>
-					  	<input id="pwdCheck" type="checkbox" name="pwdOK" value="pwdOK">
-					  </div>
-					  <div class="form-group">
-					    <label for="mainQnARegisterContent">내용</label>
-					    <textarea class="form-control" id="mainQnARegisterContent" placeholder="내용" style="resize: none"></textarea>
-					  </div>
-					  <button type="button" class="btn btn-default">확인</button>
-					  <button type="button" class="btn btn-default">취소</button>
-					</form>
+					<table class="table table-hover">
+					  <thead>
+					    <tr>
+					      <th scope="col">번호</th>
+					      <th scope="col">제목</th>
+					      <th scope="col">날짜</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">1</th>
+					      <td>제목이에용</td>
+					      <td>2019-07-31</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">2</th>
+					      <td>Jacob</td>
+					      <td>Thornton</td>
+					    </tr>
+					  </tbody>
+					</table>
 				</div>
 			</div><!-- inner -->
 		</div><!-- container -->

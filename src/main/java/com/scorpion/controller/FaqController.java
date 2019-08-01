@@ -35,10 +35,10 @@ public class FaqController {
 	}
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("faqno") Long faqno,
+	public void get(/*@RequestParam("faqno") Long faqno,
 			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		service.get(faqno);
+	        Model model*/) {
+		//service.get(faqno);
 	}
 	
 	@GetMapping("/register")
@@ -62,15 +62,15 @@ public class FaqController {
 	}
 	
 	@GetMapping("/modify")
-	public void modify(@RequestParam("faqno") Long faqno,
+	public void modify(/*@RequestParam("faqno") Long faqno,
 			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
+	        Model model*/) {
 		
 	}
 	
-	@PostMapping("/modify")
-	public String modify(FaqVO faq, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		service.modify(faq);
-		return "/faq/get";
-	}
+//	@PostMapping("/modify")
+//	public String modify(FaqVO faq, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+//		service.modify(faq);
+//		return "/faq/get";
+//	}
 }

@@ -20,5 +20,6 @@ public interface QnaService {
 	public int register(QnaVO qnavo);
 	
 	public int replymodify(Long qno, String answer);
+	public int getTotal(Criteria cri);
 
 }

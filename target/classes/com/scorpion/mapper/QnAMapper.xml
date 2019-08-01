@@ -2,20 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.scorpion.mapper.LevelTestMapper">
+<mapper namespace="com.scorpion.mapper.QnAMapper">
   <select id="getTotalCount" resultType="int">
-  	SELECT COUNT(*) FROM levelTest 
+  	SELECT COUNT(*) FROM QNA 
   	
   </select>
 
-<!-- 인덱스명 주의!!! 컴퓨터마다 이름이 다름. 테이블 만들때 정해서 통일시켜야함 -->
   <select id="getListWithPaging"
-  	      resultType="com.scorpion.domain.LevelTestVO">
+  	      resultType="com.scorpion.domain.QnaVO">
    	<![CDATA[
-  		SELECT	testindex, testcontent, testexam1, testexam2, testexam3, testexam4, testanswer
+  		SELECT	
   		FROM	( SELECT 	/*+INDEX_DESC(levelTest SYS_C007432)*/
-  							rownum rn, testindex, testcontent, testexam1, 
-  							testexam2, testexam3, testexam4, testanswer
+  							rownum rn, test_index, test_content, test_exam1,
+  							test_exam2, test_exam3, test_exam4, test_answer
   				  FROM 		levelTest
   				  WHERE		rownum <= #{pageNum} * #{amount} )
   		WHERE rn > (#{pageNum} - 1) * #{amount}
@@ -24,14 +23,14 @@
 
   <update id="update">
   	UPDATE	levelTest
-  	SET		testcontent = #{testContent}, testexam1 = #{testExam1},
-  			testexam2= #{testExam2}, testexam3 = #{testExam3},
-  			testexam4= #{testExam4}, testanswer = #{testAnswer}
-  	WHERE  	testindex = #{testIndex}
+  	SET		test_content = #{test_content}, test_exam1 = #{test_exam1},
+  			test_exam2= #{test_exam2}, test_exam3 = #{test_exam3},
+  			test_exam4= #{test_exam4}, test_answer = #{test_answer}
+  	WHERE  	test_index = #{test_index}
   </update>
   
   <delete id="delete">
-  	DELETE FROM levelTest WHERE testindex = #{testIndex}
+  	DELETE FROM QNA WHERE QNAINDEX = #{test_index}
   </delete>
 
   <select id="read" resultType="com.scorpion.domain.LevelTestVO">

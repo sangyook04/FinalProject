@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,10 +58,10 @@
 					<div class="headerContent">
 						<div class="mainlogo"><a href="#"></a></div>
 						<ul class="mainmenu">
-							<li><a href="#">½ºÅÍµð Ã£±â</a></li>
-							<li><a href="#">·¹º§ Å×½ºÆ®</a></li>
-							<li><a href="#">°øÁö»çÇ×</a></li>
-							<li class="one"><a href="#">°í°´¼¾ÅÍ</a>
+							<li><a href="#">ìŠ¤í„°ë”” ì°¾ê¸°</a></li>
+							<li><a href="#">ë ˆë²¨ í…ŒìŠ¤íŠ¸</a></li>
+							<li><a href="#">ê³µì§€ì‚¬í•­</a></li>
+							<li class="one"><a href="#">ê³ ê°ì„¼í„°</a>
 								<ul class="callsenterSub">
 									<li><a href="#">FAQ</a></li>
 									<li><a href="#">QnA</a></li>
@@ -69,9 +69,9 @@
 							</li>
 						</ul>
 						<ul class="gnb">
-							<li><a href="#">·Î±×ÀÎ</a></li>
-							<li><a href="#">ÇÐ»ý È¸¿ø°¡ÀÔ</a></li>
-							<li><a href="#">¸®´õ ½ÃÀÛÇÏ±â</a></li>
+							<li><a href="#">ë¡œê·¸ì¸</a></li>
+							<li><a href="#">í•™ìƒ íšŒì›ê°€ìž…</a></li>
+							<li><a href="#">ë¦¬ë” ì‹œìž‘í•˜ê¸°</a></li>
 						</ul>
 					</div>
 				</div>
@@ -84,33 +84,33 @@
 				    	<img src="../../resources/img/GumonMain/img_main02.png">
 				    	<div class="slidercontent">
 							<h1>WelCome</h1>
-							<h1>½ºÄÝÇÇ¿ÂÀÌ Ã³À½ÀÌ¼¼¿ä?</h1>
-							<p>Áö±Ý ·¹º§Å×½ºÆ®ÇÏ°í ²À ¸Â´Â ½ºÅÍµð¸¦ ¾È³»¹ÞÀ¸¼¼¿ä!</p>
-							<input type="button" target="_blank" name="sadas" value="½ÃÀÛÇÏ±â">
+							<h1>ìŠ¤ì½œí”¼ì˜¨ì´ ì²˜ìŒì´ì„¸ìš”?</h1>
+							<p>ì§€ê¸ˆ ë ˆë²¨í…ŒìŠ¤íŠ¸í•˜ê³  ê¼­ ë§žëŠ” ìŠ¤í„°ë””ë¥¼ ì•ˆë‚´ë°›ìœ¼ì„¸ìš”!</p>
+							<input type="button" target="_blank" name="sadas" value="ì‹œìž‘í•˜ê¸°">
 						</div>
 					</div>
 				    <div class="item item2">
 						<img src="../../resources/img/StudyMain/12950-1557969673.jpeg">
 						<div class="slidercontent">
-							<h1>½ºÄÝÇÇ¿ÂÀº?</h1>
-							<p>°¢¾ç°¢»öÀÇ ÇØ¿Ü°æÇè ¸®´õ¿Í ÇÔ²²ÇÏ´Â ½ºÅÍµð ¸ÅÄª ÇÃ·§ÆûÀÔ´Ï´Ù.</p>
+							<h1>ìŠ¤ì½œí”¼ì˜¨ì€?</h1>
+							<p>ê°ì–‘ê°ìƒ‰ì˜ í•´ì™¸ê²½í—˜ ë¦¬ë”ì™€ í•¨ê»˜í•˜ëŠ” ìŠ¤í„°ë”” ë§¤ì¹­ í”Œëž«í¼ìž…ë‹ˆë‹¤.</p>
 						</div>
 					</div>
 				    <div class="item item3">
 				    	<img src="../../resources/img/StudyMain/studySlider01.jpeg">
 				    	<div class="slidercontent">
-							<h1>½ºÅÍµð ¸®´õ¿¡ °ü½ÉÀÌ ÀÖÀ¸½Å°¡¿ä?</h1>
-							<p>½ºÅÍµðÀÇ È£½ºÆ®°¡ µÇ¾î ¿µ¾îÀÇ Áñ°Å¿òÀ» ¼±»çÇÏ¼¼¿ä!</p>
-							<input type="button" target="_blank" name="sadas" value="½ÃÀÛÇÏ±â">
+							<h1>ìŠ¤í„°ë”” ë¦¬ë”ì— ê´€ì‹¬ì´ ìžˆìœ¼ì‹ ê°€ìš”?</h1>
+							<p>ìŠ¤í„°ë””ì˜ í˜¸ìŠ¤íŠ¸ê°€ ë˜ì–´ ì˜ì–´ì˜ ì¦ê±°ì›€ì„ ì„ ì‚¬í•˜ì„¸ìš”!</p>
+							<input type="button" target="_blank" name="sadas" value="ì‹œìž‘í•˜ê¸°">
 						</div>
 					</div>
 				</div>
 			</div><!-- slider -->
 			<section class="studyListWrap">
 				<div class="inner">
-					<h1>½ºÄÝÇÇ¿ÂÀº</h1>
-					<h1>°¢¾ç°¢»öÀÇ <b>ÇØ¿Ü°æÇè ¸®´õ</b>¿Í ÇÔ²²ÇÏ´Â</h1>
-					<h1><b>¿ÀÇÁ¶óÀÎ ½ºÅÍµð ¸ÅÄª ÇÃ·§Æû</b> ÀÔ´Ï´Ù.</h1>
+					<h1>ìŠ¤ì½œí”¼ì˜¨ì€</h1>
+					<h1>ê°ì–‘ê°ìƒ‰ì˜ <b>í•´ì™¸ê²½í—˜ ë¦¬ë”</b>ì™€ í•¨ê»˜í•˜ëŠ”</h1>
+					<h1><b>ì˜¤í”„ë¼ì¸ ìŠ¤í„°ë”” ë§¤ì¹­ í”Œëž«í¼</b> ìž…ë‹ˆë‹¤.</h1>
 					<div class="studyListContent">
 						<div class="studyList">
 							Empty
@@ -127,24 +127,24 @@
 			<section class="howLike">
 				<div class="inner">
 					<div class="howLikeTitle">
-						<h1>½ºÄÝÇÇ¿Â!</h1>
-						<h2>¾î¶²Á¡ÀÌ ÁÁ³ª¿ä?</h2>
+						<h1>ìŠ¤ì½œí”¼ì˜¨!</h1>
+						<h2>ì–´ë–¤ì ì´ ì¢‹ë‚˜ìš”?</h2>
 					</div>
 					<ul>
 						<li>
 							<div class="icon icon1"></div>
-							<h2>³»°Ô ²À ¸Â´Â ¼öÁØº° ½ºÅÍµð</h2>
-							<h3>ÃÊ±Þ, Áß±Þ, °í±Þ·¹º§·Î<br> ÁøÇàµÇ´Â ½ºÅÍµð¿¡¿ä!</h3>
+							<h2>ë‚´ê²Œ ê¼­ ë§žëŠ” ìˆ˜ì¤€ë³„ ìŠ¤í„°ë””</h2>
+							<h3>ì´ˆê¸‰, ì¤‘ê¸‰, ê³ ê¸‰ë ˆë²¨ë¡œ<br> ì§„í–‰ë˜ëŠ” ìŠ¤í„°ë””ì—ìš”!</h3>
 						</li>
 						<li>
 							<div class="icon icon2"></div>
-							<h2>ÃÖ´ë 6-8¸íÀÇ ¼Ò¼ö Á¤¿¹</h2>
-							<h3>µµ¶õµµ¶õ Á¤¿¹ ¸â¹ö·Î<br>²À ¸Â´Â »ç¶÷µé³¢¸® ½ÃÀÛÇØ¿ä</h3>
+							<h2>ìµœëŒ€ 6-8ëª…ì˜ ì†Œìˆ˜ ì •ì˜ˆ</h2>
+							<h3>ë„ëž€ë„ëž€ ì •ì˜ˆ ë©¤ë²„ë¡œ<br>ê¼­ ë§žëŠ” ì‚¬ëžŒë“¤ë¼ë¦¬ ì‹œìž‘í•´ìš”</h3>
 						</li>
 						<li>
 							<div class="icon icon3"></div>
-							<h2>´Ù¾çÇÑ Áö¿ª ¹× ½Ã°£´ë</h2>
-							<h3>ÆòÀÏ ³·ºÎÅÍ ¹ã, ±×¸®°í ÁÖ¸»±îÁö!<br>³»°Ô µü ¸Â´Â ½Ã°£´ë¸¦ Ã£¾Æº¸¼¼¿ä!</h3>
+							<h2>ë‹¤ì–‘í•œ ì§€ì—­ ë° ì‹œê°„ëŒ€</h2>
+							<h3>í‰ì¼ ë‚®ë¶€í„° ë°¤, ê·¸ë¦¬ê³  ì£¼ë§ê¹Œì§€!<br>ë‚´ê²Œ ë”± ë§žëŠ” ì‹œê°„ëŒ€ë¥¼ ì°¾ì•„ë³´ì„¸ìš”!</h3>
 						</li>
 					</ul>
 				</div>
@@ -152,9 +152,9 @@
 			<section class="levelTestGo">
 				<div class="inner">
 					<div class="levelTestContent">
-						<h1><b>ÀÏ´Ü ·¹º§Å×½ºÆ®ºÎÅÍ</b><br> ½ÃÀÛÇØº¸¼¼¿ä!</h1>
-						<h2>¹«·á·Î ³»¿µ¾î ·¹º§À» ÆÄ¾ÇÇÏ°í<br>²À ¸Â´Â ½ºÅÍµð¸¦ ¾È³» ¹ÞÀ¸¼¼¿ä!</h2>
-						<a href="#">·¹º§Å×½ºÆ® ½ÃÀÛ</a>
+						<h1><b>ì¼ë‹¨ ë ˆë²¨í…ŒìŠ¤íŠ¸ë¶€í„°</b><br> ì‹œìž‘í•´ë³´ì„¸ìš”!</h1>
+						<h2>ë¬´ë£Œë¡œ ë‚´ì˜ì–´ ë ˆë²¨ì„ íŒŒì•…í•˜ê³ <br>ê¼­ ë§žëŠ” ìŠ¤í„°ë””ë¥¼ ì•ˆë‚´ ë°›ìœ¼ì„¸ìš”!</h2>
+						<a href="#">ë ˆë²¨í…ŒìŠ¤íŠ¸ ì‹œìž‘</a>
 					</div>
 					<div class="levelTestImg">
 					</div>
@@ -168,9 +168,9 @@
 			<section class="LeaderGo">
 				<div class="inner">
 					<div class="LeaderGoContent">
-						<h1><b>½ºÅÍµð ¸®´õ¿¡</b><br>°ü½ÉÀÌ ÀÖÀ¸½Å°¡¿ä?</h1>
-						<h2>³»°¡ ÆíÇÑ Áö¿ª, ÆíÇÑ ½Ã°£¿¡ ½ºÅÍµð¸¦ °³¼³ÇØ<br>ÇÐ»ýµé°úÀÇ À¯ÄèÇÑ ±³·ù¸¦ ½ÃÀÛÇØº¸¼¼¿ä.</h2>
-						<a href="#">¸®´õ ½ÃÀÛÇÏ±â!</a>
+						<h1><b>ìŠ¤í„°ë”” ë¦¬ë”ì—</b><br>ê´€ì‹¬ì´ ìžˆìœ¼ì‹ ê°€ìš”?</h1>
+						<h2>ë‚´ê°€ íŽ¸í•œ ì§€ì—­, íŽ¸í•œ ì‹œê°„ì— ìŠ¤í„°ë””ë¥¼ ê°œì„¤í•´<br>í•™ìƒë“¤ê³¼ì˜ ìœ ì¾Œí•œ êµë¥˜ë¥¼ ì‹œìž‘í•´ë³´ì„¸ìš”.</h2>
+						<a href="#">ë¦¬ë” ì‹œìž‘í•˜ê¸°!</a>
 					</div>
 					<div class="LeaderGoImg">
 					</div>
@@ -181,25 +181,25 @@
 			<div class="inner">
 				<div class="footArea">
 					<div class="footerLeft">
-						<div class="callNumber"><b>°í°´¼¾ÅÍ</b><strong> 1588-0000</strong> ÆòÀÏ 09:00~18:00(°øÈÞÀÏ Á¦¿Ü)</div>
+						<div class="callNumber"><b>ê³ ê°ì„¼í„°</b><strong> 1588-0000</strong> í‰ì¼ 09:00~18:00(ê³µíœ´ì¼ ì œì™¸)</div>
 						<div class="footerinfo">
 							<ul>
-								<li><a href="#">°³ÀÎÁ¤º¸ Ã³¸®¹æÄ§</a></li>
-								<li><a href="#">¼­ºñ½º¾à°ü</a></li>
+								<li><a href="#">ê°œì¸ì •ë³´ ì²˜ë¦¬ë°©ì¹¨</a></li>
+								<li><a href="#">ì„œë¹„ìŠ¤ì•½ê´€</a></li>
 							</ul>
 						</div>
-						<address>¼­¿ïÆ¯º°½Ã ¸¶Æ÷±¸ ¼­±³µ¿ 447-5 Ç³¼ººôµù ½Ö¿ë°­ºÏ±³À°¼¾ÅÍ</address>
+						<address>ì„œìš¸íŠ¹ë³„ì‹œ ë§ˆí¬êµ¬ ì„œêµë™ 447-5 í’ì„±ë¹Œë”© ìŒìš©ê°•ë¶êµìœ¡ì„¼í„°</address>
 					</div>
 					<div class="footerRight">
 						<div class="sns">
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_instar.png" alt="ÀÎ½ºÅ¸"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_blog.png" alt="ºí·Î±×"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_facebook.png" alt="ÆäÀÌ½ººÏ"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_kakaostory.png" alt="Ä«Ä«¿À½ºÅä¸®"></a>
+		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_instar.png" alt="ì¸ìŠ¤íƒ€"></a>
+		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_blog.png" alt="ë¸”ë¡œê·¸"></a>
+		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_facebook.png" alt="íŽ˜ì´ìŠ¤ë¶"></a>
+		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_kakaostory.png" alt="ì¹´ì¹´ì˜¤ìŠ¤í† ë¦¬"></a>
 		                </div>
 					</div>
 				</div>
-				<div class="copyright">Copyright¨Ï AGUMON. All Right Reserved</div>
+				<div class="copyright">Copyrightâ“’ AGUMON. All Right Reserved</div>
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->

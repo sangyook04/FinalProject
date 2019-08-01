@@ -137,15 +137,49 @@
 			            	</tr>
 			            </thead>
 			            <tbody>
-	                   		<c:forEach items="${list }" var="test">
+	                   		<c:forEach items="${list}" var="test">
 			            	<tr>
-			            		<td><a class="move" href="#">${test.testContent}</a></td>
+			            		<td><a class="move" href="${test.testIndex}">${test.testContent}</a></td>
 						        <td>${test.testAnswer}</td>
 			            	</tr>
 			            	</c:forEach>
 			           </tbody>
 					</table>
 					<button id="regBtn" class="btn btn-primary pull-right">문제 추가</button>
+					
+					<!-- 액션폼 -->
+					<form id='actionForm' action="/level/list" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<%-- <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<input type="hidden" name="type" value="${pageMaker.cri.type }">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> --%>
+					</form>
+				</div>
+				
+				<!-- 페이징 -->
+				<div class="pull-center">
+				<ul class="pagination">
+				<!-- previous 버튼 표시 -->
+				<c:if test="${pageMaker.prev }">	
+					<li class="paginate_button previous">
+						<a href="${pageMaker.startPage -1}">이전으로</a>
+					</li>
+				</c:if>
+					
+				<!-- 페이지 번호 표시 -->
+				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+					<li class='paginate_button ${pageMaker.cri.pageNum == num ? "active":"" } '>
+					<a href="${num}"> ${num} </a></li>
+				</c:forEach>
+				<!-- next 버튼 표시 -->
+				<c:if test="${pageMaker.next }">	
+					<li class="paginate_button next">
+						<a href="${pageMaker.endPage +1 }">다음으로</a>
+					</li>
+				</c:if>
+				</ul>
 				</div>
 				</div>
 			</div>
@@ -182,8 +216,32 @@
 	</div><!-- wrap -->
 	
 <script>
+
+var actionForm = $("#actionForm");
+
+//등록 이벤트
 $("#regBtn").on("click", function(){
 	self.location = "/level/register";
+});
+
+//상세보기 페이지 이동
+$(".move").on("click", function(e){
+		e.preventDefault();
+		actionForm.append("<input type='hidden' name='testIndex' value='"+$(this).attr("href")+"'>");
+		actionForm.attr("action", "/level/get");
+		actionForm.submit();
+		
+});
+
+//페이지 이동하기
+var actionForm = $("#actionForm");
+
+$(".paginate_button a").on("click", function(e){
+	e.preventDefault();
+
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	actionForm.submit();
 });
 </script>	
 </body>

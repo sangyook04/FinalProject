@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,29 +60,33 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>내 문의 내역</h1>
+				<h1>내 문의 상세 내역</h1>
 				<div class="QnAWrap">
-					<table class="table table-hover">
-					  <thead>
-					    <tr>
-					      <th scope="col">번호</th>
-					      <th scope="col">제목</th>
-					      <th scope="col">날짜</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr>
-					      <th scope="row">1</th>
-					      <td>제목이에용</td>
-					      <td>2019-07-31</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">2</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					    </tr>
-					  </tbody>
-					</table>
+					<form class="leaderMyQnAGetForm">
+					  <div class="form-group">
+					    <label for="QnALeaderGetNo">번호</label>
+					    <input type="text" class="form-control" id="QnALeaderGetNo" placeholder="번호" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnALeaderGetTitle">제목</label>
+					    <input type="text" class="form-control" id="QnALeaderGetTitle" placeholder="제목" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnALeaderGetDate">날짜</label>
+					    <input type="text" class="form-control" id="QnALeaderGetDate" placeholder="날짜" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnALeaderGetContent">내용</label>
+					    <textarea class="form-control" id="QnALeaderGetContent" placeholder="내용" style="resize: none" readonly="readonly"></textarea>
+					  </div>
+					  <button type="button" class="btn btn-default">수정</button>
+					  <button type="button" class="btn btn-default">삭제</button>
+					  <button type="button" class="btn btn-default">목록</button>
+					</form>
+					<div class="leaderMyQnAGetAnswer">
+						<h2>답변내용</h2>
+						<input type="textarea" class="form-control" id="QnALeaderGetContent" placeholder="내용" readonly="readonly">
+					</div>
 				</div>
 			</div><!-- inner -->
 		</div><!-- container -->
