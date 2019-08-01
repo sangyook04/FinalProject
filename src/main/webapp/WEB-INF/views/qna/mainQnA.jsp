@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +12,7 @@
 	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/leastuQnA.css">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/mainQnA.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
    <script>
@@ -58,27 +60,34 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>내 문의 수정</h1>
+				<h1>QnA</h1>
 				<div class="QnAWrap">
-					<form class="leaderMyQnAGetForm">
-					  <div class="form-group">
-					    <label for="QnALeaderGetNo">번호</label>
-					    <input type="text" class="form-control" id="QnALeaderGetNo" placeholder="번호" readonly="readonly">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnALeaderGetTitle">제목</label>
-					    <input type="text" class="form-control" id="QnALeaderGetTitle" placeholder="제목">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnALeaderGetDate">날짜</label>
-					    <input type="text" class="form-control" id="QnALeaderGetDate" placeholder="날짜" readonly="readonly">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnALeaderGetContent">내용</label>
-					    <input type="textarea" class="form-control" id="QnALeaderGetContent" placeholder="내용">
-					  </div>
-					  <button type="button" class="btn btn-default">확인</button>
-					  <button type="button" class="btn btn-default">취소</button>
+					<form>
+						<button type="button" class="btn btn-default btnNew">새글 등록</button>
+						<table class="table table-hover">
+						  <thead>
+						    <tr>
+						      <th scope="col">번호</th>
+						      <th scope="col">제목</th>
+						      <th scope="col">날짜</th>
+						      <th scope="col">작성자</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>제목이에용</td>
+						      <td>2019-07-31</td>
+						      <td>김상욱</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">2</th>
+						      <td>Jacob</td>
+						      <td>Thornton</td>
+						      <td>Thornton</td>
+						    </tr>
+						  </tbody>
+						</table>
 					</form>
 				</div>
 			</div><!-- inner -->

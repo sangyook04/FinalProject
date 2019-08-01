@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,28 +70,37 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>QnA 등록</h1>
+				<h1>QnA 상세 정보</h1>
 				<div class="QnAWrap">
-					<form>
+					<form class="MyQnAGetForm">
 					  <div class="form-group">
-					    <label for="mainQnARegisterTitle">제목</label>
-					    <input type="text" class="form-control" id="mainQnARegisterTitle" placeholder="제목">
-					  </div>
-					  <div class="form-group registerpwd">
-					    <label for="mainQnARegisterPwd">비밀번호</label>
-					    <input type="password" class="form-control" id="mainQnARegisterPwd" placeholder="비밀번호" readonly="readonly">
-					  </div>
-					  <div class="pwdOKWrap">
-					  	<label for="pwdCheck">비밀번호 여부</label>
-					  	<input id="pwdCheck" type="checkbox" name="pwdOK" value="pwdOK">
+					    <label for="QnAGetNo">번호</label>
+					    <input type="text" class="form-control" id="QnAGetNo" placeholder="번호" readonly="readonly">
 					  </div>
 					  <div class="form-group">
-					    <label for="mainQnARegisterContent">내용</label>
-					    <textarea class="form-control" id="mainQnARegisterContent" placeholder="내용" style="resize: none"></textarea>
+					    <label for="QnAGetTitle">제목</label>
+					    <input type="text" class="form-control" id="QnAGetTitle" placeholder="제목" readonly="readonly">
 					  </div>
-					  <button type="button" class="btn btn-default">확인</button>
-					  <button type="button" class="btn btn-default">취소</button>
+					  <div class="form-group">
+					    <label for="QnAGetDate">날짜</label>
+					    <input type="text" class="form-control" id="QnAGetDate" placeholder="날짜" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAGetDate">작성자</label>
+					    <input type="text" class="form-control" id="QnAGetDate" placeholder="작성자" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAGetContent">내용</label>
+					    <textarea class="form-control" id="QnAGetContent" placeholder="내용" style="resize: none" readonly="readonly"></textarea>
+					  </div>
+					  <button type="button" class="btn btn-default">수정</button>
+					  <button type="button" class="btn btn-default">삭제</button>
+					  <button type="button" class="btn btn-default">목록</button>
 					</form>
+					<div class="MyQnAGetAnswer">
+						<h2>답변내용</h2>
+						<input type="textarea" class="form-control" id="QnAGetContent" placeholder="내용" readonly="readonly">
+					</div>
 				</div>
 			</div><!-- inner -->
 		</div><!-- container -->

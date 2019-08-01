@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,9 +10,8 @@
    <!-- CSS -->
    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminQnA.css">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminMain.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
    <script>
@@ -117,36 +118,7 @@
 				</ul>
 			</aside>
 			<div class="containerContent">
-				<h1>QnA 관리</h1>
-				<div class="QnAWrap">
-					<table class="table table-hover">
-					  <thead>
-					    <tr>
-					      <th scope="col">번호</th>
-					      <th scope="col">제목</th>
-					      <th scope="col">작성자</th>
-					      <th scope="col">날짜</th>
-					      <th scope="col">답변상태</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr>
-					      <th scope="row">1</th>
-					      <td>제목이에용</td>
-					      <td>김상욱</td>
-					      <td>2019-07-31</td>
-					      <td>미답변</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">2</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					      <td>@fat</td>
-					      <td>@fat</td>
-					    </tr>
-					  </tbody>
-					</table>
-				</div>
+				<h1>안녕하세요 관리자님!</h1>
 			</div>
 		</div><!-- container -->
 		<footer>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,6 +27,16 @@
 			       $('.callsenterSub').css("display", "none");
 			    }
 			});
+
+			$('input[id="pwdCheck"]').change(function() {
+				    var value = $(this).val();
+				    var checked = $(this).prop('checked');
+
+				    if(checked)
+				    	$('#mainQnARegisterPwd').attr("readonly", false);
+				    else
+				        $('#mainQnARegisterPwd').attr("readonly", true);
+				});
 
 		});//ready
    </script>
@@ -58,30 +70,26 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>QnA 수정</h1>
+				<h1>QnA 등록</h1>
 				<div class="QnAWrap">
-					<form class="QnAModifyForm">
+					<form role="form" method="post" action="/qna/register">
 					  <div class="form-group">
-					    <label for="QnAModifyGetNo">번호</label>
-					    <input type="text" class="form-control" id="QnAModifyGetNo" placeholder="번호" readonly="readonly">
+					    <label for="mainQnARegisterTitle">제목</label>
+					    <input type="text" class="form-control" id="mainQnARegisterTitle" placeholder="제목">
+					  </div>
+					  <div class="form-group registerpwd">
+					    <label for="mainQnARegisterPwd">비밀번호</label>
+					    <input type="password" class="form-control" id="mainQnARegisterPwd" placeholder="비밀번호" readonly="readonly">
+					  </div>
+					  <div class="pwdOKWrap">
+					  	<label for="pwdCheck">비밀번호 여부</label>
+					  	<input id="pwdCheck" type="checkbox" name="pwdOK" value="pwdOK">
 					  </div>
 					  <div class="form-group">
-					    <label for="QnAModifyTitle">제목</label>
-					    <input type="text" class="form-control" id="QnAModifyTitle" placeholder="제목">
+					    <label for="mainQnARegisterContent">내용</label>
+					    <textarea class="form-control" id="mainQnARegisterContent" placeholder="내용" style="resize: none"></textarea>
 					  </div>
-					  <div class="form-group">
-					    <label for="QnAModifyDate">날짜</label>
-					    <input type="text" class="form-control" id="QnAModifyDate" placeholder="날짜" readonly="readonly">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnAModifyDate">작성자</label>
-					    <input type="text" class="form-control" id="QnAModifyDate" placeholder="작성자" readonly="readonly">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnAModifyContent">내용</label>
-					    <textarea class="form-control" id="QnAModifyContent" placeholder="내용" style="resize: none"></textarea>
-					  </div>
-					  <button type="button" class="btn btn-default">확인</button>
+					  <button type="submit" class="btn btn-default">확인</button>
 					  <button type="button" class="btn btn-default">취소</button>
 					</form>
 				</div>

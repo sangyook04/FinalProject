@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,34 +60,31 @@
 		</header>
 		<div id="container">
 			<div class="inner">
-				<h1>QnA</h1>
+				<h1>QnA 수정</h1>
 				<div class="QnAWrap">
-					<form>
-						<button type="button" class="btn btn-default btnNew">새글 등록</button>
-						<table class="table table-hover">
-						  <thead>
-						    <tr>
-						      <th scope="col">번호</th>
-						      <th scope="col">제목</th>
-						      <th scope="col">날짜</th>
-						      <th scope="col">작성자</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr>
-						      <th scope="row">1</th>
-						      <td>제목이에용</td>
-						      <td>2019-07-31</td>
-						      <td>김상욱</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">2</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>Thornton</td>
-						    </tr>
-						  </tbody>
-						</table>
+					<form class="QnAModifyForm">
+					  <div class="form-group">
+					    <label for="QnAModifyGetNo">번호</label>
+					    <input type="text" class="form-control" id="QnAModifyGetNo" placeholder="번호" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAModifyTitle">제목</label>
+					    <input type="text" class="form-control" id="QnAModifyTitle" placeholder="제목">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAModifyDate">날짜</label>
+					    <input type="text" class="form-control" id="QnAModifyDate" placeholder="날짜" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAModifyDate">작성자</label>
+					    <input type="text" class="form-control" id="QnAModifyDate" placeholder="작성자" readonly="readonly">
+					  </div>
+					  <div class="form-group">
+					    <label for="QnAModifyContent">내용</label>
+					    <textarea class="form-control" id="QnAModifyContent" placeholder="내용" style="resize: none"></textarea>
+					  </div>
+					  <button type="button" class="btn btn-default">확인</button>
+					  <button type="button" class="btn btn-default">취소</button>
 					</form>
 				</div>
 			</div><!-- inner -->
