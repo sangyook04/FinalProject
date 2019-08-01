@@ -1,0 +1,7 @@
+table td{
+	/* ...생략 처리 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/* ...생략 처리 */
+	}

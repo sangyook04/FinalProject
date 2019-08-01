@@ -33,7 +33,7 @@ public class LevelController {
 	public String leaderTest(@RequestParam("testno") Long testno,
 			@RequestParam("dap") String dap) {
 		
-		return dap;
+		return null;
 	}
 	
 	@GetMapping("/commonTest")
@@ -45,7 +45,7 @@ public class LevelController {
 	public String commonTest(@RequestParam("testno") Long testno,
 			@RequestParam("dap") String dap) {
 		
-		return dap;
+		return null;
 	}
 	
 	@GetMapping("/list")
