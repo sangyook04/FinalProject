@@ -13,5 +13,5 @@ public class QnaVO {
 	private String qnaAnswer;
 	private String qnaAnsState;
 	private String qnaAnsDate;
-
+	private String qnaPassword;
 }

@@ -62,10 +62,10 @@
 			<div class="inner">
 				<h1>QnA 수정</h1>
 				<div class="QnAWrap">
-					<form class="QnAModifyForm">
+					<div class="QnAModifyForm">
 					  <div class="form-group">
 					    <label for="QnAModifyGetNo">번호</label>
-					    <input type="text" class="form-control" id="QnAModifyGetNo" placeholder="번호" readonly="readonly">
+					    <input type="text" class="form-control" id="QnAModifyGetNo" placeholder="번호" readonly="readonly" value="${qna.qnaIndex}">
 					  </div>
 					  <div class="form-group">
 					    <label for="QnAModifyTitle">제목</label>
@@ -85,7 +85,7 @@
 					  </div>
 					  <button type="button" class="btn btn-default">확인</button>
 					  <button type="button" class="btn btn-default">취소</button>
-					</form>
+					</div>
 				</div>
 			</div><!-- inner -->
 		</div><!-- container -->

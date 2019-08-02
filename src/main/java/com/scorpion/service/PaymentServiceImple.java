@@ -46,20 +46,24 @@ public class PaymentServiceImple implements PaymentService {
 
 	@Override
 	public List<PaymentVO> getPaymentList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return mapper.getPayList(cri);
 	}
 
 	@Override
-	public List<PaymentVO> getBeforeDeposit(Criteria cri, String deposit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PaymentVO> getPaymentListWithDate(Criteria cri, Date start, Date end) {
+		return mapper.getPayListWithDate(cri, start, end);
+	}
+	
+	@Override
+	public List<PaymentVO> getBeforeDeposit(Criteria cri) {
+//		return mapper.getBeforeDepositList(cri);
+		return mapper.readList(cri);
 	}
 
 	@Override
-	public List<PaymentVO> getAfterDeposit(Criteria cri, String deposit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PaymentVO> getAfterDeposit(Criteria cri) {
+		return mapper.getAfterDepositList(cri);
 	}
 
 	@Override
@@ -73,5 +77,11 @@ public class PaymentServiceImple implements PaymentService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		return mapper.getTotalCount(cri);
+	}
+
 
 }

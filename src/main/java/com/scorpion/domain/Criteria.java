@@ -1,5 +1,7 @@
 package com.scorpion.domain;
 
+import java.util.Date;
+
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Getter;
@@ -14,10 +16,13 @@ public class Criteria {
 	private int amount;		//한 페이지 당 출력 개수
 	private String type;	//검색 조건
 	private String keyword;//검색어
-
+//	private Date start;	//시작 날짜
+//	private Date end;	//끝 날짜
 	//페이지 번호와 개수를 지정하지 않은 경우
 	public Criteria() {
 		this(1, 10);//기본 pageNum은 1, amount은 10개로 지정
+//		start = new Date(2000,10,20);
+//		end = new Date(2020,10,24);
 	}
 	
 	//페이지 번호와 개수를 지정한 경우
