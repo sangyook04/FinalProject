@@ -94,107 +94,66 @@
 								</tr>
 							</thead>
 							  <tbody>
-                   <!-- Model 데이터 출력 -->
+              
                    <c:forEach items="${noticeList }" var="notice">
-                   	   <tr><td>${notice.notIndex}</td>
-                   	   	   <td><%-- 게시물 조회 페이지 이동 --%>
-                   	   	   	   <a class="move" href="${notice.notIndex}">
-                   	   	   	   	${notice.notTitle}
-                   	   	       </a></td>
+                   	   <tr>
+                   	   <td>${notice.notIndex}</td> 
+                   	   	   <td>
+                   	   	   	   <a class="move" href="${notice.notIndex}">	${notice.notTitle} </a></td>
                    	   	  
-                   	   	   <%-- <td><fmt:formatDate value="${board.regdate}"
-                   	   	   					   pattern="yyyy-MM-dd"/></td>
-                   	   	   <td><fmt:formatDate value="${board.updateDate}"
-                   	   	   					   pattern="yyyy-MM-dd"/></td> --%>
+                   	   
+                   	   	   
+                   	   	   <td> ${notice.notDate} </td>
                    	   </tr>
                    </c:forEach>
                    </tbody>
-							<!-- <tbody>
-								<tr>
-									<th scope="row">10</th>
-									<td><button id="notice">공지사항10</button></td>
-									<td>2019-07-10</td>
-								<tr>
-									<th scope="row">9</th>
-									<td>공지사항9</td>
-									<td>2019-07-10</td>
-
-
-								</tr>
-								<tr>
-									<th scope="row">8</th>
-									<td>공지사항8</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">7</th>
-									<td>공지사항7</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">6</th>
-									<td>공지사항6</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">5</th>
-									<td>공지사항5</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">4</th>
-									<td>공지사항4</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>공지사항3</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>공지사항2</td>
-									<td>2019-07-10</td>
-
-								</tr>
-								<tr>
-									<th scope="row">1</th>
-									<td>공지사항1</td>
-									<td>2019-07-10</td>
-
-								</tr>
-
-							</tbody> -->
+					
 						</table>
+						
 					</div>
 				
-				<div class="page">
-					<nav aria-label="...">
-						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link" href="#"
-								tabindex="-1" aria-disabled="true">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active" aria-current="page"><a
-								class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-
-			</div>
-		</div>
-		</div>
+				
 		
-		<!-- container -->
+		<!-- 액션폼 -->
+					<form id='actionForm' action="/notice/noticeList" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<%-- <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<input type="hidden" name="type" value="${pageMaker.cri.type }">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> --%>
+					</form>
+				</div>
+		
+				<!-- 페이징 -->
+				<div class="pull-center">
+				<ul class="pagination">
+				<!-- previous 버튼 표시 -->
+				<c:if test="${pageMaker.prev }">	
+					<li class="paginate_button previous">
+						<a href="${pageMaker.startPage -1}">이전으로</a>
+					</li>
+				</c:if>
+					
+				<!-- 페이지 번호 표시 -->
+				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+					<li class='paginate_button ${pageMaker.cri.pageNum == num ? "active":"" } '>
+					<a href="${num}"> ${num} </a></li>
+				</c:forEach>
+				<!-- next 버튼 표시 -->
+				<c:if test="${pageMaker.next }">	
+					<li class="paginate_button next">
+						<a href="${pageMaker.endPage +1 }">다음으로</a>
+					</li>
+				</c:if>
+				</ul>
+				</div>
+				</div>
+			</div>
+			<!-- End 내용물 -->
+		</div><!-- container -->
+		
+		
 		<footer>
 			<div class="inner">
 				<div class="footArea">
@@ -230,5 +189,41 @@
 		</footer>
 	</div>
 	<!-- wrap -->
+
+	<script>
+		var actionForm = $("#actionForm");
+
+		/* //등록 이벤트
+		$("#regBtn").on("click", function() {
+			self.location = "/level/register";
+		}); */
+
+		//상세보기 페이지 이동
+		$(".move")
+				.on(
+						"click",
+						function(e) {
+							e.preventDefault();
+							actionForm
+									.append("<input type='hidden' name='notIndex' value='"
+											+ $(this).attr("href") + "'>");
+							actionForm.attr("action", "/notice/noticeView");
+							actionForm.submit();
+
+						});
+
+		//페이지 이동하기
+		var actionForm = $("#actionForm");
+
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+
+			actionForm.submit();
+		});
+	</script>
+
+
 </body>
 </html>

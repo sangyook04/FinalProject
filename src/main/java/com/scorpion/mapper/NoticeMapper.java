@@ -12,4 +12,5 @@ public interface NoticeMapper {
 	public Integer insertSelectKey(NoticeVO notice);
 	public int getTotalCount(Criteria cri);
 	public List<NoticeVO> getListWithPaging(Criteria cri);
+	public List<NoticeVO> getList();
 }

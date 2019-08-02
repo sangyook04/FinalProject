@@ -121,37 +121,49 @@
 				</ul>
 			</aside>
 			<div class="containerContent">
-				
-			 <h2><b>공지사항 등록</b></h2>
-			
+
+				<h2>
+					<b>공지사항 등록</b>
+				</h2>
+
 				<div class="containerContenttable">
-				<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">제목</th>
-      <th scope="col">
-      <input type="text" placeholder="공지사항 제목을 입력해주세요.">
-
-      </th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
- <!--  <tbody>
-
-   
-
-  </tbody> -->
-
-</table>
- <textarea class="form-control" rows="3" placeholder="공지할 내용을 입력해주세요."></textarea>
-<button id="modBtn">확인</button><button id="closeBtn">취소</button>
-
-
- 
-	</div>
+					<form role="form" method="post" action="/notice/adminNoticeRegister">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">제목</th>
+									<th scope="col"><input type="text"  name="notTitle"
+										placeholder="공지사항 제목을 입력해주세요."></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							
+						</table>
+						<textarea class="form-control" rows="3"
+							placeholder="공지할 내용을 입력해주세요." name="notContent"></textarea>
+						<button id="regBtn">확인</button>
+					
+					
+					</form>
+					
+					
+					<button  data-oper="close" id="closeBtn">취소</button>
+					
+					<form id="operForm" action="/notice/adminNoticeManage" method="get">
+					<input type="hidden" id="notIndex" name="notIndex"
+						value="${content.notIndex }">
+					<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
+						<input type="hidden" name="amount" value="${cri.amount }">
+						<input type="hidden" name="type" value="${cri.type }">
+						<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
+				</form>
+					
+					
+				</div>
 			</div>
-		</div><!-- container -->
+		</div>
+		<!-- container -->
 		<footer>
 			<div class="inner">
 				<div class="footArea">
@@ -178,5 +190,19 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+	
+ <script>
+		$(function() {
+			var operForm = $("#operForm");
+
+			//list
+			$('button[data-oper="close"]').on("click", function(e) {
+				operForm.find('#notIndex').remove();
+				operForm.attr("action", "/notice/adminNoticeManage");
+				operForm.submit();
+			});
+
+		});
+	</script>
 </body>
 </html>

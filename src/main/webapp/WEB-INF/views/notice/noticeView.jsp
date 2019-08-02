@@ -72,6 +72,7 @@
 				</div>
 			</nav>
 		</header>
+		
 		<div id="container">
 		
 			<div class="inner">
@@ -86,7 +87,7 @@
   <thead>
     <tr>
       <th scope="col">제목</th>
-      <th scope="col">공지사항 입니다.</th>
+      <th scope="col">${view.notTitle}</th>
       <th></th>
       <th></th>
     </tr>
@@ -98,12 +99,20 @@
   </tbody>
 
 </table>
- <textarea class="form-control" rows="3" > 공지사항 입니다.  </textarea>
+ <textarea class="form-control" rows="3" readonly="readonly"> ${view.notContent }  </textarea>
  
  
  </div>	
  
-<button id="listBtn">목록</button>
+<button data-oper="noticeList" id="listBtn" >목록</button>
+
+<form id="operForm" action="/notice/noticeView" method="get">
+						<input type="hidden" id="notIndex" name="notIndex" value="${view.notIndex }">
+						<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
+						<input type="hidden" name="amount" value="${cri.amount }">
+						<input type="hidden" name="type" value="${cri.type }">
+						<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
+					</form>
 
 
 	</div>
@@ -144,5 +153,21 @@
 		</footer>
 	</div>
 	<!-- wrap -->
+	
+	<script>
+$(function() {
+	var operForm = $("#operForm");
+	
+	
+	//list
+	$('button[data-oper="noticeList"]').on("click", function(e){
+		operForm.find('#notIndex').remove();
+		operForm.attr("action","/notice/noticeList");
+		operForm.submit();
+	});
+	
+	
+});
+</script>
 </body>
 </html>

@@ -19,38 +19,39 @@ public class NoticeServiceImple implements NoticeService {
 
    @Override
    public List<NoticeVO> getList(Criteria cri) {
-      
-      return null;
+	   
+	   return mapper.getListWithPaging(cri);
+	   // return mapper.getList();
    }
 
    @Override
    public void register(NoticeVO notice) {
-      
+	   mapper.insertSelectKey(notice);
       
    }
 
    @Override
    public NoticeVO get(Long notIndex) {
       
-      return null;
+      return mapper.read(notIndex);
    }
 
    @Override
    public boolean modify(NoticeVO notice) {
       
-      return false;
+	   return mapper.update(notice)==1;
    }
 
    @Override
    public boolean remove(Long notIndex) {
       
-      return false;
+	   return mapper.delete(notIndex)==1;
    }
 
    @Override
    public int getTotal(Criteria cri) {
       
-      return 0;
+	   return mapper.getTotalCount(cri);
    }
 
 }
