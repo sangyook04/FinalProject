@@ -63,40 +63,47 @@ public class QnaController {
 	@PostMapping("/remove")
 	public String remove(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {
-		
-		if(service.remove(qnaIndex)) {
-			rttr.addAttribute("result","success");
-		}
+	
+		if(service.remove(qnaIndex)) { rttr.addAttribute("result","success"); }
+
 		return "redirect:/qna/list";
 	}
 	
 	//수정
-	@GetMapping("/modify")
-	public void modify(@RequestParam("qnano") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
-
+	@GetMapping("/modify") 
+	public String modify(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) { 
+		return "qna/mainQnAModify"; 
 	}
-
+	
 	@PostMapping("/modify")
 	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		if(service.modify(qna)) {
 			rttr.addAttribute("result","success");
 		}
-		return "redirect:/level/get?testIndex="+qna.getQnaIndex();
+		return "redirect:/qna/get?qnaIndex="+qna.getQnaIndex();
+		
 	}
 	
-	@GetMapping("/myQna")
-	public void myQna(Model model, Criteria cri, @RequestParam("id") String id) {
-		service.getMyList(cri, id);
-	}
-
-	@GetMapping("/answer")
-	public void answer(@RequestParam("qnano") Long qnano, @ModelAttribute("cri") Criteria cri, Model model) {
-
-	}
-
-	@PostMapping("/answer")
-	public String answer(@RequestParam("qnano") Long qnano, @RequestParam("answer") String answer) {
-		service.replymodify(qnano, answer);
-		return "/qna/get";
-	}
+	/*
+	 * @GetMapping("/modify") public String modify(@RequestParam("qnano") Long
+	 * qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) { return
+	 * "qna/mainQnAModify"; }
+	 * 
+	 * @PostMapping("/modify") public String modify(QnaVO
+	 * qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	 * if(service.modify(qna)) { rttr.addAttribute("result","success"); } return
+	 * "redirect:/level/get?testIndex="+qna.getQnaIndex(); }
+	 * 
+	 * @GetMapping("/myQna") public void myQna(Model model, Criteria
+	 * cri, @RequestParam("id") String id) { service.getMyList(cri, id); }
+	 * 
+	 * @GetMapping("/answer") public void answer(@RequestParam("qnano") Long
+	 * qnano, @ModelAttribute("cri") Criteria cri, Model model) {
+	 * 
+	 * }
+	 * 
+	 * @PostMapping("/answer") public String answer(@RequestParam("qnano") Long
+	 * qnano, @RequestParam("answer") String answer) { service.replymodify(qnano,
+	 * answer); return "/qna/get"; }
+	 */
 }

@@ -74,7 +74,7 @@
 			<div class="inner">
 				<h1>QnA 상세 정보</h1>
 				<div class="QnAWrap">
-					<form class="MyQnAGetForm">
+					<div class="MyQnAGetForm">
 					  <div class="form-group">
 					    <label for="QnAGetNo">번호</label>
 					    <input type="text" class="form-control" id="QnAGetNo" placeholder="번호" readonly="readonly"  value="${qna.qnaIndex}">
@@ -98,7 +98,7 @@
 					  <button data-oper="modify" class="btn btn-default">수정</button>
 					  <button data-oper="remove" class="btn btn-default">삭제</button>
 					  <button data-oper="list" class="btn btn-default">목록</button>
-					</form>
+					</div>
 					<div class="MyQnAGetAnswer">
 						<h2>답변내용</h2>
 						<input type="textarea" class="form-control" id="QnAGetContent" placeholder="내용" readonly="readonly">
@@ -106,10 +106,10 @@
 					</div>
 					<form id="operForm" action="/qna/modify" method="get">
 						<input type="hidden" id="qnaIndex" name="qnaIndex" value="${qna.qnaIndex}">
-						<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
-						<input type="hidden" name="amount" value="${cri.amount }">
-						<input type="hidden" name="type" value="${cri.type }">
-						<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
+					</form>
+					
+					<form id="deleteForm" action="/qna/remove" method="post">
+						<input type="hidden" id="qnaIndex" name="qnaIndex" value="${qna.qnaIndex}">
 					</form>
 				</div>
 			</div><!-- inner -->
@@ -146,32 +146,23 @@ $(function() {
 	
 	//modify
 	$('button[data-oper="modify"]').on("click", function(e){
-		operForm.attr("action", "/qna/modify")
-				.submit();
+		$("#operForm").submit();
 	});
 	
 	//list
 	$('button[data-oper="list"]').on("click", function(e){
-		/* operForm.find('#qnaIndex').remove();
-		operForm.attr("action","/qna/list");
-		operForm.submit(); */
-		location.href = "/qna/register";
+		location.href = "/qna/list";
 	});
 	
 	//remove
 	$('button[data-oper="remove"]').on("click", function(e){
 		
-		var conf = confirm("정말로 삭제하시겠습니까?");
+		var conf = confirm("삭제 하시겠습니까?");
 		alert(conf);
 		
 		if(conf == true){
-			con = 1;
-		} else {
-			conf = 0;
-		}
-
-		operForm.attr("action","/qna/remove").attr("method", "post");
-		operForm.submit();
+			$("#deleteForm").submit();
+		} 
 	});
 });
 </script>

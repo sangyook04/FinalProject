@@ -34,7 +34,7 @@
 	</insert>
 
 	<delete id="delete">
-  		DELETE FROM QNA WHERE QNAINDEX = #{qnaIndex}
+  		DELETE FROM qna WHERE qnaindex = #{qnaIndex}
  	</delete>
 
 	<!-- <update id="update"> UPDATE levelTest SET test_content = #{test_content}, 
