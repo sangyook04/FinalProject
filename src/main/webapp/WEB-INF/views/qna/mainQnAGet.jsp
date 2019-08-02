@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -75,32 +77,40 @@
 					<form class="MyQnAGetForm">
 					  <div class="form-group">
 					    <label for="QnAGetNo">번호</label>
-					    <input type="text" class="form-control" id="QnAGetNo" placeholder="번호" readonly="readonly">
+					    <input type="text" class="form-control" id="QnAGetNo" placeholder="번호" readonly="readonly"  value="${qna.qnaIndex}">
 					  </div>
 					  <div class="form-group">
 					    <label for="QnAGetTitle">제목</label>
-					    <input type="text" class="form-control" id="QnAGetTitle" placeholder="제목" readonly="readonly">
+					    <input type="text" class="form-control" id="QnAGetTitle" placeholder="제목" readonly="readonly" value="${qna.qnaTitle}">
 					  </div>
 					  <div class="form-group">
 					    <label for="QnAGetDate">날짜</label>
-					    <input type="text" class="form-control" id="QnAGetDate" placeholder="날짜" readonly="readonly">
+					    <input type="text" class="form-control" id="QnAGetDate" placeholder="날짜" readonly="readonly" value="${qna.qnaDate}">
 					  </div>
 					  <div class="form-group">
 					    <label for="QnAGetDate">작성자</label>
-					    <input type="text" class="form-control" id="QnAGetDate" placeholder="작성자" readonly="readonly">
+					    <input type="text" class="form-control" id="QnAGetDate" placeholder="작성자" readonly="readonly" value="${qna.qnaWriter}">
 					  </div>
 					  <div class="form-group">
 					    <label for="QnAGetContent">내용</label>
-					    <textarea class="form-control" id="QnAGetContent" placeholder="내용" style="resize: none" readonly="readonly"></textarea>
+					    <textarea class="form-control" id="QnAGetContent" placeholder="내용" style="resize: none" readonly="readonly">${qna.qnaContent}</textarea>
 					  </div>
-					  <button type="button" class="btn btn-default">수정</button>
-					  <button type="button" class="btn btn-default">삭제</button>
-					  <button type="button" class="btn btn-default">목록</button>
+					  <button data-oper="modify" class="btn btn-default">수정</button>
+					  <button data-oper="remove" class="btn btn-default">삭제</button>
+					  <button data-oper="list" class="btn btn-default">목록</button>
 					</form>
 					<div class="MyQnAGetAnswer">
 						<h2>답변내용</h2>
 						<input type="textarea" class="form-control" id="QnAGetContent" placeholder="내용" readonly="readonly">
+						<!-- 나중에 answer할떄 수정 -->
 					</div>
+					<form id="operForm" action="/qna/modify" method="get">
+						<input type="hidden" id="qnaIndex" name="qnaIndex" value="${qna.qnaIndex}">
+						<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
+						<input type="hidden" name="amount" value="${cri.amount }">
+						<input type="hidden" name="type" value="${cri.type }">
+						<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
+					</form>
 				</div>
 			</div><!-- inner -->
 		</div><!-- container -->
@@ -130,5 +140,40 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+<script>
+$(function() {
+	var operForm = $("#operForm");
+	
+	//modify
+	$('button[data-oper="modify"]').on("click", function(e){
+		operForm.attr("action", "/qna/modify")
+				.submit();
+	});
+	
+	//list
+	$('button[data-oper="list"]').on("click", function(e){
+		/* operForm.find('#qnaIndex').remove();
+		operForm.attr("action","/qna/list");
+		operForm.submit(); */
+		location.href = "/qna/register";
+	});
+	
+	//remove
+	$('button[data-oper="remove"]').on("click", function(e){
+		
+		var conf = confirm("정말로 삭제하시겠습니까?");
+		alert(conf);
+		
+		if(conf == true){
+			con = 1;
+		} else {
+			conf = 0;
+		}
+
+		operForm.attr("action","/qna/remove").attr("method", "post");
+		operForm.submit();
+	});
+});
+</script>
 </body>
 </html>

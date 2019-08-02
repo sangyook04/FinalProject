@@ -8,6 +8,7 @@ import com.scorpion.domain.Criteria;
 import com.scorpion.domain.PageDTO;
 import com.scorpion.domain.QnaReplyVO;
 import com.scorpion.domain.QnaVO;
+import com.scorpion.mapper.QnaMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,52 +18,55 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class QnaServiceImple implements QnaService {
 
+	private QnaMapper mapper;
+	
 	@Override
-	public PageDTO getListPage(Criteria cri, Long qno) {
-		// TODO Auto-generated method stub
+	public PageDTO getListPage(Criteria cri, Long qnaIndex) {
 		return null;
 	}
+
+	/*
+	 * @Override public List<QnaVO> getList(Criteria cri) { return
+	 * mapper.getListWithPaging(cri); }
+	 */
 
 	@Override
 	public List<QnaVO> getList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getListWithPaging(cri);
 	}
-
 	@Override
 	public List<QnaVO> getMyList(Criteria cri, String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int modify(QnaVO qnavo) {
-		// TODO Auto-generated method stub
+	public boolean modify(QnaVO qnavo) {
+		return mapper.update(qnavo)==1;
+	}
+
+	@Override
+	public boolean remove(Long qnaIndex) {
+		return mapper.delete(qnaIndex)==1;
+	}
+
+	@Override
+	public QnaVO get(Long qnaIndex) {
+		return mapper.read(qnaIndex);
+	}
+
+	@Override
+	public void register(QnaVO qnavo) {
+		mapper.insertSelectKey(qnavo);
+	}
+
+	@Override
+	public int replymodify(Long qnaIndex, String qnaAnswer) {
 		return 0;
 	}
 
 	@Override
-	public int remove(Long qno) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public QnaVO get(Long qno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int register(QnaVO qnavo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int replymodify(Long qno, String answer) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getTotal(Criteria cri) {
+		return mapper.getTotalCount(cri);
 	}
 
 
