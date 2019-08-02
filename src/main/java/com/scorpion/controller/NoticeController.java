@@ -24,71 +24,73 @@ import lombok.extern.log4j.Log4j;
 public class NoticeController {
 
 	private NoticeService service;
-	
+
 //	@GetMapping("/list")
 //	public void list(Model model, Criteria cri) {
 //		service.getList(cri);
 //	}
-	
-	@GetMapping("/noticeList")
-	public void list(Model model, Criteria cri) {
-		service.getList(cri);
-		
-		model.addAttribute("noticeList", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123));
-	
 
-		
+	/*
+	 * @GetMapping("/noticeList") public void list(Model model, Criteria cri) {
+	 * service.getList(cri);
+	 * 
+	 * model.addAttribute("noticeList", service.getList(cri));
+	 * model.addAttribute("pageMaker", new PageDTO(cri,service.getTotal(cri)));
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+
+	@GetMapping({ "/noticeList", "/adminNoticeManage" })
+	public void list(Model model, Criteria cri) {
+		/* service.getList(cri); */
+
+		model.addAttribute("noticeList", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
+
 	}
-	
-	
-	
-//	@GetMapping("/get")
-//	public void get(@RequestParam("noticeno") Long noticeno,
+
+	@GetMapping({"/noticeView","/adminNoticeDetail"})
+	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("view", service.get(notIndex));
+	}
+
+//	
+//	@GetMapping({"/get", "/modify"})
+//	public void get(@RequestParam("notIndex") Long notIndex,
 //			@ModelAttribute("cri") Criteria cri,
 //	        Model model) {
-//		service.get(noticeno);
+//		model.addAttribute("noticeView", service.get(notIndex));
 //	}
-	
-	
-	@GetMapping("/noticeView")
-	public void get(@RequestParam("noticeno") Long noticeno,
-			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		service.get(noticeno);
-	}
-	
-	@GetMapping("/register")
+
+	@GetMapping("/adminNoticeRegister")
 	public void register() {
-		
+
 	}
+
 	
-	@PostMapping("/register")
-	public String register(NoticeVO notice,
-			   RedirectAttributes rttr) {
+	@PostMapping("/adminNoticeRegister")
+	public String register(NoticeVO notice, RedirectAttributes rttr) {
 		service.register(notice);
-		return "/notice/list";
+		rttr.addFlashAttribute("content", notice.getNotIndex());
+		return "redirect:/notice/adminNoticeManage";
 	}
-	
+
 	@PostMapping("/remove")
-	public String remove(@RequestParam("noticeno") Long noticeno,
-            @ModelAttribute("cri") Criteria cri,
-	 		     RedirectAttributes rttr) {
+	public String remove(@RequestParam("noticeno") Long noticeno, @ModelAttribute("cri") Criteria cri,
+			RedirectAttributes rttr) {
 		service.remove(noticeno);
 		return "/notice/list";
 	}
-	
+
 	@GetMapping("/modify")
-	public void modify(@RequestParam("noticeno") Long noticeno,
-			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		
+	public void modify(@RequestParam("noticeno") Long noticeno, @ModelAttribute("cri") Criteria cri, Model model) {
+
 	}
-	
+
 	@PostMapping("/modify")
-	public String modify(NoticeVO notice, 
-			@ModelAttribute("cri") Criteria cri, 
-			RedirectAttributes rttr) {
+	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		service.modify(notice);
 		return "/notice/get";
 	}

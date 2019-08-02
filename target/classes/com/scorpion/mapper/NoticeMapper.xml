@@ -2,9 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.scorpion.mapper.NoticeSMapper">
+<mapper namespace="com.scorpion.mapper.NoticeMapper">
   
-    <!-- 쿼리 보관 -->
+  
+  <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM notice
+  	
+  </select>
+  
+  
+<!--     쿼리 보관
   <sql id="criteria">
   	<trim prefix="(" suffix=") AND " 
   			  prefixOverrides="OR">
@@ -12,7 +19,7 @@
   				<trim prefix="OR">
   					<choose>
   						<when test="type == 'T'.toString()">
-  							title   LIKE '%'||#{keyword}||'%'
+  							title   LIKE '%'||#{keywords}||'%'
   						</when>
   						<when test="type == 'C'.toString()">
   							content LIKE '%'||#{keyword}||'%'
@@ -24,7 +31,23 @@
   				</trim>
   			</foreach>	  
   		</trim>
-  </sql>
+  </sql> -->
+
+
+
+<select id="getListWithPaging"
+  	      resultType="com.scorpion.domain.NoticeVO">
+   	<![CDATA[
+  		SELECT	notIndex, notTitle, notContent, notDate
+  		FROM	( SELECT 	/*+INDEX_DESC(levelTest SYS_C007432)*/
+  							rownum rn, notIndex, notTitle, notContent, 
+  							notDate
+  				  FROM 		notice
+  				  WHERE		rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  </select>
+
 
   
 
@@ -32,14 +55,27 @@
   	SELECT * FROM notice WHERE notIndex = #{notIndex}
   </select>
 
+<!--  <update id="update">
+  	UPDATE	notice
+  	SET		notContent = #{notContent}, notTitle = #{notTitle},
+  			notDate= #{notDate}
+  	WHERE  	notIndex = #{notIndex}
+  </update>
+  
+  <delete id="delete">
+  	DELETE FROM notice WHERE notIndex = #{notIndex}
+  </delete> -->
+
+
+
   <insert id="insertSelectKey">
-    <selectKey keyProperty="bno" resultType="long"    
+    <selectKey keyProperty="notIndex" resultType="long"    
     			order="BEFORE">
-    	SELECT seq_board.nextval FROM dual
+    	SELECT notice_no.nextval FROM dual
     </selectKey>
-  	INSERT INTO tbl_board(bno, title, content, writer)
-  	VALUES(#{bno}, #{title}, #{content}, #{writer})
-  </insert>
+  	INSERT INTO notice (notIndex, notTitle, notContent ,notDate)
+  	VALUES(#{notIndex}, #{notTitle}, #{notContent} , sysdate)
+  </insert> 
   
  
   <select id="getList" 
