@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LeaderVO {
    private String leaId;
-   private long leaPassword;
+   private String leaPassword;
    private String leaName;
    private String leaAddress;
    private char leaGender;

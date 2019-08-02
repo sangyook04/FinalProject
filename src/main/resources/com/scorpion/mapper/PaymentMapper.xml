@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.PaymentMapper">
+
+	<resultMap id="payMap"
+			   type="com.scorpion.domain.PaymentVO" >
+		<id 	property="payIndex"		column="payindex"/>
+		<result	property="payMoney"		column="paymoney"/>
+		<collection	property="leader"		resultMap="leaderMap"/>
+	</resultMap>
+	
+	<resultMap id="leaderMap"
+			   type="com.scorpion.domain.LeaderVO" >
+		<result	property="leaName"		column="leaname"/>
+		<result	property="leaAccount"			column="leaaccount"/>
+	</resultMap>  
+	
+	<select id="readList" resultMap="payMap">
+		SELECT			payindex, leaname, paymoney, leaaccount
+		FROM			leader l, payment p
+		WHERE			p.leaid = l.leaid and paysenddate is null
+	</select>
+
+	<select id="getPayListWithDate"
+  	      resultType="com.scorpion.domain.PaymentVO">
+   	<![CDATA[
+  		SELECT	payindex, stuid, leaid, studyindex, paysenddate, paydate, paymoney
+  		FROM	( SELECT 	/*+INDEX_DESC(payment SYS_C007410)*/
+  							rownum rn, payindex, stuid, leaid, 
+  							studyindex, paysenddate, paydate, paymoney
+  				  FROM 		payment
+  				  WHERE		paydate > #{start} and paydate < #{end} and rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  	</select>
+
+  <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM payment 
+  	
+  </select>
+
+<!-- 인덱스명 주의!!! 컴퓨터마다 이름이 다름. 테이블 만들때 정해서 통일시켜야함 -->
+ <select id="getPayList"
+  	      resultType="com.scorpion.domain.PaymentVO">
+   	<![CDATA[
+  		SELECT	payindex, stuid, leaid, studyindex, paysenddate, paydate, paymoney
+  		FROM	( SELECT 	/*+INDEX_DESC(payment SYS_C007410)*/
+  							rownum rn, payindex, stuid, leaid, 
+  							studyindex, paysenddate, paydate, paymoney
+  				  FROM 		payment
+  				  WHERE		rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  </select>
+
+  <update id="update">
+  	UPDATE	payment
+  	SET		stuid = #{stuId}, leaid = #{leaId},
+  			studyindex= #{studyIndex}, paysenddate = #{paySendDate},
+  			paydate= #{payDate}, paymoney = #{payMoney}
+  	WHERE  	payindex = #{payIndex}
+  </update>
+  
+  <delete id="delete">
+  	DELETE FROM payment WHERE payindex = #{payIndex}
+  </delete>
+
+ <!--  <select id="read" resultType="com.scorpion.domain.PaymentVO">
+  	SELECT * FROM payment WHERE payindex = #{payIndex}
+  </select> -->
+
+  <insert id="insertSelectKey">
+    <selectKey keyProperty="payIndex" resultType="long"    
+    			order="BEFORE">
+    	SELECT pay_no.nextval FROM dual
+    </selectKey>
+  	INSERT INTO payment
+  	VALUES(#{payIndex}, #{stuId}, #{leaId}, #{studyIndex}, #{paySendDate}, #{payDate}, #{payMoney})
+  </insert>
+  
+  <select id="getBeforeDepositList" 
+  		  resultType="com.scorpion.domain.PaymentVO">
+  	<![CDATA[
+  		SELECT * FROM payment WHERE paysenddate is null
+  	]]>
+  </select>
+  
+  <select id="getAfterDepositList" 
+  		  resultType="com.scorpion.domain.PaymentVO">
+  	<![CDATA[
+  		SELECT * FROM payment WHERE paysenddate is not null
+  	]]>
+  </select>
+  
+</mapper>

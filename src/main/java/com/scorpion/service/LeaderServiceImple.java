@@ -53,7 +53,7 @@ public class LeaderServiceImple implements LeaderService {
 	@Override
 	public LeaderVO get(String leaderid) {
 		
-		return null;
+		return mapper.read(leaderid);
 	}
 
 	@Override
