@@ -55,7 +55,7 @@
   	SELECT * FROM notice WHERE notIndex = #{notIndex}
   </select>
 
-<!--  <update id="update">
+  <update id="update">
   	UPDATE	notice
   	SET		notContent = #{notContent}, notTitle = #{notTitle},
   			notDate= #{notDate}
@@ -64,7 +64,7 @@
   
   <delete id="delete">
   	DELETE FROM notice WHERE notIndex = #{notIndex}
-  </delete> -->
+  </delete> 
 
 
 

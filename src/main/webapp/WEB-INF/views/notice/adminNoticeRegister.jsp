@@ -144,8 +144,22 @@
 							placeholder="공지할 내용을 입력해주세요." name="notContent"></textarea>
 						<button id="regBtn">확인</button>
 					
-					<button id="closeBtn">취소</button>
+					
 					</form>
+					
+					
+					<button  data-oper="close" id="closeBtn">취소</button>
+					
+					<form id="operForm" action="/notice/adminNoticeManage" method="get">
+					<input type="hidden" id="notIndex" name="notIndex"
+						value="${content.notIndex }">
+					<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
+						<input type="hidden" name="amount" value="${cri.amount }">
+						<input type="hidden" name="type" value="${cri.type }">
+						<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
+				</form>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -178,7 +192,17 @@
 	</div><!-- wrap -->
 	
  <script>
- 
-</script> 
+		$(function() {
+			var operForm = $("#operForm");
+
+			//list
+			$('button[data-oper="close"]').on("click", function(e) {
+				operForm.find('#notIndex').remove();
+				operForm.attr("action", "/notice/adminNoticeManage");
+				operForm.submit();
+			});
+
+		});
+	</script>
 </body>
 </html>

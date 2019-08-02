@@ -158,16 +158,19 @@
 
 				</div>
 
+				
+				<button data-oper="adminNoticeMod" id="modBtn">수정</button>
+				<button data-oper="adminNoticeRem" id="remBtn">삭제</button>
 				<button data-oper="adminNoticeManage" id="listBtn">목록</button>
-
-				<form id="operForm" action="/notice/noticeView" method="get">
+				
+				<form id="operForm" action="/notice/adminNoticeManage" method="get">
 					<input type="hidden" id="notIndex" name="notIndex"
 						value="${view.notIndex }">
-					<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
-						<input type="hidden" name="amount" value="${cri.amount }">
-						<input type="hidden" name="type" value="${cri.type }">
-						<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
 				</form>
+
+				<form id="deleteForm" action="/notice/remove" method="post">
+                  <input type="hidden" id="notIndex" name="notIndex" value="${view.notIndex}">
+               </form>
 
 
 			</div>
@@ -221,6 +224,20 @@
 				operForm.submit();
 			});
 
+			//remove
+			$('button[data-oper="adminNoticeRem"]').on("click", function(e){
+			      
+			      var conf = confirm("삭제 하시겠습니까?");
+			      alert(conf);
+			      
+			      if(conf == true){
+			     
+			         $("#deleteForm").submit();
+			      } 
+			   });
+			
+			
+			
 		});
 	</script>
 </body>

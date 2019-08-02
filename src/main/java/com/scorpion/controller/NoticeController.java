@@ -78,10 +78,12 @@ public class NoticeController {
 	}
 
 	@PostMapping("/remove")
-	public String remove(@RequestParam("noticeno") Long noticeno, @ModelAttribute("cri") Criteria cri,
+	public String remove(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {
-		service.remove(noticeno);
-		return "/notice/list";
+		if(service.remove(notIndex)) {
+			rttr.addAttribute("result","success");
+		}
+		return "redirect:/notice/adminNoticeManage";
 	}
 
 	@GetMapping("/modify")
