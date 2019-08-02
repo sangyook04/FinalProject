@@ -2,6 +2,7 @@ package com.scorpion.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.scorpion.domain.Criteria;
@@ -11,13 +12,17 @@ import com.scorpion.mapper.LeaderMapper;
 import com.scorpion.mapper.PictureMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
 @AllArgsConstructor
 public class LeaderServiceImple implements LeaderService {
+	
+	@Setter(onMethod_ = @Autowired)
 	private LeaderMapper mapper;
+	
 	private PictureMapper picturemapper; 
 	
 	@Override
@@ -46,20 +51,23 @@ public class LeaderServiceImple implements LeaderService {
 
 	@Override
 	public void register(LeaderVO leader) {
+		log.info("register......" + leader);
 		
-		
+		mapper.insertSelectKey(leader);
 	}
 
 	@Override
 	public LeaderVO get(String leaderid) {
+		log.info("get......" + leaderid);
 		
-		return null;
+		return mapper.read(leaderid);
 	}
 
 	@Override
 	public boolean modify(LeaderVO leader) {
+		log.info("modify......" + leader);
 		
-		return false;
+		return mapper.update(leader) == 1;
 	}
 
 	@Override
