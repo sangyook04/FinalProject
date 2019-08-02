@@ -138,12 +138,7 @@
 									<th></th>
 								</tr>
 							</thead>
-							<!--  <tbody>
-
-   
-
-  </tbody> -->
-
+							
 						</table>
 						<textarea class="form-control" rows="3"
 							placeholder="공지할 내용을 입력해주세요." name="notContent"></textarea>
