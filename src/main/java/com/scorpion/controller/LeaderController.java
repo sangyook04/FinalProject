@@ -1,6 +1,7 @@
 package com.scorpion.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.service.LeaderService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -18,21 +20,19 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class LeaderController {
+	LeaderService service;
 	
-	@GetMapping("/info")
-	public void info(@RequestParam("id") String id) {
-		
-	}
+//	@GetMapping("/info")
+//	public void info(@RequestParam("leaId") String leaderid, Model model) {
+//		log.info("/get");
+//		model.addAttribute("leader", service.get(leaderid));
+//	}
 	
-	@GetMapping("/modify")
-	public void modify() {
+	@GetMapping({"/info","/modify"})
+	public void info(@RequestParam("leaId") String leaderid, Model model) {
+		log.info("/get or /modify");
 		
-	}
-	
-	@PostMapping("/modify")
-	public String modify(LeaderVO leader, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		
-		return "/leader/info";
+		model.addAttribute("leader", service.get(leaderid));
 	}
 	
 	@GetMapping("/review")

@@ -1,5 +1,7 @@
 package com.scorpion.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -18,4 +20,6 @@ public class LeaderVO {
    private String leaImage;
    private String leaState;
    private String auth;
+   
+   private List<PictureVO> pictureList;
 }
