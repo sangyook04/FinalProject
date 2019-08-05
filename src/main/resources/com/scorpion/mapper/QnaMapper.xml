@@ -7,7 +7,7 @@
 		SELECT COUNT(*) FROM QNA
 
 	</select>
-	<!-- VO에 데이터주입 -->
+	
 	<select id="getListWithPaging"
 		resultType="com.scorpion.domain.QnaVO">
    	<![CDATA[
@@ -17,6 +17,15 @@
   				  FROM 		qna
   				  WHERE		rownum <= #{pageNum} * #{amount} )
   		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+	</select>
+	
+	<select id="getMyListWithPaging" parameterType="map"
+		resultType="com.scorpion.domain.QnaVO">
+   	<![CDATA[
+  		SELECT rownum rn, qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate, qnaPassword
+  		FROM qna
+  		WHERE qnaWriter = #{stuId}
   	]]>
 	</select>
 
@@ -37,11 +46,16 @@
   		DELETE FROM qna WHERE qnaindex = #{qnaIndex}
  	</delete>
 
-	<!-- <update id="update"> UPDATE levelTest SET test_content = #{test_content}, 
-		test_exam1 = #{test_exam1}, test_exam2= #{test_exam2}, test_exam3 = #{test_exam3}, 
-		test_exam4= #{test_exam4}, test_answer = #{test_answer} WHERE test_index 
-		= #{test_index} </update> -->
-
-
-
+	<update id="update">
+	  	UPDATE	qna
+  		SET		QNACONTENT = #{qnaContent}, QNATITLE = #{qnaTitle}, QNADATE = #{qnaDate}, QNAWRITER = #{qnaWriter}, QNAINDEX = #{qnaIndex}
+  		WHERE  	QNAINDEX = #{qnaIndex}
+  	</update>
+  	
+  	<update id="updateAnswer">
+	  	UPDATE	qna
+  		SET		QNAANSSTATE = #{qnaAnsState}, QNAANSWER = #{qnaAnswer}, QNACONTENT = #{qnaContent}, QNATITLE = #{qnaTitle}, QNADATE = #{qnaDate}, QNAWRITER = #{qnaWriter}, QNAINDEX = #{qnaIndex}
+  		WHERE  	QNAINDEX = #{qnaIndex}
+  	</update>
+  	
 </mapper>

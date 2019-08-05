@@ -130,63 +130,44 @@
 				</ul>
 			</aside>
 			<div class="containerContent">
-				<h1>QnA 관리</h1>
+				<h1>QnA 답변</h1>
 				<div class="QnAWrap">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">제목</th>
-								<th scope="col">작성자</th>
-								<th scope="col">날짜</th>
-								<th scope="col">답변상태</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Model 데이터 출력 -->
-							<c:forEach items="${list}" var="qna">
-								<tr>
-									<td><a class="move" href="${qna.qnaIndex}">${qna.qnaIndex}</a></td>
-									<td>${qna.qnaTitle}</td>
-									<td>${qna.qnaWriter}</td>
-									<td>${qna.qnaDate}</td>
-									<td>${qna.qnaAnsState}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					<!-- 액션폼 -->
-					<form id='actionForm' action="/admin/QnAlist" method="get">
-						<input type="hidden" name="pageNum"
-							value="${pageMaker.cri.pageNum }"> <input type="hidden"
-							name="amount" value="${pageMaker.cri.amount }">
+					<form action="/admin/QnAmodify" method="post">
+						<div class="form-group">
+					   		<label for="QnAModifyGetNo">번호</label>
+					  		<input type="text" class="form-control" id="QnAModifyGetNo" name="qnaIndex" placeholder="번호" readonly="readonly" value="${qna.qnaIndex}">
+					 	</div>
+						<div class="form-group">
+							<label for="QnAGetTitle">제목</label> <input type="text"
+								class="form-control" id="QnAGetTitle" name="qnaTitle" placeholder="제목"
+								readonly="readonly" value="${qna.qnaTitle}">
+						</div>
+						<div class="form-group">
+							<label for="QnAGetWriter">작성자</label> <input type="text"
+								class="form-control" id="QnAGetWriter" name="qnaWriter" placeholder="작성자"
+								readonly="readonly" value="${qna.qnaWriter}">
+						</div>
+						<div class="form-group">
+							<label for="QnAGetDate">날짜</label> <input type="text"
+								class="form-control" id="QnAGetDate" name="qnaDate" placeholder="날짜"
+								readonly="readonly" value="${qna.qnaDate}">
+						</div>
+						<div class="form-group">
+							<label for="QnAGetContent">내용</label>
+							<textarea class="form-control" id="QnAGetContent" name="qnaContent"
+								placeholder="내용" style="resize: none" readonly="readonly">${qna.qnaContent}</textarea>
+						</div>
+						<div class="form-group">
+							<label for="QnAGetAnswer">답변</label>
+							<textarea class="form-control" id="QnAGetAnswer" name="qnaAnswer"
+								placeholder="미답변 상태" style="resize: none">${qna.qnaAnswer}</textarea>
+						</div>
+						<input type="hidden" name="qnaAnsState" value="답변 완료">
+						<button type="submit" data-oper="modify" id="modifyOK" class="btn btn-default">확인</button>
+					 	<button type="button" id="cancel" class="btn btn-default">취소</button>
 					</form>
-
-					<!-- 페이징 -->
-					<div class="pull-center">
-						<ul class="pagination">
-							<!-- previous 버튼 표시 -->
-							<c:if test="${pageMaker.prev }">
-								<li class="paginate_button previous"><a
-									href="${pageMaker.startPage -1}">이전으로</a></li>
-							</c:if>
-
-							<!-- 페이지 번호 표시 -->
-							<c:forEach var="num" begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }">
-								<li
-									class='paginate_button ${pageMaker.cri.pageNum == num ? "active":"" } '>
-									<a href="${num}"> ${num} </a>
-								</li>
-							</c:forEach>
-							<!-- next 버튼 표시 -->
-							<c:if test="${pageMaker.next }">
-								<li class="paginate_button next"><a
-									href="${pageMaker.endPage +1 }">다음으로</a></li>
-							</c:if>
-						</ul>
-					</div>
 				</div>
+				<!-- QnAWrap -->
 			</div>
 		</div>
 		<!-- container -->
@@ -225,31 +206,12 @@
 		</footer>
 	</div>
 	<!-- wrap -->
-	<script>
-		var actionForm = $("#actionForm");
-
-		//상세보기 페이지 이동
-		$(".move")
-				.on(
-						"click",
-						function(e) {
-							e.preventDefault();
-							actionForm
-									.append("<input type='hidden' name='qnaIndex' value='"
-											+ $(this).attr("href") + "'>");
-							actionForm.attr("action", "/admin/QnAget");
-							actionForm.submit();
-
-						});
-
-		//페이지 이동하기
-		$(".paginate_button a").on("click", function(e) {
-			e.preventDefault();
-
-			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-
-			actionForm.submit();
-		});
-	</script>
+<script>
+	$("#cancel").on("click", function(e){
+		
+		var QnAModifyGetNo = $("#QnAModifyGetNo").val();
+		location.href = "/admin/QnAget?qnaIndex="+QnAModifyGetNo;
+	});	
+</script>
 </body>
 </html>

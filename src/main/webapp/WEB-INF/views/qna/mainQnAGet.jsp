@@ -100,9 +100,8 @@
 					  <button data-oper="list" class="btn btn-default">목록</button>
 					</div>
 					<div class="MyQnAGetAnswer">
-						<h2>답변내용</h2>
-						<input type="textarea" class="form-control" id="QnAGetContent" placeholder="내용" readonly="readonly">
-						<!-- 나중에 answer할떄 수정 -->
+						<label for="QnAGetAnswer">답변 내용</label>
+						<textarea class="form-control" id="QnAGetAnswer" placeholder="내용" style="resize: none" readonly="readonly">${qna.qnaAnswer}</textarea>
 					</div>
 					<form id="operForm" action="/qna/modify" method="get">
 						<input type="hidden" id="qnaIndex" name="qnaIndex" value="${qna.qnaIndex}">

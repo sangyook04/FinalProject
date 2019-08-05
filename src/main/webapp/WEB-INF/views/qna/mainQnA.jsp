@@ -80,6 +80,7 @@
 								<th scope="col">제목</th>
 								<th scope="col">날짜</th>
 								<th scope="col">작성자</th>
+								<th scope="col">답변상태</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -90,6 +91,7 @@
 									<td>${qna.qnaTitle}</td>
 									<td>${qna.qnaDate}</td>
 									<td>${qna.qnaWriter}</td>
+									<td>${qna.qnaAnsState}</td>
 								</tr>
 							</c:forEach> 
 						</tbody>

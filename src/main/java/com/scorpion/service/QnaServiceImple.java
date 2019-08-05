@@ -34,14 +34,20 @@ public class QnaServiceImple implements QnaService {
 	public List<QnaVO> getList(Criteria cri) {
 		return mapper.getListWithPaging(cri);
 	}
+	
 	@Override
 	public List<QnaVO> getMyList(Criteria cri, String id) {
-		return null;
+		return mapper.getMyListWithPaging(cri, id);
 	}
 
 	@Override
 	public boolean modify(QnaVO qnavo) {
 		return mapper.update(qnavo)==1;
+	}
+	
+	@Override
+	public boolean modifyAnswer(QnaVO qnavo) {
+		return mapper.updateAnswer(qnavo)==1;
 	}
 
 	@Override
@@ -68,6 +74,5 @@ public class QnaServiceImple implements QnaService {
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
-
-
+	
 }

@@ -38,9 +38,26 @@ public class QnaController {
 		return "/qna/mainQnA";
 	}
 
+	// 내가 등록한 QnA페이지 뿌려주는곳
+	@GetMapping("/mylist")
+	public String mylist(Model model, Criteria cri, @RequestParam("stuId") String stuId) {
+		model.addAttribute("list", service.getMyList(cri, stuId));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
+
+		return "/qna/myQnA";
+	}
+
 	// 목록 상세보기 ㅇ
 	@GetMapping("/get")
 	public String get(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("qna", service.get(qnaIndex));
+
+		return "/qna/mainQnAGet";
+	}
+	
+	// 마이QNA 목록 상세보기  
+	@GetMapping("/get")
+	public String Myget(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("qna", service.get(qnaIndex));
 
 		return "/qna/mainQnAGet";
@@ -51,6 +68,7 @@ public class QnaController {
 	public String register() {
 		return "/qna/mainQnARegister";
 	}
+
 //	@PreAuthorize("isAuthenticated()") 사용자 권한때 사용 (시큐리티 먼저)
 	@PostMapping("/register")
 	public String register(QnaVO qna, RedirectAttributes rttr) {
@@ -59,51 +77,33 @@ public class QnaController {
 		return "redirect:/qna/list";
 	}
 
-	//삭제
+	// 삭제 ㅇ
 	@PostMapping("/remove")
 	public String remove(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) {
-	
-		if(service.remove(qnaIndex)) { rttr.addAttribute("result","success"); }
+
+		if (service.remove(qnaIndex)) {
+			rttr.addAttribute("result", "success");
+		}
 
 		return "redirect:/qna/list";
 	}
-	
-	//수정
-	@GetMapping("/modify") 
-	public String modify(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) { 
-		return "qna/mainQnAModify"; 
+
+	// 수정 ㅇ
+	@GetMapping("/modify")
+	public String modify(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("qna", service.get(qnaIndex));
+		return "qna/mainQnAModify";
 	}
-	
+
 	@PostMapping("/modify")
-	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		if(service.modify(qna)) {
-			rttr.addAttribute("result","success");
+	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, Model model) {
+
+		if (service.modify(qna)) {
+			rttr.addAttribute("result", "success");
 		}
-		return "redirect:/qna/get?qnaIndex="+qna.getQnaIndex();
-		
+		return "redirect:/qna/get?qnaIndex=" + qna.getQnaIndex();
+
 	}
-	
-	/*
-	 * @GetMapping("/modify") public String modify(@RequestParam("qnano") Long
-	 * qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) { return
-	 * "qna/mainQnAModify"; }
-	 * 
-	 * @PostMapping("/modify") public String modify(QnaVO
-	 * qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-	 * if(service.modify(qna)) { rttr.addAttribute("result","success"); } return
-	 * "redirect:/level/get?testIndex="+qna.getQnaIndex(); }
-	 * 
-	 * @GetMapping("/myQna") public void myQna(Model model, Criteria
-	 * cri, @RequestParam("id") String id) { service.getMyList(cri, id); }
-	 * 
-	 * @GetMapping("/answer") public void answer(@RequestParam("qnano") Long
-	 * qnano, @ModelAttribute("cri") Criteria cri, Model model) {
-	 * 
-	 * }
-	 * 
-	 * @PostMapping("/answer") public String answer(@RequestParam("qnano") Long
-	 * qnano, @RequestParam("answer") String answer) { service.replymodify(qnano,
-	 * answer); return "/qna/get"; }
-	 */
+
 }
