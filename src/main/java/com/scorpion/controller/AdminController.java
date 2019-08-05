@@ -78,50 +78,44 @@ public class AdminController {
 
 	}
 
-	@GetMapping("/adminLeader")
-	public void adminLeader(Model model, Criteria cri) {
-		model.addAttribute("leaderList", leaService.getList(cri));
-//	      model.addAttribute("pageMaker", new PageDTO(cri, 123));
-
-		int total = leaService.getTotal(cri);
-
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-	}
-
-	@GetMapping({ "/adminLeaderInfo", "/adminLeaderModify" })
-	public void adminLeaderInfo(@RequestParam("leaId") String leaderid, @ModelAttribute("cri") Criteria cri,
-			Model model) {
-		log.info("/adminLeaderInfo");
-
-		model.addAttribute("leader", leaService.get(leaderid));
-	}
-
-	@PostMapping("/adminLeaderModify")
-	public String adminLeaderModify(LeaderVO leader, RedirectAttributes rttr) {
-		log.info("modify : " + leader);
-
-		if (leaService.modify(leader)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-
-		return "redirect:/admin/adminLeader";
-	}
-
-	@GetMapping("/adminRefusalLeader")
-	public void adminRefusalLeader(Model model, Criteria cri) {
-		model.addAttribute("leaderList", leaService.getRejectList(cri));
-
-		int total = leaService.getTotal(cri);
-
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-	}
-
-	@GetMapping("/adminWaitLeader")
-	public void adminWaitLeader(Model model, Criteria cri) {
-		model.addAttribute("leaderList", leaService.getHoldList(cri));
-
-		int total = leaService.getTotal(cri);
-
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-	}
+	/*
+	 * @GetMapping("/adminLeader") public void adminLeader(Model model, Criteria
+	 * cri) { model.addAttribute("leaderList", leaService.getList(cri)); //
+	 * model.addAttribute("pageMaker", new PageDTO(cri, 123));
+	 * 
+	 * int total = leaService.getTotal(cri);
+	 * 
+	 * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
+	 * 
+	 * @GetMapping({ "/adminLeaderInfo", "/adminLeaderModify" }) public void
+	 * adminLeaderInfo(@RequestParam("leaId") String
+	 * leaderid, @ModelAttribute("cri") Criteria cri, Model model) {
+	 * log.info("/adminLeaderInfo");
+	 * 
+	 * model.addAttribute("leader", leaService.get(leaderid)); }
+	 * 
+	 * @PostMapping("/adminLeaderModify") public String adminLeaderModify(LeaderVO
+	 * leader, RedirectAttributes rttr) { log.info("modify : " + leader);
+	 * 
+	 * if (leaService.modify(leader)) { rttr.addFlashAttribute("result", "success");
+	 * }
+	 * 
+	 * return "redirect:/admin/adminLeader"; }
+	 * 
+	 * @GetMapping("/adminRefusalLeader") public void adminRefusalLeader(Model
+	 * model, Criteria cri) { model.addAttribute("leaderList",
+	 * leaService.getRejectList(cri));
+	 * 
+	 * int total = leaService.getTotal(cri);
+	 * 
+	 * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
+	 * 
+	 * @GetMapping("/adminWaitLeader") public void adminWaitLeader(Model model,
+	 * Criteria cri) { model.addAttribute("leaderList",
+	 * leaService.getHoldList(cri));
+	 * 
+	 * int total = leaService.getTotal(cri);
+	 * 
+	 * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
+	 */
 }
