@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
+import com.scorpion.domain.PageDTO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.StudentService;
 
@@ -36,29 +37,49 @@ public class StudentController {
 			
 		}
 		
-		@GetMapping("/info")
-		public void info(@RequestParam("id") String id) {
-			service.info(id);
-		}
+	/*
+	 * @GetMapping("/info") public void info(@RequestParam("id") String id) {
+	 * service.info(id); }
+	 */
 		
-		@GetMapping("/modify")
-		public void modify() {
-			
+		@GetMapping({"/adminStudentInfo","/adminStudentMod"})
+		public void get(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
+			model.addAttribute("stuInfo", service.info(stuId));
 		}
+
 		
-		@PostMapping("/modify")
+		
+		
+	/*
+	 * @GetMapping("/modify") public void modify() {
+	 * 
+	 * }
+	 */
+		
+		@PostMapping("/adminStudentMod")
 		public String modify(StudentVO student, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-			service.modify(student);
-			return "/student/info";
+			if(service.modify(student)) {
+				rttr.addAttribute("result","success");
+			}
+			return "redirect:/student/adminStudentMod";
 		}
 		
-		@GetMapping("/levelget")
-		public void levelget(@RequestParam("id") String id) {
-			service.levelGet(id);
-		}
+//		@GetMapping("/studentLevelGet")
+//		public void levelget(@RequestParam("stuId") String stuId) {
+//			service.levelGet(stuId);
+//		}
 		
-		@GetMapping("/list")
+		@GetMapping({"/studentLevelGet"})
+		public void levelget(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
+			model.addAttribute("stuLevel", service.info(stuId));
+		}
+
+		
+		
+		@GetMapping("/adminStudentList")
 		public void list(Model model, Criteria cri) {
-			service.getList(cri);
+			
+			model.addAttribute("studentList", service.getList(cri));
+			model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
 		}
 }

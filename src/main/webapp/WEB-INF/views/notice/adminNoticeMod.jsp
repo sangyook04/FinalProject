@@ -136,47 +136,42 @@
 				</h2>
 
 				<div class="noticeContenttable">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">제목</th>
-								<th scope="col">${view.notTitle}</th>
-								<th></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
+					<form role="form" action="/notice/adminNoticeMod" method="post">
+					<input type="hidden" class="form-control" name="notIndex" value="${view.notIndex}">
+						<table class="table">	
+							<thead>
+							
+								<tr>
+									
+									<th scope="col">제목</th>
+									<th scope="col"><input type="text" name="notTitle"
+										placeholder="${view.notTitle}" value="${view.notTitle}"></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
 
 
 
-						</tbody>
+							</tbody>
 
-					</table>
-	
-					<textarea class="form-control" rows="3" readonly="readonly"> ${view.notContent }  </textarea>
+						</table>
 
-				<button data-oper="adminNoticeMod" id="modBtn">수정</button>
-				<button data-oper="adminNoticeRem" id="remBtn" 	style="background-color: red; padding: 10px; color: white; border-radius: 5px; margin-left: 10px; margin-top: -100px;">삭제</button>
-				<button data-oper="adminNoticeManage" id="listBtn2" style="background-color: #47C83E; padding: 10px; color: white; border-radius: 5px; margin-left: 10px; margin-top: -100px;">목록</button>
-				
-				
+						<textarea class="form-control" rows="3" name="notContent"> ${view.notContent} </textarea>
+
+						<button data-oper="adminNoticeMod" id="modBtn">수정</button>
+						<button data-oper="adminNoticeClose" id="closeBtn"
+							style="background-color: red; padding: 10px; color: white; border-radius: 5px; margin-left: 10px; margin-top: -100px;">취소</button>
+
+
+
+					</form>
+
 
 
 				</div>
 
-				<!-- 
-				<button data-oper="adminNoticeMod" id="modBtn">수정</button>
-				<button data-oper="adminNoticeRem" id="remBtn">삭제</button>
-				<button data-oper="adminNoticeManage" id="listBtn">목록</button>
-				 -->
-				<form id="operForm" action="/notice/adminNoticeManage" method="get">
-					<input type="hidden" id="notIndex" name="notIndex"
-						value="${view.notIndex }">
-				</form>
-
-				<form id="deleteForm" action="/notice/remove" method="post">
-                  <input type="hidden" id="notIndex" name="notIndex" value="${view.notIndex}">
-               </form>
 
 
 			</div>
@@ -220,37 +215,29 @@
 	<!-- wrap -->
 
 	<script>
-		$(function() {
-			var operForm = $("#operForm");
-			
+	$(function() {
+		
+		var formObj = $("form");
+		
+		
+		
 			//modify
-			
-			$('button[data-oper="adminNoticeMod"]').on("click", function(e) {
-				operForm.attr("action", "/notice/adminNoticeMod").submit();
+			$('button').on("click", function(e){
+				e.preventDefault();
+				var operation = $(this).data("oper");
+				
+				if(operation === "adminNoticeClose"){
+					formObj.attr("action", "/notice/adminNoticeManage").attr("method", "get");
+					
+				}else if(operation === 'adminNoticeMod'){
+					
+					
+					 var conf = confirm("수정 하시겠습니까?");
+				      alert(conf);   	  	
+				}
+				
+				formObj.submit();
 			});
-			
-			
-
-			//list
-			$('button[data-oper="adminNoticeManage"]').on("click", function(e) {
-				operForm.find('#notIndex').remove();
-				operForm.attr("action", "/notice/adminNoticeManage");
-				operForm.submit();
-			});
-
-			//remove
-			$('button[data-oper="adminNoticeRem"]').on("click", function(e){
-			      
-			      var conf = confirm("삭제 하시겠습니까?");
-			      alert(conf);
-			      
-			      if(conf == true){
-			     
-			         $("#deleteForm").submit();
-			      } 
-			   });
-			
-			
 			
 		});
 	</script>

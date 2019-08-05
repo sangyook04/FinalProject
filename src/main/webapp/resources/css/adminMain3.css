@@ -78,7 +78,7 @@ footer .copyright {clear: both; padding-top: 30px; font-size: 14px; color: #8288
 #container .innerNotice .page{text-align: center; padding:50px;}
 #container .innerNotice .inner.noticeTable { width:900px; height:900px; text-align: center;}
 #container .inner #listBtn{background-color: #47C83E; padding: 10px;width:50px;color: white;border-radius: 5px; margin-left: 950px; margin-top: 10px;}
-
+#container .innerNotice .inner .pull-center .pagination .paginate_button{margin-left:500px; padding:50px; text-align: center;}
 
 /*----------------adminNoticeDetail---------------  */
 #container .containerContent .containerContenttable  #regBtn { background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin: 10px;}
@@ -87,12 +87,12 @@ footer .copyright {clear: both; padding-top: 30px; font-size: 14px; color: #8288
 #container .inner .noticeContent .noticeContenttable {margin-left:100px; width: 900px; height:400px;}
 #container .inner .noticeContenttable .form-control{height:400px;}
 
-#container .inner  #modBtn { background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin-top: 20px; margin-left: 820px;  }
-#container .inner  #remBtn { background-color: red;padding: 10px;color: white;border-radius: 5px;  margin-left: 890px; margin-top: -50px;}
-#container .inner  #listBtn{background-color: #47C83E; padding: 10px;width:50px;color: white;border-radius: 5px; margin-left: 950px;}
+#container .inner .noticeContenttable #modBtn { background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin-top: 20px; margin-left: 820px;  }
+/* #container .inner .noticeContenttable #remBtn { background-color: red;padding: 10px;color: white;border-radius: 5px;  margin-left: 890px; margin-top: -100px;} */
+ #container .inner .noticeContenttable #listBtn{background-color: #47C83E; padding: 10px;width:50px;color: white;border-radius: 5px; margin-left: 950px;} */
 /*----------------adminNoticeMod----------------  */
 #container .containerContent .containerContenttable .table .length{width:500px;}
-
+#container .inner .noticeContenttable #closeBtn{background-color: red;padding: 10px;color: white;border-radius: 5px;  margin-left: 1000px; margin-top: -100px;}
 
 
 /*----------------adminStudentInfo----------------  */

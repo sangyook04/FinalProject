@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -70,7 +70,7 @@
 </head>
 <body>
 	<div id="wrap">
-		<header>
+			<header>
 			<nav>
 				<div class="inner">
 					<div class="headerContent">
@@ -120,47 +120,41 @@
 					</li>
 				</ul>
 			</aside>
-			<div class="containerContent">
-
-				<h2>
-					<b>공지사항 등록</b>
-				</h2>
-
-				<div class="containerContenttable">
-					<form role="form" method="post" action="/notice/adminNoticeRegister">
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">제목</th>
-									<th scope="col"><input type="text"  name="notTitle"
-										placeholder="공지사항 제목을 입력해주세요."></th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							
-						</table>
-						<textarea class="form-control" rows="3"
-							placeholder="공지할 내용을 입력해주세요." name="notContent"></textarea>
-						<button id="regBtn">확인</button>
-					
-					
-					</form>
-					
-					
-					<button  data-oper="close" id="closeBtn">취소</button>
-					
-					<form id="operForm" action="/notice/adminNoticeManage" method="get">
-					<input type="hidden" id="notIndex" name="notIndex"
-						value="${content.notIndex }">
-					
-				</form>
-					
-					
-				</div>
-			</div>
-		</div>
-		<!-- container -->
+	<div class="inner">
+	         <h1><b>학생 상세 정보</b></h1>
+            <div class="content">
+               <div class="info">아이디</div>
+               <div class="userInfo">${stuInfo.stuId}</div>
+               <div class="info">이름</div>
+               <div class="userInfo">${stuInfo.stuName}</div>
+               <div class="info">성별</div>
+               <div class="userInfo">${stuInfo.stuGender}</div>
+               <div class="info">주소</div>
+               <div class="userInfo">${stuInfo.stuAddress}</div>
+               <div class="info">연락처</div>
+               <div class="userInfo">${stuInfo.stuPhonenum}</div>
+               <div class="info">이메일</div>
+               <div class="userInfo">${stuInfo.stuEmail}</div>
+                <div class="info">레벨</div>
+               <div class="userInfo">${stuInfo.stuLevel}</div>
+              
+               <button data-oper="adminStudentMod" id="modBtn">수정</button> 				
+               <button data-oper="adminStudentList" id="listBtn" style="background-color: #47C83E; padding: 10px; color: white; border-radius: 5px; margin-left: 10px; margin-top: -100px;">목록</button>
+            </div>
+           	
+           	
+           	  <form id="operForm" action="/student/adminStudentMod" method="get">
+					<input type="hidden" id="stuId" name="stuId"
+						value="${student.stuId }">
+				</form> 
+           	
+           	 <form id="operForm" action="/student/adminStudentList" method="get">
+					<input type="hidden" id="stuId" name="stuId"
+						value="${student.stuId }">
+				</form> 
+        
+         </div>
+		</div><!-- container -->
 		<footer>
 			<div class="inner">
 				<div class="footArea">
@@ -187,19 +181,48 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
-	
- <script>
+	<script>
 		$(function() {
 			var operForm = $("#operForm");
+		
+			
 
+			//modify
+			
+			$('button[data-oper="adminStudentMod"]').on("click", function(e) {
+				operForm.attr("action", "/student/adminStudentMod").submit();
+			});
+			
+			
+			
+			
 			//list
-			$('button[data-oper="close"]').on("click", function(e) {
-				operForm.find('#notIndex').remove();
-				operForm.attr("action", "/notice/adminNoticeManage");
+			$('button[data-oper="adminStudentList"]').on("click", function(e) {
+				operForm.find('#stuId').remove();
+				operForm.attr("action", "/student/adminStudentList");
 				operForm.submit();
 			});
 
+	
+			
+			
+		});
+		
+		
+		
+		//페이지 이동하기
+		var actionForm = $("#actionForm");
+
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+
+			actionForm.submit();
 		});
 	</script>
+	
+	
+	
 </body>
 </html>

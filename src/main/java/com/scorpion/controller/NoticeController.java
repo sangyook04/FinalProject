@@ -51,7 +51,7 @@ public class NoticeController {
 
 	}
 
-	@GetMapping({"/noticeView","/adminNoticeDetail"})
+	@GetMapping({"/noticeView","/adminNoticeDetail","/adminNoticeMod"})
 	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("view", service.get(notIndex));
 	}
@@ -86,14 +86,19 @@ public class NoticeController {
 		return "redirect:/notice/adminNoticeManage";
 	}
 
-	@GetMapping("/modify")
-	public void modify(@RequestParam("noticeno") Long noticeno, @ModelAttribute("cri") Criteria cri, Model model) {
+	/*
+	 * @GetMapping("/adminNoticeMod") public void modify(@RequestParam("noticeno")
+	 * Long noticeno, @ModelAttribute("cri") Criteria cri, Model model) {
+	 * 
+	 * }
+	 */
 
-	}
-
-	@PostMapping("/modify")
+	@PostMapping("/adminNoticeMod")
 	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		service.modify(notice);
-		return "/notice/get";
+		if(service.modify(notice)) {
+			rttr.addAttribute("result","success");
+		}
+		//return "redirect:/notice/get?notIndex="+notice.getNotIndex();
+		return "redirect:/notice/adminNoticeManage";
 	}
 }
