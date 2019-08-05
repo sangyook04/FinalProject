@@ -130,6 +130,7 @@
 			<div class="Problem">
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
+					<textarea class="form-control title" rows="2" cols="100" readonly="readonly">${test.title}</textarea>
 					<textarea class="form-control questionInput" rows="20" cols="100" readonly="readonly">${test.testContent}</textarea>
 					<h2>보기</h2><br>
 					1 : <input type="text" class="form-control" readonly="readonly" value="${test.testExam1}">

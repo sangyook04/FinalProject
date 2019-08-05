@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -136,16 +137,13 @@
 		            	</tr>
 		            </thead>
 		            <tbody>
+		            <c:forEach items="${list }" var="payment" >
 		            	<tr>
-		            		<td>강푸른</td>
-					        <td>240000</td>
-					        <td>우리1002-033-899856</td>
+		            		<td>${payment.leader.leaName }</td>
+					      	<td>${payment.payMoney }</td>
+					        <td>${payment.leader.leaAccount }</td>
 		            	</tr>
-		            	<tr>
-		            		<td>강초록</td>
-					        <td>240000</td>
-					        <td>우리1002-033-899856</td>
-		            	</tr>
+		            </c:forEach>
 		           </tbody>
 				</table>
 			</div>

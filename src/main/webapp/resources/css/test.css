@@ -8,11 +8,10 @@ font-weight: bold;
    margin: 100px 0px;
    }
    .question {
-   background: aqua;
+   font-size: 15px;
    height: 400px;
    }
    .select {
-   background: pink;
    height: 100px;
    }
    .answer {
@@ -36,6 +35,11 @@ font-weight: bold;
    }
    
    /* 레벨테스트 관리 */
+   
+   .questionTitle {
+   	font-size: 20px;
+   	font-weight: bold;
+   }
    
    .problem {
 	text-align: center;

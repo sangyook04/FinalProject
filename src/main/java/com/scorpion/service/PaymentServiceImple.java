@@ -58,12 +58,12 @@ public class PaymentServiceImple implements PaymentService {
 	@Override
 	public List<PaymentVO> getBeforeDeposit(Criteria cri) {
 //		return mapper.getBeforeDepositList(cri);
-		return mapper.readList(cri);
+		return mapper.beforeList(cri);
 	}
 
 	@Override
 	public List<PaymentVO> getAfterDeposit(Criteria cri) {
-		return mapper.getAfterDepositList(cri);
+		return mapper.afterList(cri);
 	}
 
 	@Override
@@ -74,13 +74,18 @@ public class PaymentServiceImple implements PaymentService {
 
 	@Override
 	public void pay(PaymentVO payment) {
-		// TODO Auto-generated method stub
+		mapper.insertSelectKey(payment);
 		
 	}
 
 	@Override
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public boolean deposit(Long payindex) {
+		return mapper.deposit(payindex) == 1;
 	}
 
 

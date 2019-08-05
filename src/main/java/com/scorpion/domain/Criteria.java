@@ -16,8 +16,8 @@ public class Criteria {
 	private int amount;		//한 페이지 당 출력 개수
 	private String type;	//검색 조건
 	private String keyword;//검색어
-//	private Date start;	//시작 날짜
-//	private Date end;	//끝 날짜
+	private String start;	//시작 날짜
+	private String end;	//끝 날짜
 	//페이지 번호와 개수를 지정하지 않은 경우
 	public Criteria() {
 		this(1, 10);//기본 pageNum은 1, amount은 10개로 지정
@@ -33,6 +33,14 @@ public class Criteria {
 	
 	public String[] getTypeArr() {
 		return type == null ? new String[] {} : type.split("");
+	}
+	
+	public String[] getStartArr() {
+		return start == null ? new String[] {} : new String[] {start};
+	}
+	
+	public String[] getEndArr() {
+		return end == null ? new String[] {} : new String[] {end};
 	}
 	
 	//링크 생성 처리

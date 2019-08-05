@@ -144,10 +144,10 @@
 			<h2>통계 관리</h2>
 			<div class="form-group form-inline calender">
 				<span class="glyphicon glyphicon-calendar"></span>
-				<input type="date" id="start" class="form-control">
+				<input type="date" id="start" name="start" class="form-control">
 				 ~ 
 				<span class="glyphicon glyphicon-calendar"></span>
-				<input type="date" id="end" class="form-control">
+				<input type="date" id="end" name="end" class="form-control">
 			</div>
 			<div class="saleList">
 				<table class="table table-striped table-bordered">
@@ -198,6 +198,12 @@
 						<%-- <input type="hidden" name="start" value="${pageMaker.cri.start }">
 						<input type="hidden" name="end" value="${pageMaker.cri.end }"> --%>
 					</form>
+					<form id='searchForm' action="/pay/manageList" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<input type="hidden" name="start" value="${pageMaker.cri.start }">
+						<input type="hidden" name="end" value="${pageMaker.cri.end }">
+					</form>
 			</div>
 			</div>
 			</div>
@@ -235,13 +241,13 @@
 <script>
 //페이지 이동하기
 var actionForm = $("#actionForm");
-
+var searchForm = $("#searchForm");
 $(".paginate_button a").on("click", function(e){
 	e.preventDefault();
 
-	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	searchForm.find("input[name='pageNum']").val($(this).attr("href"));
 	
-	actionForm.submit();
+	searchForm.submit();
 });
 
 //end 달력 클릭시 조회
@@ -255,6 +261,9 @@ $("#end").on("change", function(e){
 		$(this).val(""); //종료날짜칸 비우기
 	}
 	else {
+		searchForm.find("input[name='start']").val($("#start").val());
+		searchForm.find("input[name='end']").val($("#end").val());
+		searchForm.submit();
 	}
 });
 
