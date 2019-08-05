@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.StudentVO;
+import com.scorpion.mapper.StudentMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -14,17 +15,17 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class StudentServiceImple implements StudentService {
-
-	@Override
+	 private StudentMapper mapper;
+	
+	 @Override
 	public int getTotal(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+		 return mapper.getTotalCount(cri);
 	}
 
 	@Override
 	public List<StudentVO> getList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+		  return mapper.getListWithPaging(cri);
+		   // return mapper.getList();
 	}
 
 	@Override
@@ -35,8 +36,7 @@ public class StudentServiceImple implements StudentService {
 
 	@Override
 	public StudentVO info(String stuid) {
-		// TODO Auto-generated method stub
-		return null;
+		 return mapper.read(stuid);
 	}
 
 	@Override

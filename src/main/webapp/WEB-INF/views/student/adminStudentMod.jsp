@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -70,7 +70,7 @@
 </head>
 <body>
 	<div id="wrap">
-		<header>
+			<header>
 			<nav>
 				<div class="inner">
 					<div class="headerContent">
@@ -120,47 +120,36 @@
 					</li>
 				</ul>
 			</aside>
-			<div class="containerContent">
-
-				<h2>
-					<b>공지사항 등록</b>
-				</h2>
-
-				<div class="containerContenttable">
-					<form role="form" method="post" action="/notice/adminNoticeRegister">
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">제목</th>
-									<th scope="col"><input type="text"  name="notTitle"
-										placeholder="공지사항 제목을 입력해주세요."></th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							
-						</table>
-						<textarea class="form-control" rows="3"
-							placeholder="공지할 내용을 입력해주세요." name="notContent"></textarea>
-						<button id="regBtn">확인</button>
+			
+			<div class="inner">
+			 <h1><b>학생 정보 수정</b></h1>
+				<div class="content">
+					<form>
 					
-					
+						<div class="info">아이디</div>
+						<div class="userInfo">englishjonnashilta</div>
+						<div class="info">비밀번호 수정</div>
+						<div class="userInfo"><input type="password" placeholder="비밀번호" class="joinInput">  <input type="password" placeholder="비밀번호 확인" class="joinInput">
+						  <button  class="Btn"> 비밀번호 확인</button><br></div>
+						<div class="info">이름</div>
+						<div class="userInfo">누구게</div>
+						<div class="info">성별</div>
+						<div class="userInfo">여자</div>
+						<div class="info">주소</div>
+						<div class="userInfo"><input type="text" placeholder="주소" class="joinInput">  <input type="text" placeholder="주소" class="joinInput"><button class="Btn">주소찾기</button></div>
+						<div class="info">연락처</div>
+						<div class="userInfo"><input type="tel" placeholder="연락처" class="joinInput">-<input type="tel" placeholder="연락처" class="joinInput">-<input type="tel" placeholder="연락처" class="joinInput"></div>
+						<div class="info">이메일</div>
+						<div class="userInfo"><input type="text" placeholder="이메일" class="joinInput">@<input type="text" placeholder="이메일" class="joinInput"><select><option>직접입력</option><option>naver.com</option><option>daum.net</option><option>gmail.com</option></select><br>
+                 </div>
+						
+						
+	
+						<button id="modBtn">확인</button><button id="closeBtn">취소</button>
 					</form>
-					
-					
-					<button  data-oper="close" id="closeBtn">취소</button>
-					
-					<form id="operForm" action="/notice/adminNoticeManage" method="get">
-					<input type="hidden" id="notIndex" name="notIndex"
-						value="${content.notIndex }">
-					
-				</form>
-					
-					
 				</div>
 			</div>
-		</div>
-		<!-- container -->
+		</div><!-- container -->
 		<footer>
 			<div class="inner">
 				<div class="footArea">
@@ -187,19 +176,5 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
-	
- <script>
-		$(function() {
-			var operForm = $("#operForm");
-
-			//list
-			$('button[data-oper="close"]').on("click", function(e) {
-				operForm.find('#notIndex').remove();
-				operForm.attr("action", "/notice/adminNoticeManage");
-				operForm.submit();
-			});
-
-		});
-	</script>
 </body>
 </html>

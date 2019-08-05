@@ -11,35 +11,13 @@
   </select>
   
   
-<!--     쿼리 보관
-  <sql id="criteria">
-  	<trim prefix="(" suffix=") AND " 
-  			  prefixOverrides="OR">
-  			<foreach item="type" collection="typeArr">
-  				<trim prefix="OR">
-  					<choose>
-  						<when test="type == 'T'.toString()">
-  							title   LIKE '%'||#{keywords}||'%'
-  						</when>
-  						<when test="type == 'C'.toString()">
-  							content LIKE '%'||#{keyword}||'%'
-  						</when>
-  						<when test="type == 'W'.toString()">
-  							writer  LIKE '%'||#{keyword}||'%'
-  						</when>
-  					</choose>
-  				</trim>
-  			</foreach>	  
-  		</trim>
-  </sql> -->
-
 
 
 <select id="getListWithPaging"
   	      resultType="com.scorpion.domain.NoticeVO">
    	<![CDATA[
   		SELECT	notIndex, notTitle, notContent, notDate
-  		FROM	( SELECT 	/*+INDEX_DESC(levelTest SYS_C007432)*/
+  		FROM	( SELECT 	/*+INDEX_DESC(notice SYS_C007432)*/
   							rownum rn, notIndex, notTitle, notContent, 
   							notDate
   				  FROM 		notice
@@ -58,7 +36,7 @@
   <update id="update">
   	UPDATE	notice
   	SET		notContent = #{notContent}, notTitle = #{notTitle},
-  			notDate= #{notDate}
+  			notDate = sysdate
   	WHERE  	notIndex = #{notIndex}
   </update>
   

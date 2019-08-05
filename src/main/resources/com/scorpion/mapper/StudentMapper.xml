@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.StudentMapper">
+  
+  
+    <!-- 쿼리 보관 -->
+   <sql id="criteria">
+  	<trim prefix="(" suffix=") AND " 
+  			  prefixOverrides="OR">
+  			<foreach item="type" collection="typeArr">
+  				<trim prefix="OR">
+  					<choose>
+  						<when test="type == 'T'.toString()">
+  							stuId  LIKE '%'||#{keyword}||'%'
+  						</when>
+  					<!-- 	<when test="type == 'C'.toString()">
+  							content LIKE '%'||#{keyword}||'%'
+  						</when>
+  						<when test="type == 'W'.toString()">
+  							writer  LIKE '%'||#{keyword}||'%'
+  						</when> -->
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
+
+  
+  
+  
+  
+  
+  
+  
+  <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM student
+  	
+  </select>
+  
+  
+
+
+<select id="getListWithPaging"
+  	      resultType="com.scorpion.domain.StudentVO">
+   	<![CDATA[
+  		SELECT	stuid, stupassword, stuname, stuaddress,stugender,stuphonenum,stuemail,stulevel,auth
+  		FROM	( SELECT 	/*+INDEX_DESC(student SYS_C007432)*/
+  							rownum rn, stuid, stupassword, stuname,
+  							stuaddress, stugender, stuphonenum, stuemail, stulevel, auth
+  				  FROM 		student
+  				  WHERE		rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  </select>
+
+
+  
+
+  <select id="read" resultType="com.scorpion.domain.StudentVO">
+  	 select * from student where stuid = #{stuId}
+
+  </select>
+
+  <update id="update">
+  	UPDATE	student
+  	SET		stupassword = #{stuPassword}, stuaddress = #{stuAddress}, stuphonenum=#{stuPhonenum},
+  			stuemail = #{stuEmail}
+  	WHERE  	stuid = #{stuId}
+  </update>
+  
+<!--   <delete id="delete">
+  	DELETE FROM notice WHERE notIndex = #{notIndex}
+  </delete> 
+ -->
+
+
+<!--   <insert id="insertSelectKey">
+    <selectKey keyProperty="notIndex" resultType="long"    
+    			order="BEFORE">
+    	SELECT notice_no.nextval FROM dual
+    </selectKey>
+  	INSERT INTO notice (notIndex, notTitle, notContent ,notDate)
+  	VALUES(#{notIndex}, #{notTitle}, #{notContent} , sysdate)
+  </insert>  -->
+  
+ 
+  <select id="getList" 
+  		  resultType="com.scorpion.domain.StudentVO">
+  	<![CDATA[
+  		SELECT * FROM student WHERE stuid > 0
+  	]]>
+  </select>
+  
+  
+  
+</mapper>
+
+
