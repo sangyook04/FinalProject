@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -72,38 +72,60 @@
 			<div class="inner">
 				<h1>QnA</h1>
 				<div class="QnAWrap">
-					<form>
-						<button type="button" class="btn btn-default btnNew">새글
-							등록</button>
-						<table class="table table-hover">
-							<thead>
+					<button type="button" id="regBtn" class="btn btn-default btnNew">새글 등록</button>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">제목</th>
+								<th scope="col">날짜</th>
+								<th scope="col">작성자</th>
+								<th scope="col">답변상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Model 데이터 출력 -->
+							<c:forEach items="${list}" var="qna">
 								<tr>
-									<th scope="col">번호</th>
-									<th scope="col">제목</th>
-									<th scope="col">날짜</th>
-									<th scope="col">작성자</th>
+									<td><a class="move" href="${qna.qnaIndex}">${qna.qnaIndex}</a></td>
+									<td>${qna.qnaTitle}</td>
+									<td>${qna.qnaDate}</td>
+									<td>${qna.qnaWriter}</td>
+									<td>${qna.qnaAnsState}</td>
 								</tr>
-							</thead>
-							<tbody>
-								<!-- Model 데이터 출력 -->
-								<c:forEach items="${list }" var="qna">
-									<tr>
-										<td>${qna.qnaindex }</td>
-										<%-- <td>
-											게시물 조회 페이지 이동 <a class="move" href="${board.bno}">
-												${board.title } <!-- 댓글 갯수 표시 --> [${board.replyCnt }]
-										</a>
-										</td>
-										<td>${board.writer}</td>
-										<td><fmt:formatDate value="${board.regdate}"
-												pattern="yyyy-MM-dd" /></td>
-										<td><fmt:formatDate value="${board.updateDate}"
-												pattern="yyyy-MM-dd" /></td> --%>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+							</c:forEach> 
+						</tbody>
+					</table>
+					<!-- 액션폼 -->
+					<form id='actionForm' action="/qna/list" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+                 		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 					</form>
+					
+					<!-- 페이징 -->
+					<div class="pull-center">
+						<ul class="pagination">
+							<!-- previous 버튼 표시 -->
+							<c:if test="${pageMaker.prev }">
+								<li class="paginate_button previous"><a
+									href="${pageMaker.startPage -1}">이전으로</a></li>
+							</c:if>
+
+							<!-- 페이지 번호 표시 -->
+							<c:forEach var="num" begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }">
+								<li
+									class='paginate_button ${pageMaker.cri.pageNum == num ? "active":"" } '>
+									<a href="${num}"> ${num} </a>
+								</li>
+							</c:forEach>
+							<!-- next 버튼 표시 -->
+							<c:if test="${pageMaker.next }">
+								<li class="paginate_button next"><a
+									href="${pageMaker.endPage +1 }">다음으로</a></li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<!-- inner -->
@@ -144,5 +166,32 @@
 		</footer>
 	</div>
 	<!-- wrap -->
+<script>
+
+var actionForm = $("#actionForm");
+
+//등록 이벤트
+$("#regBtn").on("click", function(){
+	location.href = "/qna/register";
+});
+
+//상세보기 페이지 이동
+$(".move").on("click", function(e){
+		e.preventDefault();
+		actionForm.append("<input type='hidden' name='qnaIndex' value='"+$(this).attr("href")+"'>");
+		actionForm.attr("action", "/qna/get");
+		actionForm.submit();
+		
+});
+
+//페이지 이동하기
+$(".paginate_button a").on("click", function(e){
+	e.preventDefault();
+
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	actionForm.submit();
+});
+</script>	
 </body>
 </html>

@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.service.LeaderService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class CommonController {
+	LeaderService service;
 
 	@GetMapping("/main")
 	public String main() {
@@ -38,8 +41,10 @@ public class CommonController {
 	}
 	
 	@GetMapping("/findId")
-	public void findId() {
-		
+	public void findId(String error, String logout, Model model) {
+		if(error != null){
+			model.addAttribute("msg", "입력하신 정보와 일치하는 회원이 없습니다.");
+		}
 	}
 	
 	@PostMapping("/findId")
@@ -80,8 +85,18 @@ public class CommonController {
 	}
 	
 	@PostMapping("/leaderJoin")
-	public String leaderJoin(LeaderVO leader) {
-		return "/common/main";
+	public String leaderJoin(LeaderVO leader, RedirectAttributes rttr) {
+		log.info("register : " + leader);
+		
+		if(leader.getPictureList() != null) {
+			leader.getPictureList().forEach(attach -> log.info(attach));
+		}
+		
+		
+		
+		service.register(leader);
+		
+		return "redirect:/common/main";
 	}
 	
 	@GetMapping("/studentrJoin")

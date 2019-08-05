@@ -11,15 +11,17 @@ import com.scorpion.domain.QnaVO;
 
 public interface QnaService {
 	
-	public PageDTO getListPage(Criteria cri, Long qno);
+	public PageDTO getListPage(Criteria cri, Long qnaIndex);
 	public List<QnaVO> getList(Criteria cri); 
-	public List<QnaVO> getMyList(Criteria cri, String id); //myQna
-	public int modify(QnaVO qnavo);
-	public int remove(Long qno);
-	public QnaVO get(Long qno);
-	public int register(QnaVO qnavo);
+	public List<QnaVO> getMyList(Criteria cri, String stuId); //myQna id는 나중에 수정
+	public boolean modify(QnaVO qnavo);
+	public boolean modifyAnswer(QnaVO qnavo);
+	public boolean remove(Long qnaIndex);
+	public QnaVO get(Long qnaIndex);
+	public void register(QnaVO qnavo);
 	
-	public int replymodify(Long qno, String answer);
+	
+	public int replymodify(Long qnaIndex, String qnaAnswer);
 	public int getTotal(Criteria cri);
 
 }

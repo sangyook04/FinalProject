@@ -17,20 +17,55 @@
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/common.css">
 <link rel="stylesheet" type="text/css"
-	href="../../../resources/css/main2.css">
+	href="../../../resources/css/adminMain2.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
 	rel="stylesheet">
 
-<script>
+   <script>
    		$(document).ready(function(){
 
-			$('nav .one').hover(function () {
-			    if($(".callsenterSub").css("display") == "none"){
-			       $('.callsenterSub').slideDown();
-			       $("headerA").css("color","#f15b6d");
+			$('.first').hover(function () {
+			    if($(".firstSub").css("display") == "none"){
+			       $('.firstSub').css("display", "block");
 			       event.preventDefault();
 			    } else {
-			       $('.callsenterSub').css("display", "none");
+			       $('.firstSub').css("display", "none");
+			    }
+			});
+
+			$('.firstSub2').hover(function () {
+			    if($(".asideSubmenu2").css("display") == "none"){
+			       $('.asideSubmenu2').css("display", "block");
+			       event.preventDefault();
+			    } else {
+			       $('.asideSubmenu2').css("display", "none");
+			    }
+			});
+
+			$('.second').hover(function () {
+			    if($(".secondSub").css("display") == "none"){
+			       $('.secondSub').css("display", "block");
+			       event.preventDefault();
+			    } else {
+			       $('.secondSub').css("display", "none");
+			    }
+			});
+
+			$('.third').hover(function () {
+			    if($(".thirdSub").css("display") == "none"){
+			       $('.thirdSub').css("display", "block");
+			       event.preventDefault();
+			    } else {
+			       $('.thirdSub').css("display", "none");
+			    }
+			});
+
+			$('.fourth').hover(function () {
+			    if($(".fourthSub").css("display") == "none"){
+			       $('.fourthSub').css("display", "block");
+			       event.preventDefault();
+			    } else {
+			       $('.fourthSub').css("display", "none");
 			    }
 			});
 
@@ -42,7 +77,7 @@
 		var operForm = $("#operForm");
 		
 		$("button[data-oper='modify']").on("click", function(e){
-			operForm.attr("action", "/leader/modify").submit();
+			operForm.attr("action", "/admin/adminLeaderModify").submit();
 		});
 	})
 </script>
@@ -75,7 +110,43 @@
 				</div>
 			</nav>
 		</header>
-		<div id="container">
+		<div id="container">			
+			<aside>
+				<ul class="asdieMainMenu">
+					<li class="Mainli first">매출 관리
+						<ul class="asideSubmenu firstSub">
+							<li><a href="#">결제 내역</a></li>
+							<li class="firstSub2">입금 관리
+								<ul class="asideSubmenu2">
+									<li><a href="#">입금 전 목록</a></li>
+									<li><a href="#">입금 완료 목록</a></li>
+								</ul>
+							</li>
+							<li><a href="#">통계 관리</a></li>
+						</ul>
+					</li>
+					<li class="Mainli"><a href="#">레벨테스트 관리</a></li>
+					<li class="Mainli"><a href="#">공지사항 관리</a></li>
+					<li class="Mainli second">고객센터 관리
+						<ul class="asideSubmenu secondSub">
+							<li><a href="#">QnA 관리</a></li>
+							<li><a href="#">FAQ 관리</a></li>
+						</ul>
+					</li>
+					<li class="Mainli third">회원 관리
+						<ul class="asideSubmenu thirdSub">
+							<li><a href="#">회원 관리</a></li>
+							<li><a href="#">리더 관리</a></li>
+						</ul>
+					</li>
+					<li class="Mainli fourth">리더가입 관리
+						<ul class="asideSubmenu forthSub">
+							<li><a href="#">가입 대기 리더 목록</a></li>
+							<li><a href="#">리더 가입 거부 목록</a></li>
+						</ul>
+					</li>
+				</ul>
+			</aside>
 			<div class="inner">
 				<div class="content">
 					<div class="infoContent">
@@ -99,10 +170,12 @@
 						<div class="info">자기소개</div>
 						<div class="userInfo"><c:out value="${ leader.leaIntroduce }"/></div>
 	
-						<button data-oper="modify" id="modBtn">수정하기</button>
+						<button data-oper='modify' id="modBtn">변경</button><button id="withdBtn">비활성화</button><button id="apprBtn">승인</button><button id="refBtn">거부</button><button data-oper='list' onclick="location.href='/admin/adminLeader'" id="listBtn">목록</button>
 						
 						<form id="operForm" action="/leader/modify" method="get">
 							<input type="hidden" id="leaId" name="leaId" value='<c:out value="${leader.leaId }"/>'>
+							<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
+							<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>
 						</form>
 					</div>
 				</div>

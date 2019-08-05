@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.PaymentMapper">
+
+	<resultMap id="payMap"
+			   type="com.scorpion.domain.PaymentVO" >
+		<id 	property="payIndex"		column="payindex"/> 
+		<result	property="payMoney"		column="paymoney"/>
+		<collection	property="leader"		resultMap="leaderMap"/>
+	</resultMap>
+	
+	<resultMap id="leaderMap"
+			   type="com.scorpion.domain.LeaderVO" >
+		<result	property="leaName"		column="leaname"/>
+		<result	property="leaAccount"			column="leaaccount"/>
+	</resultMap>  
+	
+	<select id="beforeList" resultMap="payMap">
+		SELECT			payindex, leaname, paymoney, leaaccount
+		FROM			leader l, payment p
+		WHERE			p.leaid = l.leaid and paysenddate is null
+	</select>
+
+	<select id="afterList" resultMap="payMap">
+		SELECT			payindex, leaname, paymoney, leaaccount
+		FROM			leader l, payment p
+		WHERE			p.leaid = l.leaid and paysenddate is not null
+	</select>
+
+	<select id="getPayListWithDate"
+  	      resultType="com.scorpion.domain.PaymentVO">
+   	<![CDATA[
+  		SELECT	payindex, stuid, leaid, studyindex, paysenddate, paydate, paymoney
+  		FROM	( SELECT 	/*+INDEX_DESC(payment SYS_C007410)*/
+  							rownum rn, payindex, stuid, leaid, 
+  							studyindex, paysenddate, paydate, paymoney
+  				  FROM 		payment
+  				  WHERE		paydate > #{start} and paydate < #{end} and rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  	</select>
+
+	<!-- 쿼리 보관 -->
+  <sql id="cri1">
+  	<trim prefix="" suffix=" AND " 
+  			  prefixOverrides="AND">
+  			<foreach item="start" collection="startArr">
+  				<trim prefix="AND">
+  					<choose>
+  						<when test="start != null">
+  							<![CDATA[paydate >= #{start}]]>
+  						</when>
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
+  <!-- 쿼리 보관 -->
+  <sql id="cri2">
+  	<trim prefix="" suffix=" AND " 
+  			  prefixOverrides="AND">
+  			<foreach item="end" collection="endArr">
+  				<trim prefix="AND">
+  					<choose>
+  						<when test="end != null">
+  						<![CDATA[paydate <= #{end}]]>
+  						</when>
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
+
+<!-- 인덱스명 주의!!! 컴퓨터마다 이름이 다름. 테이블 만들때 정해서 통일시켜야함 -->
+ <select id="getPayList"
+  	      resultType="com.scorpion.domain.PaymentVO">
+   	<![CDATA[
+  		SELECT	payindex, stuid, leaid, studyindex, paysenddate, paydate, paymoney
+  		FROM	( SELECT 	/*+INDEX_DESC(payment SYS_C007410)*/
+  							rownum rn, payindex, stuid, leaid, 
+  							studyindex, paysenddate, paydate, paymoney
+  				  FROM 		payment
+  				  WHERE		
+  		]]>		  <include refid="cri1"></include><include refid="cri2"></include> <![CDATA[
+  				  rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  </select>
+  
+  <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM payment 
+  	WHERE <include refid="cri1"></include><include refid="cri2"></include><![CDATA[ payindex > 0]]>
+  	
+  </select>
+  
+  <update id="update">
+  	UPDATE	payment
+  	SET		stuid = #{stuId}, leaid = #{leaId},
+  			studyindex= #{studyIndex}, paysenddate = #{paySendDate},
+  			paydate= #{payDate}, paymoney = #{payMoney}
+  	WHERE  	payindex = #{payIndex}
+  </update>
+  
+  <update id="deposit">
+  	UPDATE	payment
+  	SET		paysenddate = SYSDATE
+  	WHERE  	payindex = #{payindex}
+  </update>
+  
+  <delete id="delete">
+  	DELETE FROM payment WHERE payindex = #{payindex}
+  </delete>
+
+ <!--  <select id="read" resultType="com.scorpion.domain.PaymentVO">
+  	SELECT * FROM payment WHERE payindex = #{payIndex}
+  </select> -->
+
+  <insert id="insertSelectKey">
+    <selectKey keyProperty="payIndex" resultType="long"    
+    			order="BEFORE">
+    	SELECT pay_no.nextval FROM dual
+    </selectKey>
+  	INSERT INTO payment(payindex, stuid, leaid, studyindex, paydate, paymoney)
+  	VALUES(#{payIndex}, #{stuId}, #{leaId}, #{studyIndex}, #{payDate}, #{payMoney})
+  </insert>
+  
+</mapper>

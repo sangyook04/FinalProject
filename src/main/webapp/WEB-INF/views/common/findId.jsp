@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,12 +69,12 @@
 				<div class="content">
 					<h1>아이디 찾기</h1>
 					<form>
-						<div class="textInput"><input type="text" placeholder="이름을 입력해주세요"></div>
-						<div class="textInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
-						<div class="textInput"><input type="button" value="확인" class="loginBtn"></div>
+						<div class="findInput"><input type="text" placeholder="이름을 입력해주세요"></div>
+						<div class="findInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
+						<div class="findInput"><input type="button" value="확인" class="loginBtn"></div>
 					</form>
 					
-					<div class="msg">회원님의 아이디는 ㅇㅇㅇ입니다.</div>
+					<div class="msg"><c:out value="${ msg }"/></div>
 				</div>
 			</div>
 		</div>

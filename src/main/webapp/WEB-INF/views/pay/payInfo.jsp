@@ -17,6 +17,10 @@
    <!-- 부트스트랩 -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    
+   <!-- 아임포트결제 -->
+   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+   
    <script>
    		$(document).ready(function(){
 
@@ -131,9 +135,16 @@
 						  	</div>
 						</div>
 						
-						<input type="checkbox"> 위 상품 정보 및 거래 조건을 확인하였으며, 개인정보 제3자 제공에 동의합니다.(필수)
+						<input id="agree" type="checkbox"> 위 상품 정보 및 거래 조건을 확인하였으며, 개인정보 제3자 제공에 동의합니다.(필수)
 						<br>
-						<button class="btn btn-success">결제하기</button>
+						<button id="paymentBtn" class="btn btn-success">결제하기</button>
+						<form id="payForm" action="/pay/payment" method="post">
+							<input type="hidden" name="stuId" value="<!-- 학생 아이디 -->">
+							<input type="hidden" name="leaId" value="<!-- 리더 아이디 -->">
+							<input type="hidden" name="studyIndex" value="<!-- 스터디 번호 -->">
+							<input type="hidden" name="payDate" value="<!-- 오늘날짜 -->">
+							<input type="hidden" name="payMoney" value="<!-- 금액 -->">
+						</form>
 					</div>
 				</form>
 			</div><!-- End inner -->
@@ -166,6 +177,43 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
-	
+<script>
+var IMP = window.IMP; // 생략가능
+IMP.init("imp26864706"); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+$("#paymentBtn").on("click", function(e){
+	if($("#agree")[0].checked == true){
+		IMP.request_pay({
+		    pg : 'kakao', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : 10,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '강푸른',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'redirect:/',
+		    notice_url : 'http://localhost:8090/'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        location.href ="http://localhost:8090/"; //로그인되어있는 상태로 돌아가야함
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+	} else if($("#agree")[0].checked == false){
+		alert("개인정보 제공에 동의해주세요.");
+	}
+})
+</script>
 </body>
 </html>

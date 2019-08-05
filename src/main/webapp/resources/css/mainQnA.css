@@ -25,6 +25,8 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 #container .QnAWrap textarea {height: 300px;}
 #container .QnAWrap #QnAGetContent {height: 300px;}
 
+#container .QnAWrap .MyQnAGetAnswer {padding-top: 30px;}
+
 
 /*mainQnARegister.html*/
 #container .QnAWrap .pwdOKWrap {position: relative; margin-bottom: 20px;}

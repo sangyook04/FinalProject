@@ -75,11 +75,15 @@
 					<form role="form" method="post" action="/qna/register">
 					  <div class="form-group">
 					    <label for="mainQnARegisterTitle">제목</label>
-					    <input type="text" class="form-control" id="mainQnARegisterTitle" placeholder="제목">
+					    <input type="text" name="qnaTitle" class="form-control" id="mainQnARegisterTitle" placeholder="제목">
+					  </div>
+					  <div class="form-group">
+					    <label for="mainQnARegisterWriter">작성자</label>
+					    <input type="text" name="qnaWriter" class="form-control" id="mainQnARegisterWriter" placeholder="작성자">
 					  </div>
 					  <div class="form-group registerpwd">
 					    <label for="mainQnARegisterPwd">비밀번호</label>
-					    <input type="password" class="form-control" id="mainQnARegisterPwd" placeholder="비밀번호" readonly="readonly">
+					    <input type="password" name="qnaPassword" class="form-control" id="mainQnARegisterPwd" placeholder="비밀번호" readonly="readonly">
 					  </div>
 					  <div class="pwdOKWrap">
 					  	<label for="pwdCheck">비밀번호 여부</label>
@@ -87,7 +91,7 @@
 					  </div>
 					  <div class="form-group">
 					    <label for="mainQnARegisterContent">내용</label>
-					    <textarea class="form-control" id="mainQnARegisterContent" placeholder="내용" style="resize: none"></textarea>
+					    <textarea name="qnaContent" class="form-control" id="mainQnARegisterContent" placeholder="내용" style="resize: none"></textarea>
 					  </div>
 					  <button type="submit" class="btn btn-default">확인</button>
 					  <button type="button" class="btn btn-default">취소</button>

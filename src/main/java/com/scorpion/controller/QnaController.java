@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.scorpion.domain.QnaDTO;
 
 import com.scorpion.domain.Criteria;
+import com.scorpion.domain.LevelTestVO;
+import com.scorpion.domain.PageDTO;
 import com.scorpion.domain.QnaVO;
 import com.scorpion.service.QnaService;
 
@@ -23,106 +25,85 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class QnaController {
-	
-	private QnaService service;
-	
-	//처음 QnA페이지 뿌려주는 곳
-	//전체 목록 가져오기
-	@GetMapping("/list")
-	public void list(Model model, Criteria cri) {
-		log.info("list");
-//			model.addAttribute("list", service.getList());
-		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new QnaDTO(cri, 123));
-									   //전체 데이터 수는 임의로 123으로 지정
-		//전체 데이터 개수를 가지고 와서 total에 저장
-		int total = service.getTotal(cri);
-		log.info("total count : " + total);	//전체 데이터 개수 로그로 기록
-		//모델 객체 pageMaker의 값을 실제 총 데이터 개수로 지정해서 저장
-		model.addAttribute("pageMaker", new QnaDTO(cri, total));
-		
-	}	
 
-//	@GetMapping("/list")
-//	public void list(Model model, Criteria cri) {
-//		service.getList(cri);
-//	}
-	
-	
-	@GetMapping("/myQna")
-	public void myQna(Model model, Criteria cri, @RequestParam("id") String id) {
-		service.getMyList(cri, id);
+	private QnaService service;
+
+	// 처음 QnA페이지 뿌려주는 곳
+	// 전체 목록 가져오기 ㅇ
+	@GetMapping("/list")
+	public String list(Model model, Criteria cri) {
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
+
+		return "/qna/mainQnA";
 	}
-	
+
+	// 내가 등록한 QnA페이지 뿌려주는곳
+	@GetMapping("/mylist")
+	public String mylist(Model model, Criteria cri, @RequestParam("stuId") String stuId) {
+		model.addAttribute("list", service.getMyList(cri, stuId));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
+
+		return "/qna/myQnA";
+	}
+
+	// 목록 상세보기 ㅇ
 	@GetMapping("/get")
-	public void get(@RequestParam("qnano") Long qnano,
-			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		service.get(qnano);
+	public String get(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("qna", service.get(qnaIndex));
+
+		return "/qna/mainQnAGet";
 	}
 	
-	@PostMapping("/remove")
-	public String remove(@RequestParam("qnano") Long qnano,
-            @ModelAttribute("cri") Criteria cri,
-	 		     RedirectAttributes rttr) {
-		
-		service.remove(qnano);
-		
-		return "/qna/list";
+	// 마이QNA 목록 상세보기  
+	@GetMapping("/get")
+	public String Myget(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("qna", service.get(qnaIndex));
+
+		return "/qna/mainQnAGet";
 	}
-	
-	@GetMapping("/modify")
-	public void modify(@RequestParam("qnano") Long qnano,
-			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		
-	}
-	
-	@PostMapping("/modify")
-	public String modify(QnaVO qna, 
-			@ModelAttribute("cri") Criteria cri, 
-			RedirectAttributes rttr) {
-		service.modify(qna);
-		return "/qna/get";
-	}
-	
-	//register 등록기능
+
+	// register 등록기능 ㅇ
 	@GetMapping("/register")
 	public String register() {
 		return "/qna/mainQnARegister";
 	}
-	
-	@PostMapping("/register")
+
 //	@PreAuthorize("isAuthenticated()") 사용자 권한때 사용 (시큐리티 먼저)
-	public String register(QnaVO qna,
-			   RedirectAttributes rttr) {
+	@PostMapping("/register")
+	public String register(QnaVO qna, RedirectAttributes rttr) {
 		service.register(qna);
 		rttr.addFlashAttribute("result", qna.getQnaIndex());
-		return "redirect:/qna/mainQnA";
+		return "redirect:/qna/list";
 	}
-	
-//	//게시물 등록하기
-//		@PostMapping("/register")
-//		@PreAuthorize("isAuthenticated()")
-//		public String register(BoardVO board,
-//							   RedirectAttributes rttr) {
-//			log.info("register : " + board);
-//			service.register(board);
-//			rttr.addFlashAttribute("result", board.getBno());
-//			return "redirect:/board/list";
-//		}
-	
-	@GetMapping("/answer")
-	public void answer(@RequestParam("qnano") Long qnano,
-			@ModelAttribute("cri") Criteria cri,
-	        Model model) {
-		
+
+	// 삭제 ㅇ
+	@PostMapping("/remove")
+	public String remove(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri,
+			RedirectAttributes rttr) {
+
+		if (service.remove(qnaIndex)) {
+			rttr.addAttribute("result", "success");
+		}
+
+		return "redirect:/qna/list";
 	}
-	
-	@PostMapping("/answer")
-	public String answer(@RequestParam("qnano") Long qnano,
-			@RequestParam("answer") String answer) {
-		service.replymodify(qnano, answer);
-		return "/qna/get";
+
+	// 수정 ㅇ
+	@GetMapping("/modify")
+	public String modify(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("qna", service.get(qnaIndex));
+		return "qna/mainQnAModify";
 	}
+
+	@PostMapping("/modify")
+	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, Model model) {
+
+		if (service.modify(qna)) {
+			rttr.addAttribute("result", "success");
+		}
+		return "redirect:/qna/get?qnaIndex=" + qna.getQnaIndex();
+
+	}
+
 }

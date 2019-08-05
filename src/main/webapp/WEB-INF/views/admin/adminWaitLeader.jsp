@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>Final Project</title>
+   <title>Final Project_adminLeader</title>
    <!-- CSS -->
    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminQnA.css">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminMain2.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+   <link href="../../../resources/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+   <link href="../../../resources/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
 
    <script>
    		$(document).ready(function(){
@@ -118,30 +120,62 @@
 					</li>
 				</ul>
 			</aside>
-			<div class="containerContent">
-				<h1>QnA 답변</h1>
-				<div class="QnAWrap">
-					<form>
-					  <div class="form-group">
-					    <label for="QnAGetTitle">제목</label>
-					    <input type="text" class="form-control" id="QnAGetTitle" placeholder="제목">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnAGetWriter">작성자</label>
-					    <input type="text" class="form-control" id="QnAGetWriter" placeholder="작성자">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnAGetDate">날짜</label>
-					    <input type="text" class="form-control" id="QnAGetDate" placeholder="날짜">
-					  </div>
-					  <div class="form-group">
-					    <label for="QnAGetContent">내용</label>
-					    <input type="textarea" class="form-control" id="QnAGetContent" placeholder="내용">
-					  </div>
-					  <button type="button" class="btn btn-default">확인</button>
-					  <button type="button" class="btn btn-default">취소</button>
-					</form>
-				</div><!-- QnAWrap -->
+			<div class="inner">
+				<div class="content">
+					<h1>가입 대기 리더 목록</h1>
+						<div class="tableContent">
+							<div class="panel panel-default">
+							  <!-- Default panel contents -->
+							  <!-- Table -->
+							  <table class="table table-hover">
+								<thead>
+								<tr>
+									<th>아이디</th><th>리더명</th><th>신청날짜</th><th>점수</th>
+								</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${leaderList}" var="leader">
+										<tr>
+											<td><a class="move" href="<c:out value="${ leader.leaId }"/>"><c:out value="${leader.leaId }"/></a></td>
+											<td><c:out value="${leader.leaName }"/></td>
+											<td><c:out value="${leader.leaReqDate }"/></td>
+											<td><c:out value="${leader.leaScore }"/></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+												
+						<form class="form-inline" id="searchForm" action="/admin/adminLeader" method="get">
+						  <div class="form-group">
+						    <label for="exampleInputName2">아이디</label>
+						    <input type="hidden" name="type" value="I">
+						    <input type="text" class="form-control" id="exampleInputName2" name="keyword">
+						  </div>
+						    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						    <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						  <button type="submit" class="btn btn-default">검색</button>
+						</form>
+						</div>
+						
+						<div class="pageBtn">
+						  <ul class="pagination">
+						  	<c:if test="${pageMaker.prev }">
+						  		<li class="paginate_button previous"><a href="${pageMaker.startPage -1}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+						    </c:if>
+						    <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+						    	<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active' : '' } "><a href="${num}">${num }</a></li>
+						    </c:forEach>
+						    <c:if test="${pageMaker.next }">
+						    	<li class="paginate_button next"><a href="${ pageMaker.endPage +1 }" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+						    </c:if>
+						  </ul>
+						</div>
+						<form id="actionForm" action="/admin/adminLeader" method="get">
+							<input type="hidden" name='pageNum' value="${pageMaker.cri.pageNum }">
+							<input type="hidden" name='amount' value="${pageMaker.cri.amount }">
+						</form>
+				</div>
 			</div>
 		</div><!-- container -->
 		<footer>
@@ -170,5 +204,25 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+	
+		<script>
+		$(document).ready(function(){
+			var actionForm = $("#actionForm");
+		
+			$(".paginate_button a").on("click", function(e){
+				e.preventDefault();
+				console.log('click');
+				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+				actionForm.submit();
+			});
+			
+			$(".move").on("click", function(e){
+				e.preventDefault();
+				actionForm.append("<input type='hidden' name='leaId' value='"+ $(this).attr("href")+"'>");
+				actionForm.attr("action", "/admin/adminLeaderInfo");
+				actionForm.submit();
+			});
+		});
+	</script>
 </body>
 </html>

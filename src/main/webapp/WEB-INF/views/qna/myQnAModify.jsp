@@ -62,25 +62,29 @@
 			<div class="inner">
 				<h1>내 문의 수정</h1>
 				<div class="QnAWrap">
-					<form class="leaderMyQnAGetForm">
+					<form class="QnAModifyForm" action="/qna/modify" method="post">
 					  <div class="form-group">
-					    <label for="QnALeaderGetNo">번호</label>
-					    <input type="text" class="form-control" id="QnALeaderGetNo" placeholder="번호" readonly="readonly">
+					    <label for="QnAModifyGetNo">번호</label>
+					    <input type="text" class="form-control" id="QnAModifyGetNo" name="qnaIndex" placeholder="번호" readonly="readonly" value="${qna.qnaIndex}">
 					  </div>
 					  <div class="form-group">
-					    <label for="QnALeaderGetTitle">제목</label>
-					    <input type="text" class="form-control" id="QnALeaderGetTitle" placeholder="제목">
+					    <label for="QnAModifyTitle">제목</label>
+					    <input type="text" class="form-control" id="QnAModifyTitle" name="qnaTitle" placeholder="제목" value="${qna.qnaTitle}">
 					  </div>
 					  <div class="form-group">
-					    <label for="QnALeaderGetDate">날짜</label>
-					    <input type="text" class="form-control" id="QnALeaderGetDate" placeholder="날짜" readonly="readonly">
+					    <label for="QnAModifyDate">날짜</label>
+					    <input type="text" class="form-control" id="QnAModifyDate" name="qnaDate" placeholder="날짜" readonly="readonly" value="${qna.qnaDate}">
 					  </div>
 					  <div class="form-group">
-					    <label for="QnALeaderGetContent">내용</label>
-					    <input type="textarea" class="form-control" id="QnALeaderGetContent" placeholder="내용">
+					    <label for="QnAModifyDate">작성자</label>
+					    <input type="text" class="form-control" id="QnAModifyDate" name="qnaWriter" placeholder="작성자" readonly="readonly" value="${qna.qnaWriter}">
 					  </div>
-					  <button type="button" class="btn btn-default">확인</button>
-					  <button type="button" class="btn btn-default">취소</button>
+					  <div class="form-group">
+					    <label for="QnAModifyContent">내용</label>
+					    <textarea class="form-control" id="QnAModifyContent" name="qnaContent" placeholder="내용" style="resize: none">${qna.qnaContent}</textarea>
+					  </div>
+					  <button type="submit" data-oper="modify" id="modifyOK" class="btn btn-default">확인</button>
+					  <button type="button" id="cancel" class="btn btn-default">취소</button>
 					</form>
 				</div>
 			</div><!-- inner -->
@@ -112,4 +116,13 @@
 		</footer>
 	</div><!-- wrap -->
 </body>
+<script>
+
+	$("#cancel").on("click", function(e){
+		
+		var QnAModifyGetNo = $("#QnAModifyGetNo").val();
+		location.href = "/qna/get?qnaIndex="+QnAModifyGetNo;
+	});
+
+</script>
 </html>
