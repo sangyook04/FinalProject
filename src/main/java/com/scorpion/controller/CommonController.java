@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.service.LeaderService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +18,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class CommonController {
+	LeaderService service;
 
 	@GetMapping("/main")
 	public String main() {
@@ -81,7 +83,11 @@ public class CommonController {
 	
 	@PostMapping("/leaderJoin")
 	public String leaderJoin(LeaderVO leader) {
-		return "/common/main";
+		log.info("register : " + leader);
+		
+		service.register(leader);
+		
+		return "redirect:/common/main";
 	}
 	
 	@GetMapping("/studentrJoin")

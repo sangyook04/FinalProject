@@ -32,23 +32,8 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<filter>
-		<filter-name>encoding</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encoding</filter-name>
-		<servlet-name>appServlet</servlet-name>
-	</filter-mapping>
-	
 	<!-- filter 2019.08.01지현 -->
-	<!-- <filter>
+<!-- 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -56,5 +41,20 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> -->
+	
+	<!-- filter 2019.08.02 지현 -->
+   <filter>
+      <filter-name>encoding</filter-name>
+      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+      <init-param>
+         <param-name>encoding</param-name>
+         <param-value>UTF-8</param-value>
+      </init-param>
+   </filter>
+   
+   <filter-mapping>
+      <filter-name>encoding</filter-name>
+      <servlet-name>appServlet</servlet-name>
+   </filter-mapping>
 
 </web-app>

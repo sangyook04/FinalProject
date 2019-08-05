@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,8 +15,11 @@
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/adminMain3.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+<!--부트스트랩 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+
    <script>
    		$(document).ready(function(){
 
@@ -83,6 +86,7 @@
 				</div>
 			</nav>
 		</header>
+		
 		<div id="container">
 			<aside>
 				<ul class="asdieMainMenu">
@@ -120,37 +124,83 @@
 					</li>
 				</ul>
 			</aside>
-			<div class="containerContent">
 				
-			 <h2><b>공지사항 등록</b></h2>
+			<div class="innerNotice">
+
 			
-				<div class="containerContenttable">
-				<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">제목</th>
-      <th scope="col">
-      <input type="text" placeholder="공지사항 제목을 입력해주세요.">
+			<div class="inner">
+				<h2>
+					<b>공지사항 관리</b>
+				</h2>
+				<div class="noticeTable">
+					
+							<table class="table table-hover tablenoticeContent">
+							<thead>
+								<tr>
+									
+									<th scope="col">번호</th>
+									<th scope="col">제목</th>
+									<th scope="col">날짜</th>
 
-      </th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
- <!--  <tbody>
-
-   
-
-  </tbody> -->
-
-</table>
- <textarea class="form-control" rows="3" placeholder="공지할 내용을 입력해주세요."></textarea>
-<button id="modBtn">확인</button><button id="closeBtn">취소</button>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${noticeList }" var="manage">
+									<tr>
+										<td>${manage.notIndex}</td>
+										<td><a class="move" href="${manage.notIndex}">
+												${manage.notTitle} </a></td>
 
 
- 
-	</div>
+
+										<td>${manage.notDate}</td>
+									</tr>
+                   </c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+					
+					<button id="listBtn" >등록</button>
+					
+				
+		<!-- 액션폼 -->
+					<form id='actionForm' action="/notice/adminNoticeManage" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<%-- <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<input type="hidden" name="type" value="${pageMaker.cri.type }">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }"> --%>
+					</form>
+				</div>
+		
+				<!-- 페이징 -->
+				<div class="pull-center">
+				<ul class="pagination">
+				<!-- previous 버튼 표시 -->
+				<c:if test="${pageMaker.prev }">	
+					<li class="paginate_button previous">
+						<a href="${pageMaker.startPage -1}">이전으로</a>
+					</li>
+				</c:if>
+					
+				<!-- 페이지 번호 표시 -->
+				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+					<li class='paginate_button ${pageMaker.cri.pageNum == num ? "active":"" } '>
+					<a href="${num}"> ${num} </a></li>
+				</c:forEach>
+				<!-- next 버튼 표시 -->
+				<c:if test="${pageMaker.next }">	
+					<li class="paginate_button next">
+						<a href="${pageMaker.endPage +1 }">다음으로</a>
+					</li>
+				</c:if>
+				</ul>
+				</div>
+				</div>
 			</div>
+			<!-- End 내용물 -->
 		</div><!-- container -->
 		<footer>
 			<div class="inner">
@@ -178,5 +228,43 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+	
+	<script>
+		var actionForm = $("#actionForm");
+
+		 //등록 이벤트
+		$("#listBtn").on("click", function() {
+			self.location = "/notice/adminNoticeRegister";
+		}); 
+
+		//상세보기 페이지 이동
+		$(".move")
+				.on(
+						"click",
+						function(e) {
+							e.preventDefault();
+							actionForm
+									.append("<input type='hidden' name='notIndex' value='"
+											+ $(this).attr("href") + "'>");
+							actionForm.attr("action", "/notice/adminNoticeDetail");
+							actionForm.submit();
+
+						});
+
+		//페이지 이동하기
+		var actionForm = $("#actionForm");
+
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+
+			actionForm.submit();
+		});
+	</script>
+	
+	
+	
+	
 </body>
 </html>

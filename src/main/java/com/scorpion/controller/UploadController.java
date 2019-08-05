@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.scorpion.domain.PictureDTO;
+
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -152,9 +154,9 @@ public class UploadController {
 		@PreAuthorize("isAuthenticated()")
 		@PostMapping("/uploadAjaxAction")
 		@ResponseBody
-		public ResponseEntity<List<AttachFileDTO>> 
+		public ResponseEntity<List<PictureDTO>> 
 				uploadAjaxPost(MultipartFile[] uploadFile) {
-			List<AttachFileDTO> list = new ArrayList<>();
+			List<PictureDTO> list = new ArrayList<>();
 			log.info("uploadFormAction");
 			log.info("getFolder : " + getFolder());
 			String uploadFolder = "c:\\upload";	//업로드 경로
@@ -174,8 +176,8 @@ public class UploadController {
 				log.info("upload file size : " + m.getSize());
 				
 				String uploadFileName = m.getOriginalFilename();
-				AttachFileDTO attachDTO = new AttachFileDTO();
-				attachDTO.setFileName(uploadFileName);	//1.업로드 파일명 저장
+				PictureDTO pictureDTO = new PictureDTO();
+				pictureDTO.setFileName(uploadFileName);	//1.업로드 파일명 저장
 				
 				//IE의 경우 경로를 제거하고 파일명만 저장 
 				uploadFileName 
@@ -191,12 +193,12 @@ public class UploadController {
 				
 				try {
 					m.transferTo(saveFile);	//파일 업로드 
-					attachDTO.setUuid(uuid.toString());	 //2.UUID 값 저장
-					attachDTO.setUploadPath(getFolder());//3.업로드 경로 저장
+					pictureDTO.setUuid(uuid.toString());	 //2.UUID 값 저장
+					pictureDTO.setUploadPath(getFolder());//3.업로드 경로 저장
 					
 					//이미지 파일이면 섬네일 이미지 파일 생성 
 					if(checkImageType(saveFile)) {
-						attachDTO.setImage(true);  		 //4.이미지 여부 저장
+						pictureDTO.setImage(true);  		 //4.이미지 여부 저장
 						//섬네일 이미지 파일명 = s_ + 업로드파일명
 						FileOutputStream thumbnail
 							= new FileOutputStream(
@@ -209,7 +211,7 @@ public class UploadController {
 						);
 						thumbnail.close();
 					}//END 섬네일 이미지 생성
-					list.add(attachDTO);
+					list.add(pictureDTO);
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
