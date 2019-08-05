@@ -131,6 +131,7 @@
 					<div class="form-group form-inline">
 					<h2>문제</h2><br>
 					<input type="hidden" class="form-control" name="testIndex" value="${test.testIndex}">
+					<textarea class="form-control title" rows="2" cols="100" name="title">${test.title}</textarea>
 					<textarea class="form-control questionInput" rows="20" cols="100" name="testContent">${test.testContent}</textarea>
 					<h2>보기</h2><br>
 					1 : <input type="text" class="form-control" name="testExam1" value="${test.testExam1}">

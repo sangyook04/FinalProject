@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.domain.LevelTestVO;
 import com.scorpion.domain.PageDTO;
 import com.scorpion.domain.PaymentVO;
 import com.scorpion.service.LeaderService;
@@ -83,21 +85,37 @@ public class PayController {
    }
    
    @PostMapping("/deposit")
-   public String deposit(PaymentVO payment) {
-      service.modify(payment);
+   public String deposit(@RequestParam("payIndex") Long payindex, RedirectAttributes rttr) {
+	   log.info(payindex);
+      if(service.deposit(payindex)) {
+    	  rttr.addAttribute("result","success");
+      }
       return "redirect:/pay/afterDeposit";
    }
    
    @GetMapping("/afterDeposit")
-   public void afterDeposit(Model model, Criteria cri, String deposit) {
-	   service.getAfterDeposit(cri);
+   public void afterDeposit(Model model, Criteria cri) {
+	   model.addAttribute("list", service.getAfterDeposit(cri));
    }
    
    @GetMapping("/manageList")
 	public void manageList(Model model, Criteria cri) {
+	   if(cri .getStart() != null && cri.getStart().length() == 0) {
+		   cri.setStart(null);
+		   cri.setEnd(null);
+	   }
 	   model.addAttribute("list", service.getPaymentList(cri));
 	   model.addAttribute("pageMaker", new PageDTO(cri,service.getTotal(cri)));
    }
    
+   @PostMapping("/payment")
+	public String register(PaymentVO payment,
+			RedirectAttributes rttr) {
+		
+		service.pay(payment);
+		
+		rttr.addFlashAttribute("result", "success");
+		return "redirect:/";
+	}
 
 }

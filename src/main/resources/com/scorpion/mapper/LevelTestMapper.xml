@@ -3,6 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.scorpion.mapper.LevelTestMapper">
+
+  <select id="getRandomExam" resultType="com.scorpion.domain.LevelTestVO">
+  <![CDATA[
+  	select * from  (select * from leveltest
+	order by dbms_random.value)
+	where rownum <= 10
+  ]]>
+  </select>
+
   <select id="getTotalCount" resultType="int">
   	SELECT COUNT(*) FROM levelTest 
   	
@@ -12,10 +21,10 @@
   <select id="getListWithPaging"
   	      resultType="com.scorpion.domain.LevelTestVO">
    	<![CDATA[
-  		SELECT	testindex, testcontent, testexam1, testexam2, testexam3, testexam4, testanswer
+  		SELECT	testindex, testcontent, testexam1, testexam2, testexam3, testexam4, testanswer, title
   		FROM	( SELECT 	/*+INDEX_DESC(levelTest SYS_C007432)*/
   							rownum rn, testindex, testcontent, testexam1, 
-  							testexam2, testexam3, testexam4, testanswer
+  							testexam2, testexam3, testexam4, testanswer, title
   				  FROM 		levelTest
   				  WHERE		rownum <= #{pageNum} * #{amount} )
   		WHERE rn > (#{pageNum} - 1) * #{amount}
@@ -26,7 +35,7 @@
   	UPDATE	levelTest
   	SET		testcontent = #{testContent}, testexam1 = #{testExam1},
   			testexam2= #{testExam2}, testexam3 = #{testExam3},
-  			testexam4= #{testExam4}, testanswer = #{testAnswer}
+  			testexam4= #{testExam4}, testanswer = #{testAnswer}, title = #{title}
   	WHERE  	testindex = #{testIndex}
   </update>
   
@@ -44,7 +53,7 @@
     	SELECT leveltest_no.nextval FROM dual
     </selectKey>
   	INSERT INTO levelTest
-  	VALUES(#{testIndex}, #{testContent}, #{testExam1}, #{testExam2}, #{testExam3}, #{testExam4}, #{testAnswer})
+  	VALUES(#{testIndex}, #{testContent}, #{testExam1}, #{testExam2}, #{testExam3}, #{testExam4}, #{testAnswer}, #{title})
   </insert>
   
   <select id="getList" 
