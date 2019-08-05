@@ -56,12 +56,13 @@ public class QnaController {
 	}
 	
 	// 마이QNA 목록 상세보기  
-	@GetMapping("/get")
-	public String Myget(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("qna", service.get(qnaIndex));
-
-		return "/qna/mainQnAGet";
-	}
+	/*
+	 * @GetMapping("/get") public String Myget(@RequestParam("qnaIndex") Long
+	 * qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+	 * model.addAttribute("qna", service.get(qnaIndex));
+	 * 
+	 * return "/qna/mylist?stuId=" + ; }
+	 */
 
 	// register 등록기능 ㅇ
 	@GetMapping("/register")
