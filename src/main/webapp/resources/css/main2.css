@@ -79,7 +79,8 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 /* 지현  */
 #container .inner .content {padding : 50px; text-align : center;}
 #container .inner .content h1 {font-size : 3em; font-weight: bold; margin-top : 50px; margin-bottom : 50px;}
-/* #container .inner .content form input {	border: 1px solid black; padding: 4px; width : 300px; height : 40px;} */
+#container .inner .content form .findInput  input {	border: 1px solid black; padding: 4px; width : 300px; height : 40px; margin-bottom:5px;}
+#container .inner .content form .findInput  .loginBtn {	background-color : #4285f4; color : white; border : none; height : 50px; font-weight: bold; margin-bottom : 60px;}
 #container .inner .content form .textInput {margin-bottom : 10px;}
 #container .inner .content form .textInput .loginBtn {	background-color : #4285f4; color : white; border : none; height : 50px; font-weight: bold; margin-bottom : 60px;}
 
