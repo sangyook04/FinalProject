@@ -55,11 +55,18 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 #container .inner .content .infoContent form .userInfo .joinInput2 { border: 1px solid black; padding: 4px; width : 100px; height : 40px; margin-right : 5px;}
 #container .inner .content .infoContent form .userInfo .joinInput3 { border: 1px solid black; padding: 4px; width : 390px; height : 300px; margin-right : 5px; resize: none;}
 #container .inner .content .infoContent form .userInfo .joinText { margin-right : 5px;}
-#container .inner .content .infoContent form #modBtn { background-color: #47C83E; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
-#container .inner .content .infoContent form #withdBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
-#container .inner .content .infoContent form #apprBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
-#container .inner .content .infoContent form #refBtn { background-color: #5D5D5D; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
-#container .inner .content .infoContent form #listBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px; float:right;}
+#container .inner .content .infoContent #modBtn { background-color: #47C83E; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
+#container .inner .content .infoContent #withdBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
+#container .inner .content .infoContent #apprBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
+#container .inner .content .infoContent #refBtn { background-color: #5D5D5D; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
+#container .inner .content .infoContent #listBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px; float:right;}
+
+#container .inner .content .infoContent {width:600px; margin : auto; text-align: left;}
+#container .inner .content .infoContent .img { width : 200px; height : 200px; margin : auto; margin-bottom: 50px;}
+#container .inner .content .infoContent .img img { width : 200px; height : 200px; border-radius: 100%}
+#container .inner .content .infoContent .info { font-size: xx-small; margin-bottom: 5px;}
+#container .inner .content .infoContent .userInfo { border-bottom: 1px solid gray; padding: 5px; margin: 5px;}
+#container .inner .content .infoContent #modBtn { background-color: #4285f4; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
 
 #container aside a {color: #fff; text-decoration: none;}
 

@@ -23,30 +23,34 @@ public class LeaderServiceImple implements LeaderService {
 	@Setter(onMethod_ = @Autowired)
 	private LeaderMapper mapper;
 	
+	@Setter(onMethod_ = @Autowired)
 	private PictureMapper picturemapper; 
 	
 	@Override
 	public int getTotal(Criteria cri) {
 		
-		return 0;
+		return mapper.getTotalCount(cri);
 	}
 
 	@Override
 	public List<LeaderVO> getList(Criteria cri) {
+		log.info("list........" + cri);
 		
-		return null;
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
 	public List<LeaderVO> getHoldList(Criteria cri) {
+		log.info("hold list........" + cri);
 		
-		return null;
+		return mapper.getHoldListWithPaging(cri);
 	}
 
 	@Override
 	public List<LeaderVO> getRejectList(Criteria cri) {
+		log.info("Regect list........" + cri);
 		
-		return null;
+		return mapper.getRejectListWithPaging(cri);
 	}
 
 	@Override
@@ -54,6 +58,15 @@ public class LeaderServiceImple implements LeaderService {
 		log.info("register......" + leader);
 		
 		mapper.insertSelectKey(leader);
+		
+		if(leader.getPictureList() == null || leader.getPictureList().size() <= 0 ) {
+			return;
+		}
+		
+		leader.getPictureList().forEach(attach -> {
+			attach.setLeaId(leader.getLeaId());
+			picturemapper.insert(attach);
+		});
 	}
 
 	@Override

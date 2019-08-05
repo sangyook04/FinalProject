@@ -143,8 +143,12 @@
 		            		<td>${payment.leader.leaName }</td>
 					      	<td>${payment.payMoney }</td>
 					        <td>${payment.leader.leaAccount }</td>
-					        <td><button class="btn btn-success">입금</button></td>
+					        <td><button id="depositBtn" class="btn btn-success">입금</button></td>
 		            	</tr>
+		            	
+		            	<form id="depositForm" action="/pay/deposit" method="post">
+		            		<input type="hidden" name="payIndex" value="${payment.payIndex }">
+		            	</form>
 		            </c:forEach>
 		           </tbody>
 				</table>
@@ -182,5 +186,12 @@
 			</div><!-- inner -->
 		</footer>
 	</div><!-- wrap -->
+<script>
+depositForm
+$("#depositBtn").on("click", function(e){
+	$("#depositForm").submit();
+	
+});
+</script>
 </body>
 </html>

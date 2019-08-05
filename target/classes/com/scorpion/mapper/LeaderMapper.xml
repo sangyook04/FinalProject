@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scorpion.mapper.LeaderMapper">
+
+	<insert id="insertSelectKey">
+		insert into leader (LEAID, LEAPASSWORD, LEANAME,
+		LEAADDRESS, LEAGENDER,LEAPHONENUM, LEAEMAIL, LEASCORE, LEAACCOUNT,
+		LEAINTRODUCE, LEABANK, AUTH)
+		values (#{leaId}, #{leaPassword},
+		#{leaName}, #{leaAddress},
+		#{leaGender}, #{leaPhonenum}, #{leaEmail},
+		0, #{leaAccount}, #{leaIntroduce}, #{leaBank}, 'ROLE_LEADER')
+	</insert>
+
+	<select id="read" resultType="com.scorpion.domain.LeaderVO">
+		select * from leader where leaid =
+		#{leaId}
+	</select>
+
+	<update id="update">
+		update leader set
+		leapassword = #{leaPassword},
+		leaaddress = #{leaAddress},
+		leaphonenum = #{leaPhonenum},
+		leaemail = #{leaEmail},
+		leabank = #{leaBank},
+		leaaccount = #{leaAccount},
+		leaintroduce = #{leaIntroduce}
+	</update>
+
+	<!-- <select id="getListWithPaging" resultType="com.scorpion.domain.LeaderVO"> 
+		select * from leader </select> -->
+
+	<select id="getListWithPaging"
+		resultType="com.scorpion.domain.LeaderVO">
+  		<![CDATA[
+  		select leaid, leaname, leaphonenum, leaemail
+  		from ( select /*+INDEX_DESC(leader SYS_C007263)*/
+  		rownum rn, leaid, leaname, leaphonenum, leaemail, leastate
+  		from leader
+  		where ]]>
+
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'I'.toString()">
+							leaId like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+  		
+  		<![CDATA[
+  		rownum <= #{pageNum} * #{amount} and leastate = '가입완료' )
+  		where rn > (#{pageNum} -1) * #{amount}
+  		]]>
+	</select>
+
+	<select id="getHoldListWithPaging"
+		resultType="com.scorpion.domain.LeaderVO">
+  		<![CDATA[
+  		select leaid, leaname, leaphonenum, leaemail, leareqdate
+  		from ( select /*+INDEX_DESC(leader SYS_C007263)*/
+  		rownum rn, leaid, leaname, leaphonenum, leaemail, leareqdate, leastate
+  		from leader
+  		where ]]>
+
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'I'.toString()">
+							leaId like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+  		
+  		<![CDATA[
+  		rownum <= #{pageNum} * #{amount} and leastate = '가입대기' )
+  		where rn > (#{pageNum} -1) * #{amount}
+  		]]>
+	</select>
+
+	<select id="getRejectListWithPaging"
+		resultType="com.scorpion.domain.LeaderVO">
+  		<![CDATA[
+  		select leaid, leaname, leaphonenum, leaemail, leareqdate
+  		from ( select /*+INDEX_DESC(leader SYS_C007263)*/
+  		rownum rn, leaid, leaname, leaphonenum, leaemail, leareqdate, leastate
+  		from leader
+  		where ]]>
+
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'I'.toString()">
+							leaId like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+  		
+  		<![CDATA[
+  		rownum <= #{pageNum} * #{amount} and leastate = '가입거부')
+  		where rn > (#{pageNum} -1) * #{amount}
+  		]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from
+		leader
+	</select>
+</mapper>

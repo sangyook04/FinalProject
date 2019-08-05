@@ -11,4 +11,5 @@ public class LevelTestVO {
 	private String testExam3;
 	private String testExam4;
 	private String testAnswer;
+	private String title;
 }

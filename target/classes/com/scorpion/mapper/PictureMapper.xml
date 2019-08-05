@@ -8,6 +8,7 @@
 		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{studyIndex}, #{leaId})
 	</insert>
 	
+	
 	<delete id="delete">
 	
 		delete from picture where uuid = #{uuid}

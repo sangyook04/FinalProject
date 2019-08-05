@@ -54,4 +54,9 @@ public class LevelTestServiceImple implements LevelTestService {
       return mapper.getTotalCount(cri);
    }
 
+	@Override
+	public List<LevelTestVO> getRandomExam() {
+		return mapper.getRandomExam();
+	}
+
 }

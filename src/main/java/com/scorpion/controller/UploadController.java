@@ -26,6 +26,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -171,6 +172,7 @@ public class UploadController {
 			}
 			
 			for (MultipartFile m : uploadFile) {
+				
 				log.info("-------------------------");
 				log.info("upload file name : " + m.getOriginalFilename());
 				log.info("upload file size : " + m.getSize());
