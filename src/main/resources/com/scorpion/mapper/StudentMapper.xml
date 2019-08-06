@@ -27,7 +27,13 @@
   		</trim>
   </sql>
 
-  
+  <!--   <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM student
+  	WHERE 
+  		보관해 둔 쿼리 사용
+  		<include refid="criteria"></include>
+  	stuid > 0
+  </select> -->
   
   
   
@@ -35,7 +41,7 @@
   
   
   <select id="getTotalCount" resultType="int">
-  	SELECT COUNT(*) FROM student
+  	SELECT COUNT(*) FROM student where <include refid="criteria"></include> stuid is not null
   	
   </select>
   
@@ -50,7 +56,9 @@
   							rownum rn, stuid, stupassword, stuname,
   							stuaddress, stugender, stuphonenum, stuemail, stulevel, auth
   				  FROM 		student
-  				  WHERE		rownum <= #{pageNum} * #{amount} )
+  				  WHERE		
+  				  ]]><include refid="criteria"></include><![CDATA[
+  				  rownum <= #{pageNum} * #{amount} )
   		WHERE rn > (#{pageNum} - 1) * #{amount}
   	]]>
   </select>
@@ -76,14 +84,16 @@
  -->
 
 
-<!--   <insert id="insertSelectKey">
-    <selectKey keyProperty="notIndex" resultType="long"    
-    			order="BEFORE">
-    	SELECT notice_no.nextval FROM dual
-    </selectKey>
-  	INSERT INTO notice (notIndex, notTitle, notContent ,notDate)
-  	VALUES(#{notIndex}, #{notTitle}, #{notContent} , sysdate)
-  </insert>  -->
+
+
+
+
+  <insert id="insertSelectKey">
+  	INSERT INTO student (stuid, stupassword, stuname,
+  							stuaddress, stugender, stuphonenum, stuemail, auth)
+  	VALUES(#{stuId}, #{stuPassword}, #{stuName} , #{stuAddress}, #{stuGender},
+  	 #{stuPhonenum}, #{stuEmail},'ROLE_STUDENT')
+  </insert>  
   
  
   <select id="getList" 

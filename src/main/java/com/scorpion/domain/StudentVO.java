@@ -6,10 +6,10 @@ import lombok.Data;
 public class StudentVO {
 	
 	private String stuId;
-	private long stuPassword;
+	private String stuPassword;
 	private String stuName;
 	private String stuAddress;
-	private char stuGender;
+	private String stuGender;
 	private String stuPhonenum;
 	private String stuEmail;
 	private String stuLevel;
