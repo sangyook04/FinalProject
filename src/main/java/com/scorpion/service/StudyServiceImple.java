@@ -8,6 +8,7 @@ import com.scorpion.domain.Criteria;
 import com.scorpion.domain.PictureVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.domain.StudyVO;
+import com.scorpion.mapper.StudyMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +18,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class StudyServiceImple implements StudyService {
 
+	private StudyMapper mapper;
+	
 	@Override
 	public int getScheduleTotal(String leaderid, String state, Criteria cri) {
 		// TODO Auto-generated method stub
@@ -67,8 +70,7 @@ public class StudyServiceImple implements StudyService {
 
 	@Override
 	public StudyVO get(Long studyno) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.read(studyno);
 	}
 
 	@Override
