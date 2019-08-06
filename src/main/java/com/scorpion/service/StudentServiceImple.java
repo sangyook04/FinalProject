@@ -2,20 +2,25 @@ package com.scorpion.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.StudentVO;
+import com.scorpion.mapper.LeaderMapper;
 import com.scorpion.mapper.StudentMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
 @AllArgsConstructor
 public class StudentServiceImple implements StudentService {
-	 private StudentMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired) 
+	private StudentMapper mapper;
 	
 	 @Override
 	public int getTotal(Criteria cri) {
@@ -28,11 +33,6 @@ public class StudentServiceImple implements StudentService {
 		   // return mapper.getList();
 	}
 
-	@Override
-	public void join(StudentVO student) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public StudentVO info(String stuid) {
@@ -41,8 +41,7 @@ public class StudentServiceImple implements StudentService {
 
 	@Override
 	public boolean modify(StudentVO student) {
-		// TODO Auto-generated method stub
-		return false;
+		 return mapper.update(student)==1;
 	}
 
 	@Override
@@ -55,6 +54,23 @@ public class StudentServiceImple implements StudentService {
 	public String levelGet(String stuid) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public StudentVO get(String stuid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void register(StudentVO student) {
+		
+		log.info("student register......" + student);
+		
+		mapper.insertSelectKey(student);
+		
+		
+		
 	}
 
 }

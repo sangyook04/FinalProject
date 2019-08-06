@@ -1,5 +1,5 @@
 #wrap {font-family: 'Noto Sans KR', sans-serif;}
-header {position: fixed; border-top: 5px solid #f15b6d; background: #fff; width: 100%; height: 65px; z-index: 999; top: 0;}
+header {position: fixed; border-top: 5px solid #4285f4; background: #fff; width: 100%; height: 65px; z-index: 999; top: 0;}
 header nav {height: 65px; background-color: #F2F2F2; }
 header nav .headerContent {padding: 13px 0 8px 0; }
 header nav .headerContent .mainlogo {float: left; width: 80px;
@@ -56,6 +56,25 @@ aside{background: gray;}
 #container .content h1{font-size : 3em; margin-top : 50px; margin-bottom : 50px; font-weight: bold;}
 #container .content .withInfo{margin-bottom : 20px;}	
 #container .content #withBtn{background-color: red; padding: 10px; color: white; border-radius: 5px; margin: 10px;}
+
+/* studentJoin  */
+
+#container .inner .content .studentJoin { width : 450px; margin : auto;}
+#container .inner .content .studentJoin form .textInput { margin-bottom : 10px; text-align: left; margin-left : 30px;}
+#container .inner .content .studentJoin form .textInput .joinText {margin-right : 5px;}
+#container .inner .content .studentJoin form .textInput .joinInput { border: 1px solid black; padding: 4px; width : 290px; height : 40px;}
+#container .inner .content .studentJoin form .textInput .joinInput1 { border: 1px solid black; padding: 4px; width : 160px; height : 40px; margin-right : 5px;}
+#container .inner .content .studentJoin form .textInput .joinInput2 { border: 1px solid black; padding: 4px; width : 100px; height : 40px; margin-right : 5px;}
+#container .inner .content .studentJoin form .textInput .joinInput3 { border: 1px solid black; padding: 4px; width : 390px; height : 300px; margin-right : 5px; resize: none;}
+#container .inner .content .studentJoin form .textInput .btn { background-color: gray; padding: 10px; color: white; border-radius: 5px; margin-left: 10px;}
+#container .inner .content .studentJoin form .textInput label .radiogenderRadio {display:inline-block; width : 15px; height : 15px;}
+#container .inner .content .studentJoin form .textBtn {}
+#container .inner .content .studentJoin form .textBtn .joinBtn { background-color : #4285f4; color : white; border : none; height : 50px; font-weight: bold; margin-bottom : 60px; width : 400px;}
+
+#container .inner .content .withInfo { margin-bottom : 50px; }
+#container .inner .content #withBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin: 10px;}
+
+
 
 
 /* levelget */

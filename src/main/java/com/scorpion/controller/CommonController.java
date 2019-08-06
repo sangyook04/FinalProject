@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
+import com.scorpion.service.StudentService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -19,7 +21,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class CommonController {
+	StudentService stuservice;
 	LeaderService service;
+	
 
 	@GetMapping("/main")
 	public String main() {
@@ -99,13 +103,24 @@ public class CommonController {
 		return "redirect:/common/main";
 	}
 	
-	@GetMapping("/studentrJoin")
+	
+	@GetMapping("/studentJoin")
 	public void studentJoin() {
 		
 	}
 	
 	@PostMapping("/studentJoin")
-	public String studentJoin(LeaderVO leader) {
-		return "/common/main";
+	public String studentJoin(StudentVO student, RedirectAttributes rttr) {
+
+		log.info("register : " + student);
+
+		
+			
+		stuservice.register(student);
+
+		
+		
+		return "redirect:/common/main";
 	}
+	
 }
