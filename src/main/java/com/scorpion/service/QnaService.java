@@ -1,5 +1,6 @@
 package com.scorpion.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import com.scorpion.domain.Criteria;
@@ -13,7 +14,7 @@ public interface QnaService {
 	
 	public PageDTO getListPage(Criteria cri, Long qnaIndex);
 	public List<QnaVO> getList(Criteria cri); 
-	public List<QnaVO> getMyList(Criteria cri, String stuId); //myQna id는 나중에 수정
+	public List<QnaVO> getMyList(Criteria cri, String user_id); //myQna id는 나중에 수정
 	public boolean modify(QnaVO qnavo);
 	public boolean modifyAnswer(QnaVO qnavo);
 	public boolean remove(Long qnaIndex);
@@ -23,5 +24,6 @@ public interface QnaService {
 	
 	public int replymodify(Long qnaIndex, String qnaAnswer);
 	public int getTotal(Criteria cri);
+	public QnaVO myget(Long qnaIndex);
 
 }
