@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -34,7 +35,7 @@
    </script>
    
     
-    
+<link rel="stylesheet" type="text/css" href="../../../resources/css/tableEllipsis.css">    
 <style>
 	#container .inner{
     text-align: center;
@@ -91,7 +92,7 @@
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 		                       <tr>
-		                           <th>리더명<!-- Rendering engine --></th>
+		                           <th>스터디명<!-- Rendering engine --></th>
 		                           <th>기간<!-- Browser --></th>
 		                           <th>레벨<!-- Platform(s) --></th>
 		                           <th>장소<!-- Engine version --></th>
@@ -99,13 +100,15 @@
 		                       </tr>
 		                   </thead>
 		                   <tbody>
+		                   <c:forEach items="${list }" var="payment" >
 			                   <tr>
-			                   <td>Billie</td>
-			                   <td>2019.08.01 ~ 2019.10.31</td>
-			                   <td>초급</td>
-			                   <td>신촌</td>
-			                   <td>200000</td>
+			                   <td><a href="#">${payment.study.studyName}</a></td>
+			                   <td>${payment.study.studyStartdate} ~ ${payment.study.studyEnddate}</td>
+			                   <td>${payment.study.studyLevel}</td>
+			                   <td>${payment.study.studyPlace}</td>
+			                   <td>${payment.study.studyPrice}</td>
 			                   </tr>
+			               </c:forEach>
 		                   </tbody>
 						</table>
 					</div>
@@ -115,21 +118,25 @@
 						<table class="table table-stripped table-bordered table-hover">
 							<thead>
 		                       <tr>
-		                           <th>리더명<!-- Rendering engine --></th>
+		                           <th>스터디명<!-- Rendering engine --></th>
 		                           <th>기간<!-- Browser --></th>
 		                           <th>레벨<!-- Platform(s) --></th>
 		                           <th>장소<!-- Engine version --></th>
 		                           <th>가격<!-- Engine version --></th>
+		                           <th>진행상태</th>
 		                       </tr>
 		                   </thead>
 		                   <tbody>
+			               <c:forEach items="${refundList }" var="refund" >
 			                   <tr>
-			                   <td>Billie</td>
-			                   <td>2019.08.01 ~ 2019.10.31</td>
-			                   <td>초급</td>
-			                   <td>신촌</td>
-			                   <td>200000</td>
+			                   <td><a href="#">${refund.study.studyName}</a></td>
+			                   <td>${refund.study.studyStartdate} ~ ${refund.study.studyEnddate}</td>
+			                   <td>${refund.study.studyLevel}</td>
+			                   <td>${refund.study.studyPlace}</td>
+			                   <td>${refund.study.studyPrice}</td>
+			                   <td>${refund.refund.refState}</td>
 			                   </tr>
+			               </c:forEach>
 		                   </tbody>
 						</table>
 					</div>

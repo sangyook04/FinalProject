@@ -192,12 +192,13 @@
 				</div>
 				<!-- END 페이징  -->
 				<!-- 액션폼 -->
-					<form id='actionForm' action="/pay/manageList" method="get">
+					<%-- <form id='actionForm' action="/pay/manageList" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-						<%-- <input type="hidden" name="start" value="${pageMaker.cri.start }">
-						<input type="hidden" name="end" value="${pageMaker.cri.end }"> --%>
-					</form>
+						<input type="hidden" name="start" value="${pageMaker.cri.start }">
+						<input type="hidden" name="end" value="${pageMaker.cri.end }">
+					</form> --%>
+				<!-- 검색폼 -->
 					<form id='searchForm' action="/pay/manageList" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
@@ -267,8 +268,6 @@ $("#end").on("change", function(e){
 	}
 });
 
-$("#start").on("change", function(e){
-});
 
 </script>
 </body>

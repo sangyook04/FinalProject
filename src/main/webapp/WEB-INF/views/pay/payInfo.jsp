@@ -94,7 +94,6 @@
 		<div id="container">
 			<div class="inner">
 				<h1>스터디 결제 정보</h1>
-				<form>
 					<div class="payInfo">
 						<table class="table table-striped table-bordered">
 							<thead>
@@ -107,10 +106,10 @@
 		                   </thead>
 		                   <tbody>
 			                   <tr>
-			                   	   <td>영어가 안되면 시원스콜피온닷컴</td>
-			                   	   <td>초급</td>
-			                   	   <td>2019.06.17</td>
-				                   <td>240000</td>
+			                   	   <td>${study.studyName}</td>
+			                   	   <td>${study.studyLevel}</td>
+			                   	   <td>${study.studyStartdate} ~ ${study.studyEnddate}</td>
+				                   <td>${study.studyPrice}</td>
 			                   </tr>
 		                   </tbody>
 		                <caption>
@@ -137,15 +136,14 @@
 						
 						<input id="agree" type="checkbox"> 위 상품 정보 및 거래 조건을 확인하였으며, 개인정보 제3자 제공에 동의합니다.(필수)
 						<br>
-						<button id="paymentBtn" class="btn btn-success">결제하기</button>
-						<form id="payForm" action="/pay/payment" method="post">
-							<input type="hidden" name="stuId" value="<!-- 학생 아이디 -->">
-							<input type="hidden" name="leaId" value="<!-- 리더 아이디 -->">
-							<input type="hidden" name="studyIndex" value="<!-- 스터디 번호 -->">
-							<input type="hidden" name="payDate" value="<!-- 오늘날짜 -->">
-							<input type="hidden" name="payMoney" value="<!-- 금액 -->">
-						</form>
+						<button type="button" id="paymentBtn" class="btn btn-success">결제하기</button>
 					</div>
+				<form id="payForm" action="/pay/payment" method="post">
+					<input type="hidden" name="stuId" value="${studentId}">
+					<input type="hidden" name="leaId" value="${study.leaId}">
+					<input type="hidden" name="studyIndex" value="${study.studyIndex}">
+					<!-- <input type="hidden" name="payDate" value="2019-08-06"> -->
+					<input type="hidden" name="payMoney" value="${study.studyPrice}">
 				</form>
 			</div><!-- End inner -->
 		</div><!-- container -->
@@ -180,6 +178,8 @@
 <script>
 var IMP = window.IMP; // 생략가능
 IMP.init("imp26864706"); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+var payForm = $("#payForm");
+var today = new Date();
 
 $("#paymentBtn").on("click", function(e){
 	if($("#agree")[0].checked == true){
@@ -188,14 +188,13 @@ $("#paymentBtn").on("click", function(e){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '주문명:결제테스트',
-		    amount : 10,
+		    amount : '10',
 		    buyer_email : 'iamport@siot.do',
 		    buyer_name : '강푸른',
 		    buyer_tel : '010-1234-5678',
 		    buyer_addr : '서울특별시 강남구 삼성동',
 		    buyer_postcode : '123-456',
-		    m_redirect_url : 'redirect:/',
-		    notice_url : 'http://localhost:8090/'
+		    m_redirect_url : 'redirect:/'
 		}, function(rsp) {
 		    if ( rsp.success ) {
 		        var msg = '결제가 완료되었습니다.';
@@ -203,7 +202,8 @@ $("#paymentBtn").on("click", function(e){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        location.href ="http://localhost:8090/"; //로그인되어있는 상태로 돌아가야함
+//		        payForm.find("input[name='payDate']").val(today);
+		        payForm.submit();
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
