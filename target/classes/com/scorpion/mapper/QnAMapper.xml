@@ -20,16 +20,20 @@
   	]]>
 	</select>
 	
-	<select id="getMyListWithPaging" parameterType="map"
+	<select id="getMyListWithPaging"
 		resultType="com.scorpion.domain.QnaVO">
    	<![CDATA[
   		SELECT rownum rn, qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate, qnaPassword
   		FROM qna
-  		WHERE qnaWriter = #{stuId}
+  		WHERE qnaWriter = #{user_id}
   	]]>
 	</select>
 
 	<select id="read" resultType="com.scorpion.domain.QnaVO">
+		SELECT * FROM qna WHERE qnaIndex = #{qnaIndex}
+	</select>
+	
+	<select id="myread" resultType="com.scorpion.domain.QnaVO">
 		SELECT * FROM qna WHERE qnaIndex = #{qnaIndex}
 	</select>
 

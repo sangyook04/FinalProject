@@ -9,6 +9,7 @@
 
 <security:http>
    <security:intercept-url pattern="/common/*" access="permitAll"/>
+   <security:intercept-url pattern="/student/*" access="hasRole('ROLE_STUDENT')"/>
    <security:intercept-url pattern="/leader/*" access="hasRole('ROLE_LEADER')"/>
    <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
    <!-- <security:form-login /> -->

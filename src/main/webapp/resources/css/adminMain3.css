@@ -51,7 +51,7 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 #wrap .inner .footArea .footerLeft .footerinfo li a{color: black; text-decoration: none;}
 #container .containerContent .containerContenttable .form-control{width:900px; height: 350px; resize:none;}
 
-#container .containerContent .containerContenttable  #modBtn { background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin: 10px;}
+#container .containerContent .containerContenttable  #modBtn{ background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin: 10px;}
 #container .containerContent .containerContenttable  #closeBtn { background-color: red;padding: 10px;color: white;border-radius: 5px; margin: 10px;}
 #container .containerContent .containerContenttable  #regBtn { background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin: 10px;}
 
@@ -108,22 +108,26 @@ footer .copyright {clear: both; padding-top: 30px; font-size: 14px; color: #8288
 
 
 /* ----------------adminStudentMod----------------  */
+#container .inner .content .studentMod { width : 450px; margin : auto;}
+#container .inner .content .studentMod form .textInput { margin-bottom : 10px; text-align: left; margin-left : 30px; }
+#container .inner .content .studentMod form .textInput .joinText {margin-right : 5px;}
+#container .inner .content .studentMod form .textInput .joinInput { border: 1px solid black; padding: 4px; width : 290px; height : 40px;}
+#container .inner .content .studentMod form .textInput .joinInput1 { border: 1px solid black; padding: 4px; width : 160px; height : 40px; margin-right : 5px;}
+#container .inner .content .studentMod form .textInput .joinInput2 { border: 1px solid black; padding: 4px; width : 100px; height : 40px; margin-right : 5px;}
+#container .inner .content .studentMod form .textInput .joinInput3 { border: 1px solid black; padding: 4px; width : 390px; height : 300px; margin-right : 5px; resize: none;}
+#container .inner .content .studentMod form .textInput .btn { background-color: gray; padding: 10px; color: white; border-radius: 5px; margin-left: 10px;}
+#container .inner .content .studentMod form .textInput label .radiogenderRadio {display:inline-block; width : 15px; height : 15px;}
+#container .inner .content .studentMod form .textBtn {}
+#container .inner .content .studentMod form .textInputEx { margin-bottom : 10px; text-align: left; margin-left : 30px; font-weight: bold; font-size: 1.2em;}
 
 
-#container .inner h1{ padding: 50px;text-align: center;}
-#container .content {padding: 50px;text-align: center;}
-#container .content .info { font-size: xx-small; margin-bottom: 5px;}
-#container .content .userInfo{ border-bottom: 1px solid gray; padding: 5px;margin: 5px;}
+#container .inner .content .studentMod form .textBtn .modBtn { border-radius: 5px; background-color : #4285f4; color : white;  height : 50px; margin-left : -50px;margin-bottom : 60px; width :50px;}
+#container .inner .content .studentMod form .textBtn .closeBtn { border-radius: 5px; background-color : red;  color : white;  height : 50px;  margin-left : 20px; width :50px;}
 
 
-#container .content .joinInput{border: 1px solid black;  height:40px; margin-top: 20px;}
-#container .content form .Btn {background:gray; width: 100px; height:35px; color: white; font:bold; margin-left: 7px; border-radius: 5px;}
-#container .content #modBtn {background-color: #4285f4; padding: 10px;color: white;border-radius: 5px; margin: 10px;}
-#container .content #closeBtn {background-color: red;padding: 10px;color: white;border-radius: 5px; margin: 10px;}
 
-#container .content h1{font-size : 3em; margin-top : 50px; margin-bottom : 50px; font-weight: bold;}
-#container .content .withInfo{margin-bottom : 20px;}	
-#container .content #withBtn{background-color: red; padding: 10px; color: white; border-radius: 5px; margin: 10px;}
+#container .inner .content .withInfo { margin-bottom : 50px; }
+#container .inner .content #withBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin: 10px;}
 
 
 

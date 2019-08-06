@@ -135,11 +135,9 @@
 									
 									<th scope="col">아이디</th>
 									<th scope="col">이름</th>
-									<th scope="col">성별</th>
-									<th scope="col">연락처</th>
-									<th scope="col">주소</th>
+									<th scope="col">연락처</th>			
 									<th scope="col">이메일</th>
-									<th scope="col">레벨</th>
+									
 
 								</tr>
 							</thead>
@@ -150,11 +148,9 @@
 								<td><a class="move" href="${student.stuId}">${student.stuId} </a></td>
 										<%-- <td>${student.stuId}</td> --%>
 										<td>${student.stuName}</td>
-										<td>${student.stuGender}</td>
-										<td>${student.stuPhonenum}</td>
-										<td>${student.stuAddress}</td>
+										<td>${student.stuPhonenum}</td>		
 										<td>${student.stuEmail}</td>
-										<td>${student.stuLevel}</td>
+										
 									</tr>
                    </c:forEach>
 
@@ -182,7 +178,7 @@
 				   	   	   </select>
                       
                       
-                 <%--      <input type="text" class="form-control" id="searchId" name="searchId" value="${student.stuId}"> --%>
+              
                  	<input type="text" name="keyword"  class="form-control" value='<c:out value="${pageMaker.cri.keyword }"/>' >
 				  		<input type="hidden" name="pageNum" value='<c:out value= "${pageMaker.cri.pageNum }"/>'>
 						<input type="hidden" name="amount"  value='<c:out value= "${pageMaker.cri.amount }"/>'>
@@ -275,6 +271,11 @@ $(function() {
 			var searchForm = $("#searchForm");
 			$("#searchForm button").on("click", function(e){
 				
+				if(!searchForm.find("option:selected").val()){
+					alert("검색 조건을 선택해 주세요.");	//검색 조건 선택 알림
+					return false;
+				}
+				
 				if(!searchForm.find("input[name='keyword']").val()){
 					alert("아이디를 입력해 주세요.");		//검색어 입력 알림
 					return false;
@@ -286,20 +287,13 @@ $(function() {
 				searchForm.submit();	//폼 전송
 			});
 			
-			
-			
-			
+
 		});
-	
-	
 	
 	
 		var actionForm = $("#actionForm");
 
-		 //학생 검색 
-		$("#listBtn").on("click", function() {
-			self.location = "/notice/adminNoticeRegister";
-		}); 
+	
 
 		//상세보기 페이지 이동
 		$(".move")

@@ -17,6 +17,7 @@
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+   
    <script>
    		$(document).ready(function(){
 
@@ -145,12 +146,12 @@
            	
            	  <form id="operForm" action="/student/adminStudentMod" method="get">
 					<input type="hidden" id="stuId" name="stuId"
-						value="${student.stuId }">
+						value="${stuInfo.stuId }">
 				</form> 
            	
            	 <form id="operForm" action="/student/adminStudentList" method="get">
 					<input type="hidden" id="stuId" name="stuId"
-						value="${student.stuId }">
+						value="${stuInfo.stuId }">
 				</form> 
         
          </div>
