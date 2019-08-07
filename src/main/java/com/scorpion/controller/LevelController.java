@@ -40,15 +40,54 @@ public class LevelController {
 	
 	
 	@GetMapping("/leaderTest")
-	public void leaderTest() {
-		
+	public void leaderTest(Model model) {
+		if(pageFlag) {
+			testList = service.getRandomExam();
+			}
+		model.addAttribute("TestOne", testList.get(index));
+		model.addAttribute("dap", answerArr[index]);
+		model.addAttribute("TestNum", index+1);
+		if(lastExam) {
+			model.addAttribute("score", score);
+			lastExam = false;
+		}
 	}
 	
 	@PostMapping("/leaderTest")
-	public String leaderTest(@RequestParam("testno") Long testno,
-			@RequestParam("dap") String dap) {
-		
-		return null;
+	public String leaderTest(@RequestParam("dap") String dap, @RequestParam("state") String state) {
+		pageFlag = false;
+		//이전 버튼인 경우
+		if(state.equals("prev")) {
+			if(index == 0) {
+//				pageFlag = false;
+				//첫 문제임을 알림
+			}else {
+//				answerArr[index] = "";
+				index--;
+			}
+		}else if(state.equals("next")){
+			//마지막 문제가 아닌경우
+			if(index != 9) {
+				System.out.println("d" + index);
+				System.out.println("dap"+dap);
+				answerArr[index] = dap;
+				index++;
+			}
+			//마지막 문제인경우
+			else {
+				for(int i=0; i<answerArr.length; i++) {
+					if(testList.get(i).getTestAnswer().equals(answerArr[i])) {
+						cnt++;
+					}
+				}
+				score = cnt * 5;
+				System.out.println(score);
+//				pageFlag = true;	문제 새로 갖고오기 가능처리
+				lastExam = true;
+				return "redirect:/level/leaderTest"; //추천스터디 목록으로 경로 바꿔야함
+			}
+		}
+		return "redirect:/level/leaderTest";
 	}
 	
 	@GetMapping("/commonTest")

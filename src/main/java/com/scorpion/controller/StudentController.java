@@ -32,7 +32,7 @@ public class StudentController {
 		
 		@PostMapping("/join")
 		public String join(StudentVO student) {
-			service.join(student);
+			service.register(student);
 			return "/common/login";
 			
 		}
@@ -61,7 +61,8 @@ public class StudentController {
 			if(service.modify(student)) {
 				rttr.addAttribute("result","success");
 			}
-			return "redirect:/student/adminStudentMod";
+			//return "redirect:/student/adminStudentInfo";
+			return "redirect:/student/adminStudentInfo?stuId="+student.getStuId();
 		}
 		
 //		@GetMapping("/studentLevelGet")

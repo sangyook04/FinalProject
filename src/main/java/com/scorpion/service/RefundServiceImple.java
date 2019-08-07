@@ -38,9 +38,9 @@ public class RefundServiceImple implements RefundService {
 	}
 
 	@Override
-	public void register(RefundVO refund) {
-		
-		
+	public void register(Long payIndex) {
+//		mapper.insertSelectKey(payIndex);
+		mapper.insert(payIndex);
 	}
 
 	@Override

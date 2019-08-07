@@ -1,5 +1,6 @@
 package com.scorpion.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,9 +36,10 @@ public class QnaServiceImple implements QnaService {
 		return mapper.getListWithPaging(cri);
 	}
 	
-	@Override
-	public List<QnaVO> getMyList(Criteria cri, String id) {
-		return mapper.getMyListWithPaging(cri, id);
+	//myQNA
+	@Override 
+	public List<QnaVO> getMyList(Criteria cri, String user_id) {
+		return mapper.getMyListWithPaging(cri, user_id);
 	}
 
 	@Override
@@ -73,6 +75,11 @@ public class QnaServiceImple implements QnaService {
 	@Override
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public QnaVO myget(Long qnaIndex) {
+		return mapper.myread(qnaIndex);
 	}
 	
 }

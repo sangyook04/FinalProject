@@ -15,4 +15,6 @@ public class PaymentVO {
 	private Long payMoney;
 	
 	private LeaderVO leader;
+	private StudyVO study;
+	private RefundVO refund;
 }

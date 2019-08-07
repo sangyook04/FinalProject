@@ -1,5 +1,6 @@
 package com.scorpion.mapper;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +16,8 @@ public interface QnaMapper {
 	public QnaVO read(Long qnaIndex);
 	public Integer insertSelectKey(QnaVO qna);
 	public int getTotalCount(Criteria cri);
-	public List<QnaVO> getMyListWithPaging(Criteria cri, @Param("stuId") String stuId); //id는 나중에수정
+	public List<QnaVO> getMyListWithPaging(Criteria cri, String user_id); //id는 나중에수정
 	public List<QnaVO> getList(Criteria cri);
 	public List<QnaVO> getListWithPaging(Criteria cri);
+	public QnaVO myread(Long qnaIndex);
 }
