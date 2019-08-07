@@ -65,8 +65,9 @@
 				<div class="content">
 					<h1>로그인</h1>
 					<div class="msg"><c:out value="${ msg }"/></div>
+					<div class="msg"><c:out value="${ logout }"/></div>
 					<form method="post" action="/login">
-						<div class="textInput"><input type="text" name="username" placeholder="아이디"></div>
+						<div class="textInput"><input type="text" name="username" placeholder="아이디" autofocus></div>
 						<div class="textInput"><input type="password" name="password" placeholder="비밀번호"></div>
 						<div class="find"><a href="#">아이디 찾기</a>/<a href="#">비밀번호 찾기</a></div>
 						<div class="textInput"><input type="submit" value="LOGIN" class="loginBtn"></div>

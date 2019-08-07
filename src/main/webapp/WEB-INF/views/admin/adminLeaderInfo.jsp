@@ -79,6 +79,8 @@
 		$("button[data-oper='modify']").on("click", function(e){
 			operForm.attr("action", "/admin/adminLeaderModify").submit();
 		});
+		
+		var formObj = $("form");
 	})
 </script>
 
@@ -169,10 +171,15 @@
 						<div class="userInfo"><c:out value="${ leader.leaBank }"/> <c:out value="${ leader.leaAccount }"/></div>
 						<div class="info">자기소개</div>
 						<div class="userInfo"><c:out value="${ leader.leaIntroduce }"/></div>
-	
-						<button data-oper='modify' id="modBtn">변경</button><button id="withdBtn">비활성화</button><button id="apprBtn">승인</button><button id="refBtn">거부</button><button data-oper='list' onclick="location.href='/admin/adminLeader'" id="listBtn">목록</button>
 						
-						<form id="operForm" action="/leader/modify" method="get">
+						<button data-oper='modify' id="modBtn">변경</button><button id="withdBtn">비활성화</button><button data-oper='list' onclick="location.href='/admin/adminLeader'" id="listBtn">목록</button>
+						
+						<%-- <form role="form" id="BtnForm" action="/leader/adminLeaderInfo" method="post">
+						<input type="hidden" id="leaId" name="leaId" value='<c:out value="${leader.leaId }"/>'>
+						<button type="submit" data-oper="accept" id="apprBtn">승인</button><button type="submit" data-oper="reject" id="refBtn">거부</button>
+						</form> --%>
+						
+						<form role="form" id="operForm" action="/leader/adminLeadermodify" method="get">
 							<input type="hidden" id="leaId" name="leaId" value='<c:out value="${leader.leaId }"/>'>
 							<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
 							<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>

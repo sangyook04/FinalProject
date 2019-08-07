@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,7 +22,7 @@
 	href="../../../resources/css/main2.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
 	rel="stylesheet">
-	
+
 <!-- 주소창 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -172,6 +175,7 @@ function pwChk(){
 
 		});//ready
    </script>
+
 </head>
 <body>
 	<div id="wrap">
@@ -207,34 +211,108 @@ function pwChk(){
 					<h1>리더 회원가입</h1>
 					<div class="leaderJoin">
 						<form role="form" name="leaderJoin" action="/common/leaderJoin" method="post">
-							<div class="textInput"><input type="text" placeholder="아이디" name="leaId" class="joinInput"><button class="btn">중복확인</button></div>
-							<div class="textInput"><input type="password" placeholder="비밀번호" name="leaPassword" class="joinInput"></div>
-							<div class="textInput"><input type="password" placeholder="비밀번호 확인" name="leaPasswordChk" class="joinInput"><button type="button" class="btn" onclick="pwChk()">비밀번호 확인</button></div>
-							<div class="textInput"><input type="text" placeholder="이름" name="leaName" class="joinInput"></div>
-							<div class="textInput"><label><input class="radiogenderRadio" type="radio" name="leaGender" value="m">남</label><span class="joinText"></span>
-													 <label><input class="radiogenderRadio" type="radio" name="leaGender" value="f">여</label></div>
-							<div class="textInput"><input type="text" placeholder="우편번호" name="leaPostcode" id="sample4_postcode" class="joinInput2" readonly="readonly"><input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기" class="btn"></div>
-							<div class="textInput"><input type="text" placeholder="도로명주소" name="leaRoadAdd" id="sample4_roadAddress" class="joinInput" readonly="readonly"></div>
-							<div class="textInput"><input type="text" placeholder="지번주소" name="leaJibunAdd" id="sample4_jibunAddress" class="joinInput" readonly="readonly"></div>
-							<div class="textInput"><input type="text" placeholder="상세주소" name="leaAddress" id="sample4_detailAddress" class="joinInput1"><input type="text" placeholder="참고항목" name="leaExtraAdd" id="sample4_extraAddress" class="joinInput1" readonly="readonly"></div>
-							<div class="textInput"><input type="tel" placeholder="연락처" name="leaPhonenum" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" name="leaPhonenum2" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" name="leaPhonenum3" class="joinInput2"></div>
-							<div class="textInput"><input type="text" placeholder="이메일" name="leaEmail" class="joinInput2"><span class="joinText">@</span><input type="text" placeholder="이메일" name="leaEmail2" class="joinInput2">
-							<select class="joinInput2" name="leaEmail3" onchange="setEmail2(this)">
-													<option value="direct" selected>직접입력</option>
-													<option value="naver.com">naver.com</option>
-													<option value="daum.net">daum.net</option>
-													<option value="gmail.com">gmail.com</option></select></div>
-							<div class="textInput"><select name="leaBank" class="joinInput2">
-													<option value="국민은행">국민은행</option>
-													<option value="신한은행">신한은행</option>
-													<option value="우리은행">우리은행</option>
-													<option value="기업은행">기업은행</option></select>
-													<input type="text" placeholder="계좌번호" name="leaAccount" class="joinInput1"></div>
-							<div class="textInput"><textarea class="joinInput3" name="leaIntroduce" placeholder="자기소개"></textarea></div>
-							<div class="textInput"><div class='uploadDiv'><input type="file" name="uploadFile" class="joinInput" multiple></div></div>
-							<div class="bigPictureWrapper"><div class="bigPicture"></div></div>
-							<div class="uploadResult"><ul></ul></div>
-							<div class="textBtn"><button class="joinBtn" id="joinBtnId" type="submit">가입신청</button></div>
+							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+							<div class="textInput">
+								<input type="text" placeholder="아이디" name="leaId"
+									class="joinInput">
+								<button class="btn">중복확인</button>
+							</div>
+							<div class="textInput">
+								<input type="password" placeholder="비밀번호" name="leaPassword"
+									class="joinInput">
+							</div>
+							<div class="textInput">
+								<input type="password" placeholder="비밀번호 확인"
+									name="leaPasswordChk" class="joinInput">
+								<button type="button" class="btn" onclick="pwChk()">비밀번호
+									확인</button>
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="이름" name="leaName"
+									class="joinInput">
+							</div>
+							<div class="textInput">
+								<label><input class="radiogenderRadio" type="radio"
+									name="leaGender" value="m">남</label><span class="joinText"></span>
+								<label><input class="radiogenderRadio" type="radio"
+									name="leaGender" value="f">여</label>
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="우편번호" name="leaPostcode"
+									id="sample4_postcode" class="joinInput2" readonly="readonly"><input
+									type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"
+									class="btn">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="도로명주소" name="leaRoadAdd"
+									id="sample4_roadAddress" class="joinInput" readonly="readonly">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="지번주소" name="leaJibunAdd"
+									id="sample4_jibunAddress" class="joinInput" readonly="readonly">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="상세주소" name="leaAddress"
+									id="sample4_detailAddress" class="joinInput1"><input
+									type="text" placeholder="참고항목" name="leaExtraAdd"
+									id="sample4_extraAddress" class="joinInput1"
+									readonly="readonly">
+							</div>
+							<div class="textInput">
+								<input type="tel" placeholder="연락처" name="leaPhonenum"
+									class="joinInput2"><span class="joinText">-</span><input
+									type="tel" placeholder="연락처" name="leaPhonenum2"
+									class="joinInput2"><span class="joinText">-</span><input
+									type="tel" placeholder="연락처" name="leaPhonenum3"
+									class="joinInput2">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="이메일" name="leaEmail"
+									class="joinInput2"><span class="joinText">@</span><input
+									type="text" placeholder="이메일" name="leaEmail2"
+									class="joinInput2"> <select class="joinInput2"
+									name="leaEmail3" onchange="setEmail2(this)">
+									<option value="direct" selected>직접입력</option>
+									<option value="naver.com">naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="gmail.com">gmail.com</option>
+								</select>
+							</div>
+							<div class="textInput">
+								<select name="leaBank" class="joinInput2">
+									<option value="국민은행">국민은행</option>
+									<option value="신한은행">신한은행</option>
+									<option value="우리은행">우리은행</option>
+									<option value="기업은행">기업은행</option>
+								</select> <input type="text" placeholder="계좌번호" name="leaAccount"
+									class="joinInput1">
+							</div>
+							<div class="textInput">
+								<textarea class="joinInput3" name="leaIntroduce"
+									placeholder="자기소개"></textarea>
+							</div>
+							<div class="textInput">
+								<div class='uploadDiv'>
+									<input type="file" name="leaImage">
+								</div>
+							</div>
+
+							<!-- 섬네일 이미지 원본 표시 -->
+							<div class="bigPictureWrapper">
+								<div class="bigPicture"></div>
+							</div>
+							<!-- END 섬네일 이미지 원본 표시 -->
+
+							<!-- 업로드 결과 출력 -->
+							<div class="uploadResult">
+								<ul>
+								</ul>
+							</div> 
+							<!-- END 업로드 결과 출력 -->
+							
+							<div class="textBtn">
+								<button id="joinBtn" type="submit">가입신청</button>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -260,10 +338,10 @@ function pwChk(){
 					<div class="footerRight">
 						<div class="sns">
 							<a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
-							<a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
-							<a href="#" target="_blank"><img
+								src="../../../resources/img/GumonMain/img_sns_instar.png"
+								alt="인스타"></a> <a href="#" target="_blank"><img
+								src="../../../resources/img/GumonMain/img_sns_blog.png"
+								alt="블로그"></a> <a href="#" target="_blank"><img
 								src="../../../resources/img/GumonMain/img_sns_facebook.png"
 								alt="페이스북"></a> <a href="#" target="_blank"><img
 								src="../../../resources/img/GumonMain/img_sns_kakaostory.png"
@@ -277,8 +355,11 @@ function pwChk(){
 		</footer>
 	</div>
 	<!-- wrap -->
-	
-  <script>
+
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	<script>
  $(function(e){
 	var formObj = $("form[role='form']");
 	 
@@ -286,24 +367,28 @@ function pwChk(){
 	$("button[type='submit']").on('click', function(e){
 		 e.preventDefault();
 		 
+		 console.log("submit clicked");
+		 
 		 var str = "";
 		 $('.uploadResult ul li').each(function(i, obj){	
+			 
 			 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
-			 console.log('jobj : ' + obj);
+			 console.dir('jobj : ' + obj);
+			 
 			 str += "<input type='hidden' " +
-			 		"       name='attachList[" + i + "].fileName' " +
+			 		"       name='pictureList[" + i + "].fileName' " +
 			 		"       value='" + jobj.data("filename") + "'>";
 
 			 str += "<input type='hidden' " +
-			 		"       name='attachList[" + i + "].uuid' " +
+			 		"       name='pictureList[" + i + "].uuid' " +
 			 		"       value='" + jobj.data("uuid") + "'>";
 
 			 str += "<input type='hidden' " +
-			 		"       name='attachList[" + i + "].uploadPath' " +
+			 		"       name='pictureList[" + i + "].uploadPath' " +
 			 		"       value='" + jobj.data("path") + "'>";
 
 			 str += "<input type='hidden' " +
-			 		"       name='attachList[" + i + "].fileType' " +
+			 		"       name='pictureList[" + i + "].fileType' " +
 			 		"       value='" + jobj.data("type") + "'>";
 		 });//END 첨부 파일 정보 hidden 태그로 추가
 		 console.log("attach : " + str);
@@ -321,7 +406,7 @@ function pwChk(){
 		}
 		if(regex.test(fileName)) {	//확장자 확인
 			alert("업로드 불가 파일");	//제한 확장자인 경우 알림 메시지 출력
-			return false
+			return false;
 		}
 		return true;	//파일 크기 및 확장자 문제가 없는 경우
 	}//END checkExension()
@@ -336,10 +421,8 @@ function pwChk(){
 	//첨부파일 상태 변화 이벤트 핸들러 등록
 	$("input[type='file']").change(function(e){
 		var formData = new FormData();	//가상의 <form> 태그
-		var inputFile = $("input[name='uploadFile']");
+		var inputFile = $("input[name='leaImage']");
 		var files = inputFile[0].files;
-		
-		console.log(files);
 		
 		//formData 객체에 선택한 파일 추가
 		for(var i=0 ; i<files.length ; i++){
@@ -350,25 +433,21 @@ function pwChk(){
 			formData.append("uploadFile", files[i]);
 		}
 		
-		$.ajax({
-			type : 'post',
-			url :'/uploadAjaxAction',
-			data : formData,
-			dataType : 'json',
-			contentType : false,
-			processData : false,
-			beforeSend  : function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
-			success : function(result){
-				console.log(result);	//콘솔로 결과 확인
-				
-				showUploadResult(result); //
-				
-				//복사해 둔 div를 이용하여 업로드 영역 초기화
-				//$('.uploadDiv').html(cloneObj.html());
-			}
-		})//END .ajax()
+		$.ajax ({
+			  url : '/upload/uploadAjaxAction',
+			  processData : false,
+			  contentType : false,
+			  beforeSend : function(xhr){
+				  xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			  },
+			  data : formData,
+			  type : 'POST',
+			  dataType : 'json',
+			  success : function(result) {
+				  console.log(result);
+				  showUploadResult(result);
+			  }
+		}); //$.ajax
 	});//END uploadBtn 이벤트 처리 
 	
 	//업로드 결과 출력 처리
@@ -382,11 +461,8 @@ function pwChk(){
 		$(uploadResultArr).each(function(i, obj){
 			//업로드 파일명 <li>추가
 			if(obj.image){	//이미지인 경우
-				var fileCallPath = encodeURIComponent(obj.uploadPath + 
-												      "/s_" + obj.uuid  + "_" +
-												      obj.fileName);
-
-			str += "<li data-path='" + obj.uploadPath + "' " 			+
+				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid  + "_" + obj.fileName);
+				str += "<li data-path='" + obj.uploadPath + "' " 		+
 					   "data-uuid='" + obj.uuid + "' " 					+
 					   "data-filename='" + obj.fileName + "'" 			+
 					   "data-type='" + obj.image + "'>" 				+ 
@@ -419,46 +495,8 @@ function pwChk(){
 		});
 		uploadUL.append(str);
 	}//END showUploadResult()
-	
-	//X 버튼 이벤트 처리
-	$('.uploadResult').on('click', 'button', function(e){
-		var targetFile = $(this).data('file');
-		var type	   = $(this).data('type');
-		var targetLi   = $(this).closest('li');
-		
-		$.ajax({
-			type : 'post',
-			url :'/deleteFile',
-			data : {fileName:targetFile, type:type} ,
-			dataType : 'text',
-			beforeSend : function(xhr){
-				xhr.setRequestHeader (csrfHeaderName, csrfTokenValue);
-			},
-			success : function(result){
-				alert(result);		//성공하면
-				targetLi.remove();	//해당 li 삭제
-			}
-		})//END .ajax()
-	});
-	//END X 표시 이벤트 처리
-	
-	//원본 이미지 숨기기 처리
-	$('.bigPictureWrapper').on('click', function(e){
-		$(".bigPicture").animate({ width:'0%', height:'0%'}, 1000);
-		setTimeout(()=>{ $(this).hide(); }, 1000);
-	});//END 원본 이미지 숨기기 처리
-});//END $
+ });
+</script>
 
-//원본 이미지 표시 함수
-function showImage(fileCallPath){
-	//화면 가운데에 보이기
-	$('.bigPictureWrapper').css('display', 'flex').show();
-	
-	//이미지 및 효과 추가
-	$('.bigPicture').html("<img src='/display?fileName=" + 
-							encodeURI(fileCallPath) + "'>")
-					.animate( { width:'100%', height:'100%'}, 1000);
-}//END showImage()
-</script>  
 </body>
 </html>

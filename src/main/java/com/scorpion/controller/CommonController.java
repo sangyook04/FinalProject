@@ -1,5 +1,8 @@
 package com.scorpion.controller;
 
+import java.io.Console;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,10 @@ public class CommonController {
 		if(error != null) {
 			model.addAttribute("msg", "아이디 또는 비밀번호를 다시 확인해주세요.");
 		}
+		
+		if (logout != null) {
+			model.addAttribute("logout", "로그아웃 완료");
+		}
 	}
 	
 	@PostMapping("/login")
@@ -38,6 +45,15 @@ public class CommonController {
 			@RequestParam("pw") String pw) {
 		
 		return "/common/main";
+	}
+	
+	@PostMapping("/logout")
+	public String logoutPost(Model model) {
+		log.info("logout");
+		
+		model.addAttribute("logout", "로그아웃이 완료되었습니다.");
+		
+		return "/common/logout";
 	}
 	
 	@GetMapping("/findId")
@@ -79,11 +95,14 @@ public class CommonController {
 		return "/common/main";
 	}
 	
+
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/leaderJoin")
 	public void leaderJoin() {
 		
 	}
-	
+
+	@PreAuthorize("isAnonymous()")
 	@PostMapping("/leaderJoin")
 	public String leaderJoin(LeaderVO leader, RedirectAttributes rttr) {
 		log.info("register : " + leader);
@@ -91,8 +110,6 @@ public class CommonController {
 		if(leader.getPictureList() != null) {
 			leader.getPictureList().forEach(attach -> log.info(attach));
 		}
-		
-		
 		
 		service.register(leader);
 		

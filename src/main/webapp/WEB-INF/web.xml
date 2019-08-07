@@ -8,7 +8,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml
-		<!-- /WEB-INF/spring/security-context.xml -->
+		/WEB-INF/spring/security-context.xml
 		</param-value>
 	</context-param>
 	
@@ -26,22 +26,19 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<multipart-config>
+			<location>C:\\leaderPicture\\temp</location>
+			<max-file-size>20971520</max-file-size>
+			<max-request-size>41943040</max-request-size>
+			<file-size-threshold>20971520</file-size-threshold>
+		</multipart-config>
 	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	<!-- filter 2019.08.01지현 -->
-<!-- 	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
 	
 	<!-- filter 2019.08.02 지현 -->
    <filter>
@@ -52,10 +49,20 @@
          <param-value>UTF-8</param-value>
       </init-param>
    </filter>
-   
    <filter-mapping>
       <filter-name>encoding</filter-name>
       <servlet-name>appServlet</servlet-name>
+      <url-pattern>/*</url-pattern>
    </filter-mapping>
+	
+	<!-- filter 2019.08.01지현 -->
+ 	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
