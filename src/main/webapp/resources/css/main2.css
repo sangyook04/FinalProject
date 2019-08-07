@@ -122,7 +122,7 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 #container .inner .content .leaderJoin form .textInput .btn { background-color: gray; padding: 10px; color: white; border-radius: 5px; margin-left: 10px;}
 #container .inner .content .leaderJoin form .textInput label .radiogenderRadio {display:inline-block; width : 15px; height : 15px;}
 #container .inner .content .leaderJoin form .textBtn {}
-#container .inner .content .leaderJoin form .textBtn .joinBtn { background-color : #4285f4; color : white; border : none; height : 50px; font-weight: bold; margin-bottom : 60px; width : 400px;}
+#container .inner .content .leaderJoin form .textBtn #joinBtn { background-color : #4285f4; color : white; border : none; height : 50px; font-weight: bold; margin-bottom : 60px; width : 400px;}
 
 #container .inner .content .withInfo { margin-bottom : 50px; }
 #container .inner .content #withBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin: 10px;}

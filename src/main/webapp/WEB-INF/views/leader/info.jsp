@@ -86,8 +86,6 @@
 						<div class="userInfo"><c:out value="${ leader.leaName }"/></div>
 						<div class="info">성별</div>
 						<div class="userInfo"><c:out value="${ leader.leaGender }"/></div>
-						<div class="info">국적</div>
-						<div class="userInfo">추가하자~~</div>
 						<div class="info">주소</div>
 						<div class="userInfo"><c:out value="${ leader.leaAddress }"/></div>
 						<div class="info">연락처</div>

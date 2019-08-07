@@ -6,9 +6,12 @@ import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
 
 public interface LeaderMapper {
-	public int update(LeaderVO leader);
-	public int delete(String leaderid);
 	public LeaderVO read(String leaderid);
+	
+	public int update(LeaderVO leader);
+	public int updateRefusal(String leaderid);
+	public int updateLeader(String leaderid);
+	public int delete(String leaderid);
 	public Integer insertSelectKey(LeaderVO leader);
 	public int getTotalCount(Criteria cri);
 	public List<LeaderVO> getListWithPaging(Criteria cri);

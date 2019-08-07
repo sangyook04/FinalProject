@@ -5,10 +5,11 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class LeaderVO {
+public class LeaderVO{
    private String leaId;
    private String leaPassword;
    private String leaName;
+   private String leaImage;
    private String leaAddress;
    private char leaGender;
    private String leaPhonenum;
@@ -17,9 +18,11 @@ public class LeaderVO {
    private long leaAccount;
    private String leaBank;
    private String leaIntroduce;
-   private String leaImage;
    private String leaState;
-   private String auth;
-   
+   private String leaReqDate;
+   private boolean enabled;
+
+   private List<AuthorityVO> authList;
    private List<PictureVO> pictureList;
+
 }
