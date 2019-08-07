@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class AuthorityVO {
+	
 	private String auth;
 }

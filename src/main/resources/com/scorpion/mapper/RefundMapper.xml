@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.RefundMapper">
+	<insert id="insertSelectKey">
+	    <selectKey keyProperty="refIndex" resultType="long"    
+	    			order="BEFORE">
+	    	SELECT ref_no.nextval FROM dual
+	    </selectKey>
+	  	INSERT INTO refund(refindex, payindex, refrequest, refstate)
+	  	VALUES(#{refIndex}, #{payIndex}, SYSDATE, '처리 전')
+  	</insert>
+  	
+  	<insert id="insert">
+	  	INSERT INTO refund(refindex, payindex, refrequest, refstate)
+	  	VALUES(ref_no.nextval, #{payIndex}, SYSDATE, '처리 전')
+  	</insert>
+</mapper>

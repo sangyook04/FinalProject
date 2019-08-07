@@ -16,7 +16,8 @@
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
    <link href="../../../resources/css/bootstrap.min.css" type="text/css" rel="stylesheet">
    <link href="../../../resources/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminheaderfooter.css">
+   <link rel="stylesheet" type="text/css"
+	href="../../../resources/css/adminheaderfooter.css">
 
    <script>
    		$(document).ready(function(){
@@ -76,7 +77,7 @@
 			<%@ include file="../common/adminaside.jsp" %>
 			<div class="inner">
 				<div class="content">
-					<h1>리더 관리</h1>
+					<h1>가입 대기 리더 목록</h1>
 						<div class="tableContent">
 							<div class="panel panel-default">
 							  <!-- Default panel contents -->
@@ -84,22 +85,22 @@
 							  <table class="table table-hover">
 								<thead>
 								<tr>
-									<th>아이디</th><th>리더명</th><th>연락처</th><th>이메일</th>
+									<th>아이디</th><th>리더명</th><th>신청날짜</th><th>점수</th>
 								</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${leaderList}" var="leader">
+								<c:forEach items="${leaderList}" var="leader">
 										<tr>
 											<td><a class="move" href="<c:out value="${ leader.leaId }"/>"><c:out value="${leader.leaId }"/></a></td>
 											<td><c:out value="${leader.leaName }"/></td>
-											<td><c:out value="${leader.leaPhonenum }"/></td>
-											<td><c:out value="${leader.leaEmail }"/></td>
+											<td><c:out value="${leader.leaReqDate }"/></td>
+											<td><c:out value="${leader.leaScore }"/></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</div>
-						
+												
 						<form class="form-inline" id="searchForm" action="/admin/adminLeader" method="get">
 						  <div class="form-group">
 						    <label for="exampleInputName2">아이디</label>
@@ -135,7 +136,7 @@
 		<%@ include file="../common/adminfooter.jsp" %>
 	</div><!-- wrap -->
 	
-	<script>
+		<script>
 		$(document).ready(function(){
 			var actionForm = $("#actionForm");
 		

@@ -35,18 +35,7 @@
    </script>
     <link rel="stylesheet" type="text/css" href="../../../resources/css/test.css">
   
-<style>
-.question, .select{
-	background: white;
-}
-.question {
-	font-size: 20px;
-}
-.questionTitle {
-   	font-size: 20px;
-   	font-weight: bold;
-   }
-</style>
+
 </head>
 <body>
 	<div id="wrap">

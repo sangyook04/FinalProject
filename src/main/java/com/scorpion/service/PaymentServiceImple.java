@@ -27,15 +27,8 @@ public class PaymentServiceImple implements PaymentService {
 	}
 
 	@Override
-	public List<PaymentVO> getIncomeList(Criteria cri, String id, Date start, Date end) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<PaymentVO> getMyMoneyList(Criteria cri, String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getPayIdList(cri, id);
 	}
 
 	@Override
@@ -52,7 +45,8 @@ public class PaymentServiceImple implements PaymentService {
 
 	@Override
 	public List<PaymentVO> getPaymentListWithDate(Criteria cri, Date start, Date end) {
-		return mapper.getPayListWithDate(cri, start, end);
+//		return mapper.getPayListWithDate(cri, start, end);
+		return null;
 	}
 	
 	@Override
@@ -86,6 +80,21 @@ public class PaymentServiceImple implements PaymentService {
 	@Override
 	public boolean deposit(Long payindex) {
 		return mapper.deposit(payindex) == 1;
+	}
+
+	@Override
+	public List<PaymentVO> getMyRefundList(Criteria cri, String id) {
+		return mapper.getRefundIdList(cri, id);
+	}
+
+	@Override
+	public List<PaymentVO> getIncomeList(Criteria cri, String id) {
+		return mapper.getPayIdListPaging(cri, id);
+	}
+
+	@Override
+	public int getTotalJoin(Criteria cri, String id) {
+		return mapper.getTotalCountJoin(cri, id);
 	}
 
 

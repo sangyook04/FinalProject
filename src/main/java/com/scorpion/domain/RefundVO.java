@@ -9,5 +9,6 @@ public class RefundVO {
 	private Long payIndex;
 	private String refRequest;
 	private String refSuccess;
+	private String refState;
 
 }

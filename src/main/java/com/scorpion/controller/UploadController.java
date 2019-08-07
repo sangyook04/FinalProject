@@ -36,15 +36,16 @@ import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
+@RequestMapping("/upload/*")
 @Log4j
 public class UploadController {
 	//첨부 파일 삭제
-		@PreAuthorize("isAuthenticated()")
+		@PreAuthorize("isAnonymous()")
 		@PostMapping("/deleteFile")
 		@ResponseBody
 		public ResponseEntity<String> deleteFile(String fileName, String type){
 			try {
-				File file = new File("c:\\upload\\" + //원래 파일명으로 디코딩
+				File file = new File("c:\\leaderPicture\\" + //원래 파일명으로 디코딩
 								     URLDecoder.decode(fileName, "UTF-8"));
 				file.delete();	//파일 삭제
 				
@@ -83,59 +84,12 @@ public class UploadController {
 			return false;
 		}
 		
-		//일반 파일 다운로드 
-		@GetMapping(value="/download",
-					produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-		@ResponseBody
-		public ResponseEntity<Resource> downloadFile(String fileName,
-							@RequestHeader("User-Agent")String userAgent){
-			log.info("download file : " + fileName);
-			Resource resource 
-				= new FileSystemResource("c:\\upload\\" + fileName);
-			log.info("resource : " + resource);
-			if(resource.exists() == false) {	//resource가 없으면 404반환
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-			
-			
-			ResponseEntity<Resource> result = null;
-			String resourceName = resource.getFilename();//파일명 가져오기
-			
-			//UUID 잘라내기
-			String resourceOriginalName 
-			 	= resourceName.substring(resourceName.indexOf("_") + 1);
-			
-			try {
-				HttpHeaders header = new HttpHeaders();
-				
-				String downloadName = null;
-				if(userAgent.contains("Trident")) {	//IE의 경우
-					downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8")
-											 .replaceAll("\\+", " ");
-				} else if(userAgent.contains("Edge")) { //Edge의 경우
-					downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
-				} else {		//Chrome의 경우
-					downloadName = new String(resourceOriginalName.getBytes("UTF-8"),
-									   	  "ISO-8859-1"); //한글 깨짐 방지
-				}
-				
-				header.add("Content-Disposition", 
-						   "attachment; filename=" + downloadName);
-				result = new ResponseEntity<Resource>(
-								resource,
-								header,
-								HttpStatus.OK);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return result;
-		}
-		
 		//섬네일 이미지 데이터 전송
+		@PreAuthorize("isAnonymous()")
 		@GetMapping("/display")
 		@ResponseBody
 		public ResponseEntity<byte[]> getFile(String fileName){
-			File file = new File("c:\\upload\\" + fileName);
+			File file = new File("c:\\leaderPicture\\" + fileName);
 			ResponseEntity<byte[]> result = null;
 			
 			try {
@@ -151,18 +105,18 @@ public class UploadController {
 			}
 			return result;
 		}
-		
-		@PreAuthorize("isAuthenticated()")
-		@PostMapping("/uploadAjaxAction")
+
+		@PreAuthorize("isAnonymous()")
+		@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		@ResponseBody
 		public ResponseEntity<List<PictureDTO>> 
 				uploadAjaxPost(MultipartFile[] uploadFile) {
 			List<PictureDTO> list = new ArrayList<>();
 			log.info("uploadFormAction");
 			log.info("getFolder : " + getFolder());
-			String uploadFolder = "c:\\upload";	//업로드 경로
+			String uploadFolder = "c:\\leaderPicture";	//업로드 경로
 			
-			//업로드 경로 = c:\\upload 폴더 밑에 연\월\일 폴더로 생성
+			//업로드 경로 = c:\\leaderPicture 폴더 밑에 연\월\일 폴더로 생성
 			File uploadPath = new File(uploadFolder, getFolder());
 			log.info("uploadPath : " + uploadPath);
 			
@@ -209,7 +163,7 @@ public class UploadController {
 						
 						//가로 100 * 세로 100 섬네일 이미지 생성
 						Thumbnailator.createThumbnail(
-							m.getInputStream(), thumbnail, 100, 100
+							m.getInputStream(), thumbnail, 200, 200
 						);
 						thumbnail.close();
 					}//END 섬네일 이미지 생성
@@ -256,5 +210,5 @@ public class UploadController {
 		@GetMapping("/uploadForm")	//업로드 화면 이동
 		public void uploadForm() {
 			log.info("upload form");
-		}	
+		}
 }

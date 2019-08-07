@@ -9,6 +9,7 @@ import com.scorpion.domain.PictureVO;
 
 public interface LeaderService {
 
+	public List<PictureVO> getPictureList(String leaderid);
 	public List<PictureVO> getOldFiles();
 	public int getTotal(Criteria cri);
 	public List<LeaderVO> getList(Criteria cri);
@@ -17,6 +18,8 @@ public interface LeaderService {
 	public void register(LeaderVO leader);
 	public LeaderVO get(String leaderid);
 	public boolean modify(LeaderVO leader);
+	public boolean refusal(String leaderid);
+	public boolean leaderUpdate(String leaderid);
 	public boolean remove(String leaderid);
 	
 }

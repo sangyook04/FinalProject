@@ -4,6 +4,92 @@
   
 <mapper namespace="com.scorpion.mapper.PaymentMapper">
 
+	<resultMap id="payMapThree"
+			   type="com.scorpion.domain.PaymentVO" >
+		<id 	property="payIndex"		column="payindex"/>
+		<result	property="payIndex"		column="payindex"/>
+		<result	property="stuId"		column="stuid"/>
+		<result	property="leaId"		column="leaid"/>
+		<result	property="studyIndex"		column="studyindex"/>
+		<result	property="paySendDate"	column="paysenddate"/>
+		<result	property="payDate"	column="paydate"/>
+		<result	property="payMoney"	column="paymoney"/>
+		<collection	property="refund"		resultMap="refundMap"/>
+		<collection	property="study"		resultMap="studyMap"/>
+	</resultMap>
+	
+	<resultMap id="refundMap"
+			   type="com.scorpion.domain.RefundVO" >
+		<result	property="refIndex"		column="refindex"/>
+		<result	property="payIndex"		column="payindex"/>
+		<result	property="refRequest"		column="refrequest"/>
+		<result	property="refSuccess"		column="refsuccess"/>
+		<result	property="refState"		column="refstate"/>
+	</resultMap>
+	
+	<select id="getRefundIdList" resultMap="payMapThree">
+		SELECT			*
+		FROM			study s, payment p, refund r
+		WHERE			p.payindex = r.payindex and s.studyindex = p.studyindex and stuid = #{id}
+	</select>
+
+	<resultMap id="payMapTwo"
+			   type="com.scorpion.domain.PaymentVO" >
+		<id 	property="payIndex"		column="payindex"/>
+		<result	property="payIndex"		column="payindex"/>
+		<result	property="stuId"		column="stuid"/>
+		<result	property="leaId"		column="leaid"/>
+		<result	property="studyIndex"		column="studyindex"/>
+		<result	property="paySendDate"	column="paysenddate"/>
+		<result	property="payDate"	column="paydate"/>
+		<result	property="payMoney"	column="paymoney"/>
+		<collection	property="study"		resultMap="studyMap"/>
+	</resultMap>
+	
+	<resultMap id="studyMap"
+			   type="com.scorpion.domain.StudyVO" >
+		<result	property="studyIndex"		column="studyindex"/>
+		<result	property="studyName"		column="studyname"/>
+		<result	property="leaId"		column="leaid"/>
+		<result	property="studyPlace"		column="studyplace"/>
+		<result	property="studyLevel"	column="studylevel"/>
+		<result	property="studyPrice"	column="studyprice"/>
+		<result	property="studyIntroduce"	column="studyintroduce"/>
+		<result	property="studyStartdate"	column="studystartdate"/>
+		<result	property="studyEnddate"	column="studyenddate"/>
+		<result	property="studyState"	column="studystate"/>
+		<result	property="studyPeople"	column="studypeople"/>
+	</resultMap>  
+	
+	<select id="getPayIdList" resultMap="payMapTwo">
+		SELECT			*
+		FROM			study s, payment p
+		WHERE			s.studyindex = p.studyindex and stuid = #{id}
+	</select>
+
+	<select id="getPayIdListPaging"
+  	      resultMap="payMapTwo">
+   	<![CDATA[
+  		SELECT	payindex, stuid, leaid, studyindex, paysenddate, paydate, paymoney, studyname, studyplace, studylevel, studyprice, studyintroduce, studystartdate, studyenddate, studystate, studypeople
+  		FROM	( SELECT 	/*+INDEX_DESC(payment SYS_C007410)*/
+  							rownum rn, payindex, p.stuid, p.leaid, 
+  							p.studyindex, paysenddate, paydate, paymoney, 
+  							studyname, studyplace, studylevel, studyprice, studyintroduce, studystartdate, studyenddate, studystate, studypeople
+  				  FROM 		study s, payment p
+  				  WHERE		s.studyindex = p.studyindex and p.leaid = #{id} and paysenddate is not null and
+  		]]>		  <include refid="cri3"></include><include refid="cri4"></include> <![CDATA[
+  				  rownum <= #{cri.pageNum} * #{cri.amount} )
+  		WHERE rn > (#{cri.pageNum} - 1) * #{cri.amount}
+  	]]>
+  </select>
+
+  <select id="getTotalCountJoin" resultType="int">
+  	SELECT COUNT(*) FROM study s, payment p 
+  	WHERE s.studyindex = p.studyindex and p.leaid = #{id} and paysenddate is not null and 
+  	<include refid="cri3"></include><include refid="cri4"></include><![CDATA[ payindex > 0]]>
+  	
+  </select>
+
 	<resultMap id="payMap"
 			   type="com.scorpion.domain.PaymentVO" >
 		<id 	property="payIndex"		column="payindex"/> 
@@ -72,7 +158,35 @@
   			</foreach>	  
   		</trim>
   </sql>
-
+  <sql id="cri3">
+  	<trim prefix="" suffix=" AND " 
+  			  prefixOverrides="AND">
+  			<foreach item="start" collection="cri.startArr">
+  				<trim prefix="AND">
+  					<choose>
+  						<when test="start != null">
+  							<![CDATA[paysenddate >= #{start}]]>
+  						</when>
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
+  <!-- 쿼리 보관 -->
+  <sql id="cri4">
+  	<trim prefix="" suffix=" AND " 
+  			  prefixOverrides="AND">
+  			<foreach item="end" collection="cri.endArr">
+  				<trim prefix="AND">
+  					<choose>
+  						<when test="end != null">
+  						<![CDATA[paysenddate <= #{end}]]>
+  						</when>
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
 <!-- 인덱스명 주의!!! 컴퓨터마다 이름이 다름. 테이블 만들때 정해서 통일시켜야함 -->
  <select id="getPayList"
   	      resultType="com.scorpion.domain.PaymentVO">
@@ -113,17 +227,13 @@
   	DELETE FROM payment WHERE payindex = #{payindex}
   </delete>
 
- <!--  <select id="read" resultType="com.scorpion.domain.PaymentVO">
-  	SELECT * FROM payment WHERE payindex = #{payIndex}
-  </select> -->
-
   <insert id="insertSelectKey">
     <selectKey keyProperty="payIndex" resultType="long"    
     			order="BEFORE">
     	SELECT pay_no.nextval FROM dual
     </selectKey>
   	INSERT INTO payment(payindex, stuid, leaid, studyindex, paydate, paymoney)
-  	VALUES(#{payIndex}, #{stuId}, #{leaId}, #{studyIndex}, #{payDate}, #{payMoney})
+  	VALUES(#{payIndex}, #{stuId}, #{leaId}, #{studyIndex}, SYSDATE, #{payMoney})
   </insert>
   
 </mapper>
