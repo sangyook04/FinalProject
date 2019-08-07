@@ -8,8 +8,8 @@
 					<a href="#"></a>
 				</div>
 				<ul class="gnb">
-					<li>admin</li>
-					<li><input type="button" name="logout" value="로그아웃"></li>
+					<li><sec:authentication property="principal.username"/><!--관리자 -->님</li>
+					<li><a class="LogOut" href="#">로그 아웃</a></li>
 				</ul>
 			</div>
 		</div>

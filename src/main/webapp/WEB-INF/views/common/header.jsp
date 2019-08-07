@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <header>
 	<nav>
 		<div class="inner">
@@ -14,15 +18,69 @@
 					<li class="one"><a href="#">고객센터</a>
 						<ul class="callsenterSub">
 							<li><a href="#">FAQ</a></li>
+							<sec:authorize access="isAuthenticated()">
 							<li><a href="#">QnA</a></li>
+							</sec:authorize>
 						</ul></li>
 				</ul>
+				<sec:authorize access="isAnonymous()">
 				<ul class="gnb">
 					<li><a href="#">로그인</a></li>
 					<li><a href="#">학생 회원가입</a></li>
 					<li><a href="#">리더 시작하기</a></li>
 				</ul>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_STUDENT')">
+				<ul class="gnb">
+					<li class="myPage"><a href="#">마이페이지</a>
+						<ul class="myPageContent">
+							<li><a href="#">내 정보 출력</a></li>
+							<li><a href="#">레벨테스트 결과</a></li>
+							<li><a href="#">내 스터디</a></li>
+							<li><a href="#">관심 스터디</a></li>
+							<li><a href="#">문의 내역</a></li>
+							<li><a href="#">탈퇴 하기</a></li>
+						</ul></li>
+					<li><sec:authentication property="principal.username"/><!--학생 -->님</li>
+					<li><a class="LogOut" href="#">로그 아웃</a></li>
+				</ul>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_LEADER')">
+				<ul class="gnb">
+					<li class="myPage"><a href="#">마이페이지</a>
+						<ul class="myPageContent">
+							<li><a href="#">내 정보 출력</a></li>
+							<li><a href="#">내 스터디</a></li>
+							<li><a href="#">소득 내역</a></li>
+							<li><a href="#">문의 내역</a></li>
+							<li><a href="#">탈퇴 하기</a></li>
+						</ul></li>
+					<li><a href="#">스터디 개설</a></li>
+					<li><sec:authentication property="principal.username" /><!--리더-->님</li>
+					<li><a class="LogOut" href="#">로그 아웃</a></li>
+				</ul>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<ul class="gnb">
+					<li class="myPage"><a href="#">관리자 페이지</a>
+					<li><sec:authentication property="principal.username" /><!--관리자-->님</li>
+					<li><a class="LogOut" href="#">로그 아웃</a></li>
+				</ul>
+				</sec:authorize>
 			</div>
 		</div>
 	</nav>
 </header>
+<script>
+	$('nav .myPage').hover(function() {
+		if ($(".myPageContent").css("display") == "none") {
+			$('.myPageContent').slideDown();
+			$("headerA").css("color", "#f15b6d");
+			//stopPropagation();
+		} else {
+			$('.myPageContent').css("display", "none");
+			event.stopPropagation();
+			event.preventDefault();
+		}
+	});
+</script>
