@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.LeaderReviewMapper">
+  
+  
+    <!-- 쿼리 보관 -->
+   <sql id="criteria">
+  	<trim prefix="(" suffix=") AND " 
+  			  prefixOverrides="OR">
+  			<foreach item="type" collection="typeArr">
+  				<trim prefix="OR">
+  					<choose>
+  						<when test="type == 'T'.toString()">
+  							leaId  LIKE '%'||#{keyword}||'%'
+  						</when>
+  					<!-- 	<when test="type == 'C'.toString()">
+  							content LIKE '%'||#{keyword}||'%'
+  						</when>
+  						<when test="type == 'W'.toString()">
+  							writer  LIKE '%'||#{keyword}||'%'
+  						</when> -->
+  					</choose>
+  				</trim>
+  			</foreach>	  
+  		</trim>
+  </sql>
+
+  
+   
+  
+  <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM readerreview where <include refid="criteria"></include> leaid is not null
+  	
+  </select>
+  
+  
+
+
+<select id="getListWithPaging"
+  	      resultType="com.scorpion.domain.LeaderReviewVO">
+   	<![CDATA[
+  		SELECT	revindex, leaid, stuid, revgrade,revcomment
+  		FROM	( SELECT 	/*+INDEX_DESC(student SYS_C007432)*/
+  							rownum rn, revindex, leaid, stuid, revgrade, revcomment
+  				  FROM 		readerreview
+  				  WHERE		
+  				  ]]><include refid="criteria"></include><![CDATA[
+  				  rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  </select>
+
+
+  
+
+  <select id="read" resultType="com.scorpion.domain.LeaderReviewVO">
+  	 select * from readerreview where leaid = #{leaId}
+
+  </select>
+
+
+
+  <insert id="insertSelectKey">
+  	INSERT INTO readerreview (revindex, leaid, stuid,
+  							revgrade, revcomment)
+  	VALUES(#{revIndex}, #{leaId}, #{stuId} , #{revGrade}, #{revComment})
+  </insert>  
+  
+ 
+  <select id="getList" 
+  		  resultType="com.scorpion.domain.LeaderReviewVO">
+  	<![CDATA[
+  		SELECT * FROM readerreview WHERE leaid > 0
+  	]]>
+  </select>
+  
+  
+  
+</mapper>
+
+

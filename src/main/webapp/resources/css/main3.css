@@ -1,10 +1,10 @@
 #wrap {font-family: 'Noto Sans KR', sans-serif;}
-header {position: fixed; border-top: 5px solid #4285f4; background: #fff; width: 100%; height: 65px; z-index: 999; top: 0;}
+/* header {position: fixed; border-top: 5px solid #4285f4; background: #fff; width: 100%; height: 65px; z-index: 999; top: 0;}
 header nav {height: 65px; background-color: #F2F2F2; }
 header nav .headerContent {padding: 13px 0 8px 0; }
 header nav .headerContent .mainlogo {float: left; width: 80px;
     height: 42px; text-indent: -9999em; background: url(../img/GumonMain/logo.jpg); background-size: cover; margin-right: 40px;}
-/*header nav .headerContent .mainlogo {display: block; width: 200px;}*/
+header nav .headerContent .mainlogo {display: block; width: 200px;}
 header nav .headerContent .mainmenu {float: left; overflow: hidden;}
 header nav .headerContent .mainmenu>li {float: left; display: inline-block; margin: 4px 36px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
 header nav .headerContent .mainmenu li a {}
@@ -14,11 +14,11 @@ header nav .headerContent .mainmenu li .callsenterSub li { margin-bottom: 15px; 
 header nav .headerContent .gnb {float: right; overflow: hidden;}
 header nav .headerContent .gnb li {float: left; display: inline-block; margin: 4px 36px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
 header nav .headerContent .gnb li a {}
-header nav .headerContent .gnb li a:hover {color: #e83023;}
+header nav .headerContent .gnb li a:hover {color: #e83023;} */
 
-#wrap .inner .headerContent .mainmenu li a{color: #383e48; text-decoration: none;}
+/* #wrap .inner .headerContent .mainmenu li a{color: #383e48; text-decoration: none;}
 #wrap .inner .headerContent .gnb li a{color: #383e48; text-decoration: none;}
-#wrap .inner .footArea .footerLeft .footerinfo li a{color: black; text-decoration: none;}
+#wrap .inner .footArea .footerLeft .footerinfo li a{color: black; text-decoration: none;} */
 [type=radio] {display: block;}
 
 #container {margin-top: 65px;}
@@ -44,9 +44,10 @@ header nav .headerContent .gnb li a:hover {color: #e83023;}
 #container .content .info { font-size: xx-small; margin-bottom: 5px;}
 #container .content .userInfo{ border-bottom: 1px solid gray; padding: 5px;margin: 5px;}
 
+#container .inner h2 {font-size: 40px;}
 
-aside{background: gray;}
-
+/* aside{background: gray;}
+ */
 
 #container .content .joinInput{border: 1px solid black;  height:40px; margin-top: 20px;}
 #container .content form .Btn {background:gray; width: 100px; height:35px; color: white; font:bold; margin-left: 7px; border-radius: 5px;}
@@ -78,7 +79,7 @@ aside{background: gray;}
 
 
 /* levelget */
-#container .content .level{display: inline-block; background:#61DBF0; border-radius: 5px; font-size: 1.5em; color:#353535; padding:10px;  }
+#container .content .level{display: inline-block; background:white; border-radius: 5px; font-size: 1.5em; color:#353535; padding:10px;  }
 #container .content .level .levelResult{color:gary; font-size: 1.7em; }
 #container .content .recommend{width:300px; background:#6799FF; border-radius: 5px; font-size: 1.5em; color:white; padding:10px; margin-top:40px; }
 #container .content .reTest{width:300px; background:#86E57F; border-radius: 5px; font-size: 1.5em; color:white; padding:10px; margin-top:15px; }
@@ -86,7 +87,7 @@ aside{background: gray;}
 #container #container .inner.sp {font-size: 38px;}
 
 	
-footer {position: relative; background: #383e48 repeat-x top; height: 220px; margin-top: 50px;}
+/* footer {position: relative; background: #383e48 repeat-x top; height: 220px; margin-top: 50px;}
 footer .footArea {position: relative; max-width: 1200px; margin: 0 auto; overflow: hidden; padding-top: 20px;}
 footer .footArea .footerLeft {float: left; width: 70%;}
 footer .footArea .footerLeft .callNumber {line-height: 55px; font-size: 16px; color: #afadad; letter-spacing: -0.5px;}
@@ -101,7 +102,7 @@ footer .footArea .footerRight {float: left; width: 30%; height: 138px;}
 footer .footArea .footerRight .sns {height: 57px; line-height: 57px; margin-left: 30%;}
 footer .footArea .footerRight .sns a {float: left; margin: 20px 10px 10px 10px;}
 footer .copyright {clear: both; padding-top: 30px; font-size: 14px; color: #828893; text-align: center; letter-spacing: 0;}
-
+ */
 /* -----------------------noticeList------------------- */
 
 #container .innerNotice .inner  h2 {padding: 50px;text-align: center;}
@@ -122,5 +123,36 @@ footer .copyright {clear: both; padding-top: 30px; font-size: 14px; color: #8288
 /*지수*/
 
 #container .innerNotice .pull-center .pagination{margin-left: 500px; }
+
+
+/* ----------------StudentInfoMod----------------  */
+#container .inner .content .studentMod { width : 450px; margin : auto;}
+#container .inner .content .studentMod form .textInput { margin-bottom : 10px; text-align: left; margin-left : 30px; }
+#container .inner .content .studentMod form .textInput .joinText {margin-right : 5px;}
+#container .inner .content .studentMod form .textInput .joinInput { border: 1px solid black; padding: 4px; width : 290px; height : 40px;}
+#container .inner .content .studentMod form .textInput .joinInput1 { border: 1px solid black; padding: 4px; width : 160px; height : 40px; margin-right : 5px;}
+#container .inner .content .studentMod form .textInput .joinInput2 { border: 1px solid black; padding: 4px; width : 100px; height : 40px; margin-right : 5px;}
+#container .inner .content .studentMod form .textInput .joinInput3 { border: 1px solid black; padding: 4px; width : 390px; height : 300px; margin-right : 5px; resize: none;}
+#container .inner .content .studentMod form .textInput .btn { background-color: gray; padding: 10px; color: white; border-radius: 5px; margin-left: 10px;}
+#container .inner .content .studentMod form .textInput label .radiogenderRadio {display:inline-block; width : 15px; height : 15px;}
+#container .inner .content .studentMod form .textBtn {}
+#container .inner .content .studentMod form .textInputEx { margin-bottom : 10px; text-align: left; margin-left : 30px; font-weight: bold; font-size: 1.2em;}
+
+
+#container .inner .content .studentMod form .textBtn .modBtn { border-radius: 5px; background-color : #4285f4; color : white;  height : 50px; margin-left : -50px;margin-bottom : 60px; width :50px;}
+#container .inner .content .studentMod form .textBtn .closeBtn { border-radius: 5px; background-color : red;  color : white;  height : 50px;  margin-left : 20px; width :50px;}
+
+
+
+#container .inner .content .withInfo { margin-bottom : 50px; }
+#container .inner .content #withBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin: 10px;}
+
+/* ----------------studentComment----------------  */
+
+
+#container .containerContent h2 b{text-align: center; padding: 50px;}
+
+
+
 
 

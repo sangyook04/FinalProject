@@ -30,7 +30,7 @@ public class StudentServiceImple implements StudentService {
 	@Override
 	public List<StudentVO> getList(Criteria cri) {
 		  return mapper.getListWithPaging(cri);
-		   // return mapper.getList();
+		  
 	}
 
 
@@ -46,19 +46,20 @@ public class StudentServiceImple implements StudentService {
 
 	@Override
 	public boolean remove(String stuid) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
-	public String levelGet(String stuid) {
-		// TODO Auto-generated method stub
-		return null;
+	public StudentVO levelGet(String stuid) {
+		
+		 return mapper.read(stuid);
+	
 	}
 
 	@Override
 	public StudentVO get(String stuid) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -71,6 +72,12 @@ public class StudentServiceImple implements StudentService {
 		
 		
 		
+	}
+
+	@Override
+	public boolean stuModify(StudentVO student) {
+		
+		 return mapper.update(student)==1;
 	}
 
 }
