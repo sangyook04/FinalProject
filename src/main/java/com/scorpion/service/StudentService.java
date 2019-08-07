@@ -10,8 +10,9 @@ public interface StudentService {
 	public List<StudentVO> getList(Criteria cri);
 	public StudentVO info(String stuid);
 	public boolean modify(StudentVO student);
+	public boolean stuModify(StudentVO student);
 	public boolean remove(String stuid);
-	public String levelGet(String stuid);
+	public StudentVO levelGet(String stuid);
 	public StudentVO get(String stuid);
 	public void register(StudentVO student);
 	

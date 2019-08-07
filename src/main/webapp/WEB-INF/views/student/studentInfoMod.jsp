@@ -15,12 +15,13 @@
    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
-   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminMain3.css">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/main3.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css"
-	href="../../../resources/css/adminheaderfooter.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+
    
-   <!-- 주소창 -->
+   
+    <!-- 주소창 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample4_execDaumPostcode() {
@@ -156,74 +157,39 @@ function pwChk(){
 </script>
    
    
-   
    <script>
-   		$(document).ready(function(){
+	$(document).ready(function() {
 
-			$('.first').hover(function () {
-			    if($(".firstSub").css("display") == "none"){
-			       $('.firstSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.firstSub').css("display", "none");
-			    }
-			});
+		$('nav .one').hover(function() {
+			if ($(".callsenterSub").css("display") == "none") {
+				$('.callsenterSub').slideDown();
+				$("headerA").css("color", "#f15b6d");
+				event.preventDefault();
+			} else {
+				$('.callsenterSub').css("display", "none");
+			}
+		});
 
-			$('.firstSub2').hover(function () {
-			    if($(".asideSubmenu2").css("display") == "none"){
-			       $('.asideSubmenu2').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.asideSubmenu2').css("display", "none");
-			    }
-			});
-
-			$('.second').hover(function () {
-			    if($(".secondSub").css("display") == "none"){
-			       $('.secondSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.secondSub').css("display", "none");
-			    }
-			});
-
-			$('.third').hover(function () {
-			    if($(".thirdSub").css("display") == "none"){
-			       $('.thirdSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.thirdSub').css("display", "none");
-			    }
-			});
-
-			$('.fourth').hover(function () {
-			    if($(".fourthSub").css("display") == "none"){
-			       $('.fourthSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.fourthSub').css("display", "none");
-			    }
-			});
-
-		});//ready
+	});//ready
+	
    </script>
 </head>
 <body>
 	<div id="wrap">
-			<%@ include file="../common/adminheader.jsp" %>
-		<div id="container">
-			<%@ include file="../common/adminaside.jsp" %>
+		
+<%@ include file="../common/header.jsp" %>
+<div id="container">
 			
 		<div class="inner">
 				<div class="content">
-					<h1><b>학생 정보수정</b></h1>
+					<h1><b>내 정보수정</b></h1>
 					<div class="studentMod">
-						<form role="form" name="studentMod" action="/student/adminStudentMod" id="ModForm" method="post">
-							<div class="textInputEx">아이디: <input type="text" name="stuId" value="${stuInfo.stuId }" readonly="readonly"></div>
+						<form role="form" name="studentMod" action="/student/studentInfoMod" id="ModForm" method="post">
+							<div class="textInputEx">아이디: <input type="text" name="stuId" value="${stuMyInfo.stuId }" readonly="readonly"></div>
 							<div class="textInput"><input type="password" placeholder="새로운 비밀번호 입력" name="stuPassword" class="joinInput"></div>
 							<div class="textInput"><input type="password" placeholder="비밀번호 확인" name="stuPasswordChk" class="joinInput"><button type="button" class="btn" onclick="pwChk()">비밀번호 확인</button></div>
-							<div class="textInputEx">이름: <input type="text" name="stuName" value="${stuInfo.stuName }"></div>
-							<div class="textInputEx">성별: <input type="text" name="stuGender" value="${stuInfo.stuGender}" readonly="readonly"></div>
+							<div class="textInputEx">이름: <input type="text" name="stuName" value="${stuMyInfo.stuName }"></div>
+							<div class="textInputEx">성별: <input type="text" name="stuGender" value="${stuMyInfo.stuGender}" readonly="readonly"></div>
 							<div class="textInput"><input type="text" placeholder="우편번호" name="stuPostcode" id="sample4_postcode" class="joinInput2" readonly="readonly"><input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기" class="btn"></div>
 							<div class="textInput"><input type="text" placeholder="도로명주소" name="stuRoadAdd" id="sample4_roadAddress" class="joinInput" readonly="readonly"></div>
 							<div class="textInput"><input type="text" placeholder="지번주소" name="stuJibunAdd" id="sample4_jibunAddress" class="joinInput" readonly="readonly"></div>
@@ -242,9 +208,9 @@ function pwChk(){
 												
 							
 											
-							<form id="CloseForm" action="/student/adminStudentInfo" method="get">
+							<form id="CloseForm" action="/student/studentMyInfo" method="get">
 					<input type="hidden" id="stuId" name="stuId"
-						value="${stuInfo.stuId }">
+						value="${stuMyInfo.stuId }">
 					</form> 
 													
 													
@@ -254,14 +220,17 @@ function pwChk(){
 			</div>
 	</div>
 		<!-- container -->
-		<%@ include file="../common/adminfooter.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
+
+
 	</div><!-- wrap -->
-	
-	   <script>
+	<script>
 		$(function() {
-			var ModForm = $("#ModForm");
+			var operForm = $("#operForm");
 			var CloseForm = $("#CloseForm");
-		
+			
+
+			
 			//modify
 			$('button[data-oper="mod"]').on("click", function(e){
 			      
@@ -276,16 +245,30 @@ function pwChk(){
 			
 			
 			
+			
+			
 			//close
 			$('button[data-oper="close"]').on("click", function(e) {
 				//CloseForm.find('#stuId').remove();
-				CloseForm.attr("action", "/student/adminStudentInfo");
+				CloseForm.attr("action", "/student/studentMyInfo");
 				CloseForm.submit();
 			});
 
 			
 			
-			
+		});
+		
+		
+		
+		//페이지 이동하기
+		var actionForm = $("#actionForm");
+
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+
+			actionForm.submit();
 		});
 	</script>
 	

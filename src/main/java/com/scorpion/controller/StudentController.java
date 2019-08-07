@@ -37,10 +37,26 @@ public class StudentController {
 			
 		}
 		
-	/*
-	 * @GetMapping("/info") public void info(@RequestParam("id") String id) {
-	 * service.info(id); }
-	 */
+	
+		@GetMapping({"/studentMyInfo","/studentInfoMod"})
+		public void info(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
+			model.addAttribute("stuMyInfo", service.info(stuId));
+	
+		}
+		
+
+		@PostMapping("/studentInfoMod") 
+		public String stuModify(StudentVO student, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+			if(service.stuModify(student)) {
+				rttr.addAttribute("result","success");
+			}
+		
+			return "redirect:/student/studentMyInfo?stuId="+student.getStuId();
+		}
+		 
+			
+		
+		
 		
 		@GetMapping({"/adminStudentInfo","/adminStudentMod"})
 		public void get(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
@@ -50,12 +66,7 @@ public class StudentController {
 		
 		
 		
-	/*
-	 * @GetMapping("/modify") public void modify() {
-	 * 
-	 * }
-	 */
-		
+	
 		@PostMapping("/adminStudentMod")
 		public String modify(StudentVO student, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 			if(service.modify(student)) {
@@ -73,6 +84,7 @@ public class StudentController {
 		@GetMapping({"/studentLevelGet"})
 		public void levelget(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
 			model.addAttribute("stuLevel", service.info(stuId));
+			
 		}
 
 		
