@@ -11,7 +11,7 @@ header nav .headerContent .mainmenu li .callsenterSub {display: none; position: 
 header nav .headerContent .mainmenu li .callsenterSub li { margin-top: 15px; }
 header nav .headerContent .mainmenu li .callsenterSub li:nth-child(1) { margin-top: 0px; }
 header nav .headerContent .gnb {float: right; overflow: hidden;}
-header nav .headerContent .gnb li {float: left; display: inline-block; margin: 4px 36px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
+header nav .headerContent .gnb li {float: left; display: inline-block; margin: 4px 20px 0 0; color: #505050; font-size: 16px; font-weight: 600;}
 header nav .headerContent .gnb li a {}
 header nav .headerContent .gnb li a:hover {color: #4285f4;}
 
