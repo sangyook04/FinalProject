@@ -141,8 +141,57 @@
 	</div>
 	<!-- wrap -->
 
+
+ <script>
+		$(function() {
+			var ModForm = $("#ModForm");
+			var CloseForm = $("#CloseForm");
+		
+			//modify
+			$('button[data-oper="mod"]').on("click", function(e){
+			      
+			      var conf = confirm("수정이 완료되었습니다.");
+			      alert(conf);
+			      
+			      if(conf == true){
+			     
+			         $("#ModForm").submit();
+			      } 
+			   });
+			
+			
+			
+			//close
+			$('button[data-oper="close"]').on("click", function(e) {
+				//CloseForm.find('#stuId').remove();
+				CloseForm.attr("action", "/admin/adminStudentInfo");
+				CloseForm.submit();
+			});
+
+			
+			
+			
+		});
+	</script>
+	
+	
+
+
+
+
 	<script>
 		$(function() {
+			
+			
+			var ModForm = $("#ModForm");
+			var CloseForm = $("#CloseForm");
+			
+			
+			
+			
+			
+			
+			
 			var operForm = $("#operForm");
 
 			//list

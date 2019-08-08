@@ -14,6 +14,7 @@ public class StudentVO {
 	private String stuGender;
 	private String stuPhonenum;
 	private String stuEmail;
+	private String stuEmail2;
 	private String stuLevel;	
 	private boolean enabled;
 	

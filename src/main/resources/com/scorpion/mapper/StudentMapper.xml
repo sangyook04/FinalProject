@@ -14,10 +14,14 @@
       <result property="stuGender" column="stugender"/>
       <result property="stuPhonenum" column="stuphonenum"/>
       <result property="stuEmail" column="stuemail"/>
+      <result property="stuEmail2" column="stuemail2"/>
       <result property="stuLevel" column="stulevel"/>
-
+ 		
       <collection property="authList" resultMap="authMap">
       </collection>
+      
+      
+      
    </resultMap>
   
    <resultMap type="com.scorpion.domain.AuthorityVO" id="authMap">
@@ -101,18 +105,29 @@
   	WHERE  	stuid = #{stuId}
   </update>
   
-<!--   <delete id="delete">
-  	DELETE FROM notice WHERE notIndex = #{notIndex}
+  <delete id="delete">
+  	DELETE FROM student WHERE stuid = #{stuId}
   </delete> 
- -->
+
+
+	 <update id="drop">
+  	UPDATE	student
+  	SET	  enabled = '0'
+  	WHERE  	stuid = #{user_id}
+	  </update>
+
+
+
+
+	
 
 
 
   <insert id="insertSelectKey">
   	INSERT INTO student (stuid, stupassword, stuname,
-  							stuaddress, stugender, stuphonenum, stuemail, auth)
+  							stuaddress, stugender, stuphonenum, stuemail, stuemail2, auth)
   	VALUES(#{stuId}, #{stuPassword}, #{stuName} , #{stuAddress}, #{stuGender},
-  	 #{stuPhonenum}, #{stuEmail},'ROLE_STUDENT')
+  	 #{stuPhonenum}, #{stuEmail}, #{stuEmail2},'ROLE_STUDENT')
   </insert>  
   
  

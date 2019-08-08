@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css"
 	href="../../../resources/css/adminheaderfooter.css">
    
-   <!-- 주소창 -->
+  <!-- 주소창 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample4_execDaumPostcode() {
@@ -50,16 +50,24 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                //document.getElementById('sample4_postcode').value = data.zonecode;
+                //document.getElementById("sample4_roadAddress").value = roadAddr;
+                //document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                var str = "";
+                str += "[" + data.zonecode + "] ";
+                str += roadAddr + ", ";
+                str += data.jibunAddress;
                 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    //document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    str += extraRoadAddr;
                 } else {
                     document.getElementById("sample4_extraAddress").value = '';
                 }
+                
+                document.getElementById('sample4_roadAddress').value = str;
             }
         }).open();
     }
@@ -69,91 +77,80 @@
 <script>
 //폼 입력 데이터 확인 함수
 function studentModCheck(){
-	var id = document.studentMod.stuId; 
-	var pwd = document.studentMod.stuPassword; 
-	var pwd2 = document.studentMod.stuPassword2; 
-	var usernm = document.studentMod.stuName;
-	var email1 = document.studentMod.stuEmail1;
-	var email2 = document.studentMod.stuEmail2;
-	var gender = document.studentMod.stuGender;
-	var post = document.studentMod.post;
-	var Address = document.studentMod.Address;
-	var phonenum1 = document.studentMod.phonenum1;
-	var phonenum2 = document.studentMod.phonenum2;
-	var phonenum3 = document.studentMod.phonenum3;
-
-	
-	if( id.value == '') {
-		alert('아이디를 입력해 주세요');
-		id.focus();
-		return;
-	} else if(id.value.length <= 8 || id.value.length >= 16) {
-		alert('아이디는 10자 이상 15자 이내로 입력해 주세요');
-		id.focus();
-		return;
-	} else if( pwd.value == ''){
-		alert('비밀번호를 입력해 주세요');
-		pwd.focus();
-		return;
-	} else if( pwd2.value == ''){
-		alert('비밀번호 확인을 입력해 주세요');
-		pwd2.focus();
-		return;
-	} else if( pwd.value !== pwd2.value ){
-		alert('비밀번호가 일치하지 않습니다.');	
-		//비밀번호 값을 모두 지우기
-		pwd.value = "";
-		pwd2.value = '';
-		pwd.focus();
-		return;
-	} else if( usernm.value == ''){
-		alert('이름을 입력해 주세요');
-		usernm.focus();
-		return;
-	} else if( email1.value == '' || email2.value == ''){
-		alert('이메일을 입력해 주세요');
-		email1.focus();
-		return;
-	} else if( birthdate.value == ''){
-		alert('생년월일을 입력해 주세요');
-		birthdate.focus();
-		return;
-	} else if( gender.value == ''){
-		alert('성별을 선택해 주세요');
-		gender.focus();
-		return;
-	}
-	
-	document.frm2.submit();
-	
+   var id = document.studentMod.stuId; 
+   var pwd = document.studentMod.stuPassword; 
+   var pwd2 = document.studentMod.stuPassword2; 
+   var usernm = document.studentMod.stuName;
+   var email1 = document.studentMod.stuEmail;
+   var email2 = document.studentMod.stuEmail2;
+   var gender = document.studentMod.stuGender;
+   var Address = document.studentMod.stuAddress;
+   var phonenum = document.studentMod.stuPhonenum;
+  
+    if(pwd.value.length <= 8 || pwd.value.length >= 16) {
+      alert('비밀번호는8자 이상 16자 이내로 입력해 주세요');
+      pwd.focus();
+      return;
+   } else if( pwd.value == ''){
+      alert('비밀번호를 입력해 주세요');
+      pwd.focus();
+      return;
+   } else if( pwd2.value == ''){
+      alert('비밀번호 확인을 입력해 주세요');
+      pwd2.focus();
+      return;
+   } else if( pwd.value !== pwd2.value ){
+      alert('비밀번호가 일치하지 않습니다.');   
+      //비밀번호 값을 모두 지우기
+      pwd.value = "";
+      pwd2.value = '';
+      pwd.focus();
+      return;
+   } else if( Address.value == ''){
+      alert('주소를 입력해 주세요');
+      Address.focus();
+      return;
+   } else if( phonenum.value == ''){
+      alert('연락처를 입력해 주세요');
+      phonenum.focus();
+      return;
+   } else if( email1.value == '' || email2.value == ''){
+      alert('이메일을 입력해 주세요');
+      email1.focus();
+      return;
+   }
+   
+   alert('정보 수정이 완료되었습니다.');
+   document.studentMod.submit();
+   
 }
 
 //이메일 자동완성 함수
 function setEmail2(email3Obj){
-	var email2 = document.studentMod.stuEmail2;
-	var email3 = email3Obj.value;
-	
-	if(email3 != 'direct'){	//직접 선택이 아닌 경우
-		email2.value = email3;
-	} else {//직접 선택인 경우
-		email2.value = "";
-		email2.focus();
-	}
+   var email2 = document.studentMod.stuEmail2;
+   var email3 = email3Obj.value;
+   
+   if(email3 != 'direct'){   //직접 선택이 아닌 경우
+      email2.value = email3;
+   } else {//직접 선택인 경우
+      email2.value = "";
+      email2.focus();
+   }
 }
 
 //비밀번호 확인 함수
 function pwChk(){
-	var pwd = document.studentMod.stuPassword; 
-	var pwd2 = document.studentMod.stuPasswordChk; 
-	
-	if (pwd.value != pwd2.value){
-		alert('비밀번호가 일치하지 않습니다.');
-		return;
-	} else if (pwd.value == ""){
-		alert('비밀번호를 입력해주세요.')
-		return;
-	}
-	alert('비밀번호가 일치합니다.');
+   var pwd = document.studentMod.stuPassword; 
+   var pwd2 = document.studentMod.stuPassword2; 
+   
+   if (pwd.value != pwd2.value){
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+   } else if (pwd.value == ""){
+      alert('비밀번호를 입력해주세요.')
+      return;
+   }
+   alert('비밀번호가 일치합니다.');
 }
 </script>
    
@@ -220,38 +217,73 @@ function pwChk(){
 				<div class="content">
 					<h1><b>학생 정보수정</b></h1>
 					<div class="studentMod">
-						<form role="form" name="studentMod" action="/admin/adminStudentMod" id="ModForm" method="post">
-						  <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-							<div class="textInputEx">아이디: <input type="text" name="stuId" value="${stuInfo.stuId }" readonly="readonly"></div>
-							<div class="textInput"><input type="password" placeholder="새로운 비밀번호 입력" name="stuPassword" class="joinInput"></div>
-							<div class="textInput"><input type="password" placeholder="비밀번호 확인" name="stuPasswordChk" class="joinInput"><button type="button" class="btn" onclick="pwChk()">비밀번호 확인</button></div>
-							<div class="textInputEx">이름: <input type="text" name="stuName" value="${stuInfo.stuName }"></div>
-							<div class="textInputEx">성별: <input type="text" name="stuGender" value="${stuInfo.stuGender}" readonly="readonly"></div>
-							<div class="textInput"><input type="text" placeholder="우편번호" name="stuPostcode" id="sample4_postcode" class="joinInput2" readonly="readonly"><input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기" class="btn"></div>
-							<div class="textInput"><input type="text" placeholder="도로명주소" name="stuRoadAdd" id="sample4_roadAddress" class="joinInput" readonly="readonly"></div>
-							<div class="textInput"><input type="text" placeholder="지번주소" name="stuJibunAdd" id="sample4_jibunAddress" class="joinInput" readonly="readonly"></div>
-							<div class="textInput"><input type="text" placeholder="상세주소" name="stuAddress" id="sample4_detailAddress" class="joinInput1"><input type="text" placeholder="참고항목" name="stuExtraAdd" id="sample4_extraAddress" class="joinInput1" readonly="readonly"></div>
-							<div class="textInput"><input type="tel" placeholder="연락처" name="stuPhonenum" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" name="stuPhonenum2" class="joinInput2"><span class="joinText">-</span><input type="tel" placeholder="연락처" name="stuPhonenum3" class="joinInput2"></div>
-							<div class="textInput"><input type="text" placeholder="이메일" name="stuEmail" class="joinInput2"><span class="joinText">@</span><input type="text" placeholder="이메일" name="stuEmail2" class="joinInput2">
-							<select class="joinInput2" name="stuEmail3" onchange="setEmail2(this)">
-													<option value="direct" selected>직접입력</option>
-													<option value="naver.com">naver.com</option>
-													<option value="daum.net">daum.net</option>
-													<option value="gmail.com">gmail.com</option></select></div>
-							<div class="textBtn"><button class="modBtn" id="joinBtnId" type="submit" data-oper="mod">수정</button>
-							<button class="closeBtn" id="joinBtnId" type="button" data-oper="close">취소</button>	</div>
-							
-													</form>
-												
-							
-											
-							<form id="CloseForm" action="/admin/adminStudentInfo" method="get">
-					<input type="hidden" id="stuId" name="stuId"
-						value="${stuInfo.stuId }">
-					</form> 
-													
-													
-													
+						<form role="form" name="studentMod"
+							action="/admin/adminStudentMod" id="ModForm" method="post">
+							<input type="hidden" name="${_csrf.parameterName }"
+								value="${_csrf.token }">
+							<div class="textInputEx">
+								아이디: <input type="text" name="stuId" value="${stuInfo.stuId }"
+									readonly="readonly">
+							</div>
+							<div class="textInput">
+								<input type="password" placeholder="비밀번호(8~16자 이내)"
+									name="stuPassword" class="joinInput">
+							</div>
+							<div class="textInput">
+								<input type="password" placeholder="비밀번호 확인" name="stuPassword2"
+									class="joinInput">
+								<button type="button" class="btn" onclick="pwChk()">비밀번호확인</button>
+							</div>
+							<div class="textInputEx">
+								이름: <input type="text" name="stuName"
+									value="${stuInfo.stuName }">
+							</div>
+							<div class="textInputEx">
+								성별: <input type="text" name="stuGender"
+									value="${stuInfo.stuGender}" readonly="readonly">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="주소" name="stuAddress"
+									id="sample4_roadAddress" class="joinInput" readonly="readonly">
+								<input type="button" onclick="sample4_execDaumPostcode()"
+									value="주소찾기" class="btn">
+							</div>
+							<div class="textInput">
+								<input type="tel" placeholder="연락처(- 없이 입력해주세요)"
+									name="stuPhonenum" class="joinInput">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="이메일" name="stuEmail"
+									class="joinInput2"><span class="joinText">@</span><input
+									type="text" placeholder="이메일" name="stuEmail2"
+									class="joinInput2"> <select class="joinInput2"
+									name="stuEmail3" onchange="setEmail2(this)">
+									<option value="direct" selected>직접입력</option>
+									<option value="naver.com">naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="gmail.com">gmail.com</option>
+								</select>
+							</div>
+
+							<div class="textBtn">
+								<input id="modBtn" type="button" onclick="studentModCheck()"
+									value="수정">
+
+								<button class="closeBtn" id="joinBtnId" type="button"
+									data-oper="close">취소</button>
+							</div>
+
+						</form>
+
+
+
+						<form id="CloseForm" action="/admin/adminStudentInfo" method="get">
+							<input type="hidden" id="stuId" name="stuId"
+								value="${stuMyInfo.stuId }">
+						</form>
+
+
+
 					</div>
 				</div>
 			</div>
@@ -262,22 +294,10 @@ function pwChk(){
 	
 	   <script>
 		$(function() {
-			var ModForm = $("#ModForm");
+			
 			var CloseForm = $("#CloseForm");
 		
-			//modify
-			$('button[data-oper="mod"]').on("click", function(e){
-			      
-			      var conf = confirm("수정이 완료되었습니다.");
-			      alert(conf);
-			      
-			      if(conf == true){
-			     
-			         $("#ModForm").submit();
-			      } 
-			   });
-			
-			
+		
 			
 			//close
 			$('button[data-oper="close"]').on("click", function(e) {
