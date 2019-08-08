@@ -14,6 +14,7 @@
    <link rel="stylesheet" type="text/css" href="../../../resources/css/common.css">
    <link rel="stylesheet" type="text/css" href="../../../resources/css/main2.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
 
    <script>
    		$(document).ready(function(){
@@ -34,82 +35,24 @@
 </head>
 <body>
 	<div id="wrap">
-		<header>
-			<nav>
-				<div class="inner">
-					<div class="headerContent">
-						<div class="mainlogo"></div>
-						<ul class="mainmenu">
-							<li><a href="#">스터디 찾기</a></li>
-							<li><a href="#">레벨 테스트</a></li>
-							<li><a href="#">공지사항</a></li>
-							<li class="one"><a href="#">고객센터</a>
-								<ul class="callsenterSub">
-								
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">QnA</a></li>
-								</ul>
-							</li>
-						</ul>
-						<ul class="gnb">
-							<li><a href="#">로그인</a></li>
-							<li><a href="#">학생 회원가입</a></li>
-							<li><a href="#">리더 시작하기</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
+		<%@ include file="../common/header.jsp" %>
 		<div id="container">
 			<div class="inner">
 				<div class="content">
 					<h1>로그인</h1>
-					<div class="msg"><c:out value="${ msg }"/></div>
-					<div class="msg"><c:out value="${ logout }"/></div>
+					<div class="msg"><c:out value="${ msg }"/><c:out value="${ logout }"/></div>
 					<form method="post" action="/login">
-						<div class="textInput"><input type="text" name="username" placeholder="아이디" autofocus></div>
-						<div class="textInput"><input type="password" name="password" placeholder="비밀번호"></div>
-						<div class="find"><a href="#">아이디 찾기</a>/<a href="#">비밀번호 찾기</a></div>
-						<div class="textInput"><input type="submit" value="LOGIN" class="loginBtn"></div>
+						<div class="loginInput"><input type="text" name="username" placeholder="아이디" autofocus></div>
+						<div class="loginInput"><input type="password" name="password" placeholder="비밀번호"></div>
+						<div class="find"><a href="/common/findId">아이디 찾기</a>/<a href="/common/findPw">비밀번호 찾기</a></div>
+						<div class="loginInput"><input type="submit" value="LOGIN" class="loginBtn"></div>
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 					</form>
 				</div>
 			</div>
 		</div>
 		<!-- container -->
-		<footer>
-			<div class="inner">
-				<div class="footArea">
-					<div class="footerLeft">
-						<div class="callNumber">
-							<b>고객센터</b><strong> 1588-0000</strong> 평일 09:00~18:00(공휴일 제외)
-						</div>
-						<div class="footerinfo">
-							<ul>
-								<li><a href="#">개인정보 처리방침</a></li>
-								<li><a href="#">서비스약관</a></li>
-							</ul>
-						</div>
-						<address>서울특별시 마포구 서교동 447-5 풍성빌딩 쌍용강북교육센터</address>
-					</div>
-					<div class="footerRight">
-						<div class="sns">
-							<a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
-							<a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
-							<a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_facebook.png"
-								alt="페이스북"></a> <a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_kakaostory.png"
-								alt="카카오스토리"></a>
-						</div>
-					</div>
-				</div>
-				<div class="copyright">Copyrightⓒ AGUMON. All Right Reserved</div>
-			</div>
-			<!-- inner -->
-		</footer>
+		<%@ include file="../common/footer.jsp" %>
 	</div>
 	<!-- wrap -->
 </body>

@@ -22,6 +22,8 @@
 	href="../../../resources/css/main2.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="../../resources/css/headerfooter.css">
 
 <!-- 주소창 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -51,16 +53,24 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                //document.getElementById('sample4_postcode').value = data.zonecode;
+                //document.getElementById("sample4_roadAddress").value = roadAddr;
+                //document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                var str = "";
+                str += "[" + data.zonecode + "] ";
+                str += roadAddr + ", ";
+                str += data.jibunAddress;
                 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    //document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    str += extraRoadAddr;
                 } else {
                     document.getElementById("sample4_extraAddress").value = '';
                 }
+                
+                document.getElementById('sample4_roadAddress').value = str;
             }
         }).open();
     }
@@ -74,14 +84,11 @@ function leaderJoinCheck(){
 	var pwd = document.leaderJoin.leaPassword; 
 	var pwd2 = document.leaderJoin.leaPassword2; 
 	var usernm = document.leaderJoin.leaName;
-	var email1 = document.leaderJoin.leaEmail1;
+	var email1 = document.leaderJoin.leaEmail;
 	var email2 = document.leaderJoin.leaEmail2;
 	var gender = document.leaderJoin.leaGender;
-	var post = document.leaderJoin.post;
-	var Address = document.leaderJoin.Address;
-	var phonenum1 = document.leaderJoin.phonenum1;
-	var phonenum2 = document.leaderJoin.phonenum2;
-	var phonenum3 = document.leaderJoin.phonenum3;
+	var Address = document.leaderJoin.leaAddress;
+	var phonenum = document.leaderJoin.leaPhonenum;
 	var bank = document.leaderJoin.leaBank;
 	var account = document.leaderJoin.leaAccount;
 	var introduce = document.leaderJoin.leaIntroduce;
@@ -113,21 +120,33 @@ function leaderJoinCheck(){
 		alert('이름을 입력해 주세요');
 		usernm.focus();
 		return;
+	} else if( gender.value == ''){
+		alert('성별을 선택해 주세요');
+		return;
+	} else if( Address.value == ''){
+		alert('주소를 입력해 주세요');
+		Address.focus();
+		return;
+	} else if( phonenum.value == ''){
+		alert('연락처를 입력해 주세요');
+		phonenum.focus();
+		return;
 	} else if( email1.value == '' || email2.value == ''){
 		alert('이메일을 입력해 주세요');
 		email1.focus();
 		return;
-	} else if( birthdate.value == ''){
-		alert('생년월일을 입력해 주세요');
-		birthdate.focus();
+	} else if( account.value == ''){
+		alert('계좌번호를 입력해 주세요');
+		account.focus();
 		return;
-	} else if( gender.value == ''){
-		alert('성별을 선택해 주세요');
-		gender.focus();
+	} else if( introduce.value == ''){
+		alert('자기소개를 입력해 주세요');
+		introduce.focus();
 		return;
 	}
 	
-	document.frm2.submit();
+	alert('리더 회원가입 신청이 완료되었습니다.');
+	document.leaderJoin.submit();
 	
 }
 
@@ -179,39 +198,17 @@ function pwChk(){
 </head>
 <body>
 	<div id="wrap">
-		<header>
-			<nav>
-				<div class="inner">
-					<div class="headerContent">
-						<div class="mainlogo"></div>
-						<ul class="mainmenu">
-							<li><a href="#">스터디 찾기</a></li>
-							<li><a href="#">레벨 테스트</a></li>
-							<li><a href="#">공지사항</a></li>
-							<li class="one"><a href="#">고객센터</a>
-								<ul class="callsenterSub">
-
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">QnA</a></li>
-								</ul></li>
-						</ul>
-						<ul class="gnb">
-							<li><a href="#">로그인</a></li>
-							<li><a href="#">학생 회원가입</a></li>
-							<li><a href="#">리더 시작하기</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
+		<%@ include file="../common/header.jsp"%>
 		<div id="container">
 
 			<div class="inner">
 				<div class="content">
 					<h1>리더 회원가입</h1>
 					<div class="leaderJoin">
-						<form role="form" name="leaderJoin" action="/common/leaderJoin" method="post">
-							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+						<form role="form" name="leaderJoin" action="/common/leaderJoin"
+							method="post">
+							<input type="hidden" name="${_csrf.parameterName }"
+								value="${_csrf.token }">
 							<div class="textInput">
 								<input type="text" placeholder="아이디" name="leaId"
 									class="joinInput">
@@ -222,8 +219,8 @@ function pwChk(){
 									class="joinInput">
 							</div>
 							<div class="textInput">
-								<input type="password" placeholder="비밀번호 확인"
-									name="leaPasswordChk" class="joinInput">
+								<input type="password" placeholder="비밀번호 확인" name="leaPassword2"
+									class="joinInput">
 								<button type="button" class="btn" onclick="pwChk()">비밀번호
 									확인</button>
 							</div>
@@ -238,33 +235,14 @@ function pwChk(){
 									name="leaGender" value="f">여</label>
 							</div>
 							<div class="textInput">
-								<input type="text" placeholder="우편번호" name="leaPostcode"
-									id="sample4_postcode" class="joinInput2" readonly="readonly"><input
-									type="button" onclick="sample4_execDaumPostcode()" value="주소찾기"
-									class="btn">
-							</div>
-							<div class="textInput">
-								<input type="text" placeholder="도로명주소" name="leaRoadAdd"
+								<input type="text" placeholder="주소" name="leaAddress"
 									id="sample4_roadAddress" class="joinInput" readonly="readonly">
+								<input type="button" onclick="sample4_execDaumPostcode()"
+									value="주소찾기" class="btn">
 							</div>
 							<div class="textInput">
-								<input type="text" placeholder="지번주소" name="leaJibunAdd"
-									id="sample4_jibunAddress" class="joinInput" readonly="readonly">
-							</div>
-							<div class="textInput">
-								<input type="text" placeholder="상세주소" name="leaAddress"
-									id="sample4_detailAddress" class="joinInput1"><input
-									type="text" placeholder="참고항목" name="leaExtraAdd"
-									id="sample4_extraAddress" class="joinInput1"
-									readonly="readonly">
-							</div>
-							<div class="textInput">
-								<input type="tel" placeholder="연락처" name="leaPhonenum"
-									class="joinInput2"><span class="joinText">-</span><input
-									type="tel" placeholder="연락처" name="leaPhonenum2"
-									class="joinInput2"><span class="joinText">-</span><input
-									type="tel" placeholder="연락처" name="leaPhonenum3"
-									class="joinInput2">
+								<input type="tel" placeholder="연락처(- 없이 입력해주세요)"
+									name="leaPhonenum" class="joinInput">
 							</div>
 							<div class="textInput">
 								<input type="text" placeholder="이메일" name="leaEmail"
@@ -292,26 +270,21 @@ function pwChk(){
 									placeholder="자기소개"></textarea>
 							</div>
 							<div class="textInput">
-								<div class='uploadDiv'>
-									<input type="file" name="leaImage">
-								</div>
+							<!-- 첨부파일 추가 -->
+			            	<div class='uploadDiv'>
+								<input type="file" name="leaImage" multiple>
 							</div>
-
-							<!-- 섬네일 이미지 원본 표시 -->
-							<div class="bigPictureWrapper">
-								<div class="bigPicture"></div>
-							</div>
-							<!-- END 섬네일 이미지 원본 표시 -->
-
+							
 							<!-- 업로드 결과 출력 -->
 							<div class="uploadResult">
 								<ul>
 								</ul>
-							</div> 
+							</div>	
 							<!-- END 업로드 결과 출력 -->
-							
+
 							<div class="textBtn">
-								<button id="joinBtn" type="submit">가입신청</button>
+								<input id="joinBtn" type="button" onclick="leaderJoinCheck()"
+									value="가입신청">
 							</div>
 						</form>
 					</div>
@@ -320,61 +293,22 @@ function pwChk(){
 
 		</div>
 		<!-- container -->
-		<footer>
-			<div class="inner">
-				<div class="footArea">
-					<div class="footerLeft">
-						<div class="callNumber">
-							<b>고객센터</b><strong> 1588-0000</strong> 평일 09:00~18:00(공휴일 제외)
-						</div>
-						<div class="footerinfo">
-							<ul>
-								<li><a href="#">개인정보 처리방침</a></li>
-								<li><a href="#">서비스약관</a></li>
-							</ul>
-						</div>
-						<address>서울특별시 마포구 서교동 447-5 풍성빌딩 쌍용강북교육센터</address>
-					</div>
-					<div class="footerRight">
-						<div class="sns">
-							<a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_instar.png"
-								alt="인스타"></a> <a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_blog.png"
-								alt="블로그"></a> <a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_facebook.png"
-								alt="페이스북"></a> <a href="#" target="_blank"><img
-								src="../../../resources/img/GumonMain/img_sns_kakaostory.png"
-								alt="카카오스토리"></a>
-						</div>
-					</div>
-				</div>
-				<div class="copyright">Copyrightⓒ AGUMON. All Right Reserved</div>
-			</div>
-			<!-- inner -->
-		</footer>
+		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<!-- wrap -->
 
-	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-	<script>
+ <script>
  $(function(e){
 	var formObj = $("form[role='form']");
 	 
 	//submit 버튼 클릭 막기
-	$("button[type='submit']").on('click', function(e){
+	$("input[id='joinBtn']").on('click', function(e){
 		 e.preventDefault();
-		 
-		 console.log("submit clicked");
 		 
 		 var str = "";
 		 $('.uploadResult ul li').each(function(i, obj){	
-			 
 			 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
-			 console.dir('jobj : ' + obj);
-			 
+			 console.log('jobj : ' + obj);
 			 str += "<input type='hidden' " +
 			 		"       name='pictureList[" + i + "].fileName' " +
 			 		"       value='" + jobj.data("filename") + "'>";
@@ -406,7 +340,7 @@ function pwChk(){
 		}
 		if(regex.test(fileName)) {	//확장자 확인
 			alert("업로드 불가 파일");	//제한 확장자인 경우 알림 메시지 출력
-			return false;
+			return false
 		}
 		return true;	//파일 크기 및 확장자 문제가 없는 경우
 	}//END checkExension()
@@ -424,6 +358,8 @@ function pwChk(){
 		var inputFile = $("input[name='leaImage']");
 		var files = inputFile[0].files;
 		
+		console.log(files);
+		
 		//formData 객체에 선택한 파일 추가
 		for(var i=0 ; i<files.length ; i++){
 			//확장자 및 파일 크기 확인
@@ -433,21 +369,25 @@ function pwChk(){
 			formData.append("uploadFile", files[i]);
 		}
 		
-		$.ajax ({
-			  url : '/upload/uploadAjaxAction',
-			  processData : false,
-			  contentType : false,
-			  beforeSend : function(xhr){
-				  xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			  },
-			  data : formData,
-			  type : 'POST',
-			  dataType : 'json',
-			  success : function(result) {
-				  console.log(result);
-				  showUploadResult(result);
-			  }
-		}); //$.ajax
+		$.ajax({
+			type : 'post',
+			url :'/uploadAjaxAction',
+			data : formData,
+			dataType : 'json',
+			contentType : false,
+			processData : false,
+			beforeSend  : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			success : function(result){
+				console.log(result);	//콘솔로 결과 확인
+				
+				showUploadResult(result); //
+				
+				//복사해 둔 div를 이용하여 업로드 영역 초기화
+				//$('.uploadDiv').html(cloneObj.html());
+			}
+		})//END .ajax()
 	});//END uploadBtn 이벤트 처리 
 	
 	//업로드 결과 출력 처리
@@ -461,8 +401,11 @@ function pwChk(){
 		$(uploadResultArr).each(function(i, obj){
 			//업로드 파일명 <li>추가
 			if(obj.image){	//이미지인 경우
-				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid  + "_" + obj.fileName);
-				str += "<li data-path='" + obj.uploadPath + "' " 		+
+				var fileCallPath = encodeURIComponent(obj.uploadPath + 
+												      "/s_" + obj.uuid  + "_" +
+												      obj.fileName);
+
+			str += "<li data-path='" + obj.uploadPath + "' " 			+
 					   "data-uuid='" + obj.uuid + "' " 					+
 					   "data-filename='" + obj.fileName + "'" 			+
 					   "data-type='" + obj.image + "'>" 				+ 
@@ -495,8 +438,46 @@ function pwChk(){
 		});
 		uploadUL.append(str);
 	}//END showUploadResult()
- });
-</script>
+	
+	//X 버튼 이벤트 처리
+	$('.uploadResult').on('click', 'button', function(e){
+		var targetFile = $(this).data('file');
+		var type	   = $(this).data('type');
+		var targetLi   = $(this).closest('li');
+		
+		$.ajax({
+			type : 'post',
+			url :'/deleteFile',
+			data : {fileName:targetFile, type:type} ,
+			dataType : 'text',
+			beforeSend : function(xhr){
+				xhr.setRequestHeader (csrfHeaderName, csrfTokenValue);
+			},
+			success : function(result){
+				alert(result);		//성공하면
+				targetLi.remove();	//해당 li 삭제
+			}
+		})//END .ajax()
+	});
+	//END X 표시 이벤트 처리
+	
+	//원본 이미지 숨기기 처리
+	$('.bigPictureWrapper').on('click', function(e){
+		$(".bigPicture").animate({ width:'0%', height:'0%'}, 1000);
+		setTimeout(()=>{ $(this).hide(); }, 1000);
+	});//END 원본 이미지 숨기기 처리
+});//END $
 
+//원본 이미지 표시 함수
+function showImage(fileCallPath){
+	//화면 가운데에 보이기
+	$('.bigPictureWrapper').css('display', 'flex').show();
+	
+	//이미지 및 효과 추가
+	$('.bigPicture').html("<img src='/display?fileName=" + 
+							encodeURI(fileCallPath) + "'>")
+					.animate( { width:'100%', height:'100%'}, 1000);
+}//END showImage()
+</script>  
 </body>
 </html>

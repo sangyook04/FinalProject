@@ -21,5 +21,6 @@ public interface LeaderService {
 	public boolean refusal(String leaderid);
 	public boolean leaderUpdate(String leaderid);
 	public boolean remove(String leaderid);
+	public LeaderVO findId(String leaName, String leaPhonenum);
 	
 }

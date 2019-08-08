@@ -88,6 +88,9 @@ public class LeaderServiceImple implements LeaderService {
 	public boolean modify(LeaderVO leader) {
 		log.info("modify......" + leader);
 		
+		String encPassword = pwencoder.encode(leader.getLeaPassword());
+		leader.setLeaPassword(encPassword);
+		
 		return mapper.update(leader) == 1;
 	}
 
@@ -117,6 +120,12 @@ public class LeaderServiceImple implements LeaderService {
 	public List<PictureVO> getPictureList(String leaderid) {
 		log.info("get Picture List by leaderId " + leaderid);
 		return picturemapper.findByLeaId(leaderid);
+	}
+
+	@Override
+	public LeaderVO findId(String leaName, String leaPhonenum) {
+		
+		return mapper.findId(leaName, leaPhonenum);
 	}
 
 }

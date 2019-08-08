@@ -40,6 +40,7 @@ public class CommonController {
       }
    }
    
+   @PreAuthorize("isAnonymous()")
    @PostMapping("/login")
    public String login(@RequestParam("id") String id, 
          @RequestParam("pw") String pw) {
@@ -55,19 +56,22 @@ public class CommonController {
       
       return "/common/logout";
    }
-   
+
+   @PreAuthorize("isAnonymous()")
    @GetMapping("/findId")
    public void findId(String error, String logout, Model model) {
       if(error != null){
          model.addAttribute("msg", "입력하신 정보와 일치하는 회원이 없습니다.");
       }
    }
-   
+
+   @PreAuthorize("isAnonymous()")
    @PostMapping("/findId")
-   public String findId(@RequestParam("id") String id, 
-         @RequestParam("tel") String tel) {
+   public String findIdPost(@RequestParam("leaName") String name, @RequestParam("leaPhonenum") String tel, Model model) {
       
-      return "/common/login";
+	   model.addAttribute("find", service.findId(name, tel));
+	   
+      return "/common/findId";
    }
    
    @GetMapping("/findPw")
@@ -76,10 +80,7 @@ public class CommonController {
    }
    
    @PostMapping("/findPw")
-   public String findPw(@RequestParam("name") String name, 
-         @RequestParam("id") String id, 
-         @RequestParam("tel") String tel, 
-         @RequestParam("pw") String pw) {
+   public String findPw(@RequestParam("name") String name, @RequestParam("id") String id, @RequestParam("tel") String tel, @RequestParam("pw") String pw) {
       
       return "/common/login";
    }
@@ -105,6 +106,7 @@ public class CommonController {
    @PreAuthorize("isAnonymous()")
    @PostMapping("/leaderJoin")
    public String leaderJoin(LeaderVO leader, RedirectAttributes rttr) {
+	   
       log.info("register : " + leader);
       
       if(leader.getPictureList() != null) {
@@ -112,15 +114,18 @@ public class CommonController {
       }
       
       service.register(leader);
+      rttr.addFlashAttribute("result", leader.getLeaId());
       
       return "redirect:/common/main";
    }
-   
-   @GetMapping("/studentrJoin")
+
+   @PreAuthorize("isAnonymous()")
+   @GetMapping("/studentJoin")
    public void studentJoin() {
       
    }
-   
+
+   @PreAuthorize("isAnonymous()")
    @PostMapping("/studentJoin")
    public String studentJoin(LeaderVO leader) {
       return "/common/main";
