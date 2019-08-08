@@ -51,9 +51,9 @@ public class StudentServiceImple implements StudentService {
 	}
 
 	@Override
-	public boolean remove(String stuid) {
+	public boolean remove(StudentVO student) {
 		
-		return false;
+		 return mapper.delete(student)==1;
 	}
 
 	@Override
@@ -83,7 +83,15 @@ public class StudentServiceImple implements StudentService {
 	@Override
 	public boolean stuModify(StudentVO student) {
 		
+		 String encPassword = pwencoder.encode(student.getStuPassword());
+		student.setStuPassword(encPassword);
+		
 		 return mapper.update(student)==1;
+	}
+
+	@Override
+	public boolean drop(String user_id) {
+		 return mapper.drop(user_id)==1;
 	}
 
 }

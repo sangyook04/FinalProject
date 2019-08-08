@@ -11,11 +11,13 @@ public interface StudentService {
 	public StudentVO info(String stuid);
 	public boolean modify(StudentVO student);
 	public boolean stuModify(StudentVO student);
-	public boolean remove(String stuid);
+	public boolean remove(StudentVO student);
+	
 	public StudentVO levelGet(String stuid);
 	public StudentVO get(String stuid);
 	public void register(StudentVO student);
-	
+	public boolean drop(String user_id);
+//	public boolean drop(String stuid);
 
 	
 	

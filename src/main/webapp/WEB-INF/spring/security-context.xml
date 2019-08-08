@@ -32,7 +32,7 @@ union
 select stuid id,stupassword,enabled from student
 union
 select admid,admpassword,enabled from admin)
-where id=?
+where id=? 
 "
                                                     authorities-by-username-query="select * from 
 (select leaid id, auth from leader
@@ -40,7 +40,7 @@ union
 select stuid id, auth from student
 union
 select admid id, auth from admin)
-where id=?"></security:jdbc-user-service>
+where id=? "></security:jdbc-user-service>
          
          
          
