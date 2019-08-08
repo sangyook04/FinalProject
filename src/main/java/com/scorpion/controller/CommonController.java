@@ -144,7 +144,7 @@ public class CommonController {
    
    
    	@PreAuthorize("isAnonymous()")
-	@GetMapping({ "/noticeList", "/adminNoticeManage" })
+	@GetMapping( "/noticeList")
 	public void list(Model model, Criteria cri) {
 		
 
@@ -154,7 +154,7 @@ public class CommonController {
 	}
 
    	@PreAuthorize("isAnonymous()")
-	@GetMapping({"/noticeView","/adminNoticeDetail","/adminNoticeMod"})
+	@GetMapping("/noticeView")
 	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("view", notservice.get(notIndex));
 	}
