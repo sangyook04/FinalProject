@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ <%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -124,12 +126,14 @@
 				<button data-oper="adminNoticeRem" id="remBtn">삭제</button>
 				<button data-oper="adminNoticeManage" id="listBtn">목록</button>
 				 -->
-				<form id="operForm" action="/notice/adminNoticeManage" method="get">
+				<form id="operForm" action="/admin/adminNoticeManage" method="get">
+				
 					<input type="hidden" id="notIndex" name="notIndex"
 						value="${view.notIndex }">
 				</form>
 
-				<form id="deleteForm" action="/notice/remove" method="post">
+				<form id="deleteForm" action="/admin/remove" method="post">
+				 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                   <input type="hidden" id="notIndex" name="notIndex" value="${view.notIndex}">
                </form>
 
@@ -149,7 +153,7 @@
 			//modify
 			
 			$('button[data-oper="adminNoticeMod"]').on("click", function(e) {
-				operForm.attr("action", "/notice/adminNoticeMod").submit();
+				operForm.attr("action", "/admin/adminNoticeMod").submit();
 			});
 			
 			
@@ -157,7 +161,7 @@
 			//list
 			$('button[data-oper="adminNoticeManage"]').on("click", function(e) {
 				operForm.find('#notIndex').remove();
-				operForm.attr("action", "/notice/adminNoticeManage");
+				operForm.attr("action", "/admin/adminNoticeManage");
 				operForm.submit();
 			});
 

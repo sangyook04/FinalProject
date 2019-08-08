@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+ <%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -123,7 +125,7 @@
 					
 				
 		<!-- 액션폼 -->
-					<form id='actionForm' action="/notice/adminNoticeManage" method="get">
+					<form id='actionForm' action="/admin/adminNoticeManage" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 						<%-- <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
@@ -194,7 +196,7 @@
 
 		 //등록 이벤트
 		$("#listBtn").on("click", function() {
-			self.location = "/notice/adminNoticeRegister";
+			self.location = "/admin/adminNoticeRegister";
 		}); 
 
 		//상세보기 페이지 이동
@@ -206,7 +208,7 @@
 							actionForm
 									.append("<input type='hidden' name='notIndex' value='"
 											+ $(this).attr("href") + "'>");
-							actionForm.attr("action", "/notice/adminNoticeDetail");
+							actionForm.attr("action", "/admin/adminNoticeDetail");
 							actionForm.submit();
 
 						});

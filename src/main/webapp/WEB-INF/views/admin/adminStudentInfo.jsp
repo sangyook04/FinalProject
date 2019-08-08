@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -101,12 +103,12 @@
             </div>
            	
            	
-           	  <form id="operForm" action="/student/adminStudentMod" method="get">
+           	  <form id="operForm" action="/admin/adminStudentMod" method="get">
 					<input type="hidden" id="stuId" name="stuId"
 						value="${stuInfo.stuId }">
 				</form> 
            	
-           	 <form id="operForm" action="/student/adminStudentList" method="get">
+           	 <form id="operForm" action="/admin/adminStudentList" method="get">
 					<input type="hidden" id="stuId" name="stuId"
 						value="${stuInfo.stuId }">
 				</form> 
@@ -125,7 +127,7 @@
 			//modify
 			
 			$('button[data-oper="adminStudentMod"]').on("click", function(e) {
-				operForm.attr("action", "/student/adminStudentMod").submit();
+				operForm.attr("action", "/admin/adminStudentMod").submit();
 			});
 			
 			
@@ -134,7 +136,7 @@
 			//list
 			$('button[data-oper="adminStudentList"]').on("click", function(e) {
 				operForm.find('#stuId').remove();
-				operForm.attr("action", "/student/adminStudentList");
+				operForm.attr("action", "/admin/adminStudentList");
 				operForm.submit();
 			});
 

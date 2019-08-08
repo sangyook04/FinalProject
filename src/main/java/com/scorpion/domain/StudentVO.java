@@ -1,5 +1,7 @@
 package com.scorpion.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,8 +14,12 @@ public class StudentVO {
 	private String stuGender;
 	private String stuPhonenum;
 	private String stuEmail;
-	private String stuLevel;
-	private String auth;
+	private String stuLevel;	
+	private boolean enabled;
+	
+	private List<AuthorityVO> authList;
+
+	
  	
 
 }

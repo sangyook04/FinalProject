@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ <%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -89,7 +91,8 @@
 				</h2>
 
 				<div class="noticeContenttable">
-					<form role="form" action="/notice/adminNoticeMod" method="post">
+					<form role="form" action="/admin/adminNoticeMod" method="post">
+				  <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<input type="hidden" class="form-control" name="notIndex" value="${view.notIndex}">
 						<table class="table">	
 							<thead>
@@ -148,7 +151,7 @@
 				var operation = $(this).data("oper");
 				
 				if(operation === "adminNoticeClose"){
-					formObj.attr("action", "/notice/adminNoticeManage").attr("method", "get");
+					formObj.attr("action", "/admin/adminNoticeManage").attr("method", "get");
 					
 				}else if(operation === 'adminNoticeMod'){
 					
