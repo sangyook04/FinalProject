@@ -4,21 +4,22 @@
 	<ul class="asdieMainMenu">
 		<li class="Mainli first">매출 관리
 			<ul class="asideSubmenu firstSub">
-				<li><a href="#">결제 내역</a></li>
+				<li><a href="/pay/paymentList">결제 내역</a></li>
 				<li class="firstSub2">입금 관리
 					<ul class="asideSubmenu2">
-						<li><a href="#">입금 전 목록</a></li>
-						<li><a href="#">입금 완료 목록</a></li>
+						<li><a href="/pay/beforeDeposit">입금 전 목록</a></li>
+						<li><a href="/pay/afterDeposit">입금 완료 목록</a></li>
 					</ul>
 				</li>
-				<li><a href="#">통계 관리</a></li>
+				<li><a href="/pay/manageList">통계 관리</a></li>
+				<li><a href="/pay/refundList">환불 요청 목록</a></li>
 			</ul>
 		</li>
-		<li class="Mainli"><a href="#">레벨테스트 관리</a></li>
+		<li class="Mainli"><a href="/level/list">레벨테스트 관리</a></li>
 		<li class="Mainli"><a href="#">공지사항 관리</a></li>
 		<li class="Mainli second">고객센터 관리
 			<ul class="asideSubmenu secondSub">
-				<li><a href="#">QnA 관리</a></li>
+				<li><a href="/admin/QnAlist">QnA 관리</a></li>
 				<li><a href="#">FAQ 관리</a></li>
 			</ul>
 		</li>

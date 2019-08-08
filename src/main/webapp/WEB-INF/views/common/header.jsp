@@ -44,7 +44,7 @@
 							</ul></li>
 						<li><sec:authentication property="principal.username" />
 							<!--학생 -->님</li>
-						<li><a class="LogOut" href="./common/logout">로그 아웃</a></li>
+						<li><a class="LogOut" href="/common/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_LEADER')">
@@ -65,7 +65,7 @@
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<ul class="gnb">
-						<li class="myPage"><a href="#">관리자 페이지</a>
+						<li class="myPage"><a href="/admin/main">관리자 페이지</a>
 						<li><sec:authentication property="principal.username" />
 							<!--관리자-->님</li>
 						<li><a class="LogOut" href="#">로그 아웃</a></li>
