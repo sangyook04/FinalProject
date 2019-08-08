@@ -65,6 +65,22 @@ public class PayController {
 	   return "redirect:/pay/myMoneyList?studentId=" + studentId;
    }
    
+   @GetMapping("/refundList")
+   public void refundList(Model model, Criteria cri) {
+	   model.addAttribute("list", refservice.getList(cri));
+	   model.addAttribute("pageMaker", new PageDTO(cri, refservice.getTotal(cri)));
+   }
+   
+   @PostMapping("/refundAccept")
+   public String refundAccept(@RequestParam("refIndex") Long refIndex, 
+		   @RequestParam("payIndex") Long payIndex, 
+		   Criteria cri, RedirectAttributes rttr) {
+      if(refservice.modify(refIndex) && service.refund(payIndex)) {
+    	  rttr.addAttribute("result","success");
+      }
+      return "redirect:/pay/refundList";
+   }
+   
    @GetMapping("/myMoneyList")
    public void myMoneyList(@RequestParam("studentId") String studentId, Model model, Criteria cri) {
       model.addAttribute("list", service.getMyMoneyList(cri, studentId));
@@ -89,7 +105,7 @@ public class PayController {
    }
    
    @GetMapping("/beforeDeposit")
-   public void beforeDeposit(Model model, Criteria cri, String deposit) {
+   public void beforeDeposit(Model model, Criteria cri) {
 //	   List<LeaderVO> leaderlist = new ArrayList<LeaderVO>();
 //	   List<PaymentVO> paylist = service.getBeforeDeposit(cri);
 //	   model.addAttribute("paylist", paylist);

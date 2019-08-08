@@ -3,6 +3,31 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.scorpion.mapper.RefundMapper">
+
+	<update id="update">
+	  	UPDATE	refund
+	  	SET		refsuccess = SYSDATE, refstate = '처리 완료'
+	  	WHERE  	refindex = #{refIndex}
+  	</update>
+
+	<select id="getTotalCount" resultType="int">
+	  	SELECT COUNT(*) FROM refund 
+	  	WHERE 
+	  	refsuccess is null
+  	</select>
+
+	<select id="getListWithPaging"
+  	      resultType="com.scorpion.domain.RefundVO">
+   	<![CDATA[
+  		SELECT	refindex, payindex, refrequest, refsuccess, refstate
+  		FROM	( SELECT 	/*+INDEX_DESC(refund SYS_C007416)*/
+  							rownum rn, refindex, payindex, refrequest, refsuccess, refstate
+  				  FROM 		refund
+  				  WHERE		refsuccess is null and rownum <= #{pageNum} * #{amount} )
+  		WHERE rn > (#{pageNum} - 1) * #{amount}
+  	]]>
+  </select>
+
 	<insert id="insertSelectKey">
 	    <selectKey keyProperty="refIndex" resultType="long"    
 	    			order="BEFORE">

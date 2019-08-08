@@ -18,6 +18,11 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class PaymentServiceImple implements PaymentService {
 
+	@Override
+	public boolean refund(Long payIndex) {
+		return mapper.refund(payIndex) == 1;
+	}
+
 	private PaymentMapper mapper;
 	
 	@Override
