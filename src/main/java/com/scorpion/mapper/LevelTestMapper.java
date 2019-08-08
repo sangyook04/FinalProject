@@ -14,4 +14,5 @@ public interface LevelTestMapper {
 	public List<LevelTestVO> getListWithPaging(Criteria cri);
 	public List<LevelTestVO> getList();
 	public List<LevelTestVO> getRandomExam();
+	public List<LevelTestVO> getRandom20Exam();
 }

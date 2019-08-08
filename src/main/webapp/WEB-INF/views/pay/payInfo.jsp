@@ -112,6 +112,7 @@
 						<button type="button" id="paymentBtn" class="btn btn-success">결제하기</button>
 					</div>
 				<form id="payForm" action="/pay/payment" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					<input type="hidden" name="stuId" value="${studentId}">
 					<input type="hidden" name="leaId" value="${study.leaId}">
 					<input type="hidden" name="studyIndex" value="${study.studyIndex}">

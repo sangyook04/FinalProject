@@ -84,6 +84,7 @@
 						
 					</div>
 				<form id="refundForm" action="/pay/refund" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					<input type="hidden" name="payIndex" value=${payIndex }>
 					<input type="hidden" name="studentId" value="rkdvnfms5">
 					<button type="submit" id="refundBtn" class="btn btn-primary">환불 하기</button>

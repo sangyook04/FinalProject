@@ -106,6 +106,7 @@
 		           </tbody>
 				</table>
 				<form id="depositForm" action="/pay/deposit" method="post">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 		           <%--  <input type="hidden" name="payIndex" value="${payment.payIndex }"> --%>
 		        </form>
 			</div>

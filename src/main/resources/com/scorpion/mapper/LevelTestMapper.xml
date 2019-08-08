@@ -4,6 +4,14 @@
   
 <mapper namespace="com.scorpion.mapper.LevelTestMapper">
 
+  <select id="getRandom20Exam" resultType="com.scorpion.domain.LevelTestVO">
+  <![CDATA[
+  	select * from  (select * from leveltest
+	order by dbms_random.value)
+	where rownum <= 20
+  ]]>
+  </select>
+
   <select id="getRandomExam" resultType="com.scorpion.domain.LevelTestVO">
   <![CDATA[
   	select * from  (select * from leveltest

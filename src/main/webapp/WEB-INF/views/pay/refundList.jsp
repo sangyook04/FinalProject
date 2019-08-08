@@ -150,6 +150,7 @@
 				
 				<!-- 액션폼 -->
 				<form id="actionForm" action="/pay/refundList" method="get">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				</form>
