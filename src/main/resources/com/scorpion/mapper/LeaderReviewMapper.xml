@@ -31,7 +31,7 @@
    
   
   <select id="getTotalCount" resultType="int">
-  	SELECT COUNT(*) FROM readerreview where <include refid="criteria"></include> leaid is not null
+  	SELECT COUNT(*) FROM leaderreview where <include refid="criteria"></include> leaid is not null
   	
   </select>
   
@@ -44,7 +44,7 @@
   		SELECT	revindex, leaid, stuid, revgrade,revcomment
   		FROM	( SELECT 	/*+INDEX_DESC(student SYS_C007432)*/
   							rownum rn, revindex, leaid, stuid, revgrade, revcomment
-  				  FROM 		readerreview
+  				  FROM 		leaderreview
   				  WHERE		
   				  ]]><include refid="criteria"></include><![CDATA[
   				  rownum <= #{pageNum} * #{amount} )
@@ -56,14 +56,14 @@
   
 
   <select id="read" resultType="com.scorpion.domain.LeaderReviewVO">
-  	 select * from readerreview where leaid = #{leaId}
+  	 select * from leaderreview where leaid = #{leaId}
 
   </select>
 
 
 
   <insert id="insertSelectKey">
-  	INSERT INTO readerreview (revindex, leaid, stuid,
+  	INSERT INTO leaderreview (revindex, leaid, stuid,
   							revgrade, revcomment)
   	VALUES(#{revIndex}, #{leaId}, #{stuId} , #{revGrade}, #{revComment})
   </insert>  
@@ -72,7 +72,7 @@
   <select id="getList" 
   		  resultType="com.scorpion.domain.LeaderReviewVO">
   	<![CDATA[
-  		SELECT * FROM readerreview WHERE leaid > 0
+  		SELECT * FROM leaderreview WHERE leaid > 0
   	]]>
   </select>
   

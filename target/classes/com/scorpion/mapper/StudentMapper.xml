@@ -5,6 +5,29 @@
 <mapper namespace="com.scorpion.mapper.StudentMapper">
   
   
+  <resultMap type="com.scorpion.domain.StudentVO" id="studentMap">
+      <id property="stuId" column = "stuid"/>
+      <result property="stuId" column="stuid"/>
+      <result property="stuPassword" column="stupassword"/>
+      <result property="stuName" column="stuname"/>
+      <result property="stuAddress" column="stuaddress"/>
+      <result property="stuGender" column="stugender"/>
+      <result property="stuPhonenum" column="stuphonenum"/>
+      <result property="stuEmail" column="stuemail"/>
+      <result property="stuLevel" column="stulevel"/>
+
+      <collection property="authList" resultMap="authMap">
+      </collection>
+   </resultMap>
+  
+   <resultMap type="com.scorpion.domain.AuthorityVO" id="authMap">
+      <result      property="auth"         column="auth"/>   
+   </resultMap>
+   
+   
+  
+
+  
     <!-- 쿼리 보관 -->
    <sql id="criteria">
   	<trim prefix="(" suffix=") AND " 
@@ -66,7 +89,7 @@
 
   
 
-  <select id="read" resultType="com.scorpion.domain.StudentVO">
+  <select id="read" resultMap="studentMap" >
   	 select * from student where stuid = #{stuId}
 
   </select>
@@ -82,9 +105,6 @@
   	DELETE FROM notice WHERE notIndex = #{notIndex}
   </delete> 
  -->
-
-
-
 
 
 

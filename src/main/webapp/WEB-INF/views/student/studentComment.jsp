@@ -64,25 +64,34 @@
 
 				<div class="containerContenttable">
 				
-				<form role="form" method="post" action="/leader/studentComment">
-			
-				<input type="text" id="notIndex" name="notIndex"
-						value="<sec:authentication property="principal.username"/>">
+				<form role="form" method="post" action="/student/studentComment">
+				 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+			<%-- 
+				<input type="hidden" id="stuId" name="stuId"
+						value="<sec:authentication property="principal.username"/>">  --%>
 				
 					<table class="table">
+					
 						<thead>
 							<tr>
 								<th scope="col">리더 아이디</th>
 								<th scope="col"><input type="text"
 								  name="leaId"	placeholder="리더 아이디를 입력해주세요."></th>
+								  
 								<th></th>
 								<th></th>
 							</tr>
 						</thead>
+						
 						<tbody>
+						
+						
 							<tr>
 								<th scope="row">평가 점수</th>
 								<td>
+								
+				<input type="hidden" id="stuId" name="stuId"
+						value="<sec:authentication property="principal.username"/>"> 
 									<div class="radiogComment">
 										<label class="radiolabel"><input
 											class="radioCommentRadio" type="radio" name="revGrade" value="1">1</label>
@@ -139,7 +148,7 @@
 			//list
 			$('button[data-oper="close"]').on("click", function(e) {
 				//operForm.find('#notIndex').remove();
-				operForm.attr("action", "/notice/adminNoticeManage");
+				operForm.attr("action", "/common/main");
 				operForm.submit();
 			});
 

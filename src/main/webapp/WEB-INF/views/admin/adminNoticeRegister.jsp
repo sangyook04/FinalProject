@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ <%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>  
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -85,7 +87,8 @@
 				</h2>
 
 				<div class="containerContenttable">
-					<form role="form" method="post" action="/notice/adminNoticeRegister">
+					<form role="form" method="post" action="/admin/adminNoticeRegister">
+					  <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 						<table class="table">
 							<thead>
 								<tr>
@@ -107,7 +110,7 @@
 					
 					
 					<button data-oper="close" id="closeBtn2" class="closeBtn">취소</button>
-					<form id="operForm" action="/notice/adminNoticeManage" method="get">
+					<form id="operForm" action="/admin/adminNoticeManage" method="get">
 					<input type="hidden" id="notIndex" name="notIndex"
 						value="${content.notIndex }">
 					
@@ -128,7 +131,7 @@
 			//list
 			$('button[data-oper="close"]').on("click", function(e) {
 				//operForm.find('#notIndex').remove();
-				operForm.attr("action", "/notice/adminNoticeManage");
+				operForm.attr("action", "/admin/adminNoticeManage");
 				operForm.submit();
 			});
 

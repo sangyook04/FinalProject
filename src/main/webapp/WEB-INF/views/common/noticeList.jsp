@@ -93,7 +93,7 @@
 				
 		
 		<!-- 액션폼 -->
-					<form id='actionForm' action="/notice/noticeList" method="get">
+					<form id='actionForm' action="/common/noticeList" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 						<%-- <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
@@ -153,7 +153,7 @@
 							actionForm
 									.append("<input type='hidden' name='notIndex' value='"
 											+ $(this).attr("href") + "'>");
-							actionForm.attr("action", "/notice/noticeView");
+							actionForm.attr("action", "/common/noticeView");
 							actionForm.submit();
 
 						});

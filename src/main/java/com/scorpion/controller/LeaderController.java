@@ -40,26 +40,24 @@ public class LeaderController {
       model.addAttribute("leader", service.get(leaderid));
    }
    
-   @GetMapping("/studentComment")
-   public void review() {
-      
-   }
-   
-   
-   
-   
-   
-   @PostMapping("/studentComment")
-   public String review(LeaderReviewVO review, RedirectAttributes rttr) {
-      
-      log.info("review register : " + review);
-      
-      revservice.register(review);
-      rttr.addFlashAttribute("review", review.getRevIndex());
-      return "redirect:/common/main";
-      
-      
-   }
+//   @GetMapping("/studentComment")
+//   public void review() {
+//      
+//   }
+//   
+//   
+//   
+//   @PostMapping("/studentComment")
+//   public String review(LeaderReviewVO review, RedirectAttributes rttr) {
+//      
+//      log.info("review register : " + review);
+//      
+//      revservice.register(review);
+//      rttr.addFlashAttribute("review", review.getRevIndex());
+//      return "redirect:/common/main";
+//      
+//      
+//   }
    
    @GetMapping("/list")
    public void list() {
