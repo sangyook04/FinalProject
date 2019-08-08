@@ -7,6 +7,7 @@ import com.scorpion.domain.LevelTestVO;
 
 public interface LevelTestService {
    public List<LevelTestVO> getRandomExam();
+   public List<LevelTestVO> getRandom20Exam();
    public List<LevelTestVO> getList(Criteria cri);
    public void register(LevelTestVO levelTest);
    public LevelTestVO get(Long testIndex);

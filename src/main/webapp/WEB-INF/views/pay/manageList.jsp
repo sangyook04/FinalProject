@@ -114,10 +114,12 @@
 		            </thead>
 		            <tbody>
 		            	<c:forEach items="${list}" var="payment">
+		            	<c:if test="${payment.payMoney != null}">
 		            	<tr>
 					        <td>${payment.payDate }</td>
 					        <td>${payment.payMoney }</td>
 		            	</tr>
+		            	</c:if>
 		            	</c:forEach>
 		           </tbody>
 				</table>
