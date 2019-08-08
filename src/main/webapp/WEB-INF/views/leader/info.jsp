@@ -68,7 +68,7 @@
 						<div class="info">연락처</div>
 						<div class="userInfo"><c:out value="${ leader.leaPhonenum }"/></div>
 						<div class="info">이메일</div>
-						<div class="userInfo"><c:out value="${ leader.leaEmail }"/></div>
+						<div class="userInfo"><c:out value="${ leader.leaEmail }"/>@<c:out value="${ leader.leaEmail2 }"/></div>
 						<div class="info">계좌번호</div>
 						<div class="userInfo"><c:out value="${ leader.leaBank }"/> <c:out value="${ leader.leaAccount }"/></div>
 						<div class="info">자기소개</div>

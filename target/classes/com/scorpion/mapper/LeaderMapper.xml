@@ -13,6 +13,7 @@
       <result property="leaGender" column="leagender"/>
       <result property="leaPhonenum" column="leaphonenum"/>
       <result property="leaEmail" column="leaemail"/>
+      <result property="leaEmail2" column="leaemail2"/>
       <result property="leaScore" column="leascore"/>
       <result property="leaAccount" column="leaaccount"/>
       <result property="leaIntroduce" column="leaintroduce"/>
@@ -28,10 +29,10 @@
 
    <insert id="insertSelectKey">
       insert into leader (LEAID, LEAPASSWORD, LEANAME, LEAIMAGE,
-      LEAADDRESS, LEAGENDER, LEAPHONENUM, LEAEMAIL, LEASCORE, LEAACCOUNT,
+      LEAADDRESS, LEAGENDER, LEAPHONENUM, LEAEMAIL, LEAEMAIL2, LEASCORE, LEAACCOUNT,
       LEAINTRODUCE, LEABANK, AUTH)
       values (#{leaId}, #{leaPassword}, #{leaName}, #{leaImage}, 
-      #{leaAddress}, #{leaGender}, #{leaPhonenum}, #{leaEmail}, 0, #{leaAccount}, 
+      #{leaAddress}, #{leaGender}, #{leaPhonenum}, #{leaEmail}, #{leaEmail2}, 0, #{leaAccount}, 
       #{leaIntroduce}, #{leaBank}, 'ROLE_LEADER')
    </insert>
 
@@ -46,15 +47,23 @@
       where           leaid = #{leaId}
    </select>
    
+   <select id="findId" resultType="com.scorpion.domain.LeaderVO">
+   	select *
+	from leader
+	where leaname = #{leaName} and leaphonenum = #{leaPhonenum}
+   </select>
+   
    <update id="update">
       update leader set
       leapassword = #{leaPassword},
       leaaddress = #{leaAddress},
       leaphonenum = #{leaPhonenum},
       leaemail = #{leaEmail},
+      leaemail2 = #{leaEmail2},
       leabank = #{leaBank},
       leaaccount = #{leaAccount},
       leaintroduce = #{leaIntroduce}
+      where leaId = #{leaId}
    </update>
    
    <update id="updateRefusal">

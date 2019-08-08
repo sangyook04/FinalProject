@@ -8,6 +8,7 @@ import com.scorpion.domain.LeaderVO;
 public interface LeaderMapper {
 	public LeaderVO read(String leaderid);
 	
+	public LeaderVO findId(String leaName, String leaPhonenum);
 	public int update(LeaderVO leader);
 	public int updateRefusal(String leaderid);
 	public int updateLeader(String leaderid);

@@ -14,6 +14,7 @@ public class LeaderVO{
    private char leaGender;
    private String leaPhonenum;
    private String leaEmail;
+   private String leaEmail2;
    private long leaScore;
    private long leaAccount;
    private String leaBank;
