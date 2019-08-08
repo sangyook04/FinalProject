@@ -27,7 +27,7 @@
 				<sec:authorize access="isAnonymous()">
 					<ul class="gnb">
 						<li><a href="/common/login">로그인</a></li>
-						<li><a href="#">학생 회원가입</a></li>
+						<li><a href="/common/studentJoin">학생 회원가입</a></li>
 						<li><a href="/level/leaderTest">리더 시작하기</a></li>
 					</ul>
 				</sec:authorize>
