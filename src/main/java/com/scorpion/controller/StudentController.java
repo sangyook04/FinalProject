@@ -1,6 +1,8 @@
 package com.scorpion.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,58 @@ public class StudentController {
 
 		private StudentService service;
 		private LeaderReviewService revservice;
+		
+		
+		
+		
+		
+		@GetMapping("/studentDrop")
+		public void drop(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
+			model.addAttribute("stuMyInfo", service.info(stuId));
+	
+		}
+		
+		
+		
+		
+		@PostMapping("/studentDrop") 
+		public String drop(StudentVO student, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, Model model) {
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String user_id = auth.getName();
+		    
+		    model.addAttribute("list", service.drop(user_id));
+//			
+//			if(service.drop(student)) {
+//				rttr.addAttribute("result","success");
+//			}
+		
+			 return "redirect:/common/login";
+		}
+		 
+		
+//		
+//		@GetMapping("/studentDrop")
+//		public void  remove(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
+//			model.addAttribute("stuMyInfo", service.info(stuId));
+//	
+//		}
+//		
+//		
+//		
+//		
+//		@PostMapping("/studentDrop") 
+//		public String remove(StudentVO student, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+//			if(service.remove(student)) {
+//				rttr.addAttribute("result","success");
+//			}
+//		
+//			 return "redirect:/common/main";
+//		}
+		 
+		
+		
+		
 		
 		
 		   @PreAuthorize("isAuthenticated()")
@@ -63,14 +117,16 @@ public class StudentController {
 	 * }
 	 */
 		
-		@PreAuthorize("isAuthenticated()")
-		@GetMapping("/studentMyInfo?")
+		
+		@GetMapping({"/studentMyInfo","/studentInfoMod"})
 		public void info(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
 			model.addAttribute("stuMyInfo", service.info(stuId));
 	
 		}
 		
-		@PreAuthorize("isAuthenticated()")
+		
+		
+		
 		@PostMapping("/studentInfoMod") 
 		public String stuModify(StudentVO student, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 			if(service.stuModify(student)) {

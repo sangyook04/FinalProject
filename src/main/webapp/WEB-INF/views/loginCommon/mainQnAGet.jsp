@@ -74,10 +74,10 @@
 					    <label for="QnAGetContent">내용</label>
 					    <textarea class="form-control" id="QnAGetContent" placeholder="내용" style="resize: none" readonly="readonly">${qna.qnaContent}</textarea>
 					  </div>
-					  <button data-oper="modify" class="btn btn-default">수정</button>
 					  <sec:authentication property="principal" var="pinfo"/>
 					  <sec:authorize access="isAuthenticated()">
 					  	<c:if test="${pinfo.username == qna.qnaWriter}">
+					 		<button data-oper="modify" class="btn btn-default">수정</button>
 					  		<button data-oper="remove" class="btn btn-default">삭제</button>
 					  	</c:if>
 					  </sec:authorize>
