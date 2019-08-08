@@ -217,6 +217,12 @@
   	WHERE  	payindex = #{payIndex}
   </update>
   
+  <update id="refund">
+  	UPDATE	payment
+  	SET		paymoney = null
+  	WHERE  	payindex = #{payIndex}
+  </update>
+  
   <update id="deposit">
   	UPDATE	payment
   	SET		paysenddate = SYSDATE

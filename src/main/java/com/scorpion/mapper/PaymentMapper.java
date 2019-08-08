@@ -18,6 +18,7 @@ public interface PaymentMapper {
 	public List<PaymentVO> afterList(Criteria cri);
 	public Integer insertSelectKey(PaymentVO payment);
 	public int update(PaymentVO payment);
+	public int refund(Long payindex);
 	public int getTotalCount(Criteria cri);
 	public int deposit(Long payindex);
 	public int getTotalCountJoin(@Param("cri") Criteria cri, @Param("id") String id);
