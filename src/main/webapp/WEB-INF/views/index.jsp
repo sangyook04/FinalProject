@@ -52,6 +52,13 @@
 			    }
 			});
 			
+			$('#levelGOGO').on('click',function(){
+				location.href="/level/commonTest";
+			})
+			
+			$('#leaderGOGO').on('click',function(){
+				location.href="/level/leaderTest";
+			})
 			
 
 		});//ready
@@ -64,16 +71,16 @@
 			<div class="slider">
 				<div class="owl-carousel owl-theme">
 				    <div class="item item1">
-				    	<img src="../../resources/img/GumonMain/img_main02.png">
+				    	<img src="../../resources/img/StudyMain/slider2.jpeg">
 				    	<div class="slidercontent">
 							<h1>WelCome</h1>
 							<h1>스콜피온이 처음이세요?</h1>
 							<p>지금 레벨테스트하고 꼭 맞는 스터디를 안내받으세요!</p>
-							<input type="button" target="_blank" name="sadas" value="시작하기">
+							<input type="button" name="levelGOGO" id="levelGOGO" value="시작하기">
 						</div>
 					</div>
 				    <div class="item item2">
-						<img src="../../resources/img/StudyMain/12950-1557969673.jpeg">
+						<img src="../../resources/img/StudyMain/slider4.png">
 						<div class="slidercontent">
 							<h1>스콜피온은?</h1>
 							<p>각양각색의 해외경험 리더와 함께하는 스터디 매칭 플랫폼입니다.</p>
@@ -84,7 +91,7 @@
 				    	<div class="slidercontent">
 							<h1>스터디 리더에 관심이 있으신가요?</h1>
 							<p>스터디의 호스트가 되어 영어의 즐거움을 선사하세요!</p>
-							<input type="button" target="_blank" name="sadas" value="시작하기">
+							<input type="button" name="leaderGOGO" id="leaderGOGO" value="시작하기">
 						</div>
 					</div>
 				</div>
@@ -95,7 +102,7 @@
 					<h1>각양각색의 <b>해외경험 리더</b>와 함께하는</h1>
 					<h1><b>오프라인 스터디 매칭 플랫폼</b> 입니다.</h1>
 					<div class="studyListContent">
-						<div class="studyList">
+						<!-- <div class="studyList">
 							Empty
 						</div>
 						<div class="studyList">
@@ -103,7 +110,7 @@
 						</div>
 						<div class="studyList">
 							Empty
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</section>

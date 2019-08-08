@@ -11,21 +11,24 @@
 	<select id="getListWithPaging"
 		resultType="com.scorpion.domain.QnaVO">
    	<![CDATA[
-  		SELECT	qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate, qnaPassword
+  		SELECT	qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate
   		FROM	( SELECT 	/*+INDEX_DESC(qna SYS_C007244)*/
-  							rownum rn, qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate, qnaPassword
+  							rownum rn, qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate
   				  FROM 		qna
-  				  WHERE		rownum <= #{pageNum} * #{amount} )
+  				  WHERE		rownum <= #{pageNum} * #{amount} 
+  				  )
   		WHERE rn > (#{pageNum} - 1) * #{amount}
+  		
   	]]>
 	</select>
 	
 	<select id="getMyListWithPaging"
 		resultType="com.scorpion.domain.QnaVO">
    	<![CDATA[
-  		SELECT rownum rn, qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate, qnaPassword
+  		SELECT rownum rn, qnaIndex, qnaTitle, qnaContent, qnaWriter, qnaDate, qnaAnswer, qnaAnsState, qnaAnsDate
   		FROM qna
   		WHERE qnaWriter = #{user_id}
+  		ORDER BY qnaIndex desc
   	]]>
 	</select>
 

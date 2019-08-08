@@ -16,23 +16,23 @@
 			</ul>
 		</li>
 		<li class="Mainli"><a href="/level/list">레벨테스트 관리</a></li>
-		<li class="Mainli"><a href="#">공지사항 관리</a></li>
+		<li class="Mainli"><a href="/admin/adminNoticeManage">공지사항 관리</a></li>
 		<li class="Mainli second">고객센터 관리
 			<ul class="asideSubmenu secondSub">
 				<li><a href="/admin/QnAlist">QnA 관리</a></li>
-				<li><a href="#">FAQ 관리</a></li>
+				<li><a href="/faq/list">FAQ 관리</a></li>
 			</ul>
 		</li>
 		<li class="Mainli third">회원 관리
 			<ul class="asideSubmenu thirdSub">
-				<li><a href="#">회원 관리</a></li>
-				<li><a href="#">리더 관리</a></li>
+				<li><a href="/admin/adminStudentList">회원 관리</a></li>
+				<li><a href="/admin/adminLeader">리더 관리</a></li>
 			</ul>
 		</li>
 		<li class="Mainli fourth">리더가입 관리
 			<ul class="asideSubmenu forthSub">
-				<li><a href="#">가입 대기 리더 목록</a></li>
-				<li><a href="#">리더 가입 거부 목록</a></li>
+				<li><a href="/admin/beforeJoin">가입 대기 리더 목록</a></li>
+				<li><a href="/admin/rejectJoin">리더 가입 거부 목록</a></li>
 			</ul>
 		</li>
 	</ul>

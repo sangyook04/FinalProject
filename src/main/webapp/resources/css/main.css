@@ -1,20 +1,23 @@
 #wrap {font-family: 'Noto Sans KR', sans-serif;}
 
 #container {margin-top: 65px;}
-#container .slider {width: 100%; }
-#container .slider .item {background-color: #eee;}
+#container .slider {width: 100%; 
+}
+#container .slider .item {background: #74ebd5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */}
 #container .slider .item img {}
 #container .slider .item h1 {}
 #container .slider .item p {}
 #container .slider .item {position: relative;}
-#container .slider .item .slidercontent {position: absolute; top: 300px; left: 300px;}
+#container .slider .item .slidercontent {position: absolute; top: 230px; left: 400px; background-color: #4285f4; border-radius: 20px; padding: 20px;}
 #container .slider .item .slidercontent h1 {margin: 24px 88px 36px 0; font-size: 37px; font-weight: 700; line-height: 1.43em; color: #fff;}
 #container .slider .item .slidercontent p {margin: 24px 88px 36px 0; font-size: 25px; font-weight: 700; line-height: 1.43em; color: #fff;}
 #container .slider .item .slidercontent input[type="button"]  {display: inline-block; margin-top: 10px; padding: 0 3pc; height: 3pc; line-height: 3pc; border-radius: 24px; background: #fff; font-size: 18px; font-weight: 700; color: #4285f4;}
 #container .slider .item2 {}
 #container .slider .item3 {}
 
-#container .studyListWrap {height: 800px; padding: 30px 0 30px 20px; margin-top: 40px;}
+#container .studyListWrap {height: 335px; padding: 30px 0 30px 20px; margin-top: 40px; text-align: center;}
 #container .studyListWrap h1 {font-size: 40px;}
 #container .studyListWrap h1 b {color: #4285f4;}
 #container .studyListWrap h1:last-child {border-bottom: 3px solid #eee; padding-bottom: 30px;}
@@ -47,15 +50,15 @@
 #container .levelTestGo .levelTestContent h1 b {color: #4285f4;}
 #container .levelTestGo .levelTestContent h2 {margin: 24px 0 36px; font-size: 22px; font-weight: 200; color: #505050;line-height: 1.4em;}
 #container .levelTestGo .levelTestContent a {display: inline-block; border-radius: 6px; padding: 22px 58px; box-shadow: 0 3px 6px 0 rgba(0,0,0,.16); background: #4285f4; text-align: center; margin-bottom: 2px; font-size: 22px; font-weight: 600; color: #fff;}
-#container .levelTestGo .levelTestImg {float: right; width: 494px; height: 380px; background: url(../img/StudyMain/icon-pc-renewal-assets-2.6d4447f11752.png); background-position-y: -17pc;}
+#container .levelTestGo .levelTestImg {float: right; width: 494px; height: 380px; background: url(../img/StudyMain/picindex.png); background-position-y: -17pc;}
 
-#container .LeaderGo {margin-top: 50px; margin-bottom: 50px; padding: 30px 0;}
+#container .LeaderGo {margin-top: 50px; padding: 30px 0;}
 #container .LeaderGo .LeaderGoContent {display: inline-block;}
 #container .LeaderGo .LeaderGoContent h1 {font-size: 42px;}
 #container .LeaderGo .LeaderGoContent h1 b {color: #4285f4;}
 #container .LeaderGo .LeaderGoContent h2 {margin: 24px 0 36px; font-size: 22px; font-weight: 200; color: #505050;line-height: 1.4em;}
 #container .LeaderGo .LeaderGoContent a {display: inline-block; border-radius: 6px; padding: 22px 58px; box-shadow: 0 3px 6px 0 rgba(0,0,0,.16); background: #4285f4; text-align: center; margin-bottom: 2px; font-size: 22px; font-weight: 600; color: #fff;}
-#container .LeaderGo .LeaderGoImg {float: right; width: 494px; height: 380px; background: url(../img/StudyMain/icon-pc-renewal-assets-2.6d4447f11752.png); background-position-y: -43pc;}
+#container .LeaderGo .LeaderGoImg {float: right; width: 494px; height: 380px; background: url(../img/StudyMain/picindex.png); background-position-y: -43pc;}
 
 .loader6{
     position: relative;
