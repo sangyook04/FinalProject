@@ -65,18 +65,25 @@
 					    <textarea class="form-control" id="QnAGetContent" placeholder="내용" style="resize: none" readonly="readonly">${qna.qnaContent}</textarea>
 					  </div>
 					  <button data-oper="modify" class="btn btn-default">수정</button>
-					  <button data-oper="remove" class="btn btn-default">삭제</button>
+					  <sec:authentication property="principal" var="pinfo"/>
+					  <sec:authorize access="isAuthenticated()">
+					  	<c:if test="${pinfo.username == qna.qnaWriter}">
+					 		<button data-oper="remove" class="btn btn-default">삭제</button>
+					 	</c:if>
+					  </sec:authorize>
 					  <button data-oper="list" class="btn btn-default">목록</button>
 					</div>
 					<div class="MyQnAGetAnswer">
 						<label for="QnAGetAnswer">답변 내용</label>
 						<textarea class="form-control" id="QnAGetAnswer" placeholder="내용" style="resize: none" readonly="readonly">${qna.qnaAnswer}</textarea>
 					</div>
-					<form id="operForm" action="/qna/mymodify" method="get">
+					<form id="operForm" action="/loginCommon/mymodify" method="get">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 						<input type="hidden" id="qnaIndex" name="qnaIndex" value="${qna.qnaIndex}">
 					</form>
 					
-					<form id="deleteForm" action="/qna/myremove" method="post">
+					<form id="deleteForm" action="/loginCommon/myremove" method="post">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 						<input type="hidden" id="qnaIndex" name="qnaIndex" value="${qna.qnaIndex}">
 					</form>
 				</div>
@@ -95,7 +102,7 @@ $(function() {
 	
 	//list
 	$('button[data-oper="list"]').on("click", function(e){
-		location.href = "/qna/mylist";
+		location.href = "/loginCommon/mylist";
 	});
 	
 	//remove

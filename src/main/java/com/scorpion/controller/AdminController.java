@@ -37,7 +37,7 @@ public class AdminController {
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
 
-		return "/qna/adminList";
+		return "/admin/adminList";
 	}
 
 	// QNA 목록 상세보기
@@ -45,7 +45,7 @@ public class AdminController {
 	public String get(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("qna", service.get(qnaIndex));
 
-		return "/qna/adminQnAGet";
+		return "/admin/adminQnAGet";
 	}
 
 	// QNA 삭제
@@ -65,7 +65,7 @@ public class AdminController {
 	public String modifyAnswer(@RequestParam("qnaIndex") Long qnaIndex, @ModelAttribute("cri") Criteria cri,
 			Model model) {
 		model.addAttribute("qna", service.get(qnaIndex));
-		return "qna/adminQnAAnswer";
+		return "admin/adminQnAAnswer";
 	}
 
 	@PostMapping("/QnAmodify")

@@ -75,7 +75,7 @@
 						</tbody>
 					</table>
 					<!-- 액션폼 -->
-					<form id='actionForm' action="/qna/list" method="get">
+					<form id='actionForm' action="/loginCommon/list" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
                  		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 					</form>
@@ -118,14 +118,14 @@ var actionForm = $("#actionForm");
 
 //등록 이벤트
 $("#regBtn").on("click", function(){
-	location.href = "/qna/register";
+	location.href = "/loginCommon/register";
 });
 
 //상세보기 페이지 이동
 $(".move").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='qnaIndex' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "/qna/get");
+		actionForm.attr("action", "/loginCommon/get");
 		actionForm.submit();
 		
 });

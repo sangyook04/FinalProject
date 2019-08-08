@@ -38,8 +38,8 @@ public class QnaServiceImple implements QnaService {
 	
 	//myQNA
 	@Override 
-	public List<QnaVO> getMyList(Criteria cri, String user_id) {
-		return mapper.getMyListWithPaging(cri, user_id);
+	public List<QnaVO> getMyList(String user_id) {
+		return mapper.getMyListWithPaging(user_id);
 	}
 
 	@Override

@@ -53,7 +53,8 @@
 			<div class="inner">
 				<h1>QnA 등록</h1>
 				<div class="QnAWrap">
-					<form role="form" method="post" action="/qna/register">
+					<form role="form" method="post" action="/loginCommon/register">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					  <div class="form-group">
 					    <label for="mainQnARegisterTitle">제목</label>
 					    <input type="text" name="qnaTitle" class="form-control" id="mainQnARegisterTitle" placeholder="제목">

@@ -78,35 +78,10 @@
 						</tbody>
 					</table>
 					<!-- 액션폼 -->
-					<form id='actionForm' action="/qna/mylist" method="get">
+					<form id='actionForm' action="/loginCommon/mylist" method="get">
 						<input type="hidden" name="pageNum"	value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 					</form>
- 
-					<%-- <!-- 페이징 -->
-					<div class="pull-center">
-						<ul class="pagination">
-							<!-- previous 버튼 표시 -->
-							<c:if test="${pageMaker.prev }">
-								<li class="paginate_button previous"><a
-									href="${pageMaker.startPage -1}">이전으로</a></li>
-							</c:if>
-
-							<!-- 페이지 번호 표시 -->
-							<c:forEach var="num" begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }">
-								<li
-									class='paginate_button ${pageMaker.cri.pageNum == num ? "active":"" } '>
-									<a href="${num}"> ${num} </a>
-								</li>
-							</c:forEach>
-							<!-- next 버튼 표시 -->
-							<c:if test="${pageMaker.next }">
-								<li class="paginate_button next"><a
-									href="${pageMaker.endPage +1 }">다음으로</a></li>
-							</c:if>
-						</ul>
-					</div>  --%>
 				</div>
 			</div>
 			<!-- inner -->
@@ -127,7 +102,7 @@
 							actionForm
 									.append("<input type='hidden' name='qnaIndex' value='"
 											+ $(this).attr("href") + "'>");
-							actionForm.attr("action", "/qna/Myget");
+							actionForm.attr("action", "/loginCommon/myget");
 							actionForm.submit();
 
 						});
@@ -139,7 +114,7 @@
 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 
 			actionForm.submit();
-		}); */
+		});
 	</script>
 </body>
 </html>
