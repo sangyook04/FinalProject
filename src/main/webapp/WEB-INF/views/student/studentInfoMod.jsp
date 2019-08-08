@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -185,6 +187,7 @@ function pwChk(){
 					<h1><b>내 정보수정</b></h1>
 					<div class="studentMod">
 						<form role="form" name="studentMod" action="/student/studentInfoMod" id="ModForm" method="post">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 							<div class="textInputEx">아이디: <input type="text" name="stuId" value="${stuMyInfo.stuId }" readonly="readonly"></div>
 							<div class="textInput"><input type="password" placeholder="새로운 비밀번호 입력" name="stuPassword" class="joinInput"></div>
 							<div class="textInput"><input type="password" placeholder="비밀번호 확인" name="stuPasswordChk" class="joinInput"><button type="button" class="btn" onclick="pwChk()">비밀번호 확인</button></div>

@@ -43,7 +43,8 @@
 			<div class="inner">
 				<h1>QnA 수정</h1>
 				<div class="QnAWrap">
-					<form class="QnAModifyForm" action="/qna/modify" method="post">
+					<form class="QnAModifyForm" action="/loginCommon/modify" method="post">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					  <div class="form-group">
 					    <label for="QnAModifyGetNo">번호</label>
 					    <input type="text" class="form-control" id="QnAModifyGetNo" name="qnaIndex" placeholder="번호" readonly="readonly" value="${qna.qnaIndex}">
@@ -64,7 +65,12 @@
 					    <label for="QnAModifyContent">내용</label>
 					    <textarea class="form-control" id="QnAModifyContent" name="qnaContent" placeholder="내용" style="resize: none">${qna.qnaContent}</textarea>
 					  </div>
-					  <button type="submit" data-oper="modify" id="modifyOK" class="btn btn-default">확인</button>
+					  <sec:authentication property="principal" var="pinfo"/>
+					  <sec:authorize access="isAuthenticated()">
+						  <c:if test="${pinfo.username == qna.qnaWriter}">
+						  	<button type="submit" data-oper="modify" id="modifyOK" class="btn btn-default">확인</button>
+						  </c:if>
+					  </sec:authorize>
 					  <button type="button" id="cancel" class="btn btn-default">취소</button>
 					</form>
 				</div>
@@ -78,7 +84,7 @@
 	$("#cancel").on("click", function(e){
 		
 		var QnAModifyGetNo = $("#QnAModifyGetNo").val();
-		location.href = "/qna/get?qnaIndex="+QnAModifyGetNo;
+		location.href = "/loginCommon/get?qnaIndex="+QnAModifyGetNo;
 	});
 
 </script>

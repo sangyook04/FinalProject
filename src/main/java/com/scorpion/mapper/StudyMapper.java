@@ -8,8 +8,8 @@ import com.scorpion.domain.StudyVO;
 
 public interface StudyMapper {
 	public int update(StudyVO study);
-	public int delete(Long studyno);
-	public StudyVO read(Long studyno);
+	public int delete(Long studyIndex);
+	public StudyVO read(Long studyIndex);
 	public Integer insertSelectKey(StudyVO study);
 	public int getTotalCount(String id, String state, Criteria cri);
 	public List<StudyVO> getStudyList(String id, String state, Criteria cri); //시작 예정 스터디 리스트

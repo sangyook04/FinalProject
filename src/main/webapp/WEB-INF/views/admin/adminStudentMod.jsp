@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -218,7 +220,8 @@ function pwChk(){
 				<div class="content">
 					<h1><b>학생 정보수정</b></h1>
 					<div class="studentMod">
-						<form role="form" name="studentMod" action="/student/adminStudentMod" id="ModForm" method="post">
+						<form role="form" name="studentMod" action="/admin/adminStudentMod" id="ModForm" method="post">
+						  <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 							<div class="textInputEx">아이디: <input type="text" name="stuId" value="${stuInfo.stuId }" readonly="readonly"></div>
 							<div class="textInput"><input type="password" placeholder="새로운 비밀번호 입력" name="stuPassword" class="joinInput"></div>
 							<div class="textInput"><input type="password" placeholder="비밀번호 확인" name="stuPasswordChk" class="joinInput"><button type="button" class="btn" onclick="pwChk()">비밀번호 확인</button></div>
@@ -242,7 +245,7 @@ function pwChk(){
 												
 							
 											
-							<form id="CloseForm" action="/student/adminStudentInfo" method="get">
+							<form id="CloseForm" action="/admin/adminStudentInfo" method="get">
 					<input type="hidden" id="stuId" name="stuId"
 						value="${stuInfo.stuId }">
 					</form> 
@@ -279,7 +282,7 @@ function pwChk(){
 			//close
 			$('button[data-oper="close"]').on("click", function(e) {
 				//CloseForm.find('#stuId').remove();
-				CloseForm.attr("action", "/student/adminStudentInfo");
+				CloseForm.attr("action", "/admin/adminStudentInfo");
 				CloseForm.submit();
 			});
 

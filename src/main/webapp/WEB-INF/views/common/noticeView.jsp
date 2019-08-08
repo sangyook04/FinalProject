@@ -81,7 +81,7 @@
  
 <button data-oper="noticeList" id="listBtn" >목록</button>
 
-<form id="operForm" action="/notice/noticeView" method="get">
+<form id="operForm" action="/common/noticeView" method="get">
 						<input type="hidden" id="notIndex" name="notIndex" value="${view.notIndex }">
 						<%-- <input type="hidden" name="pageNum" value="${cri.pageNum }">
 						<input type="hidden" name="amount" value="${cri.amount }">
@@ -107,7 +107,7 @@ $(function() {
 	//list
 	$('button[data-oper="noticeList"]').on("click", function(e){
 		operForm.find('#notIndex').remove();
-		operForm.attr("action","/notice/noticeList");
+		operForm.attr("action","/common/noticeList");
 		operForm.submit();
 	});
 	

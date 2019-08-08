@@ -58,7 +58,7 @@
   	
   	<update id="updateAnswer">
 	  	UPDATE	qna
-  		SET		QNAANSSTATE = #{qnaAnsState}, QNAANSWER = #{qnaAnswer}, QNACONTENT = #{qnaContent}, QNATITLE = #{qnaTitle}, QNADATE = #{qnaDate}, QNAWRITER = #{qnaWriter}, QNAINDEX = #{qnaIndex}
+  		SET		QNAANSDATE = sysdate, QNAANSSTATE = #{qnaAnsState}, QNAANSWER = #{qnaAnswer}, QNACONTENT = #{qnaContent}, QNATITLE = #{qnaTitle}, QNADATE = #{qnaDate}, QNAWRITER = #{qnaWriter}, QNAINDEX = #{qnaIndex}
   		WHERE  	QNAINDEX = #{qnaIndex}
   	</update>
   	

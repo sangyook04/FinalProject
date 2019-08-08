@@ -7,7 +7,7 @@ import com.scorpion.domain.Criteria;
 import com.scorpion.domain.RefundVO;
 
 public interface RefundMapper {
-	public int update(RefundVO refund);
+	public int update(Long refIndex);
 	public int delete(String leaderid);
 	public RefundVO read(String leaderid);
 	public Integer insertSelectKey(Long payIndex);

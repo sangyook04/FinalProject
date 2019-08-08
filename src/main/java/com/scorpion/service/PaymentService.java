@@ -15,6 +15,7 @@ public interface PaymentService {
 	public List<PaymentVO> getMyMoneyList(Criteria cri, String id);
 	public List<PaymentVO> getMyRefundList(Criteria cri, String id);
 	public boolean remove(Long payindex);
+	public boolean refund(Long payindex);
 	public List<PaymentVO> getPaymentList(Criteria cri);
 	public List<PaymentVO> getPaymentListWithDate(Criteria cri, Date start, Date end);
 	public List<PaymentVO> getBeforeDeposit(Criteria cri);

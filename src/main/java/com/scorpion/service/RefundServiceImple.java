@@ -22,19 +22,13 @@ public class RefundServiceImple implements RefundService {
 	@Override
 	public int getTotal(Criteria cri) {
 		
-		return 0;
+		return mapper.getTotalCount(cri);
 	}
 
 	@Override
 	public List<RefundVO> getList(Criteria cri) {
 		
-		return null;
-	}
-
-	@Override
-	public List<RefundVO> getList() {
-		
-		return null;
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
@@ -50,9 +44,9 @@ public class RefundServiceImple implements RefundService {
 	}
 
 	@Override
-	public boolean modify(RefundVO refund) {
+	public boolean modify(Long refIndex) {
 		
-		return false;
+		return mapper.update(refIndex) == 1;
 	}
 
 	@Override

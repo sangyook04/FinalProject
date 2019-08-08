@@ -3,7 +3,9 @@ package com.scorpion.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.StudentVO;
@@ -17,10 +19,14 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 @AllArgsConstructor
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class StudentServiceImple implements StudentService {
 	
 	@Setter(onMethod_ = @Autowired) 
 	private StudentMapper mapper;
+	
+	@Setter (onMethod_ = @Autowired)
+	  private PasswordEncoder pwencoder;
 	
 	 @Override
 	public int getTotal(Criteria cri) {
@@ -67,11 +73,11 @@ public class StudentServiceImple implements StudentService {
 	public void register(StudentVO student) {
 		
 		log.info("student register......" + student);
+	
+	    String encPassword = pwencoder.encode(student.getStuPassword());
+	    student.setStuPassword(encPassword);
 		
 		mapper.insertSelectKey(student);
-		
-		
-		
 	}
 
 	@Override

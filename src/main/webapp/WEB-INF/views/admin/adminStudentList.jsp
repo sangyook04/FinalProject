@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+   uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -118,7 +120,7 @@
 					
 					
 					  
-				  <form id="searchForm" action="/student/adminStudentList" method="get"  class="form-inline">
+				  <form id="searchForm" action="/admin/adminStudentList" method="get"  class="form-inline">
 				 
 				
                     <div class="form-group">
@@ -171,7 +173,7 @@
 				</div>
 				
 				
-				 <form id="actionForm" action="/student/adminStudentList">
+				 <form id="actionForm" action="/admin/adminStudentList">
 				   	   <input type="hidden" name="pageNum" 
 				   	   	      value="${pageMaker.cri.pageNum }">
 				   	   <input type="hidden" name="amount" 
@@ -237,7 +239,7 @@ $(function() {
 							actionForm
 									.append("<input type='hidden' name='stuId' value='"
 											+ $(this).attr("href") + "'>");
-							actionForm.attr("action", "/student/adminStudentInfo");
+							actionForm.attr("action", "/admin/adminStudentInfo");
 							actionForm.submit();
 
 						});

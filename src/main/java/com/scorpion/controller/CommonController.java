@@ -6,13 +6,19 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.domain.PageDTO;
+import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
+import com.scorpion.service.NoticeService;
+import com.scorpion.service.StudentService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -23,6 +29,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class CommonController {
    LeaderService service;
+   NoticeService notservice;
+   StudentService stuservice;
 
    @GetMapping("/main")
    public String main() {
@@ -127,7 +135,33 @@ public class CommonController {
 
    @PreAuthorize("isAnonymous()")
    @PostMapping("/studentJoin")
-   public String studentJoin(LeaderVO leader) {
-      return "/common/main";
+   public String studentJoin(StudentVO student) {
+	   
+	   stuservice.register(student);
+      return "redirect:/common/main";
    }
+   
+   
+   
+   	@PreAuthorize("isAnonymous()")
+	@GetMapping({ "/noticeList", "/adminNoticeManage" })
+	public void list(Model model, Criteria cri) {
+		
+
+		model.addAttribute("noticeList", notservice.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, notservice.getTotal(cri)));
+
+	}
+
+   	@PreAuthorize("isAnonymous()")
+	@GetMapping({"/noticeView","/adminNoticeDetail","/adminNoticeMod"})
+	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("view", notservice.get(notIndex));
+	}
+   
+   
+   
+   
+   
+   
 }

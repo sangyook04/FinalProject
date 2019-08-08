@@ -21,7 +21,7 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 #container aside .asdieMainMenu .Mainli {color: #fff; font-size: 28px; border-bottom: 2px solid #fff; padding-bottom: 10px; cursor: pointer;}
 
 #container aside .asdieMainMenu .Mainli .asideSubmenu {display: none; position: absolute; left: 270px; bottom: 0; width: 200px; height: 112px; background-color: #383e48; margin-top: 22px; padding: 20px 0; text-align: center; border-radius: 3px; border: 1px solid #eee; font-size: 18px;}
-#container aside .asdieMainMenu .Mainli:nth-child(1) .asideSubmenu {height: 155px; bottom: -8px;}
+#container aside .asdieMainMenu .Mainli:nth-child(1) .asideSubmenu {height: 180px; bottom: -8px;}
 #container aside .asdieMainMenu .Mainli .asideSubmenu li {margin-bottom: 15px;}
 #container aside .asdieMainMenu .Mainli .asideSubmenu .asideSubmenu2 {display: none; position: absolute; left: 198px; bottom: 0; width: 150px; height: 110px; background-color: #383e48; margin-top: 22px; padding: 20px 0; text-align: center; border-radius: 3px; border: 1px solid #eee;}
 

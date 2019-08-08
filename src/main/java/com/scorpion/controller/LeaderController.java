@@ -40,6 +40,7 @@ public class LeaderController {
       model.addAttribute("leader", service.get(leaderid));
    }
    
+
    @PostMapping("/modify")
    public String modify(LeaderVO leader, RedirectAttributes rttr) {
 	   log.info("modify : " + leader);
