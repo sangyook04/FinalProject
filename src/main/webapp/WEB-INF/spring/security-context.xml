@@ -18,6 +18,8 @@
     <security:intercept-url pattern="/student/*" access="hasRole('ROLE_STUDENT')"/>
 <!-- <security:intercept-url pattern="/student/*" access="permitAll"/>  -->
       <security:intercept-url pattern="/loginCommon/*" access="isAuthenticated()"/>
+      <security:intercept-url pattern="/level/*" access="isAuthenticated()"/>
+      <security:intercept-url pattern="/pay/*" access="isAuthenticated()"/>
       
       <security:form-login login-page="/common/login" />
       <security:logout logout-url="/common/logout" invalidate-session="true"/>

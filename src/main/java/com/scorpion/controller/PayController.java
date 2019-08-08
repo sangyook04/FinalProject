@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +38,7 @@ public class PayController {
 	private LeaderService leaderservice;
 	private RefundService refservice;
 	
-	@GetMapping("/test")
-	public void test() {}
-	
+   @PreAuthorize("hasRole([ROLE_LEADER])")
    @GetMapping("/incomeList")
    public void get(Model model, Criteria cri,
 		   @RequestParam("leaderId") String leaderId) {
@@ -48,6 +47,7 @@ public class PayController {
 	   model.addAttribute("pageMaker", new PageDTO(cri,service.getTotalJoin(cri, leaderId)));
    }
    
+   @PreAuthorize("hasRole([ROLE_STUDENT])")
    @GetMapping("/refund")
    public void refund(@RequestParam("payIndex") String payIndex, 
 		   @RequestParam("studyIndex") Long studyIndex, Model model) {
@@ -55,6 +55,7 @@ public class PayController {
 	   model.addAttribute("payIndex", payIndex);
    }
    
+   @PreAuthorize("hasRole([ROLE_STUDENT])")
    @PostMapping("/refund")
    public String refund(@RequestParam("payIndex") String payIndex, 
 		   @RequestParam("studentId") String studentId, 
@@ -65,12 +66,14 @@ public class PayController {
 	   return "redirect:/pay/myMoneyList?studentId=" + studentId;
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @GetMapping("/refundList")
    public void refundList(Model model, Criteria cri) {
 	   model.addAttribute("list", refservice.getList(cri));
 	   model.addAttribute("pageMaker", new PageDTO(cri, refservice.getTotal(cri)));
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @PostMapping("/refundAccept")
    public String refundAccept(@RequestParam("refIndex") Long refIndex, 
 		   @RequestParam("payIndex") Long payIndex, 
@@ -81,12 +84,14 @@ public class PayController {
       return "redirect:/pay/refundList";
    }
    
+   @PreAuthorize("hasRole([ROLE_STUDENT])")
    @GetMapping("/myMoneyList")
    public void myMoneyList(@RequestParam("studentId") String studentId, Model model, Criteria cri) {
       model.addAttribute("list", service.getMyMoneyList(cri, studentId));
       model.addAttribute("refundList", service.getMyRefundList(cri, studentId));
    }
    
+   @PreAuthorize("hasRole([ROLE_STUDENT])")
    @GetMapping("/payInfo")
    public void payInfo(@RequestParam("studyIndex") Long studyIndex, 
 		   @RequestParam("studentId") String studentId , Model model) {
@@ -94,6 +99,7 @@ public class PayController {
 	   model.addAttribute("studentId", studentId);
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @GetMapping("/paymentList")
    public void paymentList(Model model, Criteria cri) {
 	   if(cri.getStart() != null && cri.getStart().length() == 0) {
@@ -104,6 +110,7 @@ public class PayController {
 	   model.addAttribute("pageMaker", new PageDTO(cri,service.getTotal(cri)));
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @GetMapping("/beforeDeposit")
    public void beforeDeposit(Model model, Criteria cri) {
 //	   List<LeaderVO> leaderlist = new ArrayList<LeaderVO>();
@@ -117,6 +124,7 @@ public class PayController {
 	   model.addAttribute("list", service.getBeforeDeposit(cri));
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @PostMapping("/deposit")
    public String deposit(@RequestParam("payIndex") Long payindex, RedirectAttributes rttr) {
 	   log.info(payindex);
@@ -126,11 +134,13 @@ public class PayController {
       return "redirect:/pay/afterDeposit";
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @GetMapping("/afterDeposit")
    public void afterDeposit(Model model, Criteria cri) {
 	   model.addAttribute("list", service.getAfterDeposit(cri));
    }
    
+   @PreAuthorize("hasRole([ROLE_ADMIN])")
    @GetMapping("/manageList")
 	public void manageList(Model model, Criteria cri) {
 	   if(cri.getStart() != null && cri.getStart().length() == 0) {
@@ -141,6 +151,7 @@ public class PayController {
 	   model.addAttribute("pageMaker", new PageDTO(cri,service.getTotal(cri)));
    }
    
+   @PreAuthorize("hasRole([ROLE_STUDENT])")
    @PostMapping("/payment")
 	public String register(PaymentVO payment,
 			RedirectAttributes rttr) {

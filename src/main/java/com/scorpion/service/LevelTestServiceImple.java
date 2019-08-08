@@ -59,4 +59,9 @@ public class LevelTestServiceImple implements LevelTestService {
 		return mapper.getRandomExam();
 	}
 
+	@Override
+	public List<LevelTestVO> getRandom20Exam() {
+		return mapper.getRandom20Exam();
+	}
+
 }

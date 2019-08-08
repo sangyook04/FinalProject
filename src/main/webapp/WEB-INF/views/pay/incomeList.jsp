@@ -81,12 +81,14 @@
 		                   </thead>
 		                   <tbody>
 		                   <c:forEach items="${list}" var="income">
+		                   <c:if test="${income.payMoney != null}">
 		                   	<tr>
 			                   <td>${income.payMoney}</td>
 			                   <td>${income.paySendDate}</td>
 			                   <td>${income.study.studyName}</td>
 			                   <td>${income.paySendDate == null ? "지급 전":"지급완료" }</td>
 		                   	</tr>
+		                   	</c:if>
 		                   </c:forEach>
 		                   </tbody>
 						</table>

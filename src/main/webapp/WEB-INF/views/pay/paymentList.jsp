@@ -120,7 +120,7 @@
 		            		<td>${payment.stuId }</td>
 		            		<td>${payment.studyIndex }</td>
 					        <td>${payment.payDate }</td>
-					        <td>${payment.payMoney }</td>
+					        <td>${payment.payMoney == null ? "결제 취소" : payment.payMoney}</td>
 		            	</tr>
 		            </c:forEach>
 		           </tbody>
