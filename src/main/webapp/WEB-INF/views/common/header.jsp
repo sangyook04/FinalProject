@@ -44,7 +44,7 @@
 							</ul></li>
 						<li><sec:authentication property="principal.username" />
 							<!--학생 -->님</li>
-						<li><a class="LogOut" href="/common/logout">로그 아웃</a></li>
+						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_LEADER')">
@@ -60,7 +60,7 @@
 						<li><a href="#">스터디 개설</a></li>
 						<li><sec:authentication property="principal.username" />
 							<!--리더-->님</li>
-						<li><a class="LogOut" href="/common/logout">로그 아웃</a></li>
+						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -68,14 +68,24 @@
 						<li class="myPage"><a href="/admin/main">관리자 페이지</a>
 						<li><sec:authentication property="principal.username" />
 							<!--관리자-->님</li>
-						<li><a class="LogOut" href="#">로그 아웃</a></li>
+						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
-			</div>
+				<form id="LogOutForm" action="/logout" method="POST">
+      			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    			</form>
+			</div><!-- headerContent -->
 		</div>
 	</nav>
 </header>
 <script>
+	
+	$(".LogOut").on("click", function(e){
+		e.preventDefault();
+		$("#LogOutForm").submit();
+	});
+		
+
 	$('nav .myPage').hover(function() {
 		if ($(".myPageContent").css("display") == "none") {
 			$('.myPageContent').slideDown();

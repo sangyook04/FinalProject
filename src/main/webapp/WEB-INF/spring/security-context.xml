@@ -22,7 +22,7 @@
       <security:intercept-url pattern="/pay/*" access="isAuthenticated()"/>
       
       <security:form-login login-page="/common/login" />
-      <security:logout logout-url="/common/logout" invalidate-session="true"/>
+      <security:logout logout-url="/logout" invalidate-session="true" logout-success-url="/"/>	
    </security:http>
    
    <security:authentication-manager>

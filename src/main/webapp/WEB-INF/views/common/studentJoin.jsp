@@ -198,7 +198,7 @@ function pwChk(){
                      <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                      <div class="textInput">
                         <input type="text" placeholder="아이디" name="stuId" class="joinInput">
-                        <button class="btn">중복확인</button>
+                        <button z="btn">중복확인</button>
                      </div>
                      <div class="textInput">
                         <input type="password" placeholder="비밀번호(8~16자 이내)" name="stuPassword"

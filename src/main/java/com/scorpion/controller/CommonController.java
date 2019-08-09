@@ -18,6 +18,7 @@ import com.scorpion.domain.PageDTO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
 import com.scorpion.service.NoticeService;
+import com.scorpion.service.PwdSearchService;
 import com.scorpion.service.StudentService;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class CommonController {
    LeaderService service;
    NoticeService notservice;
    StudentService stuservice;
+   PwdSearchService pwdservice;
 
    @GetMapping("/main")
    public String main() {
@@ -159,7 +161,11 @@ public class CommonController {
 		model.addAttribute("view", notservice.get(notIndex));
 	}
    
-   
+   	//비밀번호 찾기할꺼당
+   	@PostMapping("/pwdSearch")
+   	public void pwdSearch(String name, String id, Model model) {
+		model.addAttribute("find", pwdservice.search(name, id));
+	}
    
    
    
