@@ -19,13 +19,14 @@
 #wrap .inner .headerContent .mainmenu li a{text-decoration: none;}
 #wrap .inner .headerContent .gnb li a{text-decoration: none;}
 #wrap .inner .footArea .footerLeft .footerinfo li a{color: black; text-decoration: none;}
-#container .containerContent .containerContenttable .form-control{width:900px; resize:none;}
+#container .containerContent .containerContenttable .form-control{width:900px; height: 300px; resize:none;}
 
 #container .containerContent .containerContenttable  #modBtn{ background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin: 10px;}
 #container .containerContent .containerContenttable  #closeBtn { background-color: red;padding: 10px;color: white;border-radius: 5px; margin: 10px;}
 #container .containerContent .containerContenttable  #regBtn {display: inline-block; background-color: #4285f4; padding: 10px;width:50px;color: white;border-radius: 5px; margin: 10px;}
 
 #container .containerContent .containerContenttable  #closeBtn2 { background-color: red;padding: 10px;color: white;border-radius: 5px; margin-top: -160px; margin-left: 100px;}
+#container .containerContent .containerContenttable  #closeBtn5 { position: relative; top: -39px; left: -39px; background-color: red;padding: 10px;color: white;border-radius: 5px; margin-top: -160px; margin-left: 100px;}
 /*----------------adminNoticeManage---------------  */
 
 #container .innerNotice .inner h2 {font-size:40px;  padding: 50px;text-align: center;}

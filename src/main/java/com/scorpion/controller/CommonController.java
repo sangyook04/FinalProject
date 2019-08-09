@@ -1,6 +1,10 @@
 package com.scorpion.controller;
 
 import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -8,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
@@ -31,6 +38,10 @@ public class CommonController {
    LeaderService service;
    NoticeService notservice;
    StudentService stuservice;
+
+   //UserRegService reg_service;
+   
+   
 
    @GetMapping("/main")
    public String main() {
@@ -142,6 +153,27 @@ public class CommonController {
    }
    
    
+   @ResponseBody
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public int postIdCheck(HttpServletRequest req) throws Exception {
+		log.info("post idCheck");
+
+		String stuId = req.getParameter("stuId");
+		int idCheck = stuservice.idcheck(stuId);
+		int idCheck2 = stuservice.idcheck2(stuId);
+
+		int result = 0;
+
+		if (idCheck != 0 || idCheck2 != 0) {
+			result = 1;
+		}
+
+		log.info(result);
+
+		return result;
+
+	}
+  
    
    	@PreAuthorize("isAnonymous()")
 	@GetMapping( "/noticeList")
