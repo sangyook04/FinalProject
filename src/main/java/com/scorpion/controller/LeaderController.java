@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,7 @@ public class LeaderController {
 //      model.addAttribute("leader", service.get(leaderid));
 //   }
    
+   //회원정보, 수정 출력
    @GetMapping({"/info","/modify"})
    public void info(@RequestParam("leaId") String leaderid, Model model) {
       log.info("/get or /modify");
@@ -47,6 +50,7 @@ public class LeaderController {
       model.addAttribute("leader", service.get(leaderid));
    }
    
+   //회원 사진 정보 출력
    @GetMapping(value = "/getPictureList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public ResponseEntity<List<PictureVO>> getPictureList(@RequestParam("leaId") String leaid){
@@ -54,6 +58,8 @@ public class LeaderController {
 	   
 	   return new ResponseEntity<> (service.getPictureList(leaid), HttpStatus.OK);
    }
+   
+   //회원 정보 수정
    @PostMapping("/modify")
    public String modify(LeaderVO leader, RedirectAttributes rttr) {
 	   log.info("modify : " + leader);
@@ -65,20 +71,44 @@ public class LeaderController {
 	   return "redirect:/leader/info?leaId="+leader.getLeaId();
    }
    
+   //리더 탈퇴 화면 출력
+   @GetMapping("/leaderDrop")
+	public void drop(@RequestParam("leaId") String leaId, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("leaMyInfo", service.get(leaId));
+
+	}
+   
+   //리더 탈퇴 처리
+	@PostMapping("/leaderDrop") 
+	public String drop(LeaderVO leader, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String user_id = auth.getName();
+	    
+	    model.addAttribute("list", service.drop(user_id));
+//		
+//		if(service.drop(student)) {
+//			rttr.addAttribute("result","success");
+//		}
+	
+		 return "redirect:/common/login";
+	}
+
+	   
+	   //학생의 리더평가
+	   @PostMapping("/studentComment")
+	   public String review(LeaderReviewVO review, RedirectAttributes rttr) {
+	      
+	      log.info("review register : " + review);
+	      
+	      revservice.register(review);
+	      rttr.addFlashAttribute("review", review.getRevIndex());
+	      return "redirect:/common/main";
+	   }
+	   
+	//학생의 리더 평가 출력
    @GetMapping("/studentComment")
    public void review() {
-      
-   }
-   
-   @PostMapping("/studentComment")
-   public String review(LeaderReviewVO review, RedirectAttributes rttr) {
-      
-      log.info("review register : " + review);
-      
-      revservice.register(review);
-      rttr.addFlashAttribute("review", review.getRevIndex());
-      return "redirect:/common/main";
-      
       
    }
    
