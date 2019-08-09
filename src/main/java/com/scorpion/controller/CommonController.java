@@ -114,6 +114,7 @@ public class CommonController {
       }
       
       service.register(leader);
+      rttr.addFlashAttribute("result", leader.getLeaId());
       
       return "redirect:/common/main";
    }
