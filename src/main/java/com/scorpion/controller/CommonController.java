@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.PageDTO;
+import com.scorpion.domain.QnaVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
 import com.scorpion.service.NoticeService;
@@ -35,35 +36,31 @@ public class CommonController {
    NoticeService notservice;
    StudentService stuservice;
    PwdSearchService pwdservice;
+//
+//   	@PostMapping("/pwdCheck")
+//   	public String pwdCheck(LeaderVO leader, RedirectAttributes rttr, Model model) {
+//
+//		if (pwdservice.search(leader)) {
+//			rttr.addAttribute("result", "success");
+//		}
+//		return "/common/findPw2";
+//   	}
+//   	
+//   	@PostMapping("/pwdSearch")
+//   	public String pwdSearch(LeaderVO leader, RedirectAttributes rttr, Model model) {
+//
+//		if (pwdservice.search(leader)) {
+//			rttr.addAttribute("result", "success");
+//		}
+//		return "/";
+//   	}
+//   
+	//비밀번호 찾기할꺼당
+//  	@PostMapping("/pwdSearch")
+//  	public void pwdSearch(String name, String id, Model model) {
+//		model.addAttribute("find", pwdservice.search(name, id));
+//	}
 
-   @RequestMapping(value="/find_password", method = RequestMethod.POST)
-	public String updateEmail(Member member, Model model) {
-		
-		String s="";
-		String st[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-		Random r = new Random();
-		for(int i=1; i<=6; i++) {
-			
-			s+=st[r.nextInt(26)];
-			
-		}
-		member.setmPw(s);
-		Integer result = pwdservice.updateEmail(member);		
-		model.addAttribute("result",result);
-		System.out.println("result : " + result);
-		try {
-			if(result>=1) {
-				mailing(member);
-			}else {
-				return "mail";
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			
-		}
-		
-		return "mail";
-   }
    
    @GetMapping("/main")
    public String main() {
@@ -191,14 +188,6 @@ public class CommonController {
 	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("view", notservice.get(notIndex));
 	}
-   
-   	//비밀번호 찾기할꺼당
-   	@PostMapping("/pwdSearch")
-   	public void pwdSearch(String name, String id, Model model) {
-		model.addAttribute("find", pwdservice.search(name, id));
-	}
-   
-   
    
    
 }

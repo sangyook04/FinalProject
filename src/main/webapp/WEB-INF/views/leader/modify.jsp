@@ -113,6 +113,28 @@
 				return;
 			}
 			
+			var str = "";
+			 $('.img ul li').each(function(i, obj){	
+				 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
+				 console.log('jobj : ' + obj);
+				 str += "<input type='hidden' " +
+				 		"       name='pictureList[" + i + "].fileName' " +
+				 		"       value='" + jobj.data("filename") + "'>";
+
+				 str += "<input type='hidden' " +
+				 		"       name='pictureList[" + i + "].uuid' " +
+				 		"       value='" + jobj.data("uuid") + "'>";
+
+				 str += "<input type='hidden' " +
+				 		"       name='pictureList[" + i + "].uploadPath' " +
+				 		"       value='" + jobj.data("path") + "'>";
+
+				 str += "<input type='hidden' " +
+				 		"       name='pictureList[" + i + "].fileType' " +
+				 		"       value='" + jobj.data("type") + "'>";
+			 });//END 첨부 파일 정보 hidden 태그로 추가
+			 formObj.append(str);
+			
 			alert('수정이 완료되었습니다.');
 			formObj.submit();
 		});
@@ -141,13 +163,15 @@ function setEmail2(email3Obj){
 					<div class="infoContent">
 						<form role="form" action="/leader/modify" method="post" name="leaderModify">
 							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-							<div class="img"><img src="../../../resources/img/GumonMain/user123.jpg"></div>
+							<div class="img"><ul></ul></div>
+							<div class="info">사진수정</div>
+							<div class="userInfo"><input type="file" name="leaImage"></div>
 							<div class="info">아이디</div>
 							<div class="userInfo"><c:out value="${ leader.leaId }"/></div>
 							<div class="info">비밀번호 수정</div>
 							<div class="userInfo">
-								<input type="password" placeholder="비밀번호" name="leaPassword" class="joinInput"><input type="password" placeholder="비밀번호 확인"
-									name="leaPassword2" class="joinInput"></div>
+								<input type="password" placeholder="비밀번호" name="leaPassword" class="joinInput1"><input type="password" placeholder="비밀번호 확인"
+									name="leaPassword2" class="joinInput1"></div>
 							<div class="info">이름</div>
 							<div class="userInfo"><c:out value="${ leader.leaName }"/></div>
 							<div class="info">성별</div>
@@ -191,5 +215,175 @@ function setEmail2(email3Obj){
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 	<!-- wrap -->
+	
+	
+	<script>
+$(function(){
+	//첨부파일 목록 가져오기
+	(function(){	
+		var leaId = '<c:out value="${leader.leaId}"/>';
+		
+		$.getJSON("/leader/getPictureList", {leaId:leaId}, function(arr){
+			console.log('getAttachList----------------');
+			console.log(arr);	
+			
+			//첨부파일 목록
+			if(!arr || arr.length == 0){
+				return;
+			}
+
+			var img = $('.img ul');
+			var str = "";
+			$(arr).each(function(i, obj){
+				//업로드 파일명 <li>추가
+				if(obj.fileType){	//이미지인 경우
+					var fileCallPath = encodeURIComponent(obj.uploadPath + 
+													      "/s_" + obj.uuid  + "_" +
+													      obj.fileName);
+
+					str += "<li data-path='" + obj.uploadPath + "' " 			+
+					   "data-uuid='" + obj.uuid + "' " 					+
+					   "data-filename='" + obj.fileName + "'" 			+
+					   "data-type='" + obj.fileType + "'>" 				+ 
+					   "<div>"			+
+				       "    <button type='button' " 					+ 
+				       "            data-file='" + fileCallPath + "'" 	+
+				       "            data-type='image'" 					+
+				       "        class='btn btn-warning btn-circle'>" 	+
+				       "        <i class='fa fa-times'></i></button><br>" +
+				       "    <img src='/display?fileName="+ fileCallPath + "'>" +
+				       "    </div></li>";
+			} else {		//이미지가 아닌 경우
+				var fileCallPath 
+				= encodeURIComponent(obj.uploadPath + 
+									 "/" + obj.uuid  + "_" +
+									 obj.fileName);
+				var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");			
+				str += "<li data-path='" + obj.uploadPath + "' " 	+
+					   "    data-uuid='" + obj.uuid + "' " 			+
+					   "    data-filename='" + obj.fileName + "'" 	+
+					   "    data-type='" + obj.fileType + "'>" 		+ 
+					   "    <div>"	    +  
+				       "    <button type='button' " 					+ 
+				       "            data-file='" + fileCallPath + "'" 	+
+				       "            data-type='image'" 					+
+				       "        class='btn btn-warning btn-circle'>" 	+
+				       "        <i class='fa fa-times'></i></button><br>" +
+					   "    <img src='/resources/img/attach.png'></div></li>";
+				}
+			});
+			img.append(str);
+		});//END getJSON()
+	})();//END 첨부파일 목록 가져오기
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");	//확장자 제한 정규표현식
+	var maxSize = 5242880;	//파일 최대 업로드 크기 제한 5MB
+	
+	//CSRF 처리
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	//확장자 및 파일 크기 확인 함수
+	function checkExension(fileName, fileSize){
+		if(fileSize >= maxSize) {	//파일 크기 확인
+			alert("파일 사이즈 초과!");	//크기를 초과하면 알림 메시지 출력
+			return false;
+		}
+		if(regex.test(fileName)) {	//확장자 확인
+			alert("업로드 불가 파일");	//제한 확장자인 경우 알림 메시지 출력
+			return false
+		}
+		return true;	//파일 크기 및 확장자 문제가 없는 경우
+	}//END checkExension()
+	
+	//첨부파일 상태 변화 이벤트 핸들러 등록
+	$("input[type='file']").change(function(e){
+		var formData = new FormData();	//가상의 <form> 태그
+		
+		var inputFile = $("input[name='leaImage']");
+		var files = inputFile[0].files;
+		console.log(files);
+		
+		//formData 객체에 선택한 파일 추가
+		for(var i=0 ; i<files.length ; i++){
+			//확장자 및 파일 크기 확인
+			if(!checkExension(files[i].name, files[i].size)){
+				return false;
+			}
+			formData.append("uploadFile", files[i]);
+		}
+		
+		$.ajax({
+			type : 'post',
+			url :'/uploadAjaxAction',
+			data : formData,
+			dataType : 'json',
+			contentType : false,
+			processData : false,
+			beforeSend  : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			success : function(result){
+				console.log(result);	//콘솔로 결과 확인
+				
+				showUploadResult(result); //
+				
+				//복사해 둔 div를 이용하여 업로드 영역 초기화
+				//$('.uploadDiv').html(cloneObj.html());
+			}
+		})//END .ajax()
+	});//END uploadBtn 이벤트 처리 
+	
+	//업로드 결과 출력 처리
+	function showUploadResult(uploadResultArr){
+		if(!uploadResultArr || uploadResultArr.length == 0){
+			return;
+		}
+
+		var uploadUL = $('.img ul');
+		var str = "";
+		$(uploadResultArr).each(function(i, obj){
+			//업로드 파일명 <li>추가
+			if(obj.image){	//이미지인 경우
+				var fileCallPath = encodeURIComponent(obj.uploadPath + 
+												      "/s_" + obj.uuid  + "_" +
+												      obj.fileName);
+
+				str += "<li data-path='" + obj.uploadPath + "' " 			+
+				   "data-uuid='" + obj.uuid + "' " 					+
+				   "data-filename='" + obj.fileName + "'" 			+
+				   "data-type='" + obj.image + "'>" 				+ 
+				   "<div>"			+
+			       "    <button type='button' " 					+ 
+			       "            data-file='" + fileCallPath + "'" 	+
+			       "            data-type='image'" 					+
+			       "        class='btn btn-warning btn-circle'>" 	+
+			       "        <i class='fa fa-times'></i></button><br>" +
+			       "    <img src='/display?fileName="+ fileCallPath + "'>" +
+			       "    </div></li>";
+		} else {		//이미지가 아닌 경우
+			var fileCallPath 
+			= encodeURIComponent(obj.uploadPath + 
+								 "/" + obj.uuid  + "_" +
+								 obj.fileName);
+			var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");			
+			str += "<li data-path='" + obj.uploadPath + "' " 	+
+				   "    data-uuid='" + obj.uuid + "' " 			+
+				   "    data-filename='" + obj.fileName + "'" 	+
+				   "    data-type='" + obj.image + "'>" 		+ 
+				   "    <div><span>" + obj.fileName + "</span>"	+  
+			       "    <button type='button' " 					+ 
+			       "            data-file='" + fileCallPath + "'" 	+
+			       "            data-type='file'" 					+
+			       "        class='btn btn-warning btn-circle'>" 	+
+		       	   "        <i class='fa fa-times'></i></button><br>" +
+				   "    <img src='/resources/img/attach.png'></div></li>";
+		}
+		});
+		uploadUL.html(str);
+	}//END showUploadResult()
+});
+
+</script>
 </body>
 </html>

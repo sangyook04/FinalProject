@@ -97,10 +97,6 @@ function leaderJoinCheck(){
 		alert('아이디를 입력해 주세요');
 		id.focus();
 		return;
-	} else if(id.value.length <= 8 || id.value.length >= 16) {
-		alert('아이디는 10자 이상 15자 이내로 입력해 주세요');
-		id.focus();
-		return;
 	} else if( pwd.value == ''){
 		alert('비밀번호를 입력해 주세요');
 		pwd.focus();
@@ -145,6 +141,30 @@ function leaderJoinCheck(){
 		return;
 	}
 	
+	var formObj = $("form[role='form']");
+	var str = "";
+	 $('.uploadResult ul li').each(function(i, obj){	
+		 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
+		 console.log('jobj : ' + obj);
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].fileName' " +
+		 		"       value='" + jobj.data("filename") + "'>";
+
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].uuid' " +
+		 		"       value='" + jobj.data("uuid") + "'>";
+
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].uploadPath' " +
+		 		"       value='" + jobj.data("path") + "'>";
+
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].fileType' " +
+		 		"       value='" + jobj.data("type") + "'>";
+	 });//END 첨부 파일 정보 hidden 태그로 추가
+	 console.log("attach : " + str);
+	 formObj.append(str);	//폼데이터와 함께 전송
+	
 	alert('리더 회원가입 신청이 완료되었습니다.');
 	document.leaderJoin.submit();
 	
@@ -166,7 +186,7 @@ function setEmail2(email3Obj){
 //비밀번호 확인 함수
 function pwChk(){
 	var pwd = document.leaderJoin.leaPassword; 
-	var pwd2 = document.leaderJoin.leaPasswordChk; 
+	var pwd2 = document.leaderJoin.leaPassword2; 
 	
 	if (pwd.value != pwd2.value){
 		alert('비밀번호가 일치하지 않습니다.');
@@ -298,37 +318,7 @@ function pwChk(){
 	<!-- wrap -->
 
  <script>
- $(function(e){
-	var formObj = $("form[role='form']");
-	 
-	//submit 버튼 클릭 막기
-	$("input[id='joinBtn']").on('click', function(e){
-		 e.preventDefault();
-		 
-		 var str = "";
-		 $('.uploadResult ul li').each(function(i, obj){	
-			 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
-			 console.log('jobj : ' + obj);
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].fileName' " +
-			 		"       value='" + jobj.data("filename") + "'>";
-
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].uuid' " +
-			 		"       value='" + jobj.data("uuid") + "'>";
-
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].uploadPath' " +
-			 		"       value='" + jobj.data("path") + "'>";
-
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].fileType' " +
-			 		"       value='" + jobj.data("type") + "'>";
-		 });//END 첨부 파일 정보 hidden 태그로 추가
-		 console.log("attach : " + str);
-		 formObj.append(str).submit();	//폼데이터와 함께 전송
-	});//END submit 버튼 클릭 막기
-	 
+ $(function(e){ 
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");	//확장자 제한 정규표현식
 	var maxSize = 5242880;	//파일 최대 업로드 크기 제한 5MB
 	
@@ -436,7 +426,7 @@ function pwChk(){
 					   "    <img src='/resources/img/attach.png'></div></li>";
 			}
 		});
-		uploadUL.append(str);
+		uploadUL.html(str);
 	}//END showUploadResult()
 	
 	//X 버튼 이벤트 처리

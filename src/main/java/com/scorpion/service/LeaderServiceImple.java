@@ -33,9 +33,21 @@ public class LeaderServiceImple implements LeaderService {
 	private PasswordEncoder pwencoder;
 	
 	@Override
-	public int getTotal(Criteria cri) {
+	public int getTotalA(Criteria cri) {
 		
-		return mapper.getTotalCount(cri);
+		return mapper.getTotalCountA(cri);
+	}
+	
+	@Override
+	public int getTotalB(Criteria cri) {
+		
+		return mapper.getTotalCountB(cri);
+	}
+	
+	@Override
+	public int getTotalR(Criteria cri) {
+		
+		return mapper.getTotalCountR(cri);
 	}
 
 	@Override
@@ -72,7 +84,8 @@ public class LeaderServiceImple implements LeaderService {
 			return;
 		}
 		
-		leader.getPictureList().forEach(attach -> { attach.setLeaId(leader.getLeaId());
+		leader.getPictureList().forEach(attach -> { 
+			attach.setLeaId(leader.getLeaId());
 			picturemapper.insertLeader(attach);
 		});
 	}
@@ -86,12 +99,24 @@ public class LeaderServiceImple implements LeaderService {
 
 	@Override
 	public boolean modify(LeaderVO leader) {
+		
 		log.info("modify......" + leader);
 		
 		String encPassword = pwencoder.encode(leader.getLeaPassword());
 		leader.setLeaPassword(encPassword);
 		
-		return mapper.update(leader) == 1;
+		picturemapper.deleteAllLeader(leader.getLeaId());
+		
+		boolean modifyResult = mapper.update(leader) == 1;
+		
+		if(modifyResult && leader.getPictureList() != null && leader.getPictureList().size() > 0) {
+			leader.getPictureList().forEach(picture -> {
+				picture.setLeaId(leader.getLeaId());
+				picturemapper.insertLeader(picture);
+			});
+		}
+		
+		return modifyResult;
 	}
 
 	@Override
@@ -119,6 +144,7 @@ public class LeaderServiceImple implements LeaderService {
 	@Override
 	public List<PictureVO> getPictureList(String leaderid) {
 		log.info("get Picture List by leaderId " + leaderid);
+		
 		return picturemapper.findByLeaId(leaderid);
 	}
 

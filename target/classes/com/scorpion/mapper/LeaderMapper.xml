@@ -62,19 +62,23 @@
       leaemail2 = #{leaEmail2},
       leabank = #{leaBank},
       leaaccount = #{leaAccount},
-      leaintroduce = #{leaIntroduce}
+      leaintroduce = #{leaIntroduce},
+      leaImage = #{leaImage}
+      
       where leaId = #{leaId}
    </update>
    
    <update id="updateRefusal">
       update leader set
-      leastate = '가입거부'
+      leastate = '가입거부',
+      enabled = 0
       where leaId = #{leaId}
    </update>
    
    <update id="updateLeader">
       update leader set
-      leastate = '가입완료'
+      leastate = '가입완료',
+      enabled = 1
       where leaId = #{leaId}
    </update>
 
@@ -162,8 +166,21 @@
         ]]>
    </select>
 
-   <select id="getTotalCount" resultType="int">
+   <select id="getTotalCountA" resultType="int">
       select count(*) from
       leader
+      where leastate = '가입완료'
+   </select>
+
+   <select id="getTotalCountR" resultType="int">
+      select count(*) from
+      leader
+      where leastate = '가입거부'
+   </select>
+
+   <select id="getTotalCountB" resultType="int">
+      select count(*) from
+      leader
+      where leastate = '가입대기'
    </select>
 </mapper>

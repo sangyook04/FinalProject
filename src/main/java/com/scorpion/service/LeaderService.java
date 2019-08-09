@@ -11,7 +11,9 @@ public interface LeaderService {
 
 	public List<PictureVO> getPictureList(String leaderid);
 	public List<PictureVO> getOldFiles();
-	public int getTotal(Criteria cri);
+	public int getTotalA(Criteria cri);
+	public int getTotalR(Criteria cri);
+	public int getTotalB(Criteria cri);
 	public List<LeaderVO> getList(Criteria cri);
 	public List<LeaderVO> getHoldList(Criteria cri);
 	public List<LeaderVO> getRejectList(Criteria cri);

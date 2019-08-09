@@ -106,7 +106,7 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;} */
 #container .inner .content .infoContent .userInfo { border-bottom: 1px solid gray; padding: 5px; margin: 5px;}
 #container .inner .content .infoContent #modBtn { background-color: #4285f4; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
 
-#container .inner .content .infoContent form .joinInput { border: 1px solid black; padding: 4px; width : 200px; height : 40px; margin-right : 5px;}
+#container .inner .content .infoContent form .joinInput { border: 1px solid black; padding: 4px; width : 350px; height : 40px; margin-right : 5px; margin-bottom:5px;}
 #container .inner .content .infoContent form .joinInput1 { border: 1px solid black; padding: 4px; width : 150px; height : 40px; margin-right : 5px;}
 #container .inner .content .infoContent form .joinInput2 { border: 1px solid black; padding: 4px; width : 100px; height : 40px; margin-right : 5px;}
 #container .inner .content .infoContent form .joinInput3 { border: 1px solid black; padding: 4px; width : 390px; height : 300px; margin-right : 5px; resize: none;}

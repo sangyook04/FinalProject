@@ -43,21 +43,12 @@
 		<div id="container">
 			<div class="inner">
 				<div class="content">
-					<h1>비밀번호 찾기</h1>
-					<div class="chkPw">
-						<form action="/common/pwdCheck" method="post">
-							<div class="textInput"><input type="text" name="name" placeholder="이름을 입력해주세요"></div>
-							<div class="textInput"><input type="tel" name="id" placeholder="아이디를 입력해주세요"></div>
-							<div class="textInput"><input type="text" name="phonenumber" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
-							<div class="textInput"><input type="submit" value="확인" class="loginBtn"></div>
-						</form>
-					</div>
-						
-			<!-- 		<div class="chgPw">
+					<h1>비밀번호 업데이트</h1>
+					<form class="chgPw" >
 						<div class="textInput"><input type="tel" placeholder="새로운 비밀번호를 입력해주세요."></div>
 						<div class="textInput"><input type="text" placeholder="새로운 비밀번호를 다시 입력해주세요"></div>
 						<div class="textInput"><input type="button" value="비밀번호 변경" class="loginBtn"></div>
-					</div> -->
+					</form>
 				</div>
 			</div>
 		</div>
