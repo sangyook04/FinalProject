@@ -35,7 +35,7 @@ public class CommonController {
    LeaderService service;
    NoticeService notservice;
    StudentService stuservice;
-   PwdSearchService pwdservice;
+//   PwdSearchService pwdservice;
 //
 //   	@PostMapping("/pwdCheck")
 //   	public String pwdCheck(LeaderVO leader, RedirectAttributes rttr, Model model) {
