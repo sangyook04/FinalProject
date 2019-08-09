@@ -193,28 +193,6 @@ public class CommonController {
    }
    
    
-   @ResponseBody
-	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
-	public int postIdCheck(HttpServletRequest req) throws Exception {
-		log.info("post idCheck");
-
-		String stuId = req.getParameter("stuId");
-		int idCheck = stuservice.idcheck(stuId);
-		int idCheck2 = stuservice.idcheck2(stuId);
-
-		int result = 0;
-
-		if (idCheck != 0 || idCheck2 != 0) {
-			result = 1;
-		}
-
-		log.info(result);
-
-		return result;
-
-	}
-  
-   
    	@PreAuthorize("isAnonymous()")
 	@GetMapping( "/noticeList")
 	public void list(Model model, Criteria cri) {
