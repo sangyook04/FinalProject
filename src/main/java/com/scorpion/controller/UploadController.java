@@ -206,9 +206,9 @@ public class UploadController {
 							  new File(uploadPath, "s_" + uploadFileName)
 						  );	
 					
-					//가로 100 * 세로 100 섬네일 이미지 생성
+					//가로 200 * 세로 200 섬네일 이미지 생성
 					Thumbnailator.createThumbnail(
-						m.getInputStream(), thumbnail, 100, 100
+						m.getInputStream(), thumbnail, 200, 200
 					);
 					thumbnail.close();
 				}//END 섬네일 이미지 생성

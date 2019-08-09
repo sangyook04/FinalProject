@@ -56,7 +56,7 @@
 			<div class="inner">
 				<div class="content">
 					<div class="infoContent">
-						<div class="img"><img src="../../../resources/img/GumonMain/user123.jpg"></div>
+						<div class="img"></div>
 						<div class="info">아이디</div>
 						<div class="userInfo"><c:out value="${ leader.leaId }"/></div>
 						<div class="info">이름</div>
@@ -92,23 +92,25 @@
 			(function(){
 				var leaId = '<c:out value="${ leader.leaId }"/>';
 				
-				$.getJSON("/leader/getPictureList", {leaId : leaId}, function(arr){
+				$.getJSON("/admin/getPictureList", {leaId : leaId}, function(arr){
 					console.log(arr);
 					
 					var str = "";
 					
 					$(arr).each(function(i, picture){
 						//image type
-						if(attach.fileType){
+						if(picture.fileType){
 							var fileCallPath = encodeURIComponent(picture.uploadPath + "/s_" + picture.uuid + "_"+picture.fileName);
 							
-							str += "";
+							str += "<img src='/display?fileName="+fileCallPath+"'>";
 						}
-					})
+						
+						$(".img").append(str);
+					});
 				});
 			})();
 		});
-		
+
 	</script>
 </body>
 </html>
