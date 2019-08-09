@@ -258,16 +258,7 @@ function pwChk(){
 									</p>
 							</div>
 
-         <div class="inner">
-            <div class="content">
-               <h1>학생 회원가입</h1>
-               <div class="studentJoin">
-                  <form role="form" name="studentJoin" action="/common/studentJoin" method="post">
-                     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-                     <div class="textInput">
-                        <input type="text" placeholder="아이디" name="stuId" class="joinInput">
-                        <button z="btn">중복확인</button>
-                     </div>
+         
                      <div class="textInput">
                         <input type="password" placeholder="비밀번호(8~16자 이내)" name="stuPassword"
                            class="joinInput">
@@ -275,8 +266,7 @@ function pwChk(){
                      <div class="textInput">
                         <input type="password" placeholder="비밀번호 확인"
                            name="stuPassword2" class="joinInput">
-                        <button type="button" class="btn" onclick="pwChk()">비밀번호
-                           확인</button>
+                       
                      </div>
                      <div class="textInput">
                         <input type="text" placeholder="이름" name="stuName"
@@ -321,58 +311,6 @@ function pwChk(){
 
 
 
-
-
-							<div class="textInput">
-								<input type="password" placeholder="비밀번호(8~16자 이내)"
-									name="stuPassword" class="joinInput">
-							</div>
-							<div class="textInput">
-								<input type="password" placeholder="비밀번호 확인" name="stuPassword2"
-									class="joinInput">
-							</div>
-							<div class="textInput">
-								<input type="text" placeholder="이름" name="stuName"
-									class="joinInput">
-							</div>
-							<div class="textInput">
-								<label><input class="radiogenderRadio" type="radio"
-									name="stuGender" value="m">남</label><span class="joinText"></span>
-								<label><input class="radiogenderRadio" type="radio"
-									name="stuGender" value="f">여</label>
-							</div>
-							<div class="textInput">
-								<input type="text" placeholder="주소" name="stuAddress"
-									id="sample4_roadAddress" class="joinInput" readonly="readonly">
-								<input type="button" onclick="sample4_execDaumPostcode()"
-									value="주소찾기" class="btn">
-							</div>
-							<div class="textInput">
-								<input type="tel" placeholder="연락처(- 없이 입력해주세요)"
-									name="stuPhonenum" class="joinInput">
-							</div>
-							<div class="textInput">
-								<input type="text" placeholder="이메일" name="stuEmail"
-									class="joinInput2"><span class="joinText">@</span><input
-									type="text" placeholder="이메일" name="stuEmail2"
-									class="joinInput2"> <select class="joinInput2"
-									name="stuEmail3" onchange="setEmail2(this)">
-									<option value="direct" selected>직접입력</option>
-									<option value="naver.com">naver.com</option>
-									<option value="daum.net">daum.net</option>
-									<option value="gmail.com">gmail.com</option>
-								</select>
-							</div>
-
-
-							<div class="textBtn">
-								<input id="joinBtn" type="button" onclick="studentJoinCheck()"
-									value="가입하기">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
 
 		</div>
 		<!-- container -->
