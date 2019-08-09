@@ -36,7 +36,7 @@
          });
 
       });//ready
-   </script>
+</script>
 
 </head>
 <body>
@@ -48,12 +48,13 @@
 					<h1>아이디 찾기</h1>
 					<form action="/common/findId" method="post">
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-						<div class="findInput"><input type="text" placeholder="이름을 입력해주세요" name="leaName"></div>
-						<div class="findInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요" name="leaPhonenum"></div>
-						<div class="findInput"><input type="submit" value="확인" class="loginBtn"></div>
+						<div class="findInput"><input type="text" placeholder="이름을 입력해주세요" name="name"></div>
+						<div class="findInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요" name="phonenum"></div>
+						<div class="findInput"><button type="submit" class="loginBtn">확인</button></div>
 					</form>
-					
-					<div class="msg"><c:out value="${ find.leaId }"/></div>
+					<c:forEach items="${find }" var="id">
+						<div class="findedId">${ id.leaId }</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

@@ -3,6 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scorpion.mapper.LeaderMapper">
 
+	<resultMap type="com.scorpion.domain.LeaderVO" id="leaderMap2">
+      <id property="leaId" column = "leaid"/>
+      <result property="leaId" column="leaid"/>
+      <collection property="student" resultMap="studentMap"></collection>
+   </resultMap>
+
     <resultMap type="com.scorpion.domain.LeaderVO" id="leaderMap">
       <id property="leaId" column = "leaid"/>
       <result property="leaId" column="leaid"/>
@@ -19,12 +25,19 @@
       <result property="leaIntroduce" column="leaintroduce"/>
       <result property="leaBank" column="leabank"/>
       <result property="leaReqDate" column="leareqdate"/>
-      <collection property="authList" resultMap="authMap">
-      </collection>
+      <collection property="authList" resultMap="authMap"></collection>
+      <collection property="studentList" resultMap="studentMap"></collection>
    </resultMap>
    
    <resultMap type="com.scorpion.domain.AuthorityVO" id="authMap">
       <result      property="auth"         column="auth"/>   
+   </resultMap>
+   
+   <resultMap type="com.scorpion.domain.StudentVO" id="studentMap">
+   		<id property="stuId" column="stuid"/>
+   		<result property="stuId" column="stuid"/>
+   		<result property="stuName" column="stuname"/>
+   		<result property="stuPhonenum" column="stuphonenum"/>
    </resultMap>
 
    <insert id="insertSelectKey">
@@ -47,11 +60,18 @@
       where           leaid = #{leaId}
    </select>
    
-   <select id="findId" resultType="com.scorpion.domain.LeaderVO">
-   	select *
-	from leader
-	where leaname = #{leaName} and leaphonenum = #{leaPhonenum}
+   <select id="findId" resultMap="leaderMap2">
+   	select leaid from
+	(select leaphonenum tel, leaname name, leaid leaid from leader
+	union
+	select stuphonenum tel, stuname name, stuid leaid from student)
+	where tel = #{phonenum} and name = #{name}
    </select>
+   
+   <!-- <select id="findId" resultMap="leaderMap">
+   	select leaphonenum, leaname, leaid from leader
+	where leaphonenum = #{leaPhonenum} and leaname = #{leaName}
+   </select> -->
    
    <update id="update">
       update leader set
@@ -67,6 +87,12 @@
       
       where leaId = #{leaId}
    </update>
+   
+	 <update id="drop">
+  	UPDATE	leader
+  	SET	  enabled = '0'
+  	WHERE  	leaid = #{leaId}
+	  </update>
    
    <update id="updateRefusal">
       update leader set
@@ -107,7 +133,7 @@
       </trim>
         
         <![CDATA[
-        rownum <= #{pageNum} * #{amount} and leastate = '가입완료' )
+        rownum <= #{pageNum} * #{amount} and leastate = '가입완료' and enabled = '1' )
         where rn > (#{pageNum} -1) * #{amount}
         ]]>
    </select>
@@ -183,4 +209,20 @@
       leader
       where leastate = '가입대기'
    </select>
+   
+  
+  <select id="idcheck" parameterType="String"  resultType="Integer" >
+    select count(*)
+    from student
+    where #{leaId} = (select stuid from student where stuid= #{leaId})
+    
+</select>
+
+   
+ <select id="idcheck2" parameterType="String"  resultType="Integer" >
+    select count(*)
+    from leader
+    where leaid = #{leaId} 
+    
+</select>
 </mapper>

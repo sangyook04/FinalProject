@@ -26,5 +26,8 @@ public class LeaderVO{
    private List<StudentVO> studentList;
    private List<AuthorityVO> authList;
    private List<PictureVO> pictureList;
+   private List<StudentVO> studentList;
+   
+   private StudentVO student;
 
 }

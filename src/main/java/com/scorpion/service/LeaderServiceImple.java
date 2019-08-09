@@ -1,5 +1,6 @@
 package com.scorpion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,9 +150,28 @@ public class LeaderServiceImple implements LeaderService {
 	}
 
 	@Override
-	public LeaderVO findId(String leaName, String leaPhonenum) {
-		
-		return mapper.findId(leaName, leaPhonenum);
+	public List<LeaderVO> findId(String name, String phonenum) {
+		System.out.println("서비스 : " + name + phonenum);
+		return mapper.findId(name, phonenum);
 	}
+
+	@Override
+	public boolean drop(String leaId) {
+		 return mapper.drop(leaId)==1;
+	}
+	
+	@Override
+	   public int idcheck(String stuid) {
+		   
+	      /* return mapper.idcheck(stuid); */
+	      return mapper.idcheck(stuid);
+
+	}
+
+	   @Override
+	   public int idcheck2(String stuid) {
+	      // TODO Auto-generated method stub
+	      return mapper.idcheck2(stuid);
+	   }
 
 }
