@@ -92,13 +92,10 @@ function leaderJoinCheck(){
 	var bank = document.leaderJoin.leaBank;
 	var account = document.leaderJoin.leaAccount;
 	var introduce = document.leaderJoin.leaIntroduce;
+	var idck = document.leaderJoin.idck;
 	
 	if( id.value == '') {
 		alert('아이디를 입력해 주세요');
-		id.focus();
-		return;
-	} else if(id.value.length <= 8 || id.value.length >= 16) {
-		alert('아이디는 10자 이상 15자 이내로 입력해 주세요');
 		id.focus();
 		return;
 	} else if( pwd.value == ''){
@@ -145,8 +142,39 @@ function leaderJoinCheck(){
 		return;
 	}
 	
-	alert('리더 회원가입 신청이 완료되었습니다.');
-	document.leaderJoin.submit();
+	var formObj = $("form[role='form']");
+	var str = "";
+	 $('.uploadResult ul li').each(function(i, obj){	
+		 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
+		 console.log('jobj : ' + obj);
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].fileName' " +
+		 		"       value='" + jobj.data("filename") + "'>";
+
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].uuid' " +
+		 		"       value='" + jobj.data("uuid") + "'>";
+
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].uploadPath' " +
+		 		"       value='" + jobj.data("path") + "'>";
+
+		 str += "<input type='hidden' " +
+		 		"       name='pictureList[" + i + "].fileType' " +
+		 		"       value='" + jobj.data("type") + "'>";
+	 });//END 첨부 파일 정보 hidden 태그로 추가
+	 console.log("attach : " + str);
+	 formObj.append(str);	//폼데이터와 함께 전송
+	   
+	   if(confirm("회원가입을 하시겠습니까?")){
+	       if(idck.value==0){
+	         alert('아이디 중복체크를 해주세요');
+	           return false;
+	       }else{
+	       alert("회원가입을 축하합니다");
+	       $("#frm").submit();
+	       }
+	   }
 	
 }
 
@@ -166,7 +194,7 @@ function setEmail2(email3Obj){
 //비밀번호 확인 함수
 function pwChk(){
 	var pwd = document.leaderJoin.leaPassword; 
-	var pwd2 = document.leaderJoin.leaPasswordChk; 
+	var pwd2 = document.leaderJoin.leaPassword2; 
 	
 	if (pwd.value != pwd2.value){
 		alert('비밀번호가 일치하지 않습니다.');
@@ -205,15 +233,17 @@ function pwChk(){
 				<div class="content">
 					<h1>리더 회원가입</h1>
 					<div class="leaderJoin">
-						<form role="form" name="leaderJoin" action="/common/leaderJoin"
+						<form role="form" id="frm" name="leaderJoin" action="/common/leaderJoin"
 							method="post">
 							<input type="hidden" name="${_csrf.parameterName }"
 								value="${_csrf.token }">
+                     		<input type="hidden" name="idck" value="0">
 							<div class="textInput">
-								<input type="text" placeholder="아이디" name="leaId"
+								<input type="text" placeholder="아이디" name="leaId" id="leaId"
 									class="joinInput">
-								<button class="btn">중복확인</button>
+								<button type="button" id="leaderInput" class="idCheck btn">중복체크</button>
 							</div>
+							<div class="textInput"><p class="result"><span class="msg"></span></p></div>
 							<div class="textInput">
 								<input type="password" placeholder="비밀번호" name="leaPassword"
 									class="joinInput">
@@ -298,37 +328,7 @@ function pwChk(){
 	<!-- wrap -->
 
  <script>
- $(function(e){
-	var formObj = $("form[role='form']");
-	 
-	//submit 버튼 클릭 막기
-	$("input[id='joinBtn']").on('click', function(e){
-		 e.preventDefault();
-		 
-		 var str = "";
-		 $('.uploadResult ul li').each(function(i, obj){	
-			 var jobj = $(obj);	//첨부 파일 정보 hidden 태그로 추가
-			 console.log('jobj : ' + obj);
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].fileName' " +
-			 		"       value='" + jobj.data("filename") + "'>";
-
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].uuid' " +
-			 		"       value='" + jobj.data("uuid") + "'>";
-
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].uploadPath' " +
-			 		"       value='" + jobj.data("path") + "'>";
-
-			 str += "<input type='hidden' " +
-			 		"       name='pictureList[" + i + "].fileType' " +
-			 		"       value='" + jobj.data("type") + "'>";
-		 });//END 첨부 파일 정보 hidden 태그로 추가
-		 console.log("attach : " + str);
-		 formObj.append(str).submit();	//폼데이터와 함께 전송
-	});//END submit 버튼 클릭 막기
-	 
+ $(function(e){ 
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");	//확장자 제한 정규표현식
 	var maxSize = 5242880;	//파일 최대 업로드 크기 제한 5MB
 	
@@ -436,7 +436,7 @@ function pwChk(){
 					   "    <img src='/resources/img/attach.png'></div></li>";
 			}
 		});
-		uploadUL.append(str);
+		uploadUL.html(str);
 	}//END showUploadResult()
 	
 	//X 버튼 이벤트 처리
@@ -478,6 +478,46 @@ function showImage(fileCallPath){
 							encodeURI(fileCallPath) + "'>")
 					.animate( { width:'100%', height:'100%'}, 1000);
 }//END showImage()
-</script>  
+</script>
+   <script type="text/javascript">
+//아이디 체크여부 확인 (아이디 중복이 아닐 경우 = 0 , 중복일 경우 = 1 )
+$(".idCheck").click(function() {
+
+   var idck = document.leaderJoin.idck;
+   var query = {
+      leaId : $("#leaId").val()
+   };
+
+   var leaId = $("#leaId").val()
+   
+   var csrfHeaderName = "${_csrf.headerName}";
+   var csrfTokenValue = "${_csrf.token}";
+   console.log(leaId);
+   
+   $.ajax({
+      url : "/common/idCheck2",
+      type : "post",
+      data : {
+         leaId : leaId
+      },
+      dataType : "json",
+      beforeSend  : function(xhr){
+            xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+         },       
+      success : function(data) {
+         if ($.trim(data) == 0) {
+            $(".result .msg").text("사용가능");
+            $(".result .msg").attr("style", "color:#00f");
+            idck.value = '1';
+            
+         } else if ($.trim(data) == 1){
+            $(".result .msg").text("사용불가");
+            $(".result .msg").attr("style", "color:#f00");
+            idck.value = '0';
+         }
+      }
+   }); // ajax 끝
+}); // End id check
+</script>
 </body>
 </html>

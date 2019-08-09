@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scorpion.mapper.PwdSearchMapper">
+	
+  	<resultMap id="LeaderVO"
+			   type="com.scorpion.domain.LeaderVO" >
+		<id 	property="leaId"		column="leaId"/>
+		<result	property="leaPassword"		column="leaPassword"/>
+		<result	property="leaName"		column="leaName"/>
+		<result	property="leaPhonenum"	column="leaPhonenum"/>
+		<collection	property="studentList" resultMap="StudentVO"/>
+	</resultMap>
+	
+	<resultMap id="StudentVO"
+			   type="com.scorpion.domain.StudentVO" >
+		<id	property="stuId"		column="stuId"/>
+		<result	property="stuPassword"		column="stuPassword"/>
+		<result	property="stuName"		column="stuName"/>
+		<result	property="stuPhonenum"		column="stuPhonenum"/>
+	</resultMap>
+	
+	<select id="check" resultType="Integer">
+		select count(*)
+		from leader
+		where leaid=#{id} and leaName=#{name} and leaPhonenum=#{phonenumber}
+	</select>
+	 
+	 <select id="check2" resultType="Integer">
+		select count(*)
+		from student
+		where stuid=#{id} and stuName=#{name} and stuPhonenum=#{phonenumber}
+	 </select>	
+	 	
+	 <update id="update1">
+	  	update leader
+	  	set leapassword = #{pwd}
+	  	where leaid = #{id}
+  	</update>
+  	
+  	<update id="update2">
+	  	update student
+	  	set stupassword = #{pwd}
+	  	where stuid = #{id}
+  	</update>
+</mapper>

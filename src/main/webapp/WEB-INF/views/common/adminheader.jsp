@@ -13,9 +13,20 @@
 				</div>
 				<ul class="gnb">
 					<li><sec:authentication property="principal.username"/><!--관리자 -->님</li>
-					<li><a class="LogOut" href="/common/logout">로그 아웃</a></li>
+					<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 				</ul>
+				<form id="LogOutForm" action="/logout" method="POST">
+      			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    			</form>
 			</div>
 		</div>
 	</nav>
 </header>
+<script>
+	
+	$(".LogOut").on("click", function(e){
+		e.preventDefault();
+		$("#LogOutForm").submit();
+	});
+	
+</script>

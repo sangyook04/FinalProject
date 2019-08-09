@@ -5,7 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +32,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.PageDTO;
+import com.scorpion.domain.PwdDTO;
+import com.scorpion.domain.QnaVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
 import com.scorpion.service.NoticeService;
+import com.scorpion.service.PwdSearchService;
 import com.scorpion.service.StudentService;
 
 import lombok.AllArgsConstructor;
@@ -38,11 +51,37 @@ public class CommonController {
    LeaderService service;
    NoticeService notservice;
    StudentService stuservice;
-
-   //UserRegService reg_service;
+   PwdSearchService pwdservice;
    
-   
+   @PostMapping("/pwdCheck")
+  	public String pwdCheck(HttpServletRequest request, Model model, RedirectAttributes rttr, 
+  			@RequestParam("name") String name, @RequestParam("id") String id, 
+  			@RequestParam("phonenumber") String phonenumber) {
 
+	   if (pwdservice.check(name, id, phonenumber)) {
+			return "redirect:/common/findPw2?id="+id;
+		}else {
+			return "redirect:/common/pwdCheck";
+		}
+  	}
+      	
+   	@GetMapping("/findPw2")
+   	public String findPw2(@RequestParam("id") String id , Model model) {
+   		model.addAttribute("result", id); 
+		return "/common/findPw2";
+   	}
+   	
+   	@PostMapping("/findPw2")
+	public String modify(HttpServletRequest request, Model model, RedirectAttributes rttr,
+  			@RequestParam("pwd") String pwd, @RequestParam("pwd2") String pwd2, @RequestParam("id") String id) {
+   			
+   		if (pwdservice.modify(pwd, pwd2, id)) {
+			rttr.addAttribute("result", "success");
+		}
+   		
+		return "redirect:/common/login";
+	}
+   	 
    @GetMapping("/main")
    public String main() {
       return "/index";
@@ -84,12 +123,13 @@ public class CommonController {
       }
    }
 
+
    @PreAuthorize("isAnonymous()")
-   @PostMapping("/findId")
-   public String findIdPost(@RequestParam("leaName") String name, @RequestParam("leaPhonenum") String tel, Model model) {
+   @PostMapping(value = "/findId")
+   public String findIdPost(@RequestParam("name") String name, @RequestParam("phonenum") String tel, Model model) {
       
-	   model.addAttribute("find", service.findId(name, tel));
-	   
+      model.addAttribute("find", service.findId(name, tel));
+      
       return "/common/findId";
    }
    
@@ -190,10 +230,55 @@ public class CommonController {
 	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("view", notservice.get(notIndex));
 	}
+  
+  
    
-   
-   
-   
+    @ResponseBody
+    @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+    public int postIdCheck(HttpServletRequest req) throws Exception {
+       log.info("post idCheck");
+
+       String stuId = req.getParameter("stuId");
+       int idCheck = stuservice.idcheck(stuId);
+       int idCheck2 = stuservice.idcheck2(stuId);
+
+       int result = 0;
+
+       if (idCheck != 0 || idCheck2 != 0) {
+          result = 1;
+       }
+
+       log.info(result);
+
+       return result;
+
+    }
+    
+
+    
+    @ResponseBody
+    @RequestMapping(value = "/idCheck2", method = RequestMethod.POST)
+    public int postIdCheck2(HttpServletRequest req) throws Exception {
+       log.info("post idCheck");
+
+       String leaId = req.getParameter("leaId");
+       int idCheck = service.idcheck(leaId);
+       int idCheck2 = service.idcheck2(leaId);
+
+       int result = 0;
+
+       if (idCheck != 0 || idCheck2 != 0) {
+          result = 1;
+       }
+
+       log.info(result);
+
+       return result;
+
+    }
+
+
+
    
    
 }

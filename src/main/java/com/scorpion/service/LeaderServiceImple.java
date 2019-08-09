@@ -1,5 +1,6 @@
 package com.scorpion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,21 @@ public class LeaderServiceImple implements LeaderService {
 	private PasswordEncoder pwencoder;
 	
 	@Override
-	public int getTotal(Criteria cri) {
+	public int getTotalA(Criteria cri) {
 		
-		return mapper.getTotalCount(cri);
+		return mapper.getTotalCountA(cri);
+	}
+	
+	@Override
+	public int getTotalB(Criteria cri) {
+		
+		return mapper.getTotalCountB(cri);
+	}
+	
+	@Override
+	public int getTotalR(Criteria cri) {
+		
+		return mapper.getTotalCountR(cri);
 	}
 
 	@Override
@@ -72,7 +85,8 @@ public class LeaderServiceImple implements LeaderService {
 			return;
 		}
 		
-		leader.getPictureList().forEach(attach -> { attach.setLeaId(leader.getLeaId());
+		leader.getPictureList().forEach(attach -> { 
+			attach.setLeaId(leader.getLeaId());
 			picturemapper.insertLeader(attach);
 		});
 	}
@@ -86,12 +100,24 @@ public class LeaderServiceImple implements LeaderService {
 
 	@Override
 	public boolean modify(LeaderVO leader) {
+		
 		log.info("modify......" + leader);
 		
 		String encPassword = pwencoder.encode(leader.getLeaPassword());
 		leader.setLeaPassword(encPassword);
 		
-		return mapper.update(leader) == 1;
+		picturemapper.deleteAllLeader(leader.getLeaId());
+		
+		boolean modifyResult = mapper.update(leader) == 1;
+		
+		if(modifyResult && leader.getPictureList() != null && leader.getPictureList().size() > 0) {
+			leader.getPictureList().forEach(picture -> {
+				picture.setLeaId(leader.getLeaId());
+				picturemapper.insertLeader(picture);
+			});
+		}
+		
+		return modifyResult;
 	}
 
 	@Override
@@ -119,13 +145,33 @@ public class LeaderServiceImple implements LeaderService {
 	@Override
 	public List<PictureVO> getPictureList(String leaderid) {
 		log.info("get Picture List by leaderId " + leaderid);
+		
 		return picturemapper.findByLeaId(leaderid);
 	}
 
 	@Override
-	public LeaderVO findId(String leaName, String leaPhonenum) {
-		
-		return mapper.findId(leaName, leaPhonenum);
+	public List<LeaderVO> findId(String name, String phonenum) {
+		System.out.println("서비스 : " + name + phonenum);
+		return mapper.findId(name, phonenum);
 	}
+
+	@Override
+	public boolean drop(String leaId) {
+		 return mapper.drop(leaId)==1;
+	}
+	
+	@Override
+	   public int idcheck(String stuid) {
+		   
+	      /* return mapper.idcheck(stuid); */
+	      return mapper.idcheck(stuid);
+
+	}
+
+	   @Override
+	   public int idcheck2(String stuid) {
+	      // TODO Auto-generated method stub
+	      return mapper.idcheck2(stuid);
+	   }
 
 }

@@ -30,7 +30,7 @@
 			</ul>
 		</li>
 		<li class="Mainli fourth">리더가입 관리
-			<ul class="asideSubmenu forthSub">
+			<ul class="asideSubmenu3 forthSub">
 				<li><a href="/admin/beforeJoin">가입 대기 리더 목록</a></li>
 				<li><a href="/admin/rejectJoin">리더 가입 거부 목록</a></li>
 			</ul>

@@ -7,7 +7,11 @@
 		insert into picture (uuid, uploadpath, filename, filetype, leaid)
 		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{leaId})
 	</insert>
-	
+		
+		
+	  <delete id="deleteAllLeader">
+	  	DELETE FROM picture WHERE leaid = #{leaId}
+	  </delete>
 	
 	<delete id="delete">
 	
