@@ -109,7 +109,7 @@
 					</form>
 					
 					
-					<button data-oper="close" id="closeBtn2" class="closeBtn">취소</button>
+					<button data-oper="close" id="closeBtn5" class="closeBtn">취소</button>
 					<form id="operForm" action="/admin/adminNoticeManage" method="get">
 					<input type="hidden" id="notIndex" name="notIndex"
 						value="${content.notIndex }">

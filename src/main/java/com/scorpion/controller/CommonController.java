@@ -1,11 +1,16 @@
 package com.scorpion.controller;
 
 import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -117,12 +123,13 @@ public class CommonController {
       }
    }
 
+
    @PreAuthorize("isAnonymous()")
-   @PostMapping("/findId")
-   public String findIdPost(@RequestParam("leaName") String name, @RequestParam("leaPhonenum") String tel, Model model) {
+   @PostMapping(value = "/findId")
+   public String findIdPost(@RequestParam("name") String name, @RequestParam("phonenum") String tel, Model model) {
       
-	   model.addAttribute("find", service.findId(name, tel));
-	   
+      model.addAttribute("find", service.findId(name, tel));
+      
       return "/common/findId";
    }
    
@@ -186,6 +193,27 @@ public class CommonController {
    }
    
    
+   @ResponseBody
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public int postIdCheck(HttpServletRequest req) throws Exception {
+		log.info("post idCheck");
+
+		String stuId = req.getParameter("stuId");
+		int idCheck = stuservice.idcheck(stuId);
+		int idCheck2 = stuservice.idcheck2(stuId);
+
+		int result = 0;
+
+		if (idCheck != 0 || idCheck2 != 0) {
+			result = 1;
+		}
+
+		log.info(result);
+
+		return result;
+
+	}
+  
    
    	@PreAuthorize("isAnonymous()")
 	@GetMapping( "/noticeList")
@@ -202,6 +230,55 @@ public class CommonController {
 	public void get(@RequestParam("notIndex") Long notIndex, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("view", notservice.get(notIndex));
 	}
+  
+  
+   
+    @ResponseBody
+    @RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+    public int postIdCheck(HttpServletRequest req) throws Exception {
+       log.info("post idCheck");
+
+       String stuId = req.getParameter("stuId");
+       int idCheck = stuservice.idcheck(stuId);
+       int idCheck2 = stuservice.idcheck2(stuId);
+
+       int result = 0;
+
+       if (idCheck != 0 || idCheck2 != 0) {
+          result = 1;
+       }
+
+       log.info(result);
+
+       return result;
+
+    }
+    
+
+    
+    @ResponseBody
+    @RequestMapping(value = "/idCheck2", method = RequestMethod.POST)
+    public int postIdCheck2(HttpServletRequest req) throws Exception {
+       log.info("post idCheck");
+
+       String leaId = req.getParameter("leaId");
+       int idCheck = service.idcheck(leaId);
+       int idCheck2 = service.idcheck2(leaId);
+
+       int result = 0;
+
+       if (idCheck != 0 || idCheck2 != 0) {
+          result = 1;
+       }
+
+       log.info(result);
+
+       return result;
+
+    }
+
+
+
    
    
 }

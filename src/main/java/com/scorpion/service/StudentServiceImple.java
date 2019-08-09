@@ -94,4 +94,20 @@ public class StudentServiceImple implements StudentService {
 		 return mapper.drop(user_id)==1;
 	}
 
+	@Override
+	public int idcheck(String stuid) {
+	
+		/* return mapper.idcheck(stuid); */
+		return mapper.idcheck(stuid);
+
+}
+
+	@Override
+	public int idcheck2(String stuid) {
+		// TODO Auto-generated method stub
+		return mapper.idcheck2(stuid);
+	}
+	
+
+	
 }

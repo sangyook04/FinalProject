@@ -35,8 +35,8 @@
 					<ul class="gnb">
 						<li class="myPage"><a href="#">마이페이지</a>
 							<ul class="myPageContent">
-								<li><a href="/student/studentMyInfo">내 정보 출력</a></li>
-								<li><a href="/student/studentLevelGet">레벨테스트 결과</a></li>
+								<li><a href="/student/studentMyInfo?stuId=${pinfo.username}">내 정보 출력</a></li>
+								<li><a href="/student/studentLevelGet?stuId=${pinfo.username}">레벨테스트 결과</a></li>
 								<li><a href="#">내 스터디</a></li>
 								<li><a href="#">관심 스터디</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
