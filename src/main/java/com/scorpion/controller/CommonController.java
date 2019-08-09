@@ -1,6 +1,7 @@
 package com.scorpion.controller;
 
 import java.io.Console;
+import java.util.Random;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,6 +36,35 @@ public class CommonController {
    StudentService stuservice;
    PwdSearchService pwdservice;
 
+   @RequestMapping(value="/find_password", method = RequestMethod.POST)
+	public String updateEmail(Member member, Model model) {
+		
+		String s="";
+		String st[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+		Random r = new Random();
+		for(int i=1; i<=6; i++) {
+			
+			s+=st[r.nextInt(26)];
+			
+		}
+		member.setmPw(s);
+		Integer result = pwdservice.updateEmail(member);		
+		model.addAttribute("result",result);
+		System.out.println("result : " + result);
+		try {
+			if(result>=1) {
+				mailing(member);
+			}else {
+				return "mail";
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return "mail";
+   }
+   
    @GetMapping("/main")
    public String main() {
       return "/index";
