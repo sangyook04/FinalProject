@@ -23,6 +23,7 @@ public class LeaderVO{
    private String leaReqDate;
    private boolean enabled;
 
+   private List<StudentVO> studentList;
    private List<AuthorityVO> authList;
    private List<PictureVO> pictureList;
 

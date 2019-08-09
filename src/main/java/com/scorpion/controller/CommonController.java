@@ -1,8 +1,16 @@
 package com.scorpion.controller;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.PageDTO;
+import com.scorpion.domain.PwdDTO;
 import com.scorpion.domain.QnaVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
@@ -35,33 +45,37 @@ public class CommonController {
    LeaderService service;
    NoticeService notservice;
    StudentService stuservice;
-//   PwdSearchService pwdservice;
-//
-//   	@PostMapping("/pwdCheck")
-//   	public String pwdCheck(LeaderVO leader, RedirectAttributes rttr, Model model) {
-//
-//		if (pwdservice.search(leader)) {
-//			rttr.addAttribute("result", "success");
-//		}
-//		return "/common/findPw2";
-//   	}
-//   	
-//   	@PostMapping("/pwdSearch")
-//   	public String pwdSearch(LeaderVO leader, RedirectAttributes rttr, Model model) {
-//
-//		if (pwdservice.search(leader)) {
-//			rttr.addAttribute("result", "success");
-//		}
-//		return "/";
-//   	}
-//   
-	//비밀번호 찾기할꺼당
-//  	@PostMapping("/pwdSearch")
-//  	public void pwdSearch(String name, String id, Model model) {
-//		model.addAttribute("find", pwdservice.search(name, id));
-//	}
-
+   PwdSearchService pwdservice;
    
+   @PostMapping("/pwdCheck")
+  	public String pwdCheck(HttpServletRequest request, Model model, RedirectAttributes rttr, 
+  			@RequestParam("name") String name, @RequestParam("id") String id, 
+  			@RequestParam("phonenumber") String phonenumber) {
+
+	   if (pwdservice.check(name, id, phonenumber)) {
+			return "redirect:/common/findPw2?id="+id;
+		}else {
+			return "redirect:/common/pwdCheck";
+		}
+  	}
+      	
+   	@GetMapping("/findPw2")
+   	public String findPw2(@RequestParam("id") String id , Model model) {
+   		model.addAttribute("result", id); 
+		return "/common/findPw2";
+   	}
+   	
+   	@PostMapping("/findPw2")
+	public String modify(HttpServletRequest request, Model model, RedirectAttributes rttr,
+  			@RequestParam("pwd") String pwd, @RequestParam("pwd2") String pwd2, @RequestParam("id") String id) {
+   			
+   		if (pwdservice.modify(pwd, pwd2, id)) {
+			rttr.addAttribute("result", "success");
+		}
+   		
+		return "redirect:/common/login";
+	}
+   	 
    @GetMapping("/main")
    public String main() {
       return "/index";

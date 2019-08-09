@@ -9,44 +9,39 @@
 		<id 	property="leaId"		column="leaId"/>
 		<result	property="leaPassword"		column="leaPassword"/>
 		<result	property="leaName"		column="leaName"/>
-		<result	property="leaId"		column="leaid"/>
-		<result	property="leaImage"		column="leaImage"/>
-		<result	property="leaAddress"	column="leaAddress"/>
-		<result	property="leaGender"	column="leaGender"/>
 		<result	property="leaPhonenum"	column="leaPhonenum"/>
-		<result	property="leaEmail"	column="leaEmail"/>
-		<result	property="leaEmail2"	column="leaEmail2"/>
-		<result	property="leaScore"	column="leaScore"/>
-		<result	property="leaAccount"	column="leaAccount"/>
-		<result	property="leaBank"	column="leaBank"/>
-		<result	property="leaIntroduce"	column="leaIntroduce"/>
-		<result	property="leaState"	column="leaState"/>
-		<result	property="leaReqDate"	column="leaReqDate"/>
-		<result	property="enabled"	column="enabled"/>
-		<collection	property="StudentVO"		resultMap="StudentVO"/>
+		<collection	property="studentList" resultMap="StudentVO"/>
 	</resultMap>
 	
 	<resultMap id="StudentVO"
 			   type="com.scorpion.domain.StudentVO" >
-		<result	property="stuId"		column="stuId"/>
+		<id	property="stuId"		column="stuId"/>
 		<result	property="stuPassword"		column="stuPassword"/>
 		<result	property="stuName"		column="stuName"/>
-		<result	property="stuAddress"		column="stuAddress"/>
-		<result	property="stuGender"		column="stuGender"/>
 		<result	property="stuPhonenum"		column="stuPhonenum"/>
-		<result	property="stuEmail"		column="stuEmail"/>
-		<result	property="stuEmail2"		column="stuEmail2"/>
-		<result	property="stuLevel"		column="stuLevel"/>
-		<result	property="enabled"		column="enabled"/>
 	</resultMap>
 	
-	<select id="search" resultMap="LeaderVO">
-		select * from 
-		(select leaid id, leaname name from leader
-		union
-		select stuid id, stuname name from student
-		)
-		where id=#{id} and name=#{name}
+	<select id="check" resultType="Integer">
+		select count(*)
+		from leader
+		where leaid=#{id} and leaName=#{name} and leaPhonenum=#{phonenumber}
 	</select>
+	 
+	 <select id="check2" resultType="Integer">
+		select count(*)
+		from student
+		where stuid=#{id} and stuName=#{name} and stuPhonenum=#{phonenumber}
+	 </select>	
+	 	
+	 <update id="update1">
+	  	update leader
+	  	set leapassword = #{pwd}
+	  	where leaid = #{id}
+  	</update>
   	
+  	<update id="update2">
+	  	update student
+	  	set stupassword = #{pwd}
+	  	where stuid = #{id}
+  	</update>
 </mapper>

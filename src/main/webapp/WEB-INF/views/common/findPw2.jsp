@@ -33,8 +33,19 @@
                 $('.callsenterSub').css("display", "none");
              }
          });
+         
+         if($("#pwd").val() != ($("#pwd2").val())){ 
+       	    alert("비밀번호가 틀렸네용.");
+       	    $("#pwd").val("");
+       	    $("#pwd2").val("");
+       	    $("#pwd").focus();
+       	    return false;
+          	}
 
       });//ready
+      
+ 
+  
    </script>
 </head>
 <body>
@@ -44,10 +55,12 @@
 			<div class="inner">
 				<div class="content">
 					<h1>비밀번호 업데이트</h1>
-					<form class="chgPw" >
-						<div class="textInput"><input type="tel" placeholder="새로운 비밀번호를 입력해주세요."></div>
-						<div class="textInput"><input type="text" placeholder="새로운 비밀번호를 다시 입력해주세요"></div>
-						<div class="textInput"><input type="button" value="비밀번호 변경" class="loginBtn"></div>
+					<form class="chgPw" action="/common/findPw2" method="post">
+						<input type="hidden" name="id" value="${result}">
+						<div class="textInput"><input type="tel" id="pwd" name="pwd" placeholder="새로운 비밀번호를 입력해주세요."></div>
+						<div class="textInput"><input type="text" id="pwd2" name="pwd2" placeholder="새로운 비밀번호를 다시 입력해주세요"></div>
+						<div class="textInput"><input type="submit" id="updatepwd" value="비밀번호 변경" class="loginBtn"></div>
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					</form>
 				</div>
 			</div>

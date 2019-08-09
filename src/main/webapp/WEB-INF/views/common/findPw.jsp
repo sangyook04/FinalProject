@@ -50,6 +50,7 @@
 							<div class="textInput"><input type="tel" name="id" placeholder="아이디를 입력해주세요"></div>
 							<div class="textInput"><input type="text" name="phonenumber" placeholder="회원가입시 등록한 전화번호를 입력해주세요"></div>
 							<div class="textInput"><input type="submit" value="확인" class="loginBtn"></div>
+							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 						</form>
 					</div>
 						
