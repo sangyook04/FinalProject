@@ -14,7 +14,7 @@
 				</div>
 				<ul class="mainmenu">
 					<li><a href="#">스터디 찾기</a></li>
-					<li><a href="/level/commonTest">레벨 테스트</a></li>
+					<li><a href="/level/commonTest?stuId=${principal.username}">레벨 테스트</a></li>
 					<li><a href="/common/noticeList">공지사항</a></li>
 					<li class="one"><a href="#">고객센터</a>
 						<ul class="callsenterSub">
@@ -28,7 +28,7 @@
 					<ul class="gnb">
 						<li><a href="/common/login">로그인</a></li>
 						<li><a href="/common/studentJoin">학생 회원가입</a></li>
-						<li><a href="/level/leaderTest">리더 시작하기</a></li>
+						<li><a href="/common/leaderTest">리더 시작하기</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_STUDENT')">

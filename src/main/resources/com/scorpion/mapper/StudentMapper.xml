@@ -5,6 +5,12 @@
  <mapper namespace="com.scorpion.mapper.StudentMapper">
   
   
+  <update id="setLevel">
+  	UPDATE	student
+  	SET		stulevel = #{level}
+  	WHERE  	stuid = #{stuid}
+  </update>
+  
   <resultMap type="com.scorpion.domain.StudentVO" id="studentMap">
       <id property="stuId" column = "stuid"/>
       <result property="stuId" column="stuid"/>

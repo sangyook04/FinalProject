@@ -22,6 +22,8 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class StudentServiceImple implements StudentService {
 	
+	
+
 	@Setter(onMethod_ = @Autowired) 
 	private StudentMapper mapper;
 	
@@ -33,6 +35,12 @@ public class StudentServiceImple implements StudentService {
 		 return mapper.getTotalCount(cri);
 	}
 
+	 
+	 @Override
+		public boolean setLevel(String stuid, String level) {
+			return mapper.setLevel(stuid, level) == 1;
+		}
+	 
 	@Override
 	public List<StudentVO> getList(Criteria cri) {
 		  return mapper.getListWithPaging(cri);

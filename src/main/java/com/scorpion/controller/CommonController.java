@@ -15,6 +15,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -31,28 +32,97 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
+import com.scorpion.domain.LevelTestVO;
 import com.scorpion.domain.PageDTO;
 import com.scorpion.domain.PwdDTO;
 import com.scorpion.domain.QnaVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;
+import com.scorpion.service.LevelTestService;
 import com.scorpion.service.NoticeService;
 import com.scorpion.service.PwdSearchService;
 import com.scorpion.service.StudentService;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/common/*")
 @Log4j
-@AllArgsConstructor
 public class CommonController {
+	@Setter(onMethod_ = {@Autowired})
    LeaderService service;
+	
+	@Setter(onMethod_ = {@Autowired})
    NoticeService notservice;
+	
+	@Setter(onMethod_ = {@Autowired})
    StudentService stuservice;
+	
+	@Setter(onMethod_ = {@Autowired})
    PwdSearchService pwdservice;
    
+   @Setter(onMethod_ = {@Autowired})
+	private LevelTestService levelservice;
+	
+	private int index = 0;	//인덱스
+	private int cnt = 0;	//맞은 개수
+	private int score = 0;	//점수
+	private String grade;
+	private boolean pageFlag = true;
+	private boolean lastExam = false;
+	private String[] answerArr = new String[10];	//정답 저장 배열
+	private String[] answerArr2 = new String[20];	//정답 저장 배열
+	private List<LevelTestVO> testList;	//랜덤으로 뽑아온 10개의 테스트
+   
+	@GetMapping("/leaderTest")
+	public void leaderTest(Model model) {
+		if(pageFlag) {
+			testList = levelservice.getRandom20Exam();
+			}
+		model.addAttribute("TestOne", testList.get(index));
+		model.addAttribute("dap", answerArr2[index]);
+		model.addAttribute("TestNum", index+1);
+		if(lastExam) {
+			model.addAttribute("score", score);
+			lastExam = false;
+		}
+	}
+	
+	@PostMapping("/leaderTest")
+	public String leaderTest(@RequestParam("dap") String dap, @RequestParam("state") String state) {
+		pageFlag = false;
+		//이전 버튼인 경우
+		if(state.equals("prev")) {
+			if(index == 0) {
+			}else {
+				index--;
+			}
+		}else if(state.equals("next")){
+			//마지막 문제가 아닌경우
+			if(index != 19) {
+				System.out.println("d" + index);
+				System.out.println("dap"+dap);
+				answerArr2[index] = dap;
+				index++;
+			}
+			//마지막 문제인경우
+			else {
+				for(int i=0; i<answerArr2.length; i++) {
+					if(testList.get(i).getTestAnswer().equals(answerArr2[i])) {
+						cnt++;
+					}
+				}
+				score = cnt * 5;
+				System.out.println(score);
+				lastExam = true;
+				return "redirect:/common/leaderTest"; //리더회원가입 페ㅐ이지로
+			}
+		}
+		return "redirect:/common/leaderTest";
+	}
+	
    @PostMapping("/pwdCheck")
   	public String pwdCheck(HttpServletRequest request, Model model, RedirectAttributes rttr, 
   			@RequestParam("name") String name, @RequestParam("id") String id, 

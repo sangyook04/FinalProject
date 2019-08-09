@@ -57,6 +57,7 @@
 				<div class="answer">
 					<form id="answerForm" action="/level/commonTest" method="post">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
+					<input type="hidden" name="stuId" value="${stuId }">
 						<div class="form-group form-inline">
 							<button id="prevBtn" class="btn btn-success">이전으로</button>
 							<input type="text" class="form-control" name="dap" id="dap" value="${dap}" placeholder="번호를 입력해 주세요.">

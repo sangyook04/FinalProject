@@ -18,6 +18,7 @@ import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LevelTestVO;
 import com.scorpion.domain.PageDTO;
 import com.scorpion.service.LevelTestService;
+import com.scorpion.service.StudentService;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,9 @@ public class LevelController {
 	@Setter(onMethod_ = {@Autowired})
 	private LevelTestService service;
 	
+	@Setter(onMethod_ = {@Autowired})
+	private StudentService stuservice;
+	
 	private int index = 0;	//인덱스
 	private int cnt = 0;	//맞은 개수
 	private int score = 0;	//점수
@@ -41,70 +45,25 @@ public class LevelController {
 	private String[] answerArr2 = new String[20];	//정답 저장 배열
 	private List<LevelTestVO> testList;	//랜덤으로 뽑아온 10개의 테스트
 	
-	
-	@GetMapping("/leaderTest")
-	public void leaderTest(Model model) {
-		if(pageFlag) {
-			testList = service.getRandom20Exam();
-			}
-		model.addAttribute("TestOne", testList.get(index));
-		model.addAttribute("dap", answerArr2[index]);
-		model.addAttribute("TestNum", index+1);
-		if(lastExam) {
-			model.addAttribute("score", score);
-			lastExam = false;
-		}
-	}
-	
-	@PostMapping("/leaderTest")
-	public String leaderTest(@RequestParam("dap") String dap, @RequestParam("state") String state) {
-		pageFlag = false;
-		//이전 버튼인 경우
-		if(state.equals("prev")) {
-			if(index == 0) {
-			}else {
-				index--;
-			}
-		}else if(state.equals("next")){
-			//마지막 문제가 아닌경우
-			if(index != 19) {
-				System.out.println("d" + index);
-				System.out.println("dap"+dap);
-				answerArr2[index] = dap;
-				index++;
-			}
-			//마지막 문제인경우
-			else {
-				for(int i=0; i<answerArr2.length; i++) {
-					if(testList.get(i).getTestAnswer().equals(answerArr2[i])) {
-						cnt++;
-					}
-				}
-				score = cnt * 5;
-				System.out.println(score);
-				lastExam = true;
-				return "redirect:/level/leaderTest"; //추천스터디 목록으로 경로 바꿔야함
-			}
-		}
-		return "redirect:/level/leaderTest";
-	}
-	
+	@PreAuthorize("hasRole([ROLE_STUDENT])")
 	@GetMapping("/commonTest")
-	public void commonTest(Model model) {
+	public void commonTest(@RequestParam("stuId") String stuId, Model model) {
 		if(pageFlag) {
 			testList = service.getRandomExam();
 			}
 		model.addAttribute("TestOne", testList.get(index));
 		model.addAttribute("dap", answerArr[index]);
 		model.addAttribute("TestNum", index+1);
+		model.addAttribute("stuId", stuId);
 		if(lastExam) {
 			model.addAttribute("score", score);
 			lastExam = false;
 		}
 	}
 	
+	@PreAuthorize("hasRole([ROLE_STUDENT])")
 	@PostMapping("/commonTest")
-	public String commonTest(@RequestParam("dap") String dap, @RequestParam("state") String state) {
+	public String commonTest(@RequestParam("stuId") String stuId, @RequestParam("dap") String dap, @RequestParam("state") String state, Model model) {
 		pageFlag = false;
 		//이전 버튼인 경우
 		if(state.equals("prev")) {
@@ -137,10 +96,18 @@ public class LevelController {
 				}
 				System.out.println(score);
 				lastExam = true;
-				return "redirect:/level/commonTest"; //추천스터디 목록으로 경로 바꿔야함 grade(용원이형이 설정한 파라미터에 맞춰야함)를 넘기는거로 수정
+				
+				//학생 레벨 설정
+				if(stuservice.setLevel(stuId, grade)) {
+					model.addAttribute("grade", grade);
+					model.addAttribute("stuId", stuId);
+					System.out.println("등급"+grade);
+				}
+				
+				return "redirect:/level/commonTest?stuId="+stuId; //추천스터디 목록으로 경로 바꿔야함 grade(용원이형이 설정한 파라미터에 맞춰야함)를 넘기는거로 수정
 			}
 		}
-		return "redirect:/level/commonTest";
+		return "redirect:/level/commonTest?stuId="+stuId;
 	}
 	
 	@PreAuthorize("hasRole([ROLE_ADMIN])")
