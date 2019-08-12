@@ -144,7 +144,7 @@
 					<div class="levelTestContent">
 						<h1><b>일단 레벨테스트부터</b><br> 시작해보세요!</h1>
 						<h2>무료로 내영어 레벨을 파악하고<br>꼭 맞는 스터디를 안내 받으세요!</h2>
-						<a href="#">레벨테스트 시작</a>
+						<a id="levelTestIndex" onclick="nono()">레벨테스트 시작</a>
 					</div>
 					<div class="levelTestImg">
 					</div>
@@ -160,7 +160,7 @@
 					<div class="LeaderGoContent">
 						<h1><b>스터디 리더에</b><br>관심이 있으신가요?</h1>
 						<h2>내가 편한 지역, 편한 시간에 스터디를 개설해<br>학생들과의 유쾌한 교류를 시작해보세요.</h2>
-						<a href="#">리더 시작하기!</a>
+						<a href="/common/leaderTest">리더 시작하기!</a>
 					</div>
 					<div class="LeaderGoImg">
 					</div>
@@ -170,4 +170,10 @@
 		<%@ include file="./common/footer.jsp" %>
 	</div><!-- wrap -->
 </body>
+<script>
+	function nono(){
+		alert("로그인 후 상단 메뉴를 통해 이용해주세요!");
+	}
+</script>
+
 </html>
