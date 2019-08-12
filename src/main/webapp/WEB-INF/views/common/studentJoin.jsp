@@ -1,28 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-   content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Final Project_studentJoin</title>
 <!-- CSS -->
 <link
-   href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-   rel="stylesheet">
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 <script src="../../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
-   href="../../../resources/css/common.css">
+	href="../../../resources/css/common.css">
 <link rel="stylesheet" type="text/css"
-   href="../../../resources/css/main3.css">
+	href="../../../resources/css/main3.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
-   rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="../../resources/css/headerfooter.css">
 
 <!-- 주소창 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -77,6 +79,43 @@
 
 <!-- 회원가입 유효성검사 -->
 <script>
+/* 	var idck = 0;
+	$(".idCheck").click(function() {	
+			var query = {
+				stuId : $("#stuId").val()
+			};
+
+			var stuId = $("#stuId").val()
+			
+			var csrfHeaderName = "${_csrf.headerName}";
+			var csrfTokenValue = "${_csrf.token}";
+			console.log(stuId);
+			$.ajax({
+				url : "/common/idCheck",
+				type : "post",
+				data : {
+					stuId : stuId
+				},
+				dataType : "json",
+				beforeSend  : function(xhr){
+		            xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		         },       
+				success : function(data) {
+					if ($.trim(data) == 0) {
+						console.log("시발!!");
+						$(".result .msg").text("사용가능");
+						$(".result .msg").attr("style", "color:#00f");
+						idck = 1;
+						
+					} else if ($.trim(data) == 1){
+						$(".result .msg").text("사용불가");
+						$(".result .msg").attr("style", "color:#f00");
+					}
+				}
+			}); // ajax 끝
+		}); // End id check */
+
+
 //폼 입력 데이터 확인 함수
 function studentJoinCheck(){
    var id = document.studentJoin.stuId; 
@@ -88,7 +127,7 @@ function studentJoinCheck(){
    var gender = document.studentJoin.stuGender;
    var Address = document.studentJoin.stuAddress;
    var phonenum = document.studentJoin.stuPhonenum;
-  
+   var idck = document.studentJoin.idck;
    
    if( id.value == '') {
       alert('아이디를 입력해 주세요');
@@ -133,9 +172,18 @@ function studentJoinCheck(){
       email1.focus();
       return;
    }
-   
-   alert('학생 회원가입이 완료되었습니다.');
-   document.studentJoin.submit();
+	
+   if(confirm("회원가입을 하시겠습니까?")){
+       if(idck.value==0){
+			alert('아이디 중복체크를 해주세요');
+           return false;
+       }else{
+       alert("회원가입을 축하합니다");
+       $("#frm").submit();
+       }
+   }
+   /* alert('학생 회원가입이 완료되었습니다.');
+   document.studentJoin.submit(); */
    
 }
 
@@ -186,9 +234,29 @@ function pwChk(){
 
 </head>
 <body>
-   <div id="wrap">
-      <%@ include file="../common/header.jsp" %>
-      <div id="container">
+	<div id="wrap">
+		<%@ include file="../common/header.jsp"%>
+		<div id="container">
+
+			<div class="inner">
+				<div class="content">
+					<h1>학생 회원가입</h1>
+					<div class="studentJoin">
+						<form role="form" id="frm" name="studentJoin" action="/common/studentJoin"
+							method="post">
+							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+							<input type="hidden" name="idck" value="0">
+              
+							<div class="textInput">
+									<input type="text"
+										class="joinInput" id="stuId"
+										placeholder="아이디" name="stuId"><button type="button" id="stuIdInput" class="idCheck btn">중복체크</button>
+							</div>
+							<div class="textInput">
+									<p class="result">
+										<span class="msg"></span>
+									</p>
+							</div>
 
          <div class="inner">
             <div class="content">
@@ -198,7 +266,7 @@ function pwChk(){
                      <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                      <div class="textInput">
                         <input type="text" placeholder="아이디" name="stuId" class="joinInput">
-                        <button class="btn">중복확인</button>
+                        <button z="btn">중복확인</button>
                      </div>
                      <div class="textInput">
                         <input type="password" placeholder="비밀번호(8~16자 이내)" name="stuPassword"
@@ -251,11 +319,106 @@ function pwChk(){
             </div>
          </div>
 
-      </div>
-      <!-- container -->
-      <%@ include file="../common/footer.jsp" %>
-   </div>
-   <!-- wrap -->
 
+
+
+
+							<div class="textInput">
+								<input type="password" placeholder="비밀번호(8~16자 이내)"
+									name="stuPassword" class="joinInput">
+							</div>
+							<div class="textInput">
+								<input type="password" placeholder="비밀번호 확인" name="stuPassword2"
+									class="joinInput">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="이름" name="stuName"
+									class="joinInput">
+							</div>
+							<div class="textInput">
+								<label><input class="radiogenderRadio" type="radio"
+									name="stuGender" value="m">남</label><span class="joinText"></span>
+								<label><input class="radiogenderRadio" type="radio"
+									name="stuGender" value="f">여</label>
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="주소" name="stuAddress"
+									id="sample4_roadAddress" class="joinInput" readonly="readonly">
+								<input type="button" onclick="sample4_execDaumPostcode()"
+									value="주소찾기" class="btn">
+							</div>
+							<div class="textInput">
+								<input type="tel" placeholder="연락처(- 없이 입력해주세요)"
+									name="stuPhonenum" class="joinInput">
+							</div>
+							<div class="textInput">
+								<input type="text" placeholder="이메일" name="stuEmail"
+									class="joinInput2"><span class="joinText">@</span><input
+									type="text" placeholder="이메일" name="stuEmail2"
+									class="joinInput2"> <select class="joinInput2"
+									name="stuEmail3" onchange="setEmail2(this)">
+									<option value="direct" selected>직접입력</option>
+									<option value="naver.com">naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="gmail.com">gmail.com</option>
+								</select>
+							</div>
+
+
+							<div class="textBtn">
+								<input id="joinBtn" type="button" onclick="studentJoinCheck()"
+									value="가입하기">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- container -->
+		<%@ include file="../common/footer.jsp"%>
+	</div>
+	<!-- wrap -->
+
+	<script type="text/javascript">
+//아이디 체크여부 확인 (아이디 중복이 아닐 경우 = 0 , 중복일 경우 = 1 )
+$(".idCheck").click(function() {
+
+	var idck = document.studentJoin.idck;
+	var query = {
+		stuId : $("#stuId").val()
+	};
+
+	var stuId = $("#stuId").val()
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	console.log(stuId);
+	$.ajax({
+		url : "/common/idCheck",
+		type : "post",
+		data : {
+			stuId : stuId
+		},
+		dataType : "json",
+		beforeSend  : function(xhr){
+            xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+         },       
+		success : function(data) {
+			if ($.trim(data) == 0) {
+				console.log("안녕");
+				$(".result .msg").text("사용가능");
+				$(".result .msg").attr("style", "color:#00f");
+				idck.value = '1';
+				
+			} else if ($.trim(data) == 1){
+				$(".result .msg").text("사용불가");
+				$(".result .msg").attr("style", "color:#f00");
+				idck.value = '0';
+			}
+		}
+	}); // ajax 끝
+}); // End id check
+</script>
 </body>
 </html>

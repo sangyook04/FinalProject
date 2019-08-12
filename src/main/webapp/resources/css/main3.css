@@ -77,6 +77,9 @@ header nav .headerContent .gnb li a:hover {color: #e83023;} */
 
 #container .inner .content .studentJoin form .textBtn #joinBtn { background-color : #4285f4; color : white; border : none; height : 50px; font-weight: bold; margin-bottom : 60px; width : 400px;}
 
+/* #container .inner .content .studentJoin form */
+
+
 
 /* levelget */
 #container .content .level{display: inline-block; background:white; border-radius: 5px; font-size: 1.5em; color:#353535; padding:10px;  }

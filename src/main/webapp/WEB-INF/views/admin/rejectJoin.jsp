@@ -16,6 +16,7 @@
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
    <link href="../../../resources/css/bootstrap.min.css" type="text/css" rel="stylesheet">
    <link href="../../../resources/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="../../../resources/css/adminheaderfooter.css">
 
    <script>
    		$(document).ready(function(){

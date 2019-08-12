@@ -17,6 +17,10 @@ public interface StudentService {
 	public StudentVO get(String stuid);
 	public void register(StudentVO student);
 	public boolean drop(String user_id);
+	public int idcheck(String stuid);
+	public int idcheck2(String stuid);
+	public boolean setLevel(String stuid, String level);
+	 
 //	public boolean drop(String stuid);
 
 	

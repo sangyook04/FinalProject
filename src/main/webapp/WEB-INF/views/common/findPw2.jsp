@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +7,7 @@
 <meta name="viewport"
 	content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Final Project_findId</title>
+<title>Final Project_findPw</title>
 <!-- CSS -->
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
@@ -34,10 +33,20 @@
                 $('.callsenterSub').css("display", "none");
              }
          });
+         
+         if($("#pwd").val() != ($("#pwd2").val())){ 
+       	    alert("비밀번호가 틀렸네용.");
+       	    $("#pwd").val("");
+       	    $("#pwd2").val("");
+       	    $("#pwd").focus();
+       	    return false;
+          	}
 
       });//ready
-</script>
-
+      
+ 
+  
+   </script>
 </head>
 <body>
 	<div id="wrap">
@@ -45,16 +54,14 @@
 		<div id="container">
 			<div class="inner">
 				<div class="content">
-					<h1>아이디 찾기</h1>
-					<form action="/common/findId" method="post">
-						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-						<div class="findInput"><input type="text" placeholder="이름을 입력해주세요" name="name"></div>
-						<div class="findInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요" name="phonenum"></div>
-						<div class="findInput"><button type="submit" class="loginBtn">확인</button></div>
+					<h1>비밀번호 업데이트</h1>
+					<form class="chgPw" action="/common/findPw2" method="post">
+						<input type="hidden" name="id" value="${result}">
+						<div class="textInput"><input type="tel" id="pwd" name="pwd" placeholder="새로운 비밀번호를 입력해주세요."></div>
+						<div class="textInput"><input type="text" id="pwd2" name="pwd2" placeholder="새로운 비밀번호를 다시 입력해주세요"></div>
+						<div class="textInput"><input type="submit" id="updatepwd" value="비밀번호 변경" class="loginBtn"></div>
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					</form>
-					<c:forEach items="${find }" var="id">
-						<div class="findedId">${ id.leaId }</div>
-					</c:forEach>
 				</div>
 			</div>
 		</div>

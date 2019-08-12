@@ -82,8 +82,22 @@
 			operForm.attr("action", "/admin/adminLeaderModify").submit();
 		});
 		
-		var formObj = $("form");
-	})
+		var formObj = $("#leaderBtn");
+		
+		$("button[data-oper='accept']").on("click", function(e){
+			var acc = confirm('${leader.leaId}님을 리더 신청을 승인 하시겠습니까?');
+			if(acc){
+				formObj.attr("action", "/admin/accept").submit();
+			}
+		});
+		
+		$("button[data-oper='reject']").on("click", function(e){
+			var rej = confirm('${leader.leaId}님의 리더 신청을 거부 하시겠습니까?')
+			if(rej){
+				formObj.attr("action", "/admin/reject").submit();
+			}
+		});
+	});
 </script>
 
 </head>
@@ -95,37 +109,44 @@
 			<div class="inner">
 				<div class="content">
 					<div class="infoContent">
-						<div class="img"><img src="../../../resources/img/GumonMain/user123.jpg"></div>
+						<div class="img"></div>
 						<div class="info">아이디</div>
 						<div class="userInfo"><c:out value="${ leader.leaId }"/></div>
 						<div class="info">이름</div>
 						<div class="userInfo"><c:out value="${ leader.leaName }"/></div>
 						<div class="info">성별</div>
 						<div class="userInfo"><c:out value="${ leader.leaGender }"/></div>
-						<div class="info">국적</div>
-						<div class="userInfo">추가하자~~</div>
 						<div class="info">주소</div>
 						<div class="userInfo"><c:out value="${ leader.leaAddress }"/></div>
 						<div class="info">연락처</div>
 						<div class="userInfo"><c:out value="${ leader.leaPhonenum }"/></div>
 						<div class="info">이메일</div>
-						<div class="userInfo"><c:out value="${ leader.leaEmail }"/></div>
+						<div class="userInfo"><c:out value="${ leader.leaEmail }"/>@<c:out value="${ leader.leaEmail2 }"/></div>
 						<div class="info">계좌번호</div>
 						<div class="userInfo"><c:out value="${ leader.leaBank }"/> <c:out value="${ leader.leaAccount }"/></div>
 						<div class="info">자기소개</div>
 						<div class="userInfo"><c:out value="${ leader.leaIntroduce }"/></div>
 						
-						<button data-oper='modify' id="modBtn">변경</button><button id="withdBtn">비활성화</button><button data-oper='list' onclick="location.href='/admin/adminLeader'" id="listBtn">목록</button>
+						<c:if test="${list == 'a'}">
+							<button data-oper='modify' id="modBtn">변경</button><button id="withdBtn">비활성화</button>
+							<button type="button" data-oper='list' onclick="location.href='/admin/adminLeader'" id="listBtn">목록</button>
+						</c:if>
 						
-						<%-- <form role="form" id="BtnForm" action="/leader/adminLeaderInfo" method="post">
-						<input type="hidden" id="leaId" name="leaId" value='<c:out value="${leader.leaId }"/>'>
-						<button type="submit" data-oper="accept" id="apprBtn">승인</button><button type="submit" data-oper="reject" id="refBtn">거부</button>
-						</form> --%>
+						<c:if test="${list == 'b' or list == 'r'}">
+							<form id="leaderBtn" action="/admin/adminLeaderInfo" method="post">
+								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+								<input type="hidden" id="leaId" name="leaId" value='<c:out value="${leader.leaId }"/>'>
+								<button type="button" data-oper="accept" id="apprBtn">승인</button><button 
+								type="button" data-oper="reject" id="refBtn">거부</button>
+								<button type="button" data-oper='list' onclick="location.href='<c:if test="${list == 'b' }">/admin/beforeJoin</c:if><c:if test="${list == 'r' }">/admin/rejectJoin</c:if>'" id="listBtn">목록</button>
+							</form>
+						</c:if>
 						
-						<form role="form" id="operForm" action="/leader/adminLeadermodify" method="get">
+						<form role="form" id="operForm" action="/admin/adminLeadermodify" method="get">
 							<input type="hidden" id="leaId" name="leaId" value='<c:out value="${leader.leaId }"/>'>
 							<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
 							<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>
+							<input type="hidden" name="list" value='<c:out value="${list }"/>'>
 						</form>
 					</div>
 				</div>
@@ -135,5 +156,31 @@
 		<%@ include file="../common/adminfooter.jsp" %>
 	</div>
 	<!-- wrap -->
+	
+		<script>
+		$(document).ready(function(){
+			(function(){
+				var leaId = '<c:out value="${ leader.leaId }"/>';
+				
+				$.getJSON("/admin/getPictureList", {leaId : leaId}, function(arr){
+					console.log(arr);
+					
+					var str = "";
+					
+					$(arr).each(function(i, picture){
+						//image type
+						if(picture.fileType){
+							var fileCallPath = encodeURIComponent(picture.uploadPath + "/s_" + picture.uuid + "_"+picture.fileName);
+							
+							str += "<img src='/display?fileName="+fileCallPath+"'>";
+						}
+						
+						$(".img").html(str);
+					});
+				});
+			})();
+		});
+
+	</script>
 </body>
 </html>

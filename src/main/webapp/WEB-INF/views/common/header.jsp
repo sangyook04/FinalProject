@@ -14,7 +14,7 @@
 				</div>
 				<ul class="mainmenu">
 					<li><a href="#">스터디 찾기</a></li>
-					<li><a href="/level/commonTest">레벨 테스트</a></li>
+					<li><a href="/level/commonTest?stuId=${principal.username}">레벨 테스트</a></li>
 					<li><a href="/common/noticeList">공지사항</a></li>
 					<li class="one"><a href="#">고객센터</a>
 						<ul class="callsenterSub">
@@ -28,15 +28,15 @@
 					<ul class="gnb">
 						<li><a href="/common/login">로그인</a></li>
 						<li><a href="/common/studentJoin">학생 회원가입</a></li>
-						<li><a href="/level/leaderTest">리더 시작하기</a></li>
+						<li><a href="/common/leaderTest">리더 시작하기</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_STUDENT')">
 					<ul class="gnb">
 						<li class="myPage"><a href="#">마이페이지</a>
 							<ul class="myPageContent">
-								<li><a href="/student/studentMyInfo">내 정보 출력</a></li>
-								<li><a href="/student/studentLevelGet">레벨테스트 결과</a></li>
+								<li><a href="/student/studentMyInfo?stuId=${pinfo.username}">내 정보 출력</a></li>
+								<li><a href="/student/studentLevelGet?stuId=${pinfo.username}">레벨테스트 결과</a></li>
 								<li><a href="#">내 스터디</a></li>
 								<li><a href="#">관심 스터디</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
@@ -44,7 +44,7 @@
 							</ul></li>
 						<li><sec:authentication property="principal.username" />
 							<!--학생 -->님</li>
-						<li><a class="LogOut" href="/common/logout">로그 아웃</a></li>
+						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_LEADER')">
@@ -60,7 +60,7 @@
 						<li><a href="#">스터디 개설</a></li>
 						<li><sec:authentication property="principal.username" />
 							<!--리더-->님</li>
-						<li><a class="LogOut" href="/common/logout">로그 아웃</a></li>
+						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -68,14 +68,24 @@
 						<li class="myPage"><a href="/admin/main">관리자 페이지</a>
 						<li><sec:authentication property="principal.username" />
 							<!--관리자-->님</li>
-						<li><a class="LogOut" href="#">로그 아웃</a></li>
+						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
 					</ul>
 				</sec:authorize>
-			</div>
+				<form id="LogOutForm" action="/logout" method="POST">
+      			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    			</form>
+			</div><!-- headerContent -->
 		</div>
 	</nav>
 </header>
 <script>
+	
+	$(".LogOut").on("click", function(e){
+		e.preventDefault();
+		$("#LogOutForm").submit();
+	});
+		
+
 	$('nav .myPage').hover(function() {
 		if ($(".myPageContent").css("display") == "none") {
 			$('.myPageContent').slideDown();

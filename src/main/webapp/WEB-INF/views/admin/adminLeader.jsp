@@ -149,6 +149,7 @@
 			$(".move").on("click", function(e){
 				e.preventDefault();
 				actionForm.append("<input type='hidden' name='leaId' value='"+ $(this).attr("href")+"'>");
+				actionForm.append("<input type='hidden' name='list' value='a'>");
 				actionForm.attr("action", "/admin/adminLeaderInfo");
 				actionForm.submit();
 			});

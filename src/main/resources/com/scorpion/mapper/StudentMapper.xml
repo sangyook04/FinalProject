@@ -2,8 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.scorpion.mapper.StudentMapper">
+ <mapper namespace="com.scorpion.mapper.StudentMapper">
   
+  
+  <update id="setLevel">
+  	UPDATE	student
+  	SET		stulevel = #{level}
+  	WHERE  	stuid = #{stuid}
+  </update>
   
   <resultMap type="com.scorpion.domain.StudentVO" id="studentMap">
       <id property="stuId" column = "stuid"/>
@@ -20,17 +26,30 @@
       <collection property="authList" resultMap="authMap">
       </collection>
       
-      
-      
+    
    </resultMap>
-  
-   <resultMap type="com.scorpion.domain.AuthorityVO" id="authMap">
+   
+     <resultMap type="com.scorpion.domain.AuthorityVO" id="authMap">
       <result      property="auth"         column="auth"/>   
    </resultMap>
    
+     <resultMap id="leaderMap"
+			   type="com.scorpion.domain.LeaderVO" >
+		<result	property="leaId"		column="leaid"/>
+	
+	</resultMap> 
    
-  
+    
+    <resultMap id="dupIdMap"
+			   type="com.scorpion.domain.StudentVO" >
+   	<id property="stuId" column = "stuid"/> 
+      <collection property="leader"	resultMap="leaderMap"/>
 
+   </resultMap>  
+     
+       
+
+    
   
     <!-- 쿼리 보관 -->
    <sql id="criteria">
@@ -98,6 +117,38 @@
 
   </select>
 
+
+ <select id="idcheck" parameterType="String"  resultType="Integer" >
+    select count(*)
+    from student
+    where #{stuId} = (select leaid from leader where leaid= #{stuId})
+    
+</select>
+
+	
+ <select id="idcheck2" parameterType="String"  resultType="Integer" >
+    select count(*)
+    from student
+    where stuid = #{stuId} 
+    
+</select>
+	
+
+
+
+<!--  <select id="idcheck" parameterType="String" resultType="Integer" resultMap="dupIdMap" >
+      SELECT COUNT(*) FROM student stu, leader lea WHERE stu.stuid = #{stuId} or lea.leaid = #{stuId}
+</select> 
+ -->
+
+<!-- select stuid
+    from student
+    where stuid = (select leaid from leader where leaid='good'); -->
+
+<!-- select count(*)
+from student stu, leader lea
+where stu.stuid = lea.leaid; -->
+
   <update id="update">
   	UPDATE	student
   	SET		stupassword = #{stuPassword}, stuaddress = #{stuAddress}, stuphonenum=#{stuPhonenum},
@@ -116,10 +167,6 @@
   	WHERE  	stuid = #{user_id}
 	  </update>
 
-
-
-
-	
 
 
 

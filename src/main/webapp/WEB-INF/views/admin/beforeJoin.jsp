@@ -101,7 +101,7 @@
 							</table>
 						</div>
 												
-						<form class="form-inline" id="searchForm" action="/admin/adminLeader" method="get">
+						<form class="form-inline" id="searchForm" action="/admin/beforeJoin" method="get">
 						  <div class="form-group">
 						    <label for="exampleInputName2">아이디</label>
 						    <input type="hidden" name="type" value="I">
@@ -126,7 +126,7 @@
 						    </c:if>
 						  </ul>
 						</div>
-						<form id="actionForm" action="/admin/adminLeader" method="get">
+						<form id="actionForm" action="/admin/beforeJoin" method="get">
 							<input type="hidden" name='pageNum' value="${pageMaker.cri.pageNum }">
 							<input type="hidden" name='amount' value="${pageMaker.cri.amount }">
 						</form>
@@ -150,6 +150,7 @@
 			$(".move").on("click", function(e){
 				e.preventDefault();
 				actionForm.append("<input type='hidden' name='leaId' value='"+ $(this).attr("href")+"'>");
+				actionForm.append("<input type='hidden' name='list' value='b'>");
 				actionForm.attr("action", "/admin/adminLeaderInfo");
 				actionForm.submit();
 			});

@@ -58,7 +58,7 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;} */
 #container .inner .content .infoContent #modBtn { background-color: #47C83E; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
 #container .inner .content .infoContent #withdBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
 #container .inner .content .infoContent #apprBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
-#container .inner .content .infoContent #refBtn { background-color: #5D5D5D; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
+#container .inner .content .infoContent #refBtn { background-color: red; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px;}
 #container .inner .content .infoContent #listBtn { background-color: #4285f4 ; padding: 10px; color: white; border-radius: 5px; margin-top : 10px; margin-right: 10px; float:right;}
 
 #container .inner .content .infoContent {width:600px; margin : auto; text-align: left;}

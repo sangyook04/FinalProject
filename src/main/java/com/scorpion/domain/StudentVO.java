@@ -19,7 +19,7 @@ public class StudentVO {
 	private boolean enabled;
 	
 	private List<AuthorityVO> authList;
-
+	private LeaderVO leader;
 	
  	
 

@@ -162,13 +162,28 @@ public class StudentController {
 //		public void levelget(@RequestParam("stuId") String stuId) {
 //			service.levelGet(stuId);
 //		}
+	
+		/*
+	 * @PreAuthorize("isAuthenticated()")
+	 * 
+	 * @GetMapping({"/studentLevelGet"}) public void levelget(@RequestParam("stuId")
+	 * String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
+	 * model.addAttribute("stuLevel", service.info(stuId));
+	 * 
+	 * }
+	 */
+
+		
+		
+		
+		
 		@PreAuthorize("isAuthenticated()")
 		@GetMapping({"/studentLevelGet"})
 		public void levelget(@RequestParam("stuId") String stuId, @ModelAttribute("cri") Criteria cri, Model model) {
-			model.addAttribute("stuLevel", service.info(stuId));
+			model.addAttribute("stuLevel", service.levelGet(stuId));
 			
 		}
-
+		
 		
 	    @PreAuthorize("isAuthenticated()")
 		@GetMapping("/adminStudentList")

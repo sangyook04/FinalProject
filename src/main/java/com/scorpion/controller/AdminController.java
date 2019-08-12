@@ -1,5 +1,10 @@
 package com.scorpion.controller;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,12 +12,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scorpion.domain.Criteria;
+import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.NoticeVO;
 import com.scorpion.domain.PageDTO;
+import com.scorpion.domain.PictureVO;
 import com.scorpion.domain.QnaVO;
+import com.scorpion.service.LeaderService;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.NoticeService;
 import com.scorpion.service.QnaService;
@@ -28,6 +37,7 @@ import lombok.extern.log4j.Log4j;
 public class AdminController {
 
 	private QnaService service;
+	private LeaderService leaService;
 	private NoticeService notservice;
 	private StudentService stuservice;
 
@@ -83,48 +93,89 @@ public class AdminController {
 		return "redirect:/admin/QnAget?qnaIndex=" + qna.getQnaIndex();
 
 	}
-
-	/*
-	 * @GetMapping("/adminLeader") public void adminLeader(Model model, Criteria
-	 * cri) { model.addAttribute("leaderList", leaService.getList(cri)); //
-	 * model.addAttribute("pageMaker", new PageDTO(cri, 123));
-	 * 
-	 * int total = leaService.getTotal(cri);
-	 * 
-	 * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
-	 * 
-	 * @GetMapping({ "/adminLeaderInfo", "/adminLeaderModify" }) public void
-	 * adminLeaderInfo(@RequestParam("leaId") String
-	 * leaderid, @ModelAttribute("cri") Criteria cri, Model model) {
-	 * log.info("/adminLeaderInfo");
-	 * 
-	 * model.addAttribute("leader", leaService.get(leaderid)); }
-	 * 
-	 * @PostMapping("/adminLeaderModify") public String adminLeaderModify(LeaderVO
-	 * leader, RedirectAttributes rttr) { log.info("modify : " + leader);
-	 * 
-	 * if (leaService.modify(leader)) { rttr.addFlashAttribute("result", "success");
-	 * }
-	 * 
-	 * return "redirect:/admin/adminLeader"; }
-	 * 
-	 * @GetMapping("/adminRefusalLeader") public void adminRefusalLeader(Model
-	 * model, Criteria cri) { model.addAttribute("leaderList",
-	 * leaService.getRejectList(cri));
-	 * 
-	 * int total = leaService.getTotal(cri);
-	 * 
-	 * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
-	 * 
-	 * @GetMapping("/adminWaitLeader") public void adminWaitLeader(Model model,
-	 * Criteria cri) { model.addAttribute("leaderList",
-	 * leaService.getHoldList(cri));
-	 * 
-	 * int total = leaService.getTotal(cri);
-	 * 
-	 * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
-	 */
-
+	
+	/*-----------리더 관리------------------*/
+	
+	//리더 관리
+	@GetMapping("/adminLeader")
+	public void adminLeader(Model model, Criteria cri) {
+		model.addAttribute("leaderList", leaService.getList(cri));
+//		model.addAttribute("pageMaker", new PageDTO(cri, 123));
+		
+		int total = leaService.getTotalA(cri);
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+	
+	//리더 상세 정보, 리더 수정
+	@GetMapping({"/adminLeaderInfo", "/adminLeaderModify"})
+	public void adminLeaderInfo(@RequestParam("leaId") String leaderid, @ModelAttribute("cri") Criteria cri, Model model, @ModelAttribute("list") String list) {
+		log.info("/adminLeaderInfo");
+		
+		model.addAttribute("leader", leaService.get(leaderid));
+	}
+	
+	//리더 사진 정보
+	@GetMapping(value = "/getPictureList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public ResponseEntity<List<PictureVO>> getPictureList(@RequestParam("leaId") String leaid){
+		   log.info("getPictureList" + leaid);
+		   
+		   return new ResponseEntity<> (leaService.getPictureList(leaid), HttpStatus.OK);
+	   }
+	
+	//리더 수정 완료
+	@PostMapping("/adminLeaderModify")
+	public String adminLeaderModify(LeaderVO leader, RedirectAttributes rttr, @ModelAttribute("list") String list) {
+		log.info("modify : " + leader);
+		
+		if(leaService.modify(leader)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/admin/adminLeaderInfo?leaId=" + leader.getLeaId() + "&list=" + list;
+	}
+	
+	//리더 가입 거부 목록
+	@GetMapping("/rejectJoin")
+	public void adminRefusalLeader(Model model, Criteria cri) {
+		model.addAttribute("leaderList", leaService.getRejectList(cri));
+		
+		int total = leaService.getTotalR(cri);
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+	
+	//리더 가입 대기 목록
+	@GetMapping("/beforeJoin")
+	public void adminWaitLeader(Model model, Criteria cri) {
+		model.addAttribute("leaderList", leaService.getHoldList(cri));
+		
+		int total = leaService.getTotalB(cri);
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+	
+	//리더 가입 거부 버튼
+	@PostMapping("/reject")
+	public String adminLeaderRefusal(@RequestParam("leaId") String leaId, RedirectAttributes rttr) {
+		if(leaService.refusal(leaId)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/admin/beforeJoin";
+	}
+	
+	//리더 가입 승인 버튼
+	@PostMapping("/accept")
+	public String adminLeaderUpdate(@RequestParam("leaId") String leaId, RedirectAttributes rttr) {
+		if(leaService.leaderUpdate(leaId)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/admin/adminLeader";
+	}
+	
 	/* ------------------------------------공지사항 관리 ------------------------------------------*/
 
 
@@ -203,6 +254,4 @@ public class AdminController {
 			model.addAttribute("studentList", stuservice.getList(cri));
 			model.addAttribute("pageMaker", new PageDTO(cri, stuservice.getTotal(cri)));
 		}
-	  
-
 }
