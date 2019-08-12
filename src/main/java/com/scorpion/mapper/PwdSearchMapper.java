@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.scorpion.domain.LeaderVO;
-import com.scorpion.domain.PwdDTO;
 
 public interface PwdSearchMapper {
 

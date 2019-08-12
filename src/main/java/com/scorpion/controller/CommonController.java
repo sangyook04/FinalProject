@@ -34,7 +34,6 @@ import com.scorpion.domain.Criteria;
 import com.scorpion.domain.LeaderVO;
 import com.scorpion.domain.LevelTestVO;
 import com.scorpion.domain.PageDTO;
-import com.scorpion.domain.PwdDTO;
 import com.scorpion.domain.QnaVO;
 import com.scorpion.domain.StudentVO;
 import com.scorpion.service.LeaderService;

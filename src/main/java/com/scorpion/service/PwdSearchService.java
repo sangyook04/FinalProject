@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.scorpion.domain.LeaderVO;
-import com.scorpion.domain.PwdDTO;
 
 
 public interface PwdSearchService {

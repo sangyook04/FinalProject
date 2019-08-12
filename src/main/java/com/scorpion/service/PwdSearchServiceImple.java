@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.scorpion.domain.LeaderVO;
-import com.scorpion.domain.PwdDTO;
+
 import com.scorpion.mapper.LeaderMapper;
 import com.scorpion.mapper.LeaderReviewMapper;
 import com.scorpion.mapper.PwdSearchMapper;
