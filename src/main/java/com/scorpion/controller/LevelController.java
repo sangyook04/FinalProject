@@ -86,7 +86,7 @@ public class LevelController {
 						cnt++;
 					}
 				}
-				score = cnt * 5; //채점인데 cnt 개수에 따라 grade(용원이형이 설정한 파라미터에 맞춰야함) 설정하는것으로 수정. grade를 넘기는것으로 수정
+				score = cnt * 10; //채점인데 cnt 개수에 따라 grade(용원이형이 설정한 파라미터에 맞춰야함) 설정하는것으로 수정. grade를 넘기는것으로 수정
 				if(cnt < 3) { //0~3 초급
 					grade = "초급";
 				} else if(cnt >= 4 && cnt <= 6) { //4~6 중급
@@ -96,6 +96,11 @@ public class LevelController {
 				}
 				System.out.println(score);
 				lastExam = true;
+	            pageFlag = true;
+	            index=0;
+	            for(int i=0; i<answerArr.length; i++) {
+	               answerArr[i] = "";
+	            }
 				System.out.println("stuid="+stuId);
 				System.out.println("grade="+grade);
 				//학생 레벨 설정
