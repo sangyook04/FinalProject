@@ -13,11 +13,11 @@
 					<a href="/"></a>
 				</div>
 				<ul class="mainmenu">
-					<li><a href="#">스터디 찾기</a></li>
+					<li><a href="/study/search">스터디 찾기</a></li>
 					<li><a href="/common/noticeList">공지사항</a></li>
 					<li class="one"><a href="#">고객센터</a>
 						<ul class="callsenterSub">
-							<li><a href="#">FAQ</a></li>
+							<li><a href="/faq/view">FAQ</a></li>
 							<sec:authorize access="isAuthenticated()">
 								<li><a href="/loginCommon/list">QnA</a></li>
 							</sec:authorize>
@@ -36,8 +36,8 @@
 							<ul class="myPageContent">
 								<li><a href="/student/studentMyInfo?stuId=${pinfo.username}">내 정보 출력</a></li>
 								<li><a href="/student/studentLevelGet?stuId=${pinfo.username}">레벨테스트 결과</a></li>
-								<li><a href="#">내 스터디</a></li>
-								<li><a href="#">관심 스터디</a></li>
+								<li><a href="/study/select">내 스터디</a></li>
+								<li><a href="/study/zzimStudy">관심 스터디</a></li>
 								<li><a href="/pay/myMoneyList?stuId=${pinfo.username}">내 결제 내역</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
 								<li><a href="/student/studentDrop?stuId=${pinfo.username}">탈퇴 하기</a></li>
@@ -53,7 +53,7 @@
 						<li class="myPage"><a href="#">마이페이지</a>
 							<ul class="myPageContent">
 								<li><a href="/leader/info?leaId=${pinfo.username}">내 정보 출력</a></li>
-								<li><a href="#">내 스터디</a></li>
+								<li><a href="/study/select">내 스터디</a></li>
 								<li><a href="/pay/incomeList?leaderId=${pinfo.username}">소득 내역</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
 								<li><a href="/leader/leaderDrop?leaId=${pinfo.username}">탈퇴 하기</a></li>

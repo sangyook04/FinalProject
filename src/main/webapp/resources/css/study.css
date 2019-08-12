@@ -2,8 +2,8 @@
 #container .inner .studyingthead tr .th1{width:150px;}
 #container .inner .studyingthead tr .th2{width:250px;}
 #container .inner .studyingthead tr .th3{width:80px;}
-#container .inner .studyingthead tr .th4{width:200px;}
-#container .inner .studyingthead tr .th5{width:100px;}
+#container .inner .studyingthead tr .th4{width:150px;}
+#container .inner .studyingthead tr .th5{width:150px;}
 #container .inner .studyingthead tr .th6{width:100px;}
 #container .inner .studyingtbody tr{font-size:20px; height:50px;}
 #container .inner .studyingtbody tr .td6 .humanimg{width: 60px; height: 40px;}
@@ -36,6 +36,7 @@
 #container .inner .listtext span{font-size:20px; font-weight: bold; margin:10px;}
 #container .inner .listtext a{font-size: 25px; margin: 15px; display:block;}
 #container .inner .listtext hr{color:black;}
+#container .inner .listimg #delbtn{width:300px;}
 
 #container .inner div .kimchiimg{width:1080px; height:300px;}
 #container .inner div .kimchi {width:1080px; height: 300px; position: absolute;}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.scorpion.mapper.FaqMapper">
+   <select id="getList" resultType="com.scorpion.domain.FaqVO">
+      <![CDATA[
+      SELECT * FROM faq WHERE faqindex > 0
+      ]]>
+   
+   </select>
+   
+   <select id="getListWithPaging" resultType="com.scorpion.domain.FaqVO">
+      <![CDATA[
+         SELECT faqIndex, faqHeadline, faqTitle, faqContent 
+         FROM ( SELECT /*+INDEX_DESC(faq faq_no)*/
+               rownum rn, faqIndex, faqTitle, faqContent, faqHeadline
+               FROM faq WHERE rownum <= #{pageNum} * #{amount} )
+         WHERE rn > (#{pageNum} -1) * #{amount}      
+      ]]>   
+   </select>
+   
+    <select id="getTotalCount" resultType="int">
+      SELECT COUNT(*) FROM faq WHERE faqIndex > 0
+  </select>
+  
+  <select id="read" resultType="com.scorpion.domain.FaqVO">
+  SELECT * FROM faq WHERE faqIndex = #{faqIndex}
+  </select>
+  
+  <update id="update">
+  UPDATE faq SET faqTitle = #{faqTitle}, faqContent = #{faqContent}, faqHeadline = #{faqHeadline}
+  WHERE faqIndex = #{faqIndex}
+  </update>
+  
+  
+  <delete id="delete">
+     DELETE FROM faq WHERE faqIndex = #{faqIndex}
+  </delete>
+  
+  <insert id="insertSelectKey">
+     <selectKey keyProperty="faqIndex" resultType="long" order="BEFORE">
+     SELECT faq_no.nextval FROM dual
+     </selectKey>
+  INSERT INTO faq(faqIndex, faqHeadline, faqTitle, faqContent)
+   VALUES(#{faqIndex}, #{faqHeadline}, #{faqTitle}, #{faqContent} )
+  </insert>  
+  
+
+</mapper>

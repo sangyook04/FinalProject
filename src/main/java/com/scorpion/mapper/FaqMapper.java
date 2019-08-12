@@ -7,11 +7,11 @@ import com.scorpion.domain.FaqVO;
 
 
 public interface FaqMapper {
-	public int update(FaqVO faq);
-	public int delete(Long faqno);
-	public FaqVO read(Long faqno);
-	public Integer insertSelectKey(FaqVO faq);
-	public List<FaqVO> getList();
-	public int getTotalCount(Criteria cri);
-	public List<FaqVO> getListWithPaging(Criteria cri);
+   public int update(FaqVO faqvo);
+   public int delete(Long faqindex);
+   public FaqVO read(Long faqIndex);
+   public Integer insertSelectKey(FaqVO faqvo);
+   public List<FaqVO> getList();
+   public int getTotalCount(Criteria cri);
+   public List<FaqVO> getListWithPaging(Criteria cri);
 }

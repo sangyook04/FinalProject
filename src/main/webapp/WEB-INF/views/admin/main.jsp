@@ -26,7 +26,7 @@
 		<div id="container">
 			<%@ include file="../common/adminaside.jsp" %>
 			<div class="containerContent">
-				<h1>안녕하세요 관리자님!</h1>
+				<h1 id="mainh1">안녕하세요 관리자님!</h1>
 			</div>
 		</div><!-- container -->
 		<%@ include file="../common/adminfooter.jsp" %>

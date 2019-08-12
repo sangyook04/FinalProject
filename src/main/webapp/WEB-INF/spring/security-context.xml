@@ -20,6 +20,11 @@
       <security:intercept-url pattern="/loginCommon/*" access="isAuthenticated()"/>
       <security:intercept-url pattern="/level/*" access="isAuthenticated()"/>
       <security:intercept-url pattern="/pay/*" access="isAuthenticated()"/>
+      <security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/faq/get"/>
+	  <security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/faq/register"/>
+	  <security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/faq/remove"/>
+	  <security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/faq/modify"/>
+	  <security:intercept-url access="permitAll" pattern="/faq/view"/>
       
       <security:form-login login-page="/common/login" />
       <security:logout logout-url="/logout" invalidate-session="true" logout-success-url="/"/>	

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+    uri="http://www.springframework.org/security/tags"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,122 +13,107 @@
    <title>Final Project</title>
    <!-- CSS -->
    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-	<script src="../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
+   <script src="../../resources/lib/jquery/jquery-3.4.1.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/common.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/main.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/faq.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
    <script>
-   		$(document).ready(function(){
+         $(document).ready(function(){
 
-			$('nav .one').hover(function () {
-			    if($(".callsenterSub").css("display") == "none"){
-			       $('.callsenterSub').slideDown();
-			       $("headerA").css("color","#f15b6d");
-			       event.preventDefault();
-			    } else {
-			       $('.callsenterSub').css("display", "none");
-			    }
-			});
+         $('nav .one').hover(function () {
+             if($(".callsenterSub").css("display") == "none"){
+                $('.callsenterSub').slideDown();
+                $("headerA").css("color","#f15b6d");
+                event.preventDefault();
+             } else {
+                $('.callsenterSub').css("display", "none");
+             }
+         });
 
-		});//ready
+      });//ready
    </script>
    
 
 </head>
 <body>
-	<div id="wrap">
-		<header>
-			<nav>
-				<div class="inner">
-					<div class="headerContent">
-						<div class="mainlogo"></div>
-						<ul class="mainmenu">
-							<li><a href="#">스터디 찾기</a></li>
+   <div id="wrap">
+      <%@ include file="../common/header.jsp" %>
+      <div id="container">
+      <!-- 내용 칸 -->
+      <h1 class="viewh1"> FAQ  </h1>
+      
+   <ul id="viewul">
+   <c:forEach items="${list }" var="faq">
+        <li>
+            <a href="#">{ ${faq.faqHeadline} }    ${faq.faqTitle }</a>
+            <p>${faq.faqContent }</p>
+        </li>
+     </c:forEach>   
+   </ul>
+       <!-- 페이지 번호 출력 -->
+               <div class="pull-right">
+                     <ul class="pagination">
+                     <c:if test="${pageMaker.prev }"><!-- previous 버튼 표시 -->
+                        <li class="paginate_button previous">
+                           <a href="${pageMaker.startPage - 1 }">
+                              Previous</a></li>
+                     </c:if>
+                                          
+                     <!-- 페이지 번호 표시 -->
+                     <c:forEach begin="${pageMaker.startPage }"
+                              end="${pageMaker.endPage }" var="num">
+                        <li class="paginate_button
+                                   ${pageMaker.cri.pageNum == num ? 'active': '' }">
+                           <a href="${num }">${num }</a></li>
+                     </c:forEach>
+                     
+                     <c:if test="${pageMaker.next }"><!-- next 버튼 표시 -->
+                        <li class="paginate_button next">
+                           <a href="${pageMaker.endPage + 1 }">Next</a></li>
+                     </c:if>
+                     </ul>
+               </div>
+   
+       <!-- a 태그 대신 pageNum과 amount 파라미터로 전송 -->
+               <form id="actionForm" action="/faq/view">
+               <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
+                     <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+                     <input type="hidden" name="amount"  value="${pageMaker.cri.amount }">
+               </form>
+   <script>   
+var actionForm = $("#actionForm");
 
-							<li><a href="#">레벨 테스트</a></li>
-
-							<li><a href="#">공지사항</a></li>
-							<li class="one"><a href="#">고객센터</a>
-								<ul class="callsenterSub">
-								
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">QnA</a></li>
-								</ul>
-							</li>
-						</ul>
-						<ul class="gnb">
-							<li><a href="#">로그인</a></li>
-							<li><a href="#">학생 회원가입</a></li>
-							<li><a href="#">리더 시작하기</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
-		<div id="container">
-		<!-- 내용 칸 -->
-		<h1 class="viewh1"> FAQ  </h1>
-		
-		<table class="table">
-		<thead>
-  			<tr onclick="doDisplay()">
-  				<th class="th1">Q.</th><th class="th2">카테고리</th><th class="th3">제목</th>
-  			</tr>
-  		</thead>
-  		<tbody>
-  			<tr>
-  				<td id="inoutputtd">내용 입력</td>
-  			</tr>
-  		</tbody>	
-		</table>
-		
-	
-	
+$(".paginate_button a").on("click", function(e){
+   e.preventDefault();   //a 태그 기본 동작 막기
+   
+   //pageNum의 값을 클릭된 a의 href 값으로 변경
+   actionForm.find("input[name='pageNum']")
+            .val($(this).attr('href'));
+   //폼 전송
+   actionForm.submit();
+});
+</script>
+   
+   
 <script>
-var doDisplay = none;
-function doDisplay(){
-	var con = document.getElementById("inoutputtd");
-	if(con.style.display == 'none'){
-		con.style.display = 'block';
-	}else {
-		con.style.display = 'none';
-	}
-}
+$(document).ready(function(){
+     $("p").hide();
+     $("ul li a").click(function(){
+       $(this).next().slideToggle(300);
+       $("ul li a").not(this).next().slideUp(300);
+       return false;
+     });
+     $("ul li a").eq(0).trigger("click");
+   });
 
+</script>   
 
-
-
-
-</script>	
-
-		</div><!-- container -->
-		<footer>
-			<div class="inner">
-				<div class="footArea">
-					<div class="footerLeft">
-						<div class="callNumber"><b>고객센터</b><strong> 1588-0000</strong> 평일 09:00~18:00(공휴일 제외)</div>
-						<div class="footerinfo">
-							<ul>
-								<li><a href="#">개인정보 처리방침</a></li>
-								<li><a href="#">서비스약관</a></li>
-							</ul>
-						</div>
-						<address>서울특별시 마포구 서교동 447-5 풍성빌딩 쌍용강북교육센터</address>
-					</div>
-					<div class="footerRight">
-						<div class="sns">
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_facebook.png" alt="페이스북"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_kakaostory.png" alt="카카오스토리"></a>
-		                </div>
-					</div>
-				</div>
-				<div class="copyright">Copyrightⓒ AGUMON. All Right Reserved</div>
-			</div><!-- inner -->
-		</footer>
-	</div><!-- wrap -->
+      </div><!-- container -->
+      
+<%@ include file="../common/footer.jsp" %>
+   </div><!-- wrap -->
 </body>
 </html>

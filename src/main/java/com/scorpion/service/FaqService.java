@@ -7,12 +7,12 @@ import com.scorpion.domain.FaqVO;
 
 public interface FaqService {
 
-	public boolean remove(Long fno);
-	public boolean modify(FaqVO faq);
-	public FaqVO register(FaqVO faq);
-	public FaqVO get(Long fno);
-	public int getTotal(Criteria cri);
-	public List<FaqVO> getList(Criteria cri);
-	
-	
+   public boolean remove(Long fno);
+   public boolean modify(FaqVO faq);
+   public void register(FaqVO faq);
+   public FaqVO get(Long fno);
+   public int getTotal(Criteria cri);
+   public List<FaqVO> getList(Criteria cri);
+   
+   
 }
