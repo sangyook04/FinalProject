@@ -36,7 +36,7 @@
 							<ul class="myPageContent">
 								<li><a href="/student/studentMyInfo?stuId=${pinfo.username}">내 정보 출력</a></li>
 								<li><a href="/student/studentLevelGet?stuId=${pinfo.username}">레벨테스트 결과</a></li>
-								<li><a href="/study/select">내 스터디</a></li>
+								<li><a href="/study/scheduleList">내 스터디</a></li>
 								<li><a href="/study/zzimStudy">관심 스터디</a></li>
 								<li><a href="/pay/myMoneyList?stuId=${pinfo.username}">내 결제 내역</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
@@ -53,12 +53,12 @@
 						<li class="myPage"><a href="#">마이페이지</a>
 							<ul class="myPageContent">
 								<li><a href="/leader/info?leaId=${pinfo.username}">내 정보 출력</a></li>
-								<li><a href="/study/select">내 스터디</a></li>
+								<li><a href="/study/scheduleList">내 스터디</a></li>
 								<li><a href="/pay/incomeList?leaderId=${pinfo.username}">소득 내역</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
 								<li><a href="/leader/leaderDrop?leaId=${pinfo.username}">탈퇴 하기</a></li>
 							</ul></li>
-						<li><a href="#">스터디 개설</a></li>
+						<li><a href="/study/create">스터디 개설</a></li>
 						<li><sec:authentication property="principal.username" />
 							<!--리더-->님</li>
 						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
