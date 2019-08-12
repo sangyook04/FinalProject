@@ -19,58 +19,6 @@
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
    <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/adminheaderfooter.css">
-
-   <script>
-   		$(document).ready(function(){
-
-			$('.first').hover(function () {
-			    if($(".firstSub").css("display") == "none"){
-			       $('.firstSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.firstSub').css("display", "none");
-			    }
-			});
-
-			$('.firstSub2').hover(function () {
-			    if($(".asideSubmenu2").css("display") == "none"){
-			       $('.asideSubmenu2').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.asideSubmenu2').css("display", "none");
-			    }
-			});
-
-			$('.second').hover(function () {
-			    if($(".secondSub").css("display") == "none"){
-			       $('.secondSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.secondSub').css("display", "none");
-			    }
-			});
-
-			$('.third').hover(function () {
-			    if($(".thirdSub").css("display") == "none"){
-			       $('.thirdSub').css("display", "block");
-			       event.preventDefault();
-			    } else {
-			       $('.thirdSub').css("display", "none");
-			    }
-			});
-
-		
-			$('.fourth').hover(function () {
-			    if($(".asideSubmenu3").css("display") == "block"){
-			       $('.asideSubmenu3').css("display", "none");
-			       event.preventDefault();
-			    } else {
-			       $('.asideSubmenu3').css("display", "block");
-			    }
-			});
-
-		});//ready
-   </script>
 </head>
 <body>
 	<div id="wrap">

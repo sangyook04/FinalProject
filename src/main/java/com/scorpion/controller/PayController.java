@@ -63,7 +63,7 @@ public class PayController {
 	   
 	   refservice.register(Long.parseLong(payIndex));
 	   rttr.addFlashAttribute("result", "success");
-	   return "redirect:/pay/myMoneyList?studentId=" + studentId;
+	   return "redirect:/pay/myMoneyList?stuId=" + studentId;
    }
    
    @PreAuthorize("hasRole([ROLE_ADMIN])")
