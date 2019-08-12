@@ -50,6 +50,9 @@
 					<div class="withInfo">스터디가 시작 예정이거나 진행중인 경우 탈퇴를 할 수 없습니다. <br>탈퇴를 진행하시겠습니까?</div>
 					<button data-oper="drop" id="dropBtn" style=" font-weight:bold; color: white; padding:15px; background:red; border-radius: 5px;">탈퇴하기</button>
 					</form>
+					<form id="LogOutForm" action="/logout" method="POST">
+      			 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    				</form>
 				</div>
 			</div>
 		</div><!-- container -->
@@ -60,6 +63,7 @@
 	$(function() {
 		
 		var formObj = $("form");
+		var LogOutForm = $("LogOutForm");
 		
 		
 			//modify
@@ -75,6 +79,7 @@
 				}
 				
 				formObj.submit();
+				LogOutForm.submit();
 			});
 			
 		});
