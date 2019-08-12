@@ -17,7 +17,7 @@ header nav .headerContent .gnb li a:hover {color: #4285f4;}
 
 header nav .headerContent .gnb .myPage {cursor: pointer; text-align: right;}
 header nav .headerContent .gnb .myPage .myPageContent {display: none; position: relative; width: 200px; height: 280px; background-color: #fff; margin-top: 22px; padding: 20px; text-align: center; border-radius: 3px; border: 1px solid #eee;}
-header nav .headerContent .gnb .myPage .myPageContent li {margin-top: 15px;}
+header nav .headerContent .gnb .myPage .myPageContent li {margin-top: 10px;}
 header nav .headerContent .gnb .myPage .myPageContent li:nth-child {margin-top: 0px;}
 header nav .headerContent .gnb .myPage .myPageContent li a {}
 header nav .headerContent .gnb .myPage .myPageContent li a:hover {color: #4285f4;}
