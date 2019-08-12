@@ -95,7 +95,7 @@
 		            <c:forEach items="${list }" var="payment" >
 		            	<tr>
 		            		<td>${payment.leader.leaName }</td>
-					      	<td>${payment.payMoney }</td>
+					      	<td>${payment.payMoney == null ? "결제 취소" : payment.payMoney}</td>
 					        <td>${payment.leader.leaAccount }</td>
 		            	</tr>
 		            </c:forEach>

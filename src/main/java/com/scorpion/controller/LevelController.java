@@ -110,7 +110,7 @@ public class LevelController {
 					System.out.println("등급"+grade);
 				}
 				
-				return "redirect:/level/commonTest?stuId="+stuId; //추천스터디 목록으로 경로 바꿔야함 grade(용원이형이 설정한 파라미터에 맞춰야함)를 넘기는거로 수정
+				return "redirect:/study/recommend?stuId="+stuId; //추천스터디 목록으로 경로 바꿔야함 grade(용원이형이 설정한 파라미터에 맞춰야함)를 넘기는거로 수정
 			}
 		}
 		return "redirect:/level/commonTest?stuId="+stuId;
