@@ -45,7 +45,7 @@
       LEAADDRESS, LEAGENDER, LEAPHONENUM, LEAEMAIL, LEAEMAIL2, LEASCORE, LEAACCOUNT,
       LEAINTRODUCE, LEABANK, AUTH)
       values (#{leaId}, #{leaPassword}, #{leaName}, #{leaImage}, 
-      #{leaAddress}, #{leaGender}, #{leaPhonenum}, #{leaEmail}, #{leaEmail2}, 0, #{leaAccount}, 
+      #{leaAddress}, #{leaGender}, #{leaPhonenum}, #{leaEmail}, #{leaEmail2}, #{leaScore}, #{leaAccount}, 
       #{leaIntroduce}, #{leaBank}, 'ROLE_LEADER')
    </insert>
 

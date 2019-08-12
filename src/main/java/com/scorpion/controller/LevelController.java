@@ -59,6 +59,7 @@ public class LevelController {
 			model.addAttribute("score", score);
 			lastExam = false;
 		}
+		System.out.println("getstuid="+stuId);
 	}
 	
 	@PreAuthorize("hasRole([ROLE_STUDENT])")
@@ -96,7 +97,8 @@ public class LevelController {
 				}
 				System.out.println(score);
 				lastExam = true;
-				
+				System.out.println("stuid="+stuId);
+				System.out.println("grade="+grade);
 				//학생 레벨 설정
 				if(stuservice.setLevel(stuId, grade)) {
 					model.addAttribute("grade", grade);

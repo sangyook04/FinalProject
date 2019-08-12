@@ -76,7 +76,7 @@
 		                   <tbody>
 		                   <c:forEach items="${list }" var="payment" >
 			                   <tr>
-			                   <td><a href="#">${payment.study.studyName}</a></td>
+			                   <td><a href="/study/get?studyIndex=${payment.study.studyIndex}">${payment.study.studyName}</a></td>
 			                   <td>${payment.study.studyStartdate} ~ ${payment.study.studyEnddate}</td>
 			                   <td>${payment.study.studyLevel}</td>
 			                   <td>${payment.study.studyPlace}</td>

@@ -116,7 +116,10 @@ public class CommonController {
 				score = cnt * 5;
 				System.out.println(score);
 				lastExam = true;
-				return "redirect:/common/leaderTest"; //리더회원가입 페ㅐ이지로
+				
+				if(score >= 10) {//80점이상이면 합격
+					return "redirect:/common/leaderJoin"; //리더회원가입 페ㅐ이지로
+				}
 			}
 		}
 		return "redirect:/common/leaderTest";
@@ -227,8 +230,8 @@ public class CommonController {
 
    @PreAuthorize("isAnonymous()")
    @GetMapping("/leaderJoin")
-   public void leaderJoin() {
-      
+   public void leaderJoin(Model model) {
+	   model.addAttribute("score", score);
    }
 
    @PreAuthorize("isAnonymous()")
