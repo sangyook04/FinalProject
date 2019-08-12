@@ -18,6 +18,8 @@
    <link rel="stylesheet" type="text/css" href="../../resources/css/main.css">
    <link rel="stylesheet" type="text/css" href="../../resources/css/study.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+   
+<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
 
    <script>
    		$(document).ready(function(){
@@ -39,80 +41,7 @@
 </head>
 <body>
 	<div id="wrap">
-		<header>
-	<nav>
-		<div class="inner">
-			<div class="headerContent">
-				<sec:authentication property="principal" var="pinfo"/>
-				<div class="mainlogo">
-					<a href="/"></a>
-				</div>
-				<ul class="mainmenu">
-					<li><a href="#">스터디 찾기</a></li>
-					<li><a href="/level/commonTest?stuId=${principal.username}">레벨 테스트</a></li>
-					<li><a href="/common/noticeList">공지사항</a></li>
-					<li class="one"><a href="#">고객센터</a>
-						<ul class="callsenterSub">
-							<li><a href="#">FAQ</a></li>
-							<sec:authorize access="isAuthenticated()">
-								<li><a href="/loginCommon/list">QnA</a></li>
-							</sec:authorize>
-						</ul></li>
-					</ul>
-				<sec:authorize access="isAnonymous()">
-					<ul class="gnb">
-						<li><a href="/common/login">로그인</a></li>
-						<li><a href="/common/studentJoin">학생 회원가입</a></li>
-						<li><a href="/common/leaderTest">리더 시작하기</a></li>
-					</ul>
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_STUDENT')">
-					<ul class="gnb">
-						<li class="myPage"><a href="#">마이페이지</a>
-							<ul class="myPageContent">
-								<li><a href="/student/studentMyInfo?stuId=${pinfo.username}">내 정보 출력</a></li>
-								<li><a href="/student/studentLevelGet?stuId=${pinfo.username}">레벨테스트 결과</a></li>
-								<li><a href="#">내 스터디</a></li>
-								<li><a href="#">관심 스터디</a></li>
-								<li><a href="/loginCommon/mylist">문의 내역</a></li>
-								<li><a href="/student/studentDrop">탈퇴 하기</a></li>
-							</ul></li>
-						<li><sec:authentication property="principal.username" />
-							<!--학생 -->님</li>
-						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
-					</ul>
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_LEADER')">
-					<ul class="gnb">
-						<li class="myPage"><a href="#">마이페이지</a>
-							<ul class="myPageContent">
-								<li><a href="/leader/info?leaId=${pinfo.username}">내 정보 출력</a></li>
-								<li><a href="#">내 스터디</a></li>
-								<li><a href="/pay/incomeList?leaderId=${pinfo.username}">소득 내역</a></li>
-								<li><a href="/loginCommon/mylist">문의 내역</a></li>
-								<li><a href="#">탈퇴 하기</a></li>
-							</ul></li>
-						<li><a  id="username" href="/study/create?leaId=${pinfo.username }">스터디 개설</a></li>
-						<li><sec:authentication property="principal.username" />
-							<!--리더-->님</li>
-						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
-					</ul>
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<ul class="gnb">
-						<li class="myPage"><a href="/admin/main">관리자 페이지</a>
-						<li><sec:authentication property="principal.username" />
-							<!--관리자-->님</li>
-						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
-					</ul>
-				</sec:authorize>
-				<form id="LogOutForm" action="/logout" method="POST">
-      			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    			</form>
-			</div><!-- headerContent -->
-		</div>
-	</nav>
-</header>
+		<%@ include file="../common/header.jsp" %>
 <script>
 	
 	$(".LogOut").on("click", function(e){
@@ -308,31 +237,8 @@ studyETime.on("change", function(e){
 		</div>
 
 		</div><!-- container -->
-		<footer>
-			<div class="inner">
-				<div class="footArea">
-					<div class="footerLeft">
-						<div class="callNumber"><b>고객센터</b><strong> 1588-0000</strong> 평일 09:00~18:00(공휴일 제외)</div>
-						<div class="footerinfo">
-							<ul>
-								<li><a href="#">개인정보 처리방침</a></li>
-								<li><a href="#">서비스약관</a></li>
-							</ul>
-						</div>
-						<address>서울특별시 마포구 서교동 447-5 풍성빌딩 쌍용강북교육센터</address>
-					</div>
-					<div class="footerRight">
-						<div class="sns">
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_instar.png" alt="인스타"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_blog.png" alt="블로그"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_facebook.png" alt="페이스북"></a>
-		                    <a href="#" target="_blank"><img src="../../resources/img/GumonMain/img_sns_kakaostory.png" alt="카카오스토리"></a>
-		                </div>
-					</div>
-				</div>
-				<div class="copyright">Copyrightⓒ AGUMON. All Right Reserved</div>
-			</div><!-- inner -->
-		</footer>
+		
+<%@ include file="../common/footer.jsp" %>
 	</div><!-- wrap -->
 </body>
 </html>
