@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -75,19 +76,91 @@
 				<tr>
 					<th class="th1">이름</th><th class="th2">기간</th>
 					<th class="th3">레벨</th><th class="th4">장소</th>
-					<th class="th5">가격</th><th class="th6">사진</th>
+					<th class="th5">가격</th>
 				</tr>
 			</thead>
 			<tbody class="studyingtbody">
+				<c:forEach items="${List}" var="List">
 				<tr>
-					<td class="td1"><a href="get.jsp">용원</a></td><td class="td2">2019-04-05~2019-07-31</td>
-					<td class="td3">초급</td><td class="td4">쌍용교육</td>
-					<td class="td5">1800000</td><td class="td6"><img class="humanimg" src="../../resources/img/KisJamMain/인체아틀라스_배너.jpg"></td>
-					<td class="td7"><button class="btn btn-primary" id="studentbtn">학생명단</button></td>		
+					<td class="td1"><a class="move" href="${List.studyIndex }">${List.studyName }</a></td>
+					<td class="td2">${List.studyStartdate } ~ ${List.studyEnddate } </td>
+					<td class="td3">${List.studyLevel }</td><td class="td4">${List.studyPlace }</td>
+					<td class="td5">${List.studyPrice }</td>
+					<td class="td7"><a href="${List.studyIndex }" data-oper="stubtn" class="btn btn-primary">학생명단</a></td>	
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
+		<!-- 페이지 번호 출력 -->
+				   <div class="pull-right">
+				   		<ul class="pagination">
+				   		<c:if test="${pageMaker.prev }"><!-- previous 버튼 표시 -->
+				   			<li class="paginate_button previous">
+				   				<a href="${pageMaker.startPage - 1 }">
+				   					Previous</a></li>
+				   		</c:if>
+				   						   		
+				   		<!-- 페이지 번호 표시 -->
+				   		<c:forEach begin="${pageMaker.startPage }"
+				   				   end="${pageMaker.endPage }" var="num">
+				   			<li class="paginate_button
+				   			           ${pageMaker.cri.pageNum == num ? 'active': '' }">
+				   				<a href="${num }">${num }</a></li>
+				   		</c:forEach>
+				   		
+				   		<c:if test="${pageMaker.next }"><!-- next 버튼 표시 -->
+				   			<li class="paginate_button next">
+				   				<a href="${pageMaker.endPage + 1 }">Next</a></li>
+				   		</c:if>
+				   		</ul>
+				   </div>
+			
+					 <!-- a 태그 대신 pageNum과 amount 파라미터로 전송 -->
+				   <form id="actionForm" action="/study/studyingList">
+				   <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
+				   	   <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+				   	   <input type="hidden" name="amount"  value="${pageMaker.cri.amount }">
+				   </form>
+		
+		
+		
 		</div>
+		
+		
+<script>
+//페이지 번호를 클릭하면 해당 페이지 목록 표시
+var actionForm = $("#actionForm");
+
+$(".paginate_button a").on("click", function(e){
+	e.preventDefault();	//a 태그 기본 동작 막기
+	
+	//pageNum의 값을 클릭된 a의 href 값으로 변경
+	actionForm.find("input[name='pageNum']")
+		      .val($(this).attr('href'));
+	//폼 전송
+	actionForm.submit();
+});
+
+//a 태그의 move 클래스 속성을 이용
+$(".move").on("click", function(e){
+	//a 태그의 기본 동작 막고
+	e.preventDefault();	
+	
+	actionForm.append("<input type='hidden' name='studyIndex' value='"+
+					 $(this).attr('href')+"'>'");
+	actionForm.attr("action", "/study/get");
+	actionForm.submit();
+});
+
+$('a[data-oper="stubtn"]').on("click",function(e){
+	e.preventDefault();
+	
+	actionForm.append("<input type='hidden' name='studyIndex' value='"+ $(this).attr('href')+"'>'"); 
+	actionForm.attr("action", "/study/studyingStudentList");
+	actionForm.submit();
+});
+</script>		
+		
 		
 		 
 		

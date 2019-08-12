@@ -1,14 +1,310 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.scorpion.mapper.StudyMapper">
 
 
+<insert id="insertSelectKey">
 
-  <select id="read" resultType="com.scorpion.domain.StudyVO">
-  	SELECT * FROM study WHERE studyindex = #{studyIndex}
-  </select>
+<selectKey order="BEFORE" resultType="long" keyProperty="studyIndex">
+SELECT studyno.nextval 
+FROM dual 
+</selectKey>
+INSERT INTO study(studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime )
+VALUES(#{studyIndex}, #{studyName}, #{leaId}, #{studyPlace}, #{studyLevel}, #{studyPrice},#{studyIntroduce}, #{studyStartdate}, #{studyEnddate}, #{studyState}, #{studyPeople}, #{studySTime}, #{studyETime}) 
+</insert>
 
-  
+
+<select id="getSStudyListWithPaging" resultType="com.scorpion.domain.StudyVO">
+
+<![CDATA[
+		 	  SELECT studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  			studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+			FROM ( SELECT /*+INDEX_DESC(study SYS_C007157)*/
+					rownum rn, studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  					studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+					FROM study WHERE rownum <= #{cri.pageNum} * #{cri.amount} 
+					AND studyState = '예정'
+					AND leaId = '${leaId}' )
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}	
+		]]>
+</select>
+
+
+<select id="getSTotalCount" resultType="int">
+
+<![CDATA[
+   	SELECT COUNT(*) FROM study 
+   	WHERE studyIndex > 0 
+   	AND leaId = '${leaId}'
+   	AND studyState = '예정'
+   	]]>
+</select>
+
+
+<select id="getStudyingListWithPaging" resultType="com.scorpion.domain.StudyVO">
+
+<![CDATA[
+		 	  SELECT studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  			studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+			FROM ( SELECT /*+INDEX_DESC(study study_no)*/
+					rownum rn, studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  					studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+					FROM study WHERE rownum <= #{cri.pageNum} * #{cri.amount} 
+					AND studyState = '진행'
+					AND leaId = '${leaId}' )
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}	
+		]]>
+</select>
+
+
+<select id="getTotalCount" resultType="int">
+
+<![CDATA[
+   	SELECT COUNT(*) FROM study 
+   	WHERE studyIndex > 0 
+   	AND leaId = '${leaId}'
+   	AND studyState = '진행'
+   	]]>
+</select>
+
+
+<select id="getEStudyListWithPaging" resultType="com.scorpion.domain.StudyVO">
+
+<![CDATA[
+		 	  SELECT studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  			studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+			FROM ( SELECT /*+INDEX_DESC(study study_no)*/
+					rownum rn, studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  					studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+					FROM study WHERE rownum <= #{cri.pageNum} * #{cri.amount} 
+					AND studyState = '종료'
+					AND leaId = '${leaId}' )
+			WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}	
+		]]>
+</select>
+
+
+<select id="getETotalCount" resultType="int">
+
+<![CDATA[
+   	SELECT COUNT(*) FROM study 
+   	WHERE studyIndex > 0 
+   	AND leaId = '${leaId}'
+   	AND studyState = '종료'
+   	]]>
+</select>
+
+<delete id="delete"> DELETE FROM study WHERE studyIndex = #{studyIndex} </delete>
+
+<update id="update">
+UPDATE study SET studyName = #{studyName}, studyPlace = #{studyPlace}, studyLevel = #{studyLevel},studyPrice = #{studyPrice}, studyIntroduce = #{studyIntroduce}, studyStartdate = #{studyStartdate},studyEnddate = #{studyEnddate}, studyPeople = #{studyPeople}, studySTime = '${studySTime}',studyETime = '${studyETime}'
+
+WHERE studyIndex = #{studyIndex} </update>
+
+<select id="getStudentList" resultType="com.scorpion.domain.StudentVO">
+SELECT s.stuname, s.stuphonenum
+FROM payment p, student s
+WHERE p.stuid = s.stuid
+AND paymoney is not null
+AND studyIndex = #{studyIndex}
+ </select>
+
+
+<resultMap id="payMapTwo" type="com.scorpion.domain.PaymentVO">
+<id column="payindex" property="payIndex"/>
+<result column="payindex" property="payIndex"/>
+<result column="stuid" property="stuId"/>
+<result column="leaid" property="leaId"/>
+<result column="studyindex" property="studyIndex"/>
+<result column="paysenddate" property="paySendDate"/>
+<result column="paydate" property="payDate"/>
+<result column="paymoney" property="payMoney"/>
+<collection property="study" resultMap="studyMap"/>
+</resultMap>
+
+
+<resultMap id="studyMap" type="com.scorpion.domain.StudyVO">
+<result column="studyindex" property="studyIndex"/>
+<result column="studyname" property="studyName"/>
+<result column="leaid" property="leaId"/>
+<result column="studyplace" property="studyPlace"/>
+<result column="studylevel" property="studyLevel"/>
+<result column="studyprice" property="studyPrice"/>
+<result column="studyintroduce" property="studyIntroduce"/>
+<result column="studystartdate" property="studyStartdate"/>
+<result column="studyenddate" property="studyEnddate"/>
+<result column="studystate" property="studyState"/>
+<result column="studypeople" property="studyPeople"/>
+<result column="studystime" property="studySTime"/>
+<result column="studyetime" property="studyETime"/>
+</resultMap>
+
+
+<select id="stgetEStudyListWithPaging" resultMap="payMapTwo">
+
+<![CDATA[ 
+      SELECT studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  			studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+  	  FROM ( SELECT /*+INDEX_DESC(study study_no)*/
+					rownum rn, s.studyIndex, s.studyName, s.leaId, s.studyPlace, s.studyLevel, s.studyPrice, s.studyIntroduce,
+  					s.studyStartdate, s.studyEnddate, s.studyState, s.studyPeople, s.studySTime, s.studyETime
+					FROM study s, payment p 
+					WHERE  s.studyindex = p.studyindex 
+					AND s.studyState = '종료'
+					AND stuid = '${stuId}'
+					AND rownum <= #{cri.pageNum} * #{cri.amount}
+					
+					)
+	  WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}			
+      ]]>
+</select>
+
+
+<select id="stgetETotalCount" resultType="int">
+
+<![CDATA[
+   	SELECT COUNT(*) 
+   	FROM study s, payment p
+   	WHERE  s.studyIndex = p.studyIndex
+   	AND s.studyIndex > 0 
+   	AND stuid = '${stuId}'
+   	AND s.studyState = '종료'
+   	]]>
+</select>
+
+
+<select id="stgetSStudyListWithPaging" resultMap="payMapTwo">
+
+<![CDATA[ 
+      SELECT studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  			studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+  	  FROM ( SELECT /*+INDEX_DESC(study study_no)*/
+					rownum rn, s.studyIndex, s.studyName, s.leaId, s.studyPlace, s.studyLevel, s.studyPrice, s.studyIntroduce,
+  					s.studyStartdate, s.studyEnddate, s.studyState, s.studyPeople, s.studySTime, s.studyETime
+					FROM study s, payment p 
+					WHERE  s.studyindex = p.studyindex 
+					AND s.studyState = '예정'
+					AND stuid = '${stuId}'
+					AND rownum <= #{cri.pageNum} * #{cri.amount}
+					
+					)
+	  WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}			
+      ]]>
+</select>
+
+
+<select id="stgetSTotalCount" resultType="int">
+
+<![CDATA[
+   	SELECT COUNT(*) 
+   	FROM study s, payment p
+   	WHERE  s.studyIndex = p.studyIndex
+   	AND s.studyIndex > 0 
+   	AND stuid = '${stuId}'
+   	AND s.studyState = '예정'
+   	]]>
+</select>
+
+
+<select id="stgetStudyingListWithPaging" resultMap="payMapTwo">
+
+<![CDATA[ 
+      SELECT studyIndex, studyName, leaId, studyPlace, studyLevel, studyPrice, studyIntroduce,
+  			studyStartdate, studyEnddate, studyState, studyPeople, studySTime, studyETime
+  	  FROM ( SELECT /*+INDEX_DESC(study study_no)*/
+					rownum rn, s.studyIndex, s.studyName, s.leaId, s.studyPlace, s.studyLevel, s.studyPrice, s.studyIntroduce,
+  					s.studyStartdate, s.studyEnddate, s.studyState, s.studyPeople, s.studySTime, s.studyETime
+					FROM study s, payment p 
+					WHERE  s.studyindex = p.studyindex 
+					AND s.studyState = '진행'
+					AND stuid = '${stuId}'
+					AND rownum <= #{cri.pageNum} * #{cri.amount}
+					
+					)
+	  WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}			
+      ]]>
+</select>
+
+
+<select id="stgetTotalCount" resultType="int">
+
+<![CDATA[
+   	SELECT COUNT(*) 
+   	FROM study s, payment p
+   	WHERE  s.studyIndex = p.studyIndex
+   	AND s.studyIndex > 0 
+   	AND stuid = '${stuId}'
+   	AND s.studyState = '진행'
+   	]]>
+</select>
+
+
+<resultMap id="imgstudy" type="com.scorpion.domain.StudyVO">
+<id column="studyIndex" property="studyIndex"/>
+<result column="studyName" property="studyName"/>
+<result column="leaId" property="leaId"/>
+<result column="studyPlace" property="studyPlace"/>
+<result column="studyLevel" property="studyLevel"/>
+<result column="studyPrice" property="studyPrice"/>
+<result column="studyIntroduce" property="studyIntroduce"/>
+<result column="studyStartdate" property="studyStartdate"/>
+<result column="studyEnddate" property="studyEnddate"/>
+<result column="studySTime" property="studySTime"/>
+<result column="studyETime" property="studyETime"/>
+<result column="studyState" property="studyState"/>
+<result column="studyPeople" property="studyPeople"/>
+<collection property="picturevo" resultMap="pictureMap"/>
+<collection property="leaderVO" resultMap="leaderMap"/>
+<collection property="leaderReviewVO" resultMap="leaderreMap"/>
+</resultMap>
+
+
+<resultMap id="leaderMap" type="com.scorpion.domain.LeaderVO">
+<result column="leaid" property="leaId"/>
+<result column="leaintroduce" property="leaIntroduce"/>
+<result column="leaname" property="leaName"/>
+</resultMap>
+
+
+<resultMap id="leaderreMap" type="com.scorpion.domain.LeaderReviewVO">
+<result column="leaid" property="leaId"/>
+<result column="stuId" property="stuId"/>
+<result column="revGrade" property="revGrade"/>
+<result column="revcomment" property="revComment"/>
+</resultMap>
+
+
+<resultMap id="pictureMap" type="com.scorpion.domain.PictureVO">
+<result column="uuid" property="uuid"/>
+<result column="uploadpath" property="uploadPath"/>
+<result column="filename" property="fileName"/>
+<result column="filetype" property="fileType"/>
+<result column="studyindex" property="StudyIndex"/>
+<result column="leaid" property="leaId"/>
+</resultMap>
+
+<select id="listread" resultType="com.scorpion.domain.LeaderReviewVO">
+ select lr.leaid, lr.revgrade, lr.revcomment, lr.stuid
+ from leaderreview lr, study swhere s.leaid = lr.leaid
+ AND studyindex = #{studyIndex} </select>
+
+<select id="read" resultMap="imgstudy">
+select DISTINCT uuid, uploadpath, filename, filetype, m.studyindex, m.leaid, m.studyplace, m.studylevel,m.studyPrice, m.studyName, m.studystartdate, m.studyenddate ,m.studypeople, m.studystime, m.studyetime, m.studyintroduce,m.leaintroduce, m.revgrade, m.revcomment
+from ( SELECT s.studyindex, s.leaid, s.studyplace, s.studylevel, s.studyPrice, s.studyName, s.studystartdate, s.studyenddate ,s.studypeople, s.studystime, s.studyetime, s.studyintroduce, l.leaintroduce, r.revgrade, r.revcomment
+FROM leader l, study s, leaderreview r
+WHERE l.leaid = s.leaid
+AND l.leaid = r.leaid
+AND studyindex = #{studyIndex}) m, picture ps
+WHERE p.leaid = m.leaid </select>
+
+<select id="readimage" resultMap="imgstudy">
+SELECT p.uuid, p.uploadpath, p.filename, p.filetype, p.studyindex, p.leaid, s.studyplace, s.studylevel,s.studyPrice, s.studyName, s.studystartdate, s.studyenddate
+FROM interestStudy i, picture p, study s
+WHERE i.studyindex = s.studyindex
+AND s.leaid = p.leaid
+AND stuId = #{stuId} </select>
+
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,7 +64,7 @@
 		<div id="container">
 		
 		<div class="inner">
-		<h1 class="sslh1">진행중 스터디 학생 목록</h1>
+		<h1 class="sslh1">스터디 학생 목록</h1>
 		<table class="table table-striped">
 			<thead class="endssl">
 				<tr>
@@ -71,17 +72,59 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${studentlist }" var="slist">
 				<tr>
-					<td class="ssltd1">이름들</td>
-					<td class="ssltd2">연락처들</td>
+					<td class="ssltd1">${slist.stuName }</td>
+					<td class="ssltd2">${slist.stuPhonenum }</td>
 				</tr>
+			</c:forEach>	
 			</tbody>
 		
 		</table>
 		
+		<form action="/study/studyingList" method="get" id="listform">
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->	
+		<input type="hidden" name="pageNum" value="${cri.pageNum }">
+		<input type="hidden" name="amount" value="${cri.amount }">	
 		
-		<button type="button" class="btn btn-primary" id="ssllistbtn">목록</button>
+		</form>
+		<button class="btn btn-primary" id="ssllistbtn">목록</button>
 		</div>
+		
+		
+		
+<script>
+
+var listform = $("#listform");
+var studyState = "${param.studyState}";
+
+$("#ssllistbtn").on("click",function(e){
+	if(studyState == "종료"){
+		listform.attr("action","/study/endStudyList");
+		listform.submit();
+	}else if(studyState == "st종료"){
+		listform.attr("action","/study/stendStudyList");
+		listform.submit();
+	}else if(studyState == "st진행"){
+		listform.attr("action","/study/stStudyingList");
+		listform.submit();
+	} 
+	else{
+		listform.submit();	
+	}
+	
+});
+
+$("#ssllistbtn").on("click",function(e){
+		listform.submit();	
+	
+	
+});
+
+
+
+
+</script>
 
 		</div><!-- container -->
 		<footer>

@@ -66,127 +66,171 @@
 		<div class="inner">
 		<h1 class="creh1">스터디 수정</h1>
 		
-		<form method="post" action="/study/create">
+		<form method="post" action="/study/scheduleModify" id="createform" name="modifyform" >
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
   			<div class="form-group">
    			 <label for="studytitle">스터디 제목</label>
-   			 <input type="text" class="form-control" id="studytitle" placeholder="스터디 제목을 입력하세요" maxlength="20">
+   			 <input type="text" class="form-control" name="studyName" id="studyName"  value="${list.studyName }"
+   			 required="required" maxlength="30">
  			 </div>
  			 <div class="form-group">
  			 <label>인원 수</label>
- 			 <select class="form-control">
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
+ 			 <select class="form-control" name="studyPeople" id="studyPeople">
+ 			 <option selected="selected"  value="${list.studyPeople }"> 기존값 = ${list.studyPeople }</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
 			</select>
 			</div>
 			<div class="form-group">
 				<label>스터디 레벨을 입력해주세요</label>
-				<select class="form-control">
-				<option>초급</option>
-				<option>중급</option>
-				<option>고급</option>
+				<select class="form-control" name="studyLevel" id="studyLevel">
+				<option selected="selected" value="${list.studyLevel }">기존값 = ${list.studyLevel }</option>
+				<option value="초급">초급</option>
+				<option value="중급">중급</option>
+				<option value="고급">고급</option>
 				</select>
 			</div>
 			 <div class="form-group">
  			 <label>시작 시간</label>
- 			 <select class="form-control">
-			<option>08:00</option>
-			<option>09:00</option>
-			<option>11:00</option>
-			<option>12:00</option>
-			<option>13:00</option>
-			<option>14:00</option>
-			<option>15:00</option>
-			<option>16:00</option>
-			<option>17:00</option>
-			<option>18:00</option>
-			<option>19:00</option>
-			<option>20:00</option>
-			<option>21:00</option>
-			<option>22:00</option>
-			<option>23:00</option>
-			<option>24:00</option>
+ 			 <select class="form-control" name="studySTime" id="studySTime">
+ 			 <option selected="selected" value="${list.studySTime }">기존값 = ${list.studySTime }</option>
+			<option value="08:00">08:00</option>
+			<option value="09:00">09:00</option>
+			<option value="10:00">10:00</option>
+			<option value="11:00">11:00</option>
+			<option value="12:00">12:00</option>
+			<option value="13:00">13:00</option>
+			<option value="14:00">14:00</option>
+			<option value="15:00">15:00</option>
+			<option value="16:00">16:00</option>
+			<option value="17:00">17:00</option>
+			<option value="18:00">18:00</option>
+			<option value="19:00">19:00</option>
+			<option value="20:00">20:00</option>
+			<option value="21:00">21:00</option>
+			<option value="22:00">22:00</option>
+			<option value="23:00">23:00</option>
+			<option value="24:00">24:00</option>
 			</select>
 			</div>
 			
 			 <div class="form-group">
  			 <label>종료 시간</label>
- 			 <select class="form-control">
-				<option>08:00</option>
-			<option>09:00</option>
-			<option>11:00</option>
-			<option>12:00</option>
-			<option>13:00</option>
-			<option>14:00</option>
-			<option>15:00</option>
-			<option>16:00</option>
-			<option>17:00</option>
-			<option>18:00</option>
-			<option>19:00</option>
-			<option>20:00</option>
-			<option>21:00</option>
-			<option>22:00</option>
-			<option>23:00</option>
-			<option>24:00</option>
+ 			 <select class="form-control" name="studyETime" id="studyETime">
+ 			<option selected="selected" value="${list.studyETime }">기존값 = ${list.studyETime }</option> 
+			<option value="08:00">08:00</option>
+			<option value="09:00">09:00</option>
+			<option value="10:00">10:00</option>
+			<option value="11:00">11:00</option>
+			<option value="12:00">12:00</option>
+			<option value="13:00">13:00</option>
+			<option value="14:00">14:00</option>
+			<option value="15:00">15:00</option>
+			<option value="16:00">16:00</option>
+			<option value="17:00">17:00</option>
+			<option value="18:00">18:00</option>
+			<option value="19:00">19:00</option>
+			<option value="20:00">20:00</option>
+			<option value="21:00">21:00</option>
+			<option value="22:00">22:00</option>
+			<option value="23:00">23:00</option>
+			<option value="24:00">24:00</option>
 			</select>
 			</div>
 			
 			<div class="form-group">
  			 <label>지역</label>
- 			 <select class="form-control">
-				<option>마포구</option>
-				<option>영등포구</option>
-				<option>양천구</option>
-				<option>강서구</option>
-				<option>동작구</option>
-				<option>용산구</option>
-				<option>중구</option>
-				<option>서대문구</option>
-				<option>종로구</option>
-				<option>성동구</option>
-				<option>강남구</option>
-				<option>서초구</option>
-				<option>관악구</option>
-				<option>금천구</option>
-				<option>구로구</option>
+ 			 <select class="form-control" name="studyPlace" id="studyPlace" >
+ 			 <option selected="selected" value="${list.studyPlace }">기존값 = ${list.studyPlace }</option> 
+				<option value="마포구">마포구</option>
+				<option value="영등포구">영등포구</option>
+				<option value="양천구">양천구</option>
+				<option value="강서구">강서구</option>
+				<option value="동작구">동작구</option>
+				<option value="용산구">용산구</option>
+				<option value="중구">중구</option>
+				<option value="서대문구">서대문구</option>
+				<option value="종로구">종로구</option>
+				<option value="성동구">성동구</option>
+				<option value="강남구">강남구</option>
+				<option value="서초구">서초구</option>
+				<option value="관악구">관악구</option>
+				<option value="금천구">금천구</option>
+				<option value="구로구">구로구</option>
 			</select>
 			</div>
 
   			<div class="form-group">
   			  <label for="studyprice">가격</label>
-  			  <input type="number" class="form-control" id="studyprice" placeholder="가격을 입력해주세요" min="0">
+  			  <input type="number" class="form-control" id="studyPrice"  value="${list.studyPrice }"
+  			  required="required" name="studyPrice"  placeholder="가격을 입력해주세요" min="0" maxlength="7">
   			</div>
-  				<div class="form-group">
-  			  <label>사진</label>
-   			 <input type="file" id="leaderimg">
-  			</div>
+  				
   			
   			<div class="form-group">
-  			  <input type="date">
+  			<label>시작 날짜</label>
+  			  <input type="date" class="form-control" name="studyStartdate"
+  			  id="studyStartdate" required="required" value="${list.studyStartdate }">
   			</div>
-  			 
   			
   				<div class="form-group">
-  			  <label>종료 날짜</label><br>
-   			 <input type="date">
+  			  <label>종료 날짜</label>
+   			 <input type="date" class="form-control" name="studyEnddate" id="studyEnddate" required="required"
+   			 value="${list.studyEnddate }">
   			</div>
-  			
+  			 	
   			<div class="form-group">
   			  <label>스터디 소개</label><br>
-   			 <textarea id="textarea" class="form-control" rows="10"></textarea>
+   			 <textarea id="textarea" class="form-control" name="studyIntroduce"  id="studyIntroduce"
+   			 required="required" rows="10" maxlength="1500">${list.studyIntroduce }</textarea>
   			</div>
-  			
-  			
-  			<button type="button" class="btn btn-primary" id="ssllistbtn">스터디 개설</button>
+  			<input type="hidden" value="예정" name="studyState" id="studyState">
+  			<input type="hidden" value="host" name="leaId" id="leaId">
+  			<input type="hidden" value="${list.studyIndex}" name="studyIndex">
+  			<button class="btn btn-primary" id="ssllistbtn" >스터디 수정</button>
   			
 </form>	
-		
 
-		
+	
+
+<script>
+var studyEnddate = $("#studyEnddate");
+var studyStartdate = $("#studyStartdate");
+
+   	$("#studyEnddate").on("change", function(e){
+ 	   if(studyStartdate.val() == ""){
+ 	      alert("시작 날짜를 입력해주세요.");
+ 	   }
+ 	   else if(studyStartdate.val() > studyEnddate.val()){
+ 	      alert("날짜 선택이 잘못되었습니다.");
+ 	     studyStartdate.val(""); //시작날짜칸 비우기
+ 	    studyEnddate.val(""); //종료날짜칸 비우기
+ 	   }
+ 	});	  
+ 	
+
+var studySTime = $("#studySTime");
+var studyETime = $("#studyETime");
+
+studyETime.on("change", function(e){
+	if(studySTime.val() ==""){
+		alert("시작 시간을 선택해줘");
+	} else if(studySTime.val() > studyETime.val()){
+		alert("시간 선택이 잘못되었어");
+		studySTime.val("");
+		studyETime.val("");
+	}
+	
+});
+	
+
+</script>
+
 		
 		</div>
 

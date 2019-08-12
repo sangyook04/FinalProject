@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class StudyVO {
+	
       private long studyIndex;
       private String studyName;
       private String leaId;
@@ -13,6 +14,11 @@ public class StudyVO {
       private String studyIntroduce;
       private String studyStartdate;
       private String studyEnddate;
+      private String studySTime;
+      private String studyETime;
       private String studyState;
       private long studyPeople;
+      private PictureVO picturevo;
+      private LeaderVO leaderVO;
+      private LeaderReviewVO leaderReviewVO;
 }
