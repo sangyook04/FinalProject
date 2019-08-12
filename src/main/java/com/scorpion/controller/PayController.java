@@ -86,9 +86,9 @@ public class PayController {
    
    @PreAuthorize("hasRole([ROLE_STUDENT])")
    @GetMapping("/myMoneyList")
-   public void myMoneyList(@RequestParam("studentId") String studentId, Model model, Criteria cri) {
-      model.addAttribute("list", service.getMyMoneyList(cri, studentId));
-      model.addAttribute("refundList", service.getMyRefundList(cri, studentId));
+   public void myMoneyList(@RequestParam("stuId") String stuId, Model model, Criteria cri) {
+      model.addAttribute("list", service.getMyMoneyList(cri, stuId));
+      model.addAttribute("refundList", service.getMyRefundList(cri, stuId));
    }
    
    @PreAuthorize("hasRole([ROLE_STUDENT])")

@@ -103,7 +103,7 @@
 		                   <tbody>
 			               <c:forEach items="${refundList }" var="refund" >
 			                   <tr>
-			                   <td><a href="#">${refund.study.studyName}</a></td>
+			                   <td><a href="/study/get?studyIndex=${refund.study.studyIndex}">${refund.study.studyName}</a></td>
 			                   <td>${refund.study.studyStartdate} ~ ${refund.study.studyEnddate}</td>
 			                   <td>${refund.study.studyLevel}</td>
 			                   <td>${refund.study.studyPlace}</td>

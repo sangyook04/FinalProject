@@ -59,7 +59,6 @@ public class LevelController {
 			model.addAttribute("score", score);
 			lastExam = false;
 		}
-		System.out.println("getstuid="+stuId);
 	}
 	
 	@PreAuthorize("hasRole([ROLE_STUDENT])")

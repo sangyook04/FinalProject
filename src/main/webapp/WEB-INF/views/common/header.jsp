@@ -38,6 +38,7 @@
 								<li><a href="/student/studentLevelGet?stuId=${pinfo.username}">레벨테스트 결과</a></li>
 								<li><a href="#">내 스터디</a></li>
 								<li><a href="#">관심 스터디</a></li>
+								<li><a href="/pay/myMoneyList?stuId=${pinfo.username}">내 결제 내역</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
 								<li><a href="/student/studentDrop?stuId=${pinfo.username}">탈퇴 하기</a></li>
 							</ul></li>
