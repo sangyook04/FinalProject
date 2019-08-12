@@ -14,7 +14,6 @@
 				</div>
 				<ul class="mainmenu">
 					<li><a href="#">스터디 찾기</a></li>
-					<li><a href="/level/commonTest?stuId=${principal.username}">레벨 테스트</a></li>
 					<li><a href="/common/noticeList">공지사항</a></li>
 					<li class="one"><a href="#">고객센터</a>
 						<ul class="callsenterSub">
@@ -42,6 +41,7 @@
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
 								<li><a href="/student/studentDrop?stuId=${pinfo.username}">탈퇴 하기</a></li>
 							</ul></li>
+						<li><a href="/level/commonTest?stuId=${pinfo.username}">레벨 테스트</a></li>
 						<li><sec:authentication property="principal.username" />
 							<!--학생 -->님</li>
 						<li><a class="LogOut" href="/logout">로그 아웃</a></li>
