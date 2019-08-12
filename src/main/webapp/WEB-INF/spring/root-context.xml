@@ -28,7 +28,8 @@
       <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
       <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1522:xe"/>
       <property name="username" value="FinalProject"/>
-      <property name="password" value="1111"/>
+     <!--  <property name="password" value="1111"/> -->
+      <property name="password" value="qwerty123"/>
    </bean>
    
    <!-- dataSource configuration -->
