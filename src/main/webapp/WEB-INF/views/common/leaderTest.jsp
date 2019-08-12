@@ -40,6 +40,7 @@
 .answer {
 margin-top: 50px;
 }
+</style>
 </head>
 <body>
 	<div id="wrap">
@@ -60,7 +61,7 @@ margin-top: 50px;
 				</ol>
 				</div>
 				<div class="answer">
-					<form id="answerForm" action="/level/leaderTest" method="post">
+					<form id="answerForm" action="/common/leaderTest" method="post">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 						<div class="form-group form-inline">
 							<button id="prevBtn" class="btn btn-success">이전으로</button>

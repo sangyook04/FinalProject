@@ -237,6 +237,7 @@ function pwChk(){
 							method="post">
 							<input type="hidden" name="${_csrf.parameterName }"
 								value="${_csrf.token }">
+							<input type="hidden" name="leaScore" value="${score}">
                      		<input type="hidden" name="idck" value="0">
 							<div class="textInput">
 								<input type="text" placeholder="아이디" name="leaId" id="leaId"
