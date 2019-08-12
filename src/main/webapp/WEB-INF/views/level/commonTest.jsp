@@ -96,7 +96,7 @@ if(score != ""){
 	if(score >= 80){
 		str += "점수는 " + score + "점 입니다. 통과";
 	}else {
-		str += score + "점입니다. 탈락이다 임마.";
+		str += score + "점입니다.";
 	}
 	alert(str);
 }
