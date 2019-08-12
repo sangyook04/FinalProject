@@ -49,16 +49,60 @@
 			<div class="inner">
 					 <h1><b>레벨 테스트 결과</b></h1>
 				<div class="content">
-					<form>
+					
 						<div class="level"> <b>${stuLevel.stuId}</b> 회원님은  <span class="levelResult"><b>${stuLevel.stuLevel }</b></span>  입니다.</div> <br>
-						<button class="recommend"><b>추천 스터디 목록 보기</b></button><br>
-						<button class="reTest"><b>재시험</b>	</button>
-					</form>
+				
+          		 	
+					
+						
+						<button class="recommend"  data-oper="recommendStudy" ><b>추천 스터디 목록 보기</b></button><br>
+						<button class="reTest"  data-oper="reTest"><b>재시험</b>	</button>
+					
+					
+					
+				   <form id="operForm" action="/study/recommend" method="get">
+					<input type="hidden" id="stuId" name="stuId"
+						value="${stuLevel.stuId}">
+				</form> 
+				 <form id="operForm2" action="/level/commonTest" method="get">
+					<input type="hidden" id="stuId" name="stuId"
+						value="${stuLevel.stuId}">
+				</form> 
+         
 				</div>
 			</div>
 		</div><!-- container -->
 	
 <%@ include file="../common/footer.jsp" %>
 	</div><!-- wrap -->
+	
+	<script>
+		$(function() {
+			var operForm = $("#operForm");
+			var operForm2 = $("#operForm2");
+			
+
+			//추천 스터디 및 재시험 페이지 이동
+			
+			$('button[data-oper="recommendStudy"]').on("click", function(e) {
+				operForm.attr("action", "/study/recommend").submit();
+			});
+			
+			
+			$('button[data-oper="reTest"]').on("click", function(e) {
+				operForm2.attr("action", "/level/commonTest").submit();
+			});
+			
+			
+			
+		});
+		
+		
+		
+	</script>
+	
+	
+	
+	
 </body>
 </html>

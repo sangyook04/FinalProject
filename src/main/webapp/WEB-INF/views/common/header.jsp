@@ -40,7 +40,7 @@
 								<li><a href="#">내 스터디</a></li>
 								<li><a href="#">관심 스터디</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
-								<li><a href="/student/studentDrop">탈퇴 하기</a></li>
+								<li><a href="/student/studentDrop?stuId=${pinfo.username}">탈퇴 하기</a></li>
 							</ul></li>
 						<li><sec:authentication property="principal.username" />
 							<!--학생 -->님</li>
@@ -55,7 +55,7 @@
 								<li><a href="#">내 스터디</a></li>
 								<li><a href="/pay/incomeList?leaderId=${pinfo.username}">소득 내역</a></li>
 								<li><a href="/loginCommon/mylist">문의 내역</a></li>
-								<li><a href="#">탈퇴 하기</a></li>
+								<li><a href="/leader/leaderDrop?leaId=${pinfo.username}">탈퇴 하기</a></li>
 							</ul></li>
 						<li><a href="#">스터디 개설</a></li>
 						<li><sec:authentication property="principal.username" />
