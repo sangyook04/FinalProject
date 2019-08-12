@@ -52,14 +52,6 @@
 			    }
 			});
 			
-			$('#levelGOGO').on('click',function(){
-				location.href="/level/commonTest";
-			})
-			
-			$('#leaderGOGO').on('click',function(){
-				location.href="/level/leaderTest";
-			})
-			
 
 		});//ready
    </script>
@@ -76,7 +68,7 @@
 							<h1>WelCome</h1>
 							<h1>스콜피온이 처음이세요?</h1>
 							<p>지금 레벨테스트하고 꼭 맞는 스터디를 안내받으세요!</p>
-							<input type="button" name="levelGOGO" id="levelGOGO" value="시작하기">
+							<!-- <input type="button" name="levelGOGO" id="levelGOGO" value="시작하기"> -->
 						</div>
 					</div>
 				    <div class="item item2">
@@ -91,7 +83,9 @@
 				    	<div class="slidercontent">
 							<h1>스터디 리더에 관심이 있으신가요?</h1>
 							<p>스터디의 호스트가 되어 영어의 즐거움을 선사하세요!</p>
-							<input type="button" name="leaderGOGO" id="leaderGOGO" value="시작하기">
+							<sec:authorize access="isAnonymous()">
+								<input type="button" name="leaderGOGO" id="leaderGOGO" value="시작하기">
+							</sec:authorize>
 						</div>
 					</div>
 				</div>
@@ -144,7 +138,7 @@
 					<div class="levelTestContent">
 						<h1><b>일단 레벨테스트부터</b><br> 시작해보세요!</h1>
 						<h2>무료로 내영어 레벨을 파악하고<br>꼭 맞는 스터디를 안내 받으세요!</h2>
-						<a id="levelTestIndex" onclick="nono()">레벨테스트 시작</a>
+						<!-- <a id="levelTestIndex" onclick="nono()">레벨테스트 시작</a> -->
 					</div>
 					<div class="levelTestImg">
 					</div>
@@ -160,7 +154,9 @@
 					<div class="LeaderGoContent">
 						<h1><b>스터디 리더에</b><br>관심이 있으신가요?</h1>
 						<h2>내가 편한 지역, 편한 시간에 스터디를 개설해<br>학생들과의 유쾌한 교류를 시작해보세요.</h2>
-						<a href="/common/leaderTest">리더 시작하기!</a>
+						<sec:authorize access="isAnonymous()">
+							<a href="/common/leaderTest">리더 시작하기!</a>
+						</sec:authorize>
 					</div>
 					<div class="LeaderGoImg">
 					</div>
@@ -174,6 +170,14 @@
 	function nono(){
 		alert("로그인 후 상단 메뉴를 통해 이용해주세요!");
 	}
+	
+	$('#levelGOGO').on('click',function(){
+		nono();
+	})
+	
+	$('#leaderGOGO').on('click',function(){
+		location.href="/common/leaderTest";
+	})
 </script>
 
 </html>
