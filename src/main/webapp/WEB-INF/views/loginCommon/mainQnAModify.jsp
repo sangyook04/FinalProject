@@ -43,7 +43,7 @@
 			<div class="inner">
 				<h1>QnA 수정</h1>
 				<div class="QnAWrap">
-					<form class="QnAModifyForm" action="/loginCommon/modify" method="post">
+					<form class="QnAModifyForm" action="/loginCommon/modify" method="post" onsubmit="return checks()">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					  <div class="form-group">
 					    <label for="QnAModifyGetNo">번호</label>
@@ -86,6 +86,19 @@
 		var QnAModifyGetNo = $("#QnAModifyGetNo").val();
 		location.href = "/loginCommon/get?qnaIndex="+QnAModifyGetNo;
 	});
+	
+	function checks(){
+		
+		if($("#QnAModifyTitle").val() == ""){ 
+			alert("제목을 입력해주세요"); 
+			$("#QnAModifyTitle").focus(); 
+			return false; 
+		} else if ($("#QnAModifyContent").val() == ""){ 
+			alert("내용을 입력해주세요"); 
+			$("#QnAModifyContent").focus(); 
+			return false; 
+		}
+	}
 
 </script>
 </html>

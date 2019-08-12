@@ -252,8 +252,6 @@ function pwChk(){
 							<div class="textInput">
 								<input type="password" placeholder="비밀번호 확인" name="leaPassword2"
 									class="joinInput">
-								<button type="button" class="btn" onclick="pwChk()">비밀번호
-									확인</button>
 							</div>
 							<div class="textInput">
 								<input type="text" placeholder="이름" name="leaName"

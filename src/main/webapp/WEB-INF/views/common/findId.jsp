@@ -50,7 +50,7 @@
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 						<div class="findInput"><input type="text" placeholder="이름을 입력해주세요" name="name"></div>
 						<div class="findInput"><input type="text" placeholder="회원가입시 등록한 전화번호를 입력해주세요" name="phonenum"></div>
-						<div class="findInput"><button type="submit" class="loginBtn">확인</button></div>
+						<div class="findInput"><input type="submit" class="loginBtn" value="확인"></div>
 					</form>
 					<c:forEach items="${find }" var="id">
 						<div class="findedId">${ id.leaId }</div>

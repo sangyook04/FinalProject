@@ -62,10 +62,10 @@
    
    <select id="findId" resultMap="leaderMap2">
    	select leaid from
-	(select leaphonenum tel, leaname name, leaid leaid from leader
+	(select leaphonenum tel, leaname name, leaid leaid, enabled from leader
 	union
-	select stuphonenum tel, stuname name, stuid leaid from student)
-	where tel = #{phonenum} and name = #{name}
+	select stuphonenum tel, stuname name, stuid leaid, enabled from student)
+	where tel = #{phonenum} and name = #{name} and enabled = 1
    </select>
    
    <!-- <select id="findId" resultMap="leaderMap">

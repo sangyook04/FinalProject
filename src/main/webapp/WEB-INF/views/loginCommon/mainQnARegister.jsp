@@ -53,7 +53,7 @@
 			<div class="inner">
 				<h1>QnA 등록</h1>
 				<div class="QnAWrap">
-					<form role="form" method="post" action="/loginCommon/register">
+					<form role="form" method="post" action="/loginCommon/register" onsubmit="return checks()">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"><!-- 보안토큰 -->
 					  <div class="form-group">
 					    <label for="mainQnARegisterTitle">제목</label>
@@ -87,6 +87,23 @@
 	$("#cancel").on("click", function(e){
 		location.href = "/list";
 	});
+	
+	
+	function checks(){
+	
+		if($("#mainQnARegisterTitle").val() == ""){ 
+			alert("제목을 입력해주세요"); 
+			$("#mainQnARegisterTitle").focus(); 
+			return false; 
+		} else if ($("#mainQnARegisterContent").val() == ""){ 
+			alert("내용을 입력해주세요"); 
+			$("#mainQnARegisterContent").focus(); 
+			return false; 
+		}
+	}
+
+
+	
 </script>
 </body>
 </html>
